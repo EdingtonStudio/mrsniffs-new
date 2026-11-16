@@ -1,0 +1,405 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Mr. Sniff's — Come Get a Whiff</title>
+  <meta name="description" content="Incense for whatever kind of night you have in mind. Meet Bonfire and Yoga Studio, or bring home both." />
+  <link rel="preload" href="assets/fonts/big-shoulders-display-latin-700-normal.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="assets/fonts/inter-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="assets/img/hero.webp" as="image" />
+  <link rel="stylesheet" href="css/tokens.css" />
+  <link rel="stylesheet" href="css/main.css" />
+  <script defer src="js/main.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <!-- ─── Announcement ─────────────────────────────────────────── -->
+  <div class="announcement" role="region" aria-label="Announcement">
+    <p>ANNOUNCEMENT BANNER — APPROVED FACTUAL MESSAGE ONLY</p>
+  </div>
+
+  <!-- ─── Header / Nav ─────────────────────────────────────────── -->
+  <header class="site-header" data-header>
+    <nav class="nav" aria-label="Primary">
+      <ul class="nav__links" id="nav-menu" data-menu>
+        <li><a class="nav__link is-current" href="#scents">Shop <img class="nav__arrow" src="assets/icons/arrow-up-right-sm.svg" width="14" height="14" alt="" /></a></li>
+        <li><a class="nav__link" href="#scents">Find your scent</a></li>
+        <li><a class="nav__link" href="#how-to">How to use</a></li>
+        <li><a class="nav__link" href="#story">Our story</a></li>
+      </ul>
+
+      <a class="nav__logo" href="#top" aria-label="Mr. Sniff's — home">
+        <img src="assets/icons/logo.svg" width="119" height="50" alt="Mr. Sniff's" />
+      </a>
+
+      <div class="nav__actions">
+        <button class="icon-btn" type="button" aria-label="Search">
+          <img src="assets/icons/search.svg" width="20" height="20" alt="" />
+        </button>
+        <a class="icon-btn nav__cart" href="#cart" aria-label="Cart, 0 items" data-cart-link>
+          <img src="assets/icons/bag.svg" width="20" height="20" alt="" />
+          <span class="cart-count" data-cart-count hidden>0</span>
+        </a>
+        <button class="nav__burger" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="nav-menu" data-burger>
+          <span></span><span></span>
+        </button>
+      </div>
+    </nav>
+  </header>
+
+  <main id="main">
+    <!-- ─── Hero ───────────────────────────────────────────────── -->
+    <section class="hero" id="top" aria-label="Mr. Sniff's incense">
+      <div class="hero__frame">
+        <img class="hero__bg" src="assets/img/hero-bg.webp" width="2200" height="1228" alt="" data-parallax="0.12" />
+        <div class="hero__product" data-parallax="0.05">
+          <img src="assets/img/hero.webp" width="2400" height="1728" alt="Mr. Sniff's Bonfire and Yoga Studio incense boxes on driftwood beside a burning stick in a black holder" fetchpriority="high" />
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── Come get a whiff ───────────────────────────────────── -->
+    <section class="whiff" aria-labelledby="whiff-title">
+      <div class="whiff__intro">
+        <div class="whiff__heading">
+          <p class="eyebrow" data-reveal>Incense sticks and holders</p>
+          <h1 class="display-xl" id="whiff-title" data-split>COME GET A WHIFF.</h1>
+        </div>
+        <p class="lede whiff__lede" data-reveal style="--d: 2">Incense for whatever kind of night you have in mind. Meet Bonfire and Yoga Studio, or bring home both.</p>
+        <div class="btn-row" data-reveal style="--d: 3">
+          <a class="btn btn--solid btn--w165" href="#scents">Shop incense</a>
+          <a class="btn btn--outline" href="#scents">Find your scent</a>
+        </div>
+      </div>
+
+      <ul class="gallery" data-gallery aria-label="Mr. Sniff's in the wild">
+        <li class="gallery__item gallery__item--mid" style="--i: 3" data-depth="0.6"><img src="assets/img/gallery-4.webp" width="733" height="1100" alt="Hands in a mint suit holding a Mr. Sniff's box" loading="lazy" /></li>
+        <li class="gallery__item gallery__item--low" style="--i: 2" data-depth="1"><img src="assets/img/gallery-3.webp" width="1200" height="1800" alt="Tattooed hand holding a Bonfire box in blue smoke" loading="lazy" /></li>
+        <li class="gallery__item gallery__item--mid" style="--i: 1" data-depth="0.7"><img src="assets/img/gallery-2.webp" width="615" height="1100" alt="Woman in an embroidered jacket with a lit incense stick" loading="lazy" /></li>
+        <li class="gallery__item gallery__item--lg" style="--i: 0" data-depth="0.3"><img src="assets/img/gallery-1.webp" width="615" height="1100" alt="Man in white sunglasses and a yellow leather jacket holding an incense stick" loading="lazy" /></li>
+        <li class="gallery__item gallery__item--mid" style="--i: 1" data-depth="0.7"><img src="assets/img/gallery-6.webp" width="615" height="1100" alt="Man with sunglasses and a burning incense stick" loading="lazy" /></li>
+        <li class="gallery__item gallery__item--low" style="--i: 2" data-depth="1"><img src="assets/img/gallery-7.webp" width="733" height="1100" alt="Pattern of Bonfire and Yoga Studio boxes on black" loading="lazy" /></li>
+        <li class="gallery__item gallery__item--mid" style="--i: 3" data-depth="0.6"><img src="assets/img/gallery-5.webp" width="733" height="1100" alt="Yoga Studio box standing in low light" loading="lazy" /></li>
+      </ul>
+    </section>
+
+    <!-- ─── Two scents ─────────────────────────────────────────── -->
+    <section class="scents section--ink" id="scents" aria-labelledby="scents-title">
+      <header class="section-head" data-reveal>
+        <h2 class="display-l" id="scents-title">TWO SCENTS. FIND YOUR FAVORITE.</h2>
+        <p class="lede lede--on-ink">Compare them here or take the Smell Test.</p>
+      </header>
+
+      <div class="scents__grid">
+        <article class="scent-card scent-card--bonfire" data-reveal>
+          <a class="scent-card__media" href="#bonfire" aria-label="Meet Bonfire">
+            <img class="scent-card__shadow" src="assets/icons/box-shadow.svg" width="366" height="237" alt="" />
+            <span class="scent-card__box"><img src="assets/img/box-bonfire.webp" width="267" height="800" alt="Bonfire Agarwood incense box" loading="lazy" /></span>
+          </a>
+          <div class="scent-card__body">
+            <div class="scent-card__info">
+              <div>
+                <h3 class="product-name">Bonfire · Agarwood Incense</h3>
+                <p class="product-note">Dark resin + smoke</p>
+              </div>
+              <p class="product-price">$24</p>
+            </div>
+            <div class="scent-card__actions">
+              <a class="btn btn--light btn--sm btn--w195" href="#bonfire">Meet Bonfire</a>
+              <button class="icon-btn icon-btn--tile" type="button" aria-label="Add Bonfire to cart" data-add-to-cart>
+                <img src="assets/icons/cart.svg" width="16" height="16" alt="" />
+              </button>
+            </div>
+          </div>
+        </article>
+
+        <article class="scent-card scent-card--yoga" data-reveal style="--d: 1">
+          <a class="scent-card__media" href="#yoga-studio" aria-label="Meet Yoga Studio">
+            <img class="scent-card__shadow" src="assets/icons/box-shadow.svg" width="366" height="237" alt="" />
+            <span class="scent-card__box"><img src="assets/img/box-yoga.webp" width="197" height="600" alt="Yoga Studio Palo Santo incense box" loading="lazy" /></span>
+          </a>
+          <div class="scent-card__body">
+            <div class="scent-card__info">
+              <div>
+                <h3 class="product-name">Yoga Studio · Palo Santo Incense</h3>
+                <p class="product-note">Warm resin + citrus peel</p>
+              </div>
+              <p class="product-price">$24</p>
+            </div>
+            <div class="scent-card__actions">
+              <a class="btn btn--light btn--sm btn--w195" href="#yoga-studio">Meet Yoga Studio</a>
+              <button class="icon-btn icon-btn--tile" type="button" aria-label="Add Yoga Studio to cart" data-add-to-cart>
+                <img src="assets/icons/cart.svg" width="16" height="16" alt="" />
+              </button>
+            </div>
+          </div>
+        </article>
+      </div>
+
+      <a class="text-link text-link--on-ink" href="#compare" data-reveal>
+        <span>Compare the two scents side by side</span>
+        <img src="assets/icons/arrow-up-right.svg" width="20" height="20" alt="" />
+      </a>
+    </section>
+
+    <!-- ─── The duo ────────────────────────────────────────────── -->
+    <section class="duo" id="duo" aria-labelledby="duo-title">
+      <img class="duo__branch" src="assets/img/duo-branch.webp" width="942" height="1400" alt="Bonfire and Yoga Studio boxes hanging by twine from a driftwood branch" loading="lazy" data-parallax="-0.06" />
+      <div class="duo__track duo__track--blend">
+        <div class="duo__sticky">
+          <div class="duo__row">
+            <div class="duo__col">
+              <h2 class="display-l" id="duo-title" data-reveal>WHY PICK JUST ONE?</h2>
+              <p class="lede duo__copy" data-reveal style="--d: 1">Bonfire and Yoga Studio, together. Get to know both sides of the lineup.</p>
+            </div>
+            <div class="duo__col duo__col--price">
+              <p class="display-l" data-reveal>$42</p>
+              <p class="lede duo__copy" data-reveal style="--d: 1">Exact included quantities - pending confirmation</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="duo__track">
+        <div class="duo__sticky">
+          <a class="btn btn--solid btn--w165 duo__cta" href="#duo" data-reveal style="--d: 2">Meet the duo</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── Holders ────────────────────────────────────────────── -->
+    <section class="holders" id="holders" aria-labelledby="holders-title">
+      <header class="section-head" data-reveal>
+        <h2 class="display-l" id="holders-title">SOMEWHERE TO STICK IT</h2>
+        <p class="lede">Holders. Sold separately.</p>
+      </header>
+
+      <div class="holders__grid">
+        <article class="holder-card" data-reveal>
+          <div class="holder-card__media">
+            <img src="assets/img/holder-ash-catchum.webp" width="886" height="1100" alt="Ash Catchum round stoneware ash catcher with a burning stick" loading="lazy" />
+            <span class="chip">Sold-out</span>
+          </div>
+          <div class="holder-card__body">
+            <div class="holder-card__info">
+              <div>
+                <h3 class="product-name">Ash Catchum</h3>
+                <p class="product-desc">Matte-black stoneware ash catcher for incense sticks.</p>
+              </div>
+              <p class="product-price">$22</p>
+            </div>
+            <div class="holder-card__actions" data-notify>
+              <button class="btn btn--solid btn--sm btn--block" type="button" data-notify-open>Notify me</button>
+              <form class="notify-form" data-notify-form novalidate hidden>
+                <label class="sr-only" for="notify-ash">Email for Ash Catchum restock</label>
+                <input id="notify-ash" type="email" placeholder="your@email.com" required autocomplete="email" />
+                <button class="btn btn--solid btn--sm" type="submit">Send</button>
+              </form>
+              <p class="form-msg" data-notify-msg role="status"></p>
+            </div>
+          </div>
+        </article>
+
+        <article class="holder-card" data-reveal style="--d: 1">
+          <div class="holder-card__media">
+            <img src="assets/img/holder-stachin-ash.webp" width="886" height="1100" alt="Stachin' Ash moustache-shaped stoneware holder with a burning stick" loading="lazy" />
+          </div>
+          <div class="holder-card__body">
+            <div class="holder-card__info">
+              <div>
+                <h3 class="product-name">Stachin’ Ash</h3>
+                <p class="product-desc">Moustache-shaped black stoneware ash catcher.</p>
+              </div>
+              <p class="product-price">$38</p>
+            </div>
+            <div class="holder-card__actions">
+              <button class="btn btn--solid btn--sm btn--block" type="button" data-add-to-cart>Add to cart</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="holder-card" data-reveal style="--d: 2">
+          <div class="holder-card__media">
+            <img src="assets/img/holder-brass-monkey.webp" width="886" height="1100" alt="Brass Monkey blackened brass holder with a burning stick" loading="lazy" />
+            <span class="chip">Sold-out</span>
+          </div>
+          <div class="holder-card__body">
+            <div class="holder-card__info">
+              <div>
+                <h3 class="product-name">Brass Monkey</h3>
+                <p class="product-desc">Blackened brass incense holder.</p>
+              </div>
+              <p class="product-price">$85</p>
+            </div>
+            <div class="holder-card__actions" data-notify>
+              <button class="btn btn--solid btn--sm btn--block" type="button" data-notify-open>Notify me</button>
+              <form class="notify-form" data-notify-form novalidate hidden>
+                <label class="sr-only" for="notify-brass">Email for Brass Monkey restock</label>
+                <input id="notify-brass" type="email" placeholder="your@email.com" required autocomplete="email" />
+                <button class="btn btn--solid btn--sm" type="submit">Send</button>
+              </form>
+              <p class="form-msg" data-notify-msg role="status"></p>
+            </div>
+          </div>
+        </article>
+      </div>
+
+      <p class="footnote" data-reveal>All three sold out at audit · Notify-me only if supported and approved</p>
+    </section>
+
+    <!-- ─── How to use ─────────────────────────────────────────── -->
+    <section class="howto" id="how-to" aria-labelledby="howto-title">
+      <div class="howto__inner">
+        <div class="howto__copy">
+          <div class="howto__head" data-reveal>
+            <h2 class="display-l" id="howto-title">NEW TO INCENSE? START HERE.</h2>
+            <p class="lede">Set up your space, choose a suitable holder, and follow the directions supplied with your incense.</p>
+          </div>
+
+          <ol class="steps" data-steps>
+            <li class="step is-active" data-reveal style="--d: 1">
+              <button class="step__trigger" type="button" aria-pressed="true">
+                <span class="step__icon"><img src="assets/icons/step-flame.svg" width="16" height="20" alt="" /></span>
+                <span class="step__text">Choose a stable, heat-resistant incense holder.</span>
+              </button>
+              <span class="step__progress" aria-hidden="true"></span>
+            </li>
+            <li class="step" data-reveal style="--d: 2">
+              <button class="step__trigger" type="button" aria-pressed="false">
+                <span class="step__icon"><img class="is-flipped" src="assets/icons/step-shield.svg" width="16" height="19" alt="" /></span>
+                <span class="step__text">Place it away from curtains, drafts and anything flammable.</span>
+              </button>
+              <span class="step__progress" aria-hidden="true"></span>
+            </li>
+            <li class="step" data-reveal style="--d: 3">
+              <button class="step__trigger" type="button" aria-pressed="false">
+                <span class="step__icon"><img class="is-flipped" src="assets/icons/step-eye.svg" width="19" height="16" alt="" /></span>
+                <span class="step__text">Never leave a burning incense stick unattended.</span>
+              </button>
+              <span class="step__progress" aria-hidden="true"></span>
+            </li>
+          </ol>
+
+          <a class="btn btn--solid howto__cta" href="#how-to" data-reveal style="--d: 4">How to use incense</a>
+        </div>
+
+        <div class="howto__media" data-reveal="fade">
+          <img src="assets/img/howto.webp" width="1800" height="1005" alt="Bonfire box and driftwood on sand in front of an orange sun, with a burning stick in a black holder" loading="lazy" />
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── Story ──────────────────────────────────────────────── -->
+    <section class="story section--ink" id="story" aria-labelledby="story-title">
+      <div class="story__art" aria-hidden="true">
+        <img class="story__hand" src="assets/img/gallery-3.webp" width="1200" height="1800" alt="" loading="lazy" data-parallax="0.08" />
+        <div class="story__vignette"></div>
+        <img class="story__smoke" src="assets/img/story-smoke.webp" width="598" height="800" alt="" loading="lazy" />
+      </div>
+      <div class="story__copy">
+        <h2 class="display-l story__title" id="story-title" data-split>GOOD SCENTS. A LITTLE PERSONALITY.</h2>
+        <p data-reveal style="--d: 2">Meet the people behind Mr. Sniff's.</p>
+        <p data-reveal style="--d: 3">We're here to make incense that actually makes an impression. Hand-rolled sticks, real wood and bold fragrance loads — no shortcuts, no unnecessary extras. Just good scents with a point of view.</p>
+        <a class="btn btn--ghost-light btn--sm" href="#story" data-reveal style="--d: 4">Read our story</a>
+      </div>
+    </section>
+
+    <!-- ─── FAQ ────────────────────────────────────────────────── -->
+    <section class="faq" id="faq" aria-labelledby="faq-title">
+      <img class="faq__mascot" src="assets/img/mascot.svg" width="494" height="536" alt="" aria-hidden="true" loading="lazy" />
+      <div class="faq__inner">
+        <h2 class="display-l" id="faq-title" data-reveal>BEFORE YOU LIGHT ONE</h2>
+
+        <div class="accordion" data-reveal style="--d: 1">
+          <details class="accordion__item" data-accordion>
+            <summary><span>Do I need a holder?</span><img src="assets/icons/plus.svg" width="18" height="18" alt="" /></summary>
+            <div class="accordion__panel"><p>Yes. Burn incense in a stable, heat-resistant holder that catches falling ash.</p></div>
+          </details>
+          <details class="accordion__item" data-accordion>
+            <summary><span>How many sticks come in a pack?</span><img src="assets/icons/plus.svg" width="18" height="18" alt="" /></summary>
+            <div class="accordion__panel"><p>[Pending confirmation — approved pack count goes here.]</p></div>
+          </details>
+          <details class="accordion__item" data-accordion>
+            <summary><span>When are the holders back in stock?</span><img src="assets/icons/plus.svg" width="18" height="18" alt="" /></summary>
+            <div class="accordion__panel"><p>[Pending — approved restock messaging goes here.]</p></div>
+          </details>
+          <details class="accordion__item" data-accordion>
+            <summary><span>How long does shipping take?</span><img src="assets/icons/plus.svg" width="18" height="18" alt="" /></summary>
+            <div class="accordion__panel"><p>[Pending — approved shipping timeframes go here.]</p></div>
+          </details>
+        </div>
+
+        <div class="btn-row" data-reveal style="--d: 2">
+          <a class="btn btn--solid btn--w165" href="#scents">Shop incense</a>
+          <a class="btn btn--outline" href="#scents">Find your scent</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ─── Footer ───────────────────────────────────────────────── -->
+  <footer class="footer section--ink">
+    <img class="footer__wordmark" src="assets/img/footer-wordmark.svg" width="1220" height="511" alt="" aria-hidden="true" loading="lazy" data-parallax="-0.08" />
+
+    <div class="signup">
+      <h2 class="display-s">JOIN THE LIST</h2>
+      <p class="lede lede--on-ink">Get first whiff of new scents.</p>
+      <form class="signup__form" data-signup novalidate>
+        <div class="signup__row">
+          <label class="sr-only" for="signup-email">Email address</label>
+          <input class="signup__input" id="signup-email" name="email" type="email" placeholder="your@email.com" autocomplete="email" required />
+          <button class="btn btn--light" type="submit">Sign up</button>
+        </div>
+        <label class="consent">
+          <input type="checkbox" name="consent" required />
+          <span class="consent__box" aria-hidden="true"></span>
+          <span>Yes, email me about new scents and restocks. Unsubscribe anytime.</span>
+        </label>
+        <p class="form-msg" data-signup-msg role="status"></p>
+      </form>
+    </div>
+
+    <nav class="footer__nav" aria-label="Footer">
+      <div class="footer__col">
+        <h3>SHOP</h3>
+        <ul>
+          <li><a href="#scents">Incense</a></li>
+          <li><a href="#holders">Incense Holders</a></li>
+          <li><a href="#duo">The Duo</a></li>
+          <li><a href="#scents">All products</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <h3>LEARN</h3>
+        <ul>
+          <li><a href="#scents">Find your scent</a></li>
+          <li><a href="#how-to">How to use incense</a></li>
+          <li><a href="#story">Our story</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <h3>HELP</h3>
+        <ul>
+          <li><a href="#faq">FAQ</a></li>
+          <li><a href="#contact">Contact</a></li>
+          <li><a href="#shipping">Shipping &amp; Returns</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <h3>POLICIES</h3>
+        <ul>
+          <li><a href="#shipping-policy">Shipping policy</a></li>
+          <li><a href="#refund-policy">Refund policy</a></li>
+          <li><a href="#privacy-policy">Privacy policy</a></li>
+          <li><a href="#terms">Terms of service</a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <div class="footer__bar">
+      <p>© 2026 Mr. Sniff's. We just make scents.</p>
+    </div>
+  </footer>
+</body>
+</html>

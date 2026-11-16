@@ -1,0 +1,321 @@
+/* ==========================================================================
+   Mr. Sniff's — interaction layer
+   Vanilla, no deps. Each module is self-contained and no-ops if its markup
+   isn't on the page, so they port cleanly into Shopify section JS later.
+   ========================================================================== */
+(() => {
+  const root = document.documentElement;
+  root.classList.add('js');
+
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const $ = (sel, ctx = document) => ctx.querySelector(sel);
+  const $$ = (sel, ctx = document) => [...ctx.querySelectorAll(sel)];
+  const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+
+  /* ---- Buttons: wrap label for the roll-on-hover ------------------------ */
+  $$('.btn').forEach((btn) => {
+    if (btn.querySelector('.btn__roll')) return;
+    const text = btn.textContent.trim();
+    btn.textContent = '';
+    const roll = document.createElement('span');
+    roll.className = 'btn__roll';
+    roll.dataset.label = text;
+    const inner = document.createElement('span');
+    inner.textContent = text;
+    roll.append(inner);
+    btn.append(roll);
+  });
+
+  const setBtnLabel = (btn, text) => {
+    const roll = btn.querySelector('.btn__roll');
+    if (!roll) { btn.textContent = text; return; }
+    roll.dataset.label = text;
+    roll.firstElementChild.textContent = text;
+  };
+
+  /* ---- Split headlines into masked words -------------------------------- */
+  $$('[data-split]').forEach((el) => {
+    const words = el.textContent.trim().split(/\s+/);
+    el.setAttribute('aria-label', el.textContent.trim());
+    el.innerHTML = words
+      .map((w, i) => `<span class="split-word" aria-hidden="true" style="--w:${i}"><span>${w}</span></span>`)
+      .join(' ');
+  });
+
+  /* ---- Reveal on scroll -------------------------------------------------- */
+  const revealTargets = $$('[data-reveal], [data-split]');
+  if (reduceMotion || !('IntersectionObserver' in window)) {
+    revealTargets.forEach((el) => el.classList.add('is-in'));
+  } else {
+    const io = new IntersectionObserver(
+      (entries) => entries.forEach((e) => {
+        if (!e.isIntersecting) return;
+        e.target.classList.add('is-in');
+        io.unobserve(e.target);
+      }),
+      { rootMargin: '0px 0px -10% 0px', threshold: 0.12 }
+    );
+    revealTargets.forEach((el) => io.observe(el));
+  }
+
+  /* ---- Header: condense after the banner, hide on scroll down ----------- */
+  const header = $('[data-header]');
+  const menu = $('[data-menu]');
+  const burger = $('[data-burger]');
+  let lastY = window.scrollY;
+
+  const onHeaderScroll = () => {
+    if (!header) return;
+    const y = window.scrollY;
+    header.classList.toggle('is-scrolled', y > 28);
+    const goingDown = y > lastY && y > 400;
+    const menuOpen = menu && menu.classList.contains('is-open');
+    header.classList.toggle('is-hidden', goingDown && !menuOpen);
+    lastY = y;
+  };
+
+  /* ---- Mobile menu ------------------------------------------------------- */
+  const setMenu = (open) => {
+    if (!menu || !burger) return;
+    menu.classList.toggle('is-open', open);
+    burger.setAttribute('aria-expanded', String(open));
+    burger.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+    document.body.style.overflow = open ? 'hidden' : '';
+  };
+  burger?.addEventListener('click', () => setMenu(!menu.classList.contains('is-open')));
+  menu?.addEventListener('click', (e) => { if (e.target.closest('a')) setMenu(false); });
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') setMenu(false); });
+
+  /* ---- Parallax (uses the `translate` property so it composes with
+         transform-based hover states and keyframes) ----------------------- */
+  const parallaxEls = reduceMotion ? [] : $$('[data-parallax]');
+  const applyParallax = () => {
+    const vh = window.innerHeight;
+    parallaxEls.forEach((el) => {
+      const r = el.parentElement.getBoundingClientRect();
+      if (r.bottom < -200 || r.top > vh + 200) return;
+      const speed = parseFloat(el.dataset.parallax) || 0;
+      const offset = (r.top + r.height / 2 - vh / 2) * speed;
+      el.style.translate = `0 ${offset.toFixed(1)}px`;
+    });
+  };
+
+  let ticking = false;
+  const onScroll = () => {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(() => {
+      onHeaderScroll();
+      applyParallax();
+      ticking = false;
+    });
+  };
+  window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', onScroll, { passive: true });
+  onScroll();
+
+  /* ---- Gallery: fan-in entrance + pointer depth ------------------------- */
+  const gallery = $('[data-gallery]');
+  if (gallery && !reduceMotion) {
+    const items = $$('.gallery__item', gallery);
+    gallery.dataset.state = 'pre';
+    const gio = new IntersectionObserver((entries) => {
+      if (!entries[0].isIntersecting) return;
+      gio.disconnect();
+      requestAnimationFrame(() => {
+        gallery.dataset.state = 'in';
+        setTimeout(() => (gallery.dataset.state = 'done'), 1500);
+      });
+    }, { threshold: 0.2 });
+    gio.observe(gallery);
+
+    const finePointer = window.matchMedia('(pointer: fine)').matches;
+    if (finePointer) {
+      gallery.addEventListener('pointermove', (e) => {
+        const r = gallery.getBoundingClientRect();
+        const nx = (e.clientX - r.left) / r.width - 0.5;
+        const ny = (e.clientY - r.top) / r.height - 0.5;
+        items.forEach((item) => {
+          const d = parseFloat(item.dataset.depth) || 0.5;
+          item.style.setProperty('--px', (-nx * 18 * d).toFixed(2));
+          item.style.setProperty('--py', (-ny * 12 * d).toFixed(2));
+        });
+      });
+      gallery.addEventListener('pointerleave', () => {
+        items.forEach((item) => {
+          item.style.setProperty('--px', 0);
+          item.style.setProperty('--py', 0);
+        });
+      });
+    }
+  }
+
+  /* ---- Cart (front-end stub — swap for Shopify /cart/add.js) ------------ */
+  const cartCount = $('[data-cart-count]');
+  const cartLink = $('[data-cart-link]');
+  let count = 0;
+  const bumpCart = () => {
+    count += 1;
+    if (!cartCount) return;
+    cartCount.hidden = false;
+    cartCount.textContent = String(count);
+    cartLink?.setAttribute('aria-label', `Cart, ${count} item${count === 1 ? '' : 's'}`);
+    cartCount.classList.remove('is-bump');
+    void cartCount.offsetWidth; // restart animation
+    cartCount.classList.add('is-bump');
+  };
+
+  $$('[data-add-to-cart]').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      bumpCart();
+      if (btn.classList.contains('icon-btn')) {
+        btn.classList.remove('is-added');
+        void btn.offsetWidth;
+        btn.classList.add('is-added');
+        setTimeout(() => btn.classList.remove('is-added'), 1400);
+      } else {
+        btn.classList.add('is-done');
+        setBtnLabel(btn, 'Added ✓');
+        setTimeout(() => {
+          btn.classList.remove('is-done');
+          setBtnLabel(btn, 'Add to cart');
+        }, 1600);
+      }
+    });
+  });
+
+  /* ---- Notify me (inline restock capture) ------------------------------- */
+  $$('[data-notify]').forEach((wrap) => {
+    const open = $('[data-notify-open]', wrap);
+    const form = $('[data-notify-form]', wrap);
+    const msg = $('[data-notify-msg]', wrap);
+    const input = $('input', form);
+
+    open.addEventListener('click', () => {
+      open.hidden = true;
+      form.hidden = false;
+      input.focus();
+    });
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      form.classList.remove('is-error');
+      if (!EMAIL_RE.test(input.value.trim())) {
+        void form.offsetWidth;
+        form.classList.add('is-error');
+        msg.className = 'form-msg is-error';
+        msg.textContent = 'Enter a valid email address.';
+        return;
+      }
+      form.hidden = true;
+      msg.className = 'form-msg is-success';
+      msg.textContent = "You're on the list for this one.";
+    });
+  });
+
+  /* ---- How-to stepper: auto-advance while visible, pause on hover ------- */
+  const steps = $('[data-steps]');
+  if (steps) {
+    const items = $$('.step', steps);
+    const STEP_MS = 4000;
+    steps.style.setProperty('--step-dur', `${STEP_MS}ms`);
+    let active = 0;
+    let timer = null;
+    let visible = false;
+    let paused = false;
+
+    const activate = (i) => {
+      active = (i + items.length) % items.length;
+      items.forEach((li, idx) => {
+        const on = idx === active;
+        li.classList.toggle('is-active', on);
+        $('.step__trigger', li).setAttribute('aria-pressed', String(on));
+        // restart progress bar
+        const bar = $('.step__progress', li);
+        bar.style.animation = 'none';
+        void bar.offsetWidth;
+        bar.style.animation = '';
+      });
+    };
+
+    const schedule = () => {
+      clearTimeout(timer);
+      if (reduceMotion || !visible || paused) return;
+      timer = setTimeout(() => { activate(active + 1); schedule(); }, STEP_MS);
+    };
+
+    items.forEach((li, idx) => {
+      $('.step__trigger', li).addEventListener('click', () => { activate(idx); schedule(); });
+    });
+    steps.addEventListener('pointerenter', () => { paused = true; steps.classList.add('is-paused'); clearTimeout(timer); });
+    steps.addEventListener('pointerleave', () => { paused = false; steps.classList.remove('is-paused'); activate(active); schedule(); });
+    steps.addEventListener('focusin', () => { paused = true; steps.classList.add('is-paused'); clearTimeout(timer); });
+    steps.addEventListener('focusout', () => { paused = false; steps.classList.remove('is-paused'); schedule(); });
+
+    if (reduceMotion) steps.classList.add('is-paused');
+    new IntersectionObserver((entries) => {
+      visible = entries[0].isIntersecting;
+      if (visible) { activate(active); schedule(); } else clearTimeout(timer);
+    }, { threshold: 0.4 }).observe(steps);
+  }
+
+  /* ---- FAQ accordion: animate <details> open/close ---------------------- */
+  $$('[data-accordion]').forEach((details) => {
+    const summary = $('summary', details);
+    const panel = $('.accordion__panel', details);
+    let anim = null;
+
+    summary.addEventListener('click', (e) => {
+      if (reduceMotion || !panel.animate) return;
+      e.preventDefault();
+      anim?.cancel();
+      if (details.open) {
+        details.classList.add('is-closing');
+        const h = panel.offsetHeight;
+        anim = panel.animate([{ height: `${h}px`, opacity: 1 }, { height: '0px', opacity: 0 }], { duration: 320, easing: 'cubic-bezier(0.65,0,0.35,1)' });
+        anim.onfinish = () => { details.open = false; details.classList.remove('is-closing'); };
+      } else {
+        // close siblings for a tidy single-open accordion
+        $$('[data-accordion][open]').forEach((d) => { if (d !== details) d.open = false; });
+        details.open = true;
+        const h = panel.offsetHeight;
+        anim = panel.animate([{ height: '0px', opacity: 0 }, { height: `${h}px`, opacity: 1 }], { duration: 420, easing: 'cubic-bezier(0.22,1,0.36,1)' });
+      }
+    });
+  });
+
+  /* ---- Newsletter: validation + consent + success/error states ---------- */
+  const signup = $('[data-signup]');
+  if (signup) {
+    const email = signup.elements.email;
+    const consent = signup.elements.consent;
+    const msg = $('[data-signup-msg]', signup);
+    const submit = $('button[type="submit"]', signup);
+
+    signup.addEventListener('submit', (e) => {
+      e.preventDefault();
+      signup.classList.remove('is-error', 'is-consent-error');
+      void signup.offsetWidth;
+
+      if (!EMAIL_RE.test(email.value.trim())) {
+        signup.classList.add('is-error');
+        msg.className = 'form-msg is-error';
+        msg.textContent = 'Enter a valid email address.';
+        email.focus();
+        return;
+      }
+      if (!consent.checked) {
+        signup.classList.add('is-consent-error');
+        msg.className = 'form-msg is-error';
+        msg.textContent = 'Tick the box so we can email you.';
+        return;
+      }
+      // TODO: post to Shopify customer form / Klaviyo list
+      msg.className = 'form-msg is-success';
+      msg.textContent = "You're in. First whiff is yours.";
+      setBtnLabel(submit, 'Done ✓');
+      submit.disabled = true;
+      email.disabled = true;
+    });
+  }
+})();
