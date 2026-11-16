@@ -429,8 +429,20 @@ input { font: inherit; }
 /* ==========================================================================
    Come get a whiff
    ========================================================================== */
-.whiff { padding: var(--section-y) 0 75px; overflow: hidden; }
-.whiff__intro { display: flex; flex-direction: column; align-items: center; gap: var(--s-24); padding: 0 var(--pad-x); text-align: center; }
+.whiff { position: relative; padding: 0 0 75px; overflow: clip; }  /* clip, not hidden — hidden kills sticky */
+/* Figma 54:39: intro is `sticky top-0` across the full section height —
+   copy pins while the photo fan scrolls over it, releases at the section end. */
+.whiff__intro {
+  position: sticky;
+  top: 0;
+  z-index: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--s-24);
+  padding: var(--section-y) var(--pad-x) 0;
+  text-align: center;
+}
 .whiff__heading { display: flex; flex-direction: column; align-items: center; gap: var(--s-16); }
 .whiff__lede { max-width: 488px; }
 
@@ -443,6 +455,8 @@ input { font: inherit; }
   gap: calc(var(--w) * 0.0129);
   width: var(--w);
   margin: 59px auto 0;
+  position: relative;
+  z-index: 1;               /* photos pass over the pinned copy */
 }
 .gallery__item {
   --px: 0;
@@ -557,7 +571,7 @@ input { font: inherit; }
 .duo {
   position: relative;
   height: 1213px;
-  overflow: hidden;
+  overflow: clip;           /* clip, not hidden — hidden kills sticky */
   background: var(--c-paper);
 }
 .duo__branch {
@@ -997,6 +1011,7 @@ input { font: inherit; }
     left: calc(50% - var(--hh) * 1.2003 * 1455 / 1047 * 0.485);
   }
 
+  .whiff__intro { position: relative; top: auto; }
   .gallery { --w: 150vw; margin-left: -25vw; }
 
   .scents__grid,
