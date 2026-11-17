@@ -3,30 +3,6 @@
    Builds on tokens.css + main.css; only shop-specific pieces live here.
    ========================================================================== */
 
-/* ---- Announcement: tinted variant (1:456) -------------------------------- */
-.announcement--tint { background: rgba(15, 17, 20, 0.05); }
-
-/* ---- Header: solid white variant (1:1199) --------------------------------
-   In flow and sticky instead of floating over a hero. Same nav, ink colorway. */
-.site-header--solid {
-  position: sticky;
-  top: 0;
-  left: auto;
-  right: auto;
-  padding: 16px;
-  color: var(--c-ink);
-  background: var(--c-white);
-  transition: transform 450ms var(--ease-out), box-shadow var(--dur) var(--ease-out);
-}
-.site-header--solid::before { display: none; }
-.site-header--solid.is-scrolled { top: 0; left: auto; right: auto; padding: 16px; box-shadow: 0 1px 0 var(--c-ink-10); }
-.site-header--solid .nav__logo img { width: 129px; height: 54px; }
-.site-header--solid.is-scrolled .nav__logo img { width: 103px; height: 43px; }
-
-/* ---- Shared helpers ------------------------------------------------------ */
-.is-flipped { transform: scaleY(-1); }
-.product-desc--md { font-size: 16px; letter-spacing: var(--tr-body); }
-
 /* two-tone gleam for the bundle: ember arc with a mint shine */
 .gleam--duo { --gleam-accent: var(--c-ember); --gleam-accent-soft: #a3d3d6; }
 
@@ -206,10 +182,6 @@
 
 /* ---- Responsive ---------------------------------------------------------- */
 @media (max-width: 900px) {
-  .site-header--solid { padding: 12px var(--gutter); }
-  .site-header--solid .nav__logo img,
-  .site-header--solid.is-scrolled .nav__logo img { width: 95px; height: 40px; }
-  .site-header--solid .nav__links { background: var(--c-white); }
 
   .shop-hero__frame { aspect-ratio: auto; height: min(70svh, 560px); }
   .shop-hero__img { top: -16%; height: 132%; }

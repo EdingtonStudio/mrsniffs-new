@@ -417,6 +417,32 @@ input { font: inherit; }
 .nav__burger[aria-expanded="true"] span:first-child { top: 9.5px; transform: rotate(45deg); }
 .nav__burger[aria-expanded="true"] span:last-child { top: 9.5px; transform: rotate(-45deg); }
 
+/* ---- Shared page chrome for inner pages (solid header, tinted banner) ---- */
+/* ---- Announcement: tinted variant (1:456) -------------------------------- */
+.announcement--tint { background: rgba(15, 17, 20, 0.05); }
+
+/* ---- Header: solid white variant (1:1199) --------------------------------
+   In flow and sticky instead of floating over a hero. Same nav, ink colorway. */
+.site-header--solid {
+  position: sticky;
+  top: 0;
+  left: auto;
+  right: auto;
+  padding: 16px;
+  color: var(--c-ink);
+  background: var(--c-white);
+  transition: transform 450ms var(--ease-out), box-shadow var(--dur) var(--ease-out);
+}
+.site-header--solid::before { display: none; }
+.site-header--solid.is-scrolled { top: 0; left: auto; right: auto; padding: 16px; box-shadow: 0 1px 0 var(--c-ink-10); }
+.site-header--solid .nav__logo img { width: 129px; height: 54px; }
+.site-header--solid.is-scrolled .nav__logo img { width: 103px; height: 43px; }
+
+/* ---- Shared helpers ------------------------------------------------------ */
+.is-flipped { transform: scaleY(-1); }
+.product-desc--md { font-size: 16px; letter-spacing: var(--tr-body); }
+
+
 /* ==========================================================================
    Hero
    ========================================================================== */
@@ -1139,6 +1165,10 @@ input { font: inherit; }
 }
 
 @media (max-width: 900px) {
+  .site-header--solid { padding: 12px var(--gutter); }
+  .site-header--solid .nav__logo img,
+  .site-header--solid.is-scrolled .nav__logo img { width: 95px; height: 40px; }
+  .site-header--solid .nav__links { background: var(--c-white); }
   /* nav → drawer */
   .site-header { top: 28px; }
   .nav__links {
