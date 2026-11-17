@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Find Your Whiff — Mr. Sniff's</title>
+  <meta name="description" content="A few quick picks. A scent to meet. Four questions, about 30 seconds, no email needed." />
+  <link rel="preload" href="assets/fonts/big-shoulders-display-latin-700-normal.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="assets/fonts/inter-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="assets/img/smell-hero.webp" as="image" />
+  <link rel="stylesheet" href="css/tokens.css" />
+  <link rel="stylesheet" href="css/main.css" />
+  <link rel="stylesheet" href="css/smell.css" />
+  <script defer src="js/main.js"></script>
+  <script defer src="js/smoke.js"></script>
+</head>
+<body class="page-smell">
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <!-- ─── Announcement (1:456) ─────────────────────────────────── -->
+  <div class="announcement announcement--tint" role="region" aria-label="Announcement">
+    <p>ANNOUNCEMENT BANNER — APPROVED FACTUAL MESSAGE ONLY</p>
+  </div>
+
+  <!-- ─── Header, solid variant (1:1199) ───────────────────────── -->
+  <header class="site-header site-header--solid" data-header>
+    <nav class="nav" aria-label="Primary">
+      <ul class="nav__links" id="nav-menu" data-menu>
+        <li><a class="nav__link" href="shop.html">Shop <img class="nav__arrow" src="assets/icons/arrow-up-right-sm-ink.svg" width="14" height="14" alt="" /></a></li>
+        <li><a class="nav__link is-current" href="smell-test.html" aria-current="page">Find your scent</a></li>
+        <li><a class="nav__link" href="how-to.html">How to use</a></li>
+        <li><a class="nav__link" href="index.html#story">Our story</a></li>
+      </ul>
+
+      <a class="nav__logo" href="index.html" aria-label="Mr. Sniff's — home">
+        <img src="assets/icons/logo-ink.svg" width="129" height="54" alt="Mr. Sniff's" />
+      </a>
+
+      <div class="nav__actions">
+        <button class="icon-btn" type="button" aria-label="Search">
+          <img src="assets/icons/search-ink.svg" width="20" height="20" alt="" />
+        </button>
+        <a class="icon-btn nav__cart" href="#cart" aria-label="Cart, 0 items" data-cart-link>
+          <img src="assets/icons/bag-ink.svg" width="20" height="20" alt="" />
+          <span class="cart-count" data-cart-count hidden>0</span>
+        </a>
+        <button class="nav__burger" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="nav-menu" data-burger>
+          <span></span><span></span>
+        </button>
+      </div>
+    </nav>
+  </header>
+
+  <main id="main">
+    <!-- ─── Hero (99:806) ──────────────────────────────────────── -->
+    <section class="smell-hero" aria-labelledby="smell-title">
+      <div class="smell-hero__frame">
+        <img class="smell-hero__img" src="assets/img/smell-hero.webp" width="1800" height="1005" alt="Bonfire and Yoga Studio boxes on a stack of books beside a moustache holder with a burning stick" fetchpriority="high" data-parallax="0.08" />
+        <div class="smell-hero__copy">
+          <h1 class="smell-hero__title" id="smell-title" data-split>FIND YOUR WHIFF.</h1>
+          <p class="smell-hero__lede" data-reveal style="--d: 3">A few quick picks. A scent to meet.</p>
+          <p class="smell-hero__meta" data-reveal style="--d: 4">4 QUESTIONS · ABOUT 30 SECONDS · NO EMAIL NEEDED</p>
+          <div class="smell-hero__actions" data-reveal style="--d: 5">
+            <a class="btn btn--light btn--sm" href="#smell-test">Start the Smell Test</a>
+            <a class="btn btn--ghost-light btn--sm" href="shop.html#compare">Compare scents instead</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── No-script fallback (99:819) ───────────────────────────
+         Figma: "If scripting fails, the plain comparison renders instead."
+         Rendered only when JavaScript is unavailable. -->
+    <noscript>
+      <section class="smell-fallback" aria-labelledby="fallback-title">
+        <header class="section-head">
+          <h2 class="display-l" id="fallback-title">TWO SCENTS. FIND YOUR FAVORITE.</h2>
+          <p class="lede">Compare them here or take the Smell Test.</p>
+        </header>
+        <div class="scents__grid">
+          <article class="scent-card scent-card--bonfire">
+            <a class="scent-card__media" href="bonfire.html" aria-label="View Bonfire">
+              <img class="scent-card__shadow" src="assets/icons/box-shadow.svg" width="366" height="237" alt="" />
+              <span class="scent-card__box"><img src="assets/img/box-bonfire.webp" width="267" height="800" alt="Bonfire Agarwood incense box" /></span>
+            </a>
+            <div class="scent-card__body">
+              <div class="scent-card__info">
+                <div>
+                  <h3 class="product-name">Bonfire · Agarwood Incense</h3>
+                  <p class="product-note">Dark resin + smoke</p>
+                </div>
+                <p class="product-price">$24</p>
+              </div>
+              <div class="scent-card__actions"><a class="btn btn--solid btn--sm" href="bonfire.html">View</a></div>
+            </div>
+          </article>
+          <article class="scent-card scent-card--yoga">
+            <a class="scent-card__media" href="shop.html#yoga-studio" aria-label="View Yoga Studio">
+              <img class="scent-card__shadow" src="assets/icons/box-shadow.svg" width="366" height="237" alt="" />
+              <span class="scent-card__box"><img src="assets/img/box-yoga.webp" width="197" height="600" alt="Yoga Studio Palo Santo incense box" /></span>
+            </a>
+            <div class="scent-card__body">
+              <div class="scent-card__info">
+                <div>
+                  <h3 class="product-name">Yoga Studio · Palo Santo Incense</h3>
+                  <p class="product-note">Warm resin + citrus peel</p>
+                </div>
+                <p class="product-price">$24</p>
+              </div>
+              <div class="scent-card__actions"><a class="btn btn--solid btn--sm" href="shop.html#yoga-studio">View</a></div>
+            </div>
+          </article>
+        </div>
+      </section>
+    </noscript>
+  </main>
+
+  <!-- ─── Footer (1:733) ─────────────────────────────────────────── -->
+  <footer class="footer section--ink">
+    <img class="footer__wordmark" src="assets/img/footer-wordmark.svg" width="1220" height="511" alt="" aria-hidden="true" loading="lazy" data-parallax="-0.08" />
+
+    <div class="signup">
+      <h2 class="display-s">JOIN THE LIST</h2>
+      <p class="lede lede--on-ink">Get first whiff of new scents.</p>
+      <form class="signup__form" data-signup novalidate>
+        <div class="signup__row">
+          <label class="sr-only" for="signup-email">Email address</label>
+          <input class="signup__input" id="signup-email" name="email" type="email" placeholder="your@email.com" autocomplete="email" required />
+          <button class="btn btn--light" type="submit">Sign up</button>
+        </div>
+        <label class="consent">
+          <input type="checkbox" name="consent" required />
+          <span class="consent__box" aria-hidden="true"></span>
+          <span>Yes, email me about new scents and restocks. Unsubscribe anytime.</span>
+        </label>
+        <p class="form-msg" data-signup-msg role="status"></p>
+      </form>
+    </div>
+
+    <nav class="footer__nav" aria-label="Footer">
+      <div class="footer__col">
+        <h3>SHOP</h3>
+        <ul>
+          <li><a href="shop.html">Incense</a></li>
+          <li><a href="index.html#holders">Incense Holders</a></li>
+          <li><a href="shop.html#duo">The Duo</a></li>
+          <li><a href="shop.html">All products</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <h3>LEARN</h3>
+        <ul>
+          <li><a href="smell-test.html">Find your scent</a></li>
+          <li><a href="how-to.html">How to use incense</a></li>
+          <li><a href="index.html#story">Our story</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <h3>HELP</h3>
+        <ul>
+          <li><a href="shop.html#faq">FAQ</a></li>
+          <li><a href="#contact">Contact</a></li>
+          <li><a href="#shipping">Shipping &amp; Returns</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <h3>POLICIES</h3>
+        <ul>
+          <li><a href="#shipping-policy">Shipping policy</a></li>
+          <li><a href="#refund-policy">Refund policy</a></li>
+          <li><a href="#privacy-policy">Privacy policy</a></li>
+          <li><a href="#terms">Terms of service</a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <div class="footer__bar">
+      <p>© 2026 Mr. Sniff's. We just make scents.</p>
+    </div>
+  </footer>
+</body>
+</html>

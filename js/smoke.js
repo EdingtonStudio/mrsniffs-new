@@ -55,6 +55,7 @@
   dot.className = 'cursor-dot is-hidden';
   dot.setAttribute('aria-hidden', 'true');
   dot.innerHTML = '<span></span>';
+  dot.style.transform = 'translate3d(-100px, -100px, 0)';   // off-screen until the first move
   document.body.append(dot);
   root.classList.add('has-cursor-dot');
 
