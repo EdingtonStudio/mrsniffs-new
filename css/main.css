@@ -1222,6 +1222,8 @@ input { font: inherit; }
   padding: var(--section-y) var(--pad-x);
   background: var(--c-paper);
 }
+.why .eyebrow { padding-bottom: 0; }
+.why .eyebrow::after { display: none; }
 .why__proof {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
