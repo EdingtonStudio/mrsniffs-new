@@ -318,24 +318,62 @@
 .ht-clears__head .lede { line-height: normal; }
 .ht-clears__cols {
   position: absolute;
-  left: 526px;
+  left: 36.53%;                  /* 526 / 1440 — fluid so col 3 never clips */
+  right: 16px;
   top: 130px;
   display: flex;
 }
-.ht-clear { width: 308px; display: flex; flex-direction: column; }
-.ht-clear + .ht-clear { padding-left: 16px; border-left: 1px solid var(--c-ink-15); margin-top: 8px; }
+.ht-clear {
+  /* --cp: 0 → 1 scroll progress for this column (set by js/howto.js).
+     Defaults to 1 so no-JS / reduced motion shows the finished layout. */
+  --cp: 1;
+  --ncp: clamp(0, calc(var(--cp) * 2.2), 1);              /* number rises first   */
+  --hcp: clamp(0, calc((var(--cp) - 0.25) / 0.45), 1);     /* then heading wipes   */
+  --pcp: clamp(0, calc((var(--cp) - 0.45) / 0.55), 1);     /* then copy fades up   */
+  position: relative;
+  flex: 1 1 0;
+  min-width: 0;
+  max-width: 308px;
+  display: flex;
+  flex-direction: column;
+}
+.ht-clear + .ht-clear { padding-left: 16px; margin-top: 8px; }
+/* divider draws downward with the column's progress */
+.ht-clear + .ht-clear::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background: var(--c-ink-15);
+  transform: scaleY(var(--cp));
+  transform-origin: 50% 0;
+}
+.ht-clear__mask { display: block; overflow: hidden; }
 .ht-clear:nth-child(3) { margin-top: 9px; }
 .ht-clear__num {
   font-family: var(--f-mono);
   font-size: 57px;
   letter-spacing: 1.78px;
   line-height: 1.2;
-  color: rgba(15, 17, 20, 0.24);
-  opacity: 0.4;
   margin-top: -8px;
+  display: block;
+  /* rises out of its mask glowing ember, cools to the Figma grey as it settles */
+  transform: translateY(calc((1 - var(--ncp)) * 105%));
+  color: color-mix(in srgb, var(--c-ember) calc((1 - var(--cp)) * 100%), rgba(15, 17, 20, 0.24));
+  opacity: calc(1 - var(--cp) * 0.6);
 }
 .ht-clear:first-child .ht-clear__num { margin-top: 0; }
-.ht-clear__text { width: 276px; display: flex; flex-direction: column; gap: 12px; }
+.ht-clear__text { width: 100%; max-width: 276px; display: flex; flex-direction: column; gap: 12px; }
+.ht-clear h3 {
+  clip-path: inset(0 calc((1 - var(--hcp)) * 100%) 0 0);
+  transform: translateX(calc((1 - var(--hcp)) * -12px));
+}
+.ht-clear p {
+  opacity: var(--pcp);
+  transform: translateY(calc((1 - var(--pcp)) * 14px));
+}
 .ht-clear:nth-child(1) .ht-clear__text { margin-top: 18px; }
 .ht-clear:nth-child(2) .ht-clear__text { margin-top: 115px; }
 .ht-clear:nth-child(3) .ht-clear__text { margin-top: 222px; }
@@ -347,8 +385,15 @@
   line-height: normal;
 }
 .ht-clear p { line-height: var(--lh-body); color: var(--c-ink-60); }
-.ht-clear__num { transition: opacity 600ms var(--ease-out), color 600ms var(--ease-out); }
-.ht-clear:hover .ht-clear__num { opacity: 1; color: var(--c-ember); }
+.ht-clear:hover .ht-clear__num { opacity: 1; color: var(--c-ember); transition: color 400ms var(--ease-out), opacity 400ms var(--ease-out); }
+
+/* holder slides in from the left and settles as the section arrives */
+.ht-clears { --sp: 1; }
+.ht-clears__img {
+  transform: translateX(calc((1 - var(--sp)) * -22%)) rotate(calc((1 - var(--sp)) * -5deg));
+  opacity: calc(0.25 + var(--sp) * 0.75);
+  transform-origin: 30% 70%;
+}
 
 /* ---- FAQ ---------------------------------------------------------------- */
 .ht-faq { padding: 88px var(--pad-x); }
@@ -466,7 +511,9 @@
   .ht-tile { min-height: 220px; padding-top: 22px; }
 
   .ht-clears__cols { flex-direction: column; gap: 28px; }
-  .ht-clear + .ht-clear { padding-left: 0; border-left: 0; border-top: 1px solid var(--c-ink-15); padding-top: 20px; margin-top: 0; }
+  .ht-clear { max-width: none; }
+  .ht-clear + .ht-clear { padding-left: 0; padding-top: 20px; margin-top: 0; }
+  .ht-clear + .ht-clear::before { left: 0; right: 0; top: 0; bottom: auto; width: auto; height: 1px; transform: scaleX(var(--cp)); transform-origin: 0 50%; }
   .ht-clear .ht-clear__text { margin-top: 8px !important; }
 
   .ht-cta { height: auto; min-height: 560px; display: flex; align-items: flex-end; }

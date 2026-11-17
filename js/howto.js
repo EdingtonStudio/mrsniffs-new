@@ -128,6 +128,35 @@
     }
   });
 
+  /* ---- When the smoke clears: scroll-scrubbed assembly -------------------
+     Section progress drives the holder; each column gets its own --cp,
+     staggered so 01 → 02 → 03 arrive in sequence (desktop) or as each
+     stacked column reaches the viewport (mobile). */
+  const clears = document.querySelector('.ht-clears');
+  const clearCols = clears ? [...clears.querySelectorAll('.ht-clear')] : [];
+  const clamp01 = (v) => Math.max(0, Math.min(1, v));
+  const updateClears = () => {
+    if (!clears || reduce.matches) return;
+    const vh = window.innerHeight;
+    const r = clears.getBoundingClientRect();
+    if (r.bottom < -100 || r.top > vh + 100) return;
+    // 0 when the section top hits the bottom of the viewport, 1 when it's ~35% up
+    const sp = clamp01((vh - r.top) / (vh * 0.65));
+    clears.style.setProperty('--sp', sp.toFixed(3));
+    const stacked = window.innerWidth <= 900;
+    clearCols.forEach((col, i) => {
+      let cp;
+      if (stacked) {
+        const cr = col.getBoundingClientRect();
+        cp = clamp01((vh * 0.92 - cr.top) / (vh * 0.35));
+      } else {
+        cp = clamp01((sp - 0.18 - i * 0.2) / 0.42);
+      }
+      col.style.setProperty('--cp', cp.toFixed(3));
+    });
+  };
+  if (reduce.matches) clearCols.forEach((c) => c.style.removeProperty('--cp'));
+
   /* ---- Loop -------------------------------------------------------------- */
   let ticking = false;
   const onScroll = () => {
@@ -135,6 +164,7 @@
     ticking = true;
     requestAnimationFrame(() => {
       updateBurn();
+      updateClears();
       syncTabs();
       syncFloat();
       ticking = false;
