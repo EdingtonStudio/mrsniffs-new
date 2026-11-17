@@ -963,6 +963,91 @@ input { font: inherit; }
 .footer__bar p { font-size: var(--fs-xs); color: var(--c-grey-2); letter-spacing: 0; }
 
 /* ==========================================================================
+   Gleam card edge
+   Ported from 21st.dev "Shiny Button" (conic sweep border + inner glow),
+   applied to product card outlines. Still at rest; on hover the arc grows,
+   sweeps around the edge and the inner edge glow breathes in.
+   Per-card color via --gleam-accent / --gleam-accent-soft.
+   ========================================================================== */
+@property --gleam-angle   { syntax: "<angle>";      initial-value: 0deg; inherits: false; }
+@property --gleam-offset  { syntax: "<angle>";      initial-value: 0deg; inherits: false; }
+@property --gleam-percent { syntax: "<percentage>"; initial-value: 0%;   inherits: false; }
+@property --gleam-shine   { syntax: "<color>";      initial-value: white; inherits: false; }
+
+.gleam {
+  --gleam-accent: var(--c-ember);
+  --gleam-accent-soft: #f08a68;
+  --gleam-width: 1.5px;
+  --gleam-sweep: 3s;
+  --gleam-ease: 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+  position: relative;
+  isolation: isolate;
+}
+
+/* the sweeping ring — a conic gradient masked down to the edge */
+.gleam::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  padding: var(--gleam-width);
+  pointer-events: none;
+  background: conic-gradient(
+    from calc(var(--gleam-angle) - var(--gleam-offset)),
+    transparent,
+    var(--gleam-accent) var(--gleam-percent),
+    var(--gleam-shine) calc(var(--gleam-percent) * 2),
+    var(--gleam-accent) calc(var(--gleam-percent) * 3),
+    transparent calc(var(--gleam-percent) * 4)
+  );
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+          mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0);
+  transition: var(--gleam-ease);
+  transition-property: --gleam-offset, --gleam-percent, --gleam-shine;
+  animation: gleam-spin var(--gleam-sweep) linear infinite paused;
+}
+
+/* inner edge glow, breathing */
+.gleam::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  box-shadow:
+    inset 0 0 0 1px color-mix(in srgb, var(--gleam-accent) 35%, transparent),
+    inset 0 -1.5rem 3rem -1rem color-mix(in srgb, var(--gleam-accent) 55%, transparent);
+  opacity: 0;
+  transition: opacity var(--gleam-ease);
+  animation: gleam-breathe calc(var(--gleam-sweep) * 1.5) ease-in-out infinite paused;
+}
+
+.gleam:is(:hover, :focus-within)::before {
+  --gleam-percent: 20%;
+  --gleam-offset: 95deg;
+  --gleam-shine: var(--gleam-accent-soft);
+  animation-play-state: running;
+}
+.gleam:is(:hover, :focus-within)::after { opacity: 1; animation-play-state: running; }
+
+@keyframes gleam-spin { to { --gleam-angle: 360deg; } }
+@keyframes gleam-breathe { 0%, 100% { filter: brightness(1); } 50% { filter: brightness(1.6); } }
+
+.gleam--bonfire { --gleam-accent: var(--c-ember); --gleam-accent-soft: #f08a68; }
+.gleam--yoga    { --gleam-accent: #a3d3d6;        --gleam-accent-soft: #e2f4f5; }
+/* on white, keep the glow to a rim so it doesn't tint copy and buttons */
+.gleam--light::after {
+  box-shadow:
+    inset 0 0 0 1px color-mix(in srgb, var(--gleam-accent) 40%, transparent),
+    inset 0 -0.75rem 1.25rem -0.75rem color-mix(in srgb, var(--gleam-accent) 45%, transparent);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .gleam::before, .gleam::after { animation: none; }
+}
+
+/* ==========================================================================
    Scroll reveal + split headlines
    ========================================================================== */
 .js [data-reveal] {
