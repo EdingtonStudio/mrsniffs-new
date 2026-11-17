@@ -429,9 +429,10 @@ input { font: inherit; }
 }
 .hero__bg {
   position: absolute;
-  inset: 0;
+  left: 0;
+  top: -8%;                  /* overscan so parallax never shows an edge */
   width: 100%;
-  height: 100%;
+  height: 116%;
   object-fit: cover;
   animation: hero-settle 2200ms var(--ease-out) both;
 }
@@ -1110,6 +1111,7 @@ input { font: inherit; }
 
   .hero { --hh: min(78svh, 640px); }
   .hero__frame { aspect-ratio: auto; height: var(--hh); }
+  .hero__bg { top: -18%; height: 136%; }
   /* keep the boxes centred: product sits at ~48.5% of the layer width.
      (no `translate` here — JS parallax owns that property) */
   .hero__product {

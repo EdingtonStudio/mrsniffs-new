@@ -1,0 +1,232 @@
+/* ==========================================================================
+   Mr. Sniff's — Shop / Collection (Figma 1:455)
+   Builds on tokens.css + main.css; only shop-specific pieces live here.
+   ========================================================================== */
+
+/* ---- Announcement: tinted variant (1:456) -------------------------------- */
+.announcement--tint { background: rgba(15, 17, 20, 0.05); }
+
+/* ---- Header: solid white variant (1:1199) --------------------------------
+   In flow and sticky instead of floating over a hero. Same nav, ink colorway. */
+.site-header--solid {
+  position: sticky;
+  top: 0;
+  left: auto;
+  right: auto;
+  padding: 16px;
+  color: var(--c-ink);
+  background: var(--c-white);
+  transition: transform 450ms var(--ease-out), box-shadow var(--dur) var(--ease-out);
+}
+.site-header--solid::before { display: none; }
+.site-header--solid.is-scrolled { top: 0; left: auto; right: auto; padding: 16px; box-shadow: 0 1px 0 var(--c-ink-10); }
+.site-header--solid .nav__logo img { width: 129px; height: 54px; }
+.site-header--solid.is-scrolled .nav__logo img { width: 103px; height: 43px; }
+
+/* ---- Shared helpers ------------------------------------------------------ */
+.is-flipped { transform: scaleY(-1); }
+.product-desc--md { font-size: 16px; letter-spacing: var(--tr-body); }
+
+/* two-tone gleam for the bundle: ember arc with a mint shine */
+.gleam--duo { --gleam-accent: var(--c-ember); --gleam-accent-soft: #a3d3d6; }
+
+/* ---- Hero (1:458) -------------------------------------------------------- */
+.shop-hero { padding: 0 var(--gutter); }
+.shop-hero__frame {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 1408 / 710;
+  background: var(--c-ink);
+  isolation: isolate;
+}
+.shop-hero__img {
+  position: absolute;
+  left: 0;
+  top: -10%;                 /* overscan so parallax never shows an edge */
+  width: 100%;
+  height: 120%;
+  object-fit: cover;
+  object-position: 50% 46.3%;
+  z-index: -2;
+  animation: hero-settle 2200ms var(--ease-out) both;
+}
+.shop-hero__frame::after {             /* 35% ink scrim from Figma */
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: rgba(15, 17, 20, 0.35);
+}
+.shop-hero__title {
+  position: absolute;
+  left: 27.88%;
+  top: 52.4%;
+  translate: -50% 0;
+  color: var(--c-white);
+  text-align: center;
+  white-space: nowrap;
+}
+.shop-hero__sub {
+  position: absolute;
+  left: 64.77%;
+  top: 56.2%;
+  width: 150px;
+  color: var(--c-white);
+}
+
+/* ---- Product grid (1:478) ------------------------------------------------ */
+.shop-grid { display: flex; justify-content: center; padding: var(--s-16) var(--gutter) var(--section-y); }
+.shop-grid .holder-card__media { display: block; background: var(--c-stone); }
+.shop-card__actions { display: flex; align-items: center; gap: var(--s-16); padding: 0 var(--s-16); }
+
+.icon-btn--tile-light { background: var(--c-ink-10); }
+.icon-btn--tile-light:hover { background: var(--c-ink); }
+.icon-btn--tile-light:hover img { filter: invert(1); }
+.icon-btn--tile-light.is-added { background: var(--c-ember); }
+.icon-btn--tile-light.is-added img { filter: invert(1); }
+
+/* ---- Compare (1:533) ----------------------------------------------------- */
+.compare {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--s-36);
+  padding: var(--section-y) var(--pad-x);
+  background: var(--c-paper);
+}
+.compare__scroll { width: 100%; max-width: 1320px; }
+.compare__table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  table-layout: fixed;
+  font-size: 16px;
+  letter-spacing: var(--tr-body);
+  line-height: normal;
+}
+.compare__table col:first-child { width: 334px; }
+.compare__table th,
+.compare__table td {
+  height: 67px;
+  padding: 0 24px;
+  text-align: left;
+  font-weight: 400;
+  vertical-align: middle;
+  border-bottom: 1px dashed var(--c-ink-25);
+  border-right: 1px solid var(--c-ink-15);
+  transition: background-color var(--dur) var(--ease-out);
+}
+.compare__table tr > :first-child { width: 334px; }
+.compare__table tfoot td { height: 93px; border-bottom: 0; }
+.compare__table tfoot .compare__corner { border-right: 1px solid var(--c-ink-15); }
+.compare__table th span { display: inline-flex; align-items: center; gap: 8px; }
+.compare__table th img { flex: none; transition: transform 450ms var(--ease-spring); }
+.compare__table th img.is-flipped { transform: scaleY(-1); }
+.compare__table tbody th:hover img,
+.compare__head:hover img { transform: rotate(-12deg) scale(1.15); }
+.compare__table tbody th:hover img.is-flipped,
+.compare__head:hover img.is-flipped { transform: scaleY(-1) rotate(12deg) scale(1.15); }
+
+.compare__head--bonfire { background: #f9eae2; }
+.compare__head--yoga    { background: #e6f3f4; }
+.compare__head--both    { background: #e0e0e0; }
+
+.compare__table .is-pending { color: var(--c-ink-60); }
+
+/* column focus: hovering anywhere in a column tints that column */
+.compare__table:has(tr > :nth-child(2):hover) tr > :nth-child(2):not(.compare__head) { background: rgba(249, 234, 226, 0.55); }
+.compare__table:has(tr > :nth-child(3):hover) tr > :nth-child(3):not(.compare__head) { background: rgba(230, 243, 244, 0.6); }
+.compare__table:has(tr > :nth-child(4):hover) tr > :nth-child(4):not(.compare__head) { background: rgba(224, 224, 224, 0.45); }
+.compare__table tfoot tr > * { background: transparent !important; }
+
+/* ---- Still deciding (1:663) --------------------------------------------- */
+.decide {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--s-36);
+  padding: var(--section-y) var(--gutter);
+}
+.decide__grid { display: flex; gap: var(--s-16); width: 100%; max-width: 1408px; }
+.decide-card { flex: 1 0 0; min-width: 0; display: flex; flex-direction: column; gap: var(--s-12); }
+.decide-card__media { position: relative; aspect-ratio: 458.67 / 484; overflow: hidden; background: var(--c-stone); }
+.decide-card__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 1100ms var(--ease-out);
+}
+/* Figma crop for the burn shot: 109.91% × 158.06% at -4.96%, -55.26% */
+.decide-card__media--burn img {
+  position: absolute;
+  left: -4.96%;
+  top: -55.26%;
+  width: 109.91%;
+  height: 158.06%;
+  max-width: none;
+  object-fit: fill;
+}
+.decide-card:hover .decide-card__media img { transform: scale(1.05); }
+
+.decide-card__body { display: flex; flex-direction: column; align-items: flex-start; gap: var(--s-24); padding-right: var(--s-16); }
+.decide-card__pill {
+  position: relative;
+  padding: 6px 0;
+  font-size: 14px;
+  letter-spacing: -0.28px;
+  color: var(--c-ink-60);
+  line-height: normal;
+}
+/* 32px rule that runs the full label on hover */
+.decide-card__pill::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 32px;
+  height: 1px;
+  background: #ff5b24;
+  transition: width 600ms var(--ease-out);
+}
+.decide-card:hover .decide-card__pill::after { width: 100%; }
+
+.decide-card__text { display: flex; flex-direction: column; gap: var(--s-16); }
+.decide-card__text h3 {
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 24px;
+  letter-spacing: -0.4px;
+  color: var(--c-ink);
+}
+.decide-card__text p { font-size: 14px; line-height: 20px; letter-spacing: -0.28px; color: rgba(20, 20, 20, 0.6); }
+
+/* ---- FAQ, full-width variant (1:708) ------------------------------------ */
+.faq--wide { padding: var(--section-y) var(--pad-x); background: var(--c-paper); }
+.faq--wide .faq__inner { max-width: 1320px; }
+
+/* ---- Responsive ---------------------------------------------------------- */
+@media (max-width: 900px) {
+  .site-header--solid { padding: 12px var(--gutter); }
+  .site-header--solid .nav__logo img,
+  .site-header--solid.is-scrolled .nav__logo img { width: 95px; height: 40px; }
+  .site-header--solid .nav__links { background: var(--c-white); }
+
+  .shop-hero__frame { aspect-ratio: auto; height: min(70svh, 560px); }
+  .shop-hero__img { top: -16%; height: 132%; }
+  .shop-hero__title { left: 50%; top: auto; bottom: 96px; }
+  .shop-hero__sub { left: 50%; top: auto; bottom: 48px; width: auto; translate: -50% 0; text-align: center; white-space: nowrap; }
+
+  .shop-grid .holder-card { flex: 0 0 82%; }
+
+  .compare__scroll { overflow-x: auto; margin: 0 calc(-1 * var(--pad-x)); padding: 0 var(--pad-x); width: calc(100% + 2 * var(--pad-x)); }
+  .compare__table { min-width: 760px; }
+  .compare__table tr > :first-child {
+    position: sticky;
+    left: 0;
+    z-index: 1;
+    width: 150px;
+    background: var(--c-paper);
+  }
+
+  .decide__grid { flex-direction: column; gap: var(--s-48); }
+}

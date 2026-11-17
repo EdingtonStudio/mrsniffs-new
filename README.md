@@ -1,6 +1,6 @@
 # Mr. Sniff's — website
 
-Homepage build from Figma `Mr. Sniff's website - Nov 12` → frame **Homepage** (`1:8`).
+Pages built from Figma `Mr. Sniff's website - Nov 12`: **Homepage** (`1:8`) → `index.html`, **Shop / Collection** (`1:455`) → `shop.html`.
 Static HTML/CSS/JS, no build step. Each section maps 1:1 to a future Shopify section.
 
 ```bash
@@ -12,6 +12,7 @@ python3 -m http.server 8000   # then open http://localhost:8000
 ```
 index.html          sections in page order (Figma node ids noted in DESIGN map below)
 css/tokens.css      color, type, space, motion, @font-face — single source of truth
+css/shop.css        shop-only sections (solid header, hero, compare table, still-deciding cards)
 css/main.css        primitives (btn, link, chip) → sections → reveal → responsive → reduced-motion
 js/main.js          interaction modules (self-contained, no deps)
 assets/img|icons|fonts
@@ -35,6 +36,17 @@ assets/img|icons|fonts
 All buttons share one component, using the 21st.dev *Interactive Hover Button* effect ported to plain CSS/JS: a dot beside the label blooms to fill the button, the label slides out and a copy + arrow slides in. Squash on press. Colors are per-skin variables in `css/main.css`.
 Product cards (both scents, all three holders) use a `.gleam` edge ported from 21st.dev *Shiny Button*: still at rest, on hover a conic light sweeps the outline and an inner glow breathes. Color per card via `--gleam-accent` (Bonfire ember, Yoga Studio mint).
 `prefers-reduced-motion` keeps state changes and drops movement.
+
+## Shop page map
+
+| Section | Figma node | Interactions |
+|---|---|---|
+| Header (solid) | `1:1199` | Sticky white header with hairline on scroll; same nav behaviours |
+| Hero | `1:458` | Settle-in, parallax, word reveal |
+| Products | `1:478` | Gleam edge (Bonfire ember, Yoga mint, Duo ember→mint), image push-in, cart tile |
+| Compare | `1:533` | Semantic table, column tint on hover, icon nudge, sticky label column + swipe on mobile |
+| Still deciding | `1:663` | Image push-in, accent rule runs full width on hover |
+| FAQ | `1:708` | Shared accordion, full-width variant |
 
 ## Open items
 
