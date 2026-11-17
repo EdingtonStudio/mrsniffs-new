@@ -39,6 +39,9 @@
 
 .pdp-tile--man img { width: 100%; height: 100%; object-fit: cover; }
 
+/* hanging-branch shot: keep the boxes in frame, not the branch */
+.pdp-tile--show-boxes img { object-position: 50% 92%; }
+
 /* main shot as a plain cover photo (Yoga Studio, Duo, holders) */
 .pdp-tile--photo img { left: 0; top: 0; width: 100%; height: 100%; object-fit: cover; }
 
@@ -514,6 +517,7 @@
   object-fit: cover;
   transition: transform 1400ms var(--ease-out);
 }
+.pdp-policy__fg--cover { left: 0; top: 0; width: 100%; height: 100%; object-position: 50% 50%; }
 .pdp-policy__media:hover .pdp-policy__fg { transform: scale(1.03); }
 .pdp-policy__copy {
   display: flex;
