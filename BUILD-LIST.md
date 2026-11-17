@@ -7,7 +7,7 @@ Style source: Figma file "Mr. Sniff's Style Guide + Emails" (tokens, type styles
 
 | Page | File | Notes |
 |---|---|---|
-| Homepage | `index.html` | Add the differentiation block (see P2-1) |
+| Homepage | `index.html` | "Why Mr. Sniff's" block added after the intro (Nov 17) |
 | Shop / Collection | `shop.html` | |
 | Bonfire PDP | `bonfire.html` | Template for every other PDP |
 | How to Use Incense | `how-to.html` | Logo renders small in Chrome |
@@ -27,26 +27,27 @@ Style source: Figma file "Mr. Sniff's Style Guide + Emails" (tokens, type styles
 | 8 | **Policy pages ×4** | One text template | Shipping, Refunds, Privacy, Terms. Footer links are dead anchors today |
 | 9 | **404** | New | Mascot, short line, Shop and Smell Test buttons |
 | 10 | **Password / coming-soon page** | New | Shopify password page with email capture, for teasing before Dec 15 |
+| 11 | **Search overlay** | New | Keep search (Chris, Nov 17). Opens from the nav icon: input, live results for products and pages, empty state |
 
 ## P2 — States and conversion
 
 | # | Item | Notes |
 |---|---|---|
-| 1 | Homepage differentiation block after the hero | Nontoxic, all-wood, transparent supply chain (Jacob, Nov 17) |
-| 2 | PDP reviews block | Klaviyo reviews widget; plan is 15–20 reviews live on day one |
-| 3 | Add-to-cart confirmation | Toast or drawer open, used on every Add button |
-| 4 | Empty and sold-out states | Figma "REQUIRED STATES" frame (1:783) |
-| 5 | Exit-intent pop-up | Email capture, "try before you buy" sample marked coming soon |
-| 6 | Newsletter success and error states | Footer form is a stub today |
+| 1 | PDP reviews block | Klaviyo reviews widget; plan is 15–20 reviews live on day one |
+| 2 | Add-to-cart confirmation | Toast or drawer open, used on every Add button |
+| 3 | Empty and sold-out states | Figma "REQUIRED STATES" frame (1:783) |
+| 4 | Exit-intent pop-up | Email capture, "try before you buy" sample marked coming soon |
+| 5 | Newsletter success and error states | Footer form is a stub today |
 
-## Cut or defer (recommendation)
+## Decided (Nov 17)
 
-- **Search**: two products don't need it. Remove the nav icon instead of building an overlay.
-- **Holder PDPs**: holders aren't in the launch lineup. Keep the Notify me cards and build PDPs when they ship.
-- **Account pages**: use Shopify's default customer accounts and style them after launch.
+- **Search**: keep it. Built as a custom overlay (P1-11).
+- **Holders**: keep them. Use Shopify's default product template for holder pages for now.
+- **Account pages**: Shopify's default customer accounts for now; style after launch.
 
 ## Known fixes
 
 - Logo renders small on How to Use in Chrome.
 - Upside-down product photo on the PDP gallery.
 - Mono45 Headline license files still missing (DM Mono stands in).
+- Copy conflict: the homepage and How to Use story blocks say "hand-rolled sticks" and "bold fragrance loads", but the PDP and emails say extruded, sun-dried, no added fragrance. Pick one.
