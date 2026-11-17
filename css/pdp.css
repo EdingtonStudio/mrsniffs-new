@@ -3,9 +3,7 @@
    Builds on tokens.css + main.css. Page-scoped; nothing here leaks out.
    ========================================================================== */
 
-/* ---- Header: the PDP uses the compact 56px solid header (99:43) ---------- */
-.page-pdp .site-header--solid .nav__logo img,
-.page-pdp .site-header--solid.is-scrolled .nav__logo img { width: 57px; height: 24px; }
+/* Header: same as every other page (logo sizing lives in main.css) */
 
 /* ==========================================================================
    1 · Gallery (99:60) + sticky product info (99:78)

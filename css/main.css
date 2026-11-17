@@ -436,15 +436,16 @@ input { font: inherit; }
   top: 0;
   left: auto;
   right: auto;
-  padding: 16px;
+  padding: 16px calc(var(--gutter) + 16px);   /* same inset as the homepage header */
   color: var(--c-ink);
   background: var(--c-white);
   transition: transform 450ms var(--ease-out), box-shadow var(--dur) var(--ease-out);
 }
 .site-header--solid::before { display: none; }
-.site-header--solid.is-scrolled { top: 0; left: auto; right: auto; padding: 16px; box-shadow: 0 1px 0 var(--c-ink-10); }
-.site-header--solid .nav__logo img { width: 129px; height: 54px; }
-.site-header--solid.is-scrolled .nav__logo img { width: 103px; height: 43px; }
+.site-header--solid.is-scrolled { top: 0; left: auto; right: auto; padding: 8px calc(var(--gutter) + 16px); box-shadow: 0 1px 0 var(--c-ink-10); }
+/* logo matches the homepage exactly: 119×50, 95×40 once scrolled */
+.site-header--solid .nav__logo img { width: 119px; height: 50px; }
+.site-header--solid.is-scrolled .nav__logo img { width: 95px; height: 40px; }
 
 /* ---- Shared helpers ------------------------------------------------------ */
 .is-flipped { transform: scaleY(-1); }
