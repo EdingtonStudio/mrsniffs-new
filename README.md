@@ -35,6 +35,7 @@ assets/img|icons|fonts
 
 All buttons share one component, using the 21st.dev *Interactive Hover Button* effect ported to plain CSS/JS: a dot beside the label blooms to fill the button, the label slides out and a copy + arrow slides in. Squash on press. Colors are per-skin variables in `css/main.css`.
 Product cards (both scents, all three holders) use a `.gleam` edge ported from 21st.dev *Shiny Button*: still at rest, on hover a conic light sweeps the outline and an inner glow breathes. Color per card via `--gleam-accent` (Bonfire ember, Yoga Studio mint).
+**Incense cursor** (`js/smoke.js`, both pages): an ember dot replaces the pointer and a small WebGL fluid sim trails grey smoke that rises, curls and fades; pale over dark sections, charcoal over light. A thin thread rises from the tip at rest. Desktop only, off for reduced motion, sleeps when idle. Tune via the `CFG` block at the top of the file.
 `prefers-reduced-motion` keeps state changes and drops movement.
 
 ## Shop page map
