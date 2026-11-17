@@ -39,6 +39,32 @@
 
 .pdp-tile--man img { width: 100%; height: 100%; object-fit: cover; }
 
+/* main shot as a plain cover photo (Yoga Studio, Duo, holders) */
+.pdp-tile--photo img { left: 0; top: 0; width: 100%; height: 100%; object-fit: cover; }
+
+/* labeled placeholder until the Dec shoot lands — swap for a real <img> */
+.pdp-tile--placeholder,
+.note__img--placeholder,
+.inbox__placeholder {
+  display: flex;
+  align-items: flex-end;
+  padding: 12px;
+  background: var(--c-stone);
+  color: var(--c-ink-60);
+  font-family: var(--f-mono);
+  font-size: var(--fs-micro);
+  letter-spacing: var(--tr-mono-wide);
+  text-transform: uppercase;
+}
+.note__img--placeholder { padding: 6px; font-size: 8px; }
+/* the inbox stage sizes everything in em (1em ≈ 1px), so keep its font-size and scale the label only */
+.inbox__placeholder { font-size: inherit; justify-content: center; align-items: center; text-align: center; }
+.inbox__placeholder span { font-size: 10px; }
+/* closed box standing in for the open-box shot, tilted to match Bonfire's angle */
+.inbox__box--angled { object-fit: contain; transform: rotate(36deg) scale(0.82); }
+/* light photography behind "What it smells like" needs knocking back for the white headline */
+.pdp-smells--scrim .pdp-smells__bg { filter: brightness(0.42) saturate(0.9); }
+
 /* holder in living room — 418×458 at -6,-88 */
 .pdp-tile--holder img { position: absolute; left: -1.7%; top: -23.78%; width: 118.75%; height: 123.8%; max-width: none; object-fit: cover; }
 
