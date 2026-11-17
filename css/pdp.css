@@ -273,6 +273,11 @@
   object-position: bottom;
 }
 .pdp-smells__head { position: absolute; left: 0; right: 0; top: 8.05%; }
+/* Yoga Studio + Duo: shorter stage so the notes sit closer to the headline */
+.pdp-smells--scrim { aspect-ratio: 1440 / 560; }
+.pdp-smells--scrim .pdp-smells__bg { top: 0; height: 100%; object-position: 50% 62%; }
+.pdp-smells--scrim .pdp-smells__head { top: 9%; }
+.pdp-smells--scrim .notes { top: auto; bottom: 9%; }
 .notes {
   position: absolute;
   left: 50%;
