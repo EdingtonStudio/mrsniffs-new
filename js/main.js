@@ -12,25 +12,42 @@
   const $$ = (sel, ctx = document) => [...ctx.querySelectorAll(sel)];
   const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 
-  /* ---- Buttons: wrap label for the roll-on-hover ------------------------ */
+  /* ---- Buttons: build the interactive-hover markup from the text ------- */
+  const ARROW = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>';
+
   $$('.btn').forEach((btn) => {
-    if (btn.querySelector('.btn__roll')) return;
+    if (btn.querySelector('.btn__label')) return;
     const text = btn.textContent.trim();
     btn.textContent = '';
-    const roll = document.createElement('span');
-    roll.className = 'btn__roll';
-    roll.dataset.label = text;
-    const inner = document.createElement('span');
-    inner.textContent = text;
-    roll.append(inner);
-    btn.append(roll);
+    const label = document.createElement('span');
+    label.className = 'btn__label';
+    label.textContent = text;
+    const hover = document.createElement('span');
+    hover.className = 'btn__hover';
+    hover.setAttribute('aria-hidden', 'true');
+    hover.innerHTML = `<span></span>${ARROW}`;
+    hover.firstElementChild.textContent = text;
+    const dot = document.createElement('span');
+    dot.className = 'btn__dot';
+    dot.setAttribute('aria-hidden', 'true');
+    btn.append(label, hover, dot);
   });
 
+  // Park the dot 12px left of the label (the original's 20% lands on the
+  // text on wide buttons). Re-measure when a button resizes.
+  const placeDot = (btn) => {
+    const label = btn.querySelector('.btn__label');
+    if (label) btn.style.setProperty('--dot-x', `${Math.max(4, label.offsetLeft - 12)}px`);
+  };
+  const dotRO = 'ResizeObserver' in window ? new ResizeObserver((es) => es.forEach((e) => placeDot(e.target))) : null;
+  $$('.btn').forEach((btn) => { placeDot(btn); dotRO?.observe(btn); });
+  document.fonts?.ready.then(() => $$('.btn').forEach(placeDot));
+
   const setBtnLabel = (btn, text) => {
-    const roll = btn.querySelector('.btn__roll');
-    if (!roll) { btn.textContent = text; return; }
-    roll.dataset.label = text;
-    roll.firstElementChild.textContent = text;
+    const label = btn.querySelector('.btn__label');
+    if (!label) { btn.textContent = text; return; }
+    label.textContent = text;
+    btn.querySelector('.btn__hover > span').textContent = text;
   };
 
   /* ---- Split headlines into masked words -------------------------------- */

@@ -32,7 +32,7 @@ assets/img|icons|fonts
 | FAQ | `1:272` + `1:300` | Animated single-open accordion, mascot idle |
 | Footer | `1:200` | Email + consent validation, success/error states, link nudge, wordmark parallax |
 
-All buttons share one component: fill wipes up + label rolls on hover, squash on press.
+All buttons share one component, using the 21st.dev *Interactive Hover Button* effect ported to plain CSS/JS: a dot beside the label blooms to fill the button, the label slides out and a copy + arrow slides in. Squash on press. Colors are per-skin variables in `css/main.css`.
 `prefers-reduced-motion` keeps state changes and drops movement.
 
 ## Open items
