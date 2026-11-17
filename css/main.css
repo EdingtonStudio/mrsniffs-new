@@ -151,10 +151,11 @@ input { font: inherit; }
 
 /* resting label, nudged right of centre to balance the dot */
 .btn__label {
+  --slot: 1.5em;                 /* = hover gap (0.5em) + arrow (1em) */
   position: relative;
   z-index: 1;
   display: inline-block;
-  transform: translateX(4px);
+  padding-left: var(--slot);     /* dot sits in here at rest */
   transition: transform var(--btn-dur) var(--btn-ease), opacity var(--btn-dur) var(--btn-ease);
 }
 
@@ -166,7 +167,7 @@ input { font: inherit; }
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 8px;
+  gap: 0.5em;
   color: var(--btn-fill-fg);
   opacity: 0;
   transform: translateX(48px);
@@ -195,14 +196,14 @@ input { font: inherit; }
 .btn:hover .btn__label,
 .btn:focus-visible .btn__label { transform: translateX(48px); opacity: 0; }
 .btn:hover .btn__hover,
-.btn:focus-visible .btn__hover { transform: translateX(-4px); opacity: 1; }
+.btn:focus-visible .btn__hover { transform: none; opacity: 1; }
 .btn:hover .btn__dot,
 .btn:focus-visible .btn__dot { left: 0; top: 0; width: 100%; height: 100%; transform: scale(1.8); }
 .btn:active { transform: scale(0.975); }
 
 .btn:disabled { cursor: default; }
 .btn:disabled .btn__dot { opacity: 0; }
-.btn:disabled:hover .btn__label { transform: translateX(4px); opacity: 1; }
+.btn:disabled:hover .btn__label { transform: none; opacity: 1; }
 .btn:disabled:hover .btn__hover { opacity: 0; }
 
 .btn--solid       { --btn-bg: var(--c-ink); --btn-fg: var(--c-white); --btn-bd: var(--c-ink); --btn-fill: var(--c-ember); --btn-fill-fg: var(--c-white); }

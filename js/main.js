@@ -33,11 +33,13 @@
     btn.append(label, hover, dot);
   });
 
-  // Park the dot 12px left of the label (the original's 20% lands on the
-  // text on wide buttons). Re-measure when a button resizes.
+  // Centre the dot in the label's reserved left slot (the original's 20%
+  // lands on the text on wide buttons). Re-measure when a button resizes.
   const placeDot = (btn) => {
     const label = btn.querySelector('.btn__label');
-    if (label) btn.style.setProperty('--dot-x', `${Math.max(4, label.offsetLeft - 12)}px`);
+    if (!label) return;
+    const slot = parseFloat(getComputedStyle(label).paddingLeft) || 0;
+    btn.style.setProperty('--dot-x', `${label.offsetLeft + (slot - 8) / 2 - 2}px`);
   };
   const dotRO = 'ResizeObserver' in window ? new ResizeObserver((es) => es.forEach((e) => placeDot(e.target))) : null;
   $$('.btn').forEach((btn) => { placeDot(btn); dotRO?.observe(btn); });
