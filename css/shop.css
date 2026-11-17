@@ -3,8 +3,6 @@
    Builds on tokens.css + main.css; only shop-specific pieces live here.
    ========================================================================== */
 
-/* two-tone gleam for the bundle: ember arc with a mint shine */
-.gleam--duo { --gleam-accent: var(--c-ember); --gleam-accent-soft: #a3d3d6; }
 
 /* ---- Hero (1:458) -------------------------------------------------------- */
 .shop-hero { padding: 0 var(--gutter); }
@@ -54,12 +52,6 @@
 .shop-grid { display: flex; justify-content: center; padding: var(--s-16) var(--gutter) var(--section-y); }
 .shop-grid .holder-card__media { display: block; background: var(--c-stone); }
 .shop-card__actions { display: flex; align-items: center; gap: var(--s-16); padding: 0 var(--s-16); }
-
-.icon-btn--tile-light { background: var(--c-ink-10); }
-.icon-btn--tile-light:hover { background: var(--c-ink); }
-.icon-btn--tile-light:hover img { filter: invert(1); }
-.icon-btn--tile-light.is-added { background: var(--c-ember); }
-.icon-btn--tile-light.is-added img { filter: invert(1); }
 
 /* ---- Compare (1:533) ----------------------------------------------------- */
 .compare {

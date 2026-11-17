@@ -417,6 +417,14 @@ input { font: inherit; }
 .nav__burger[aria-expanded="true"] span:first-child { top: 9.5px; transform: rotate(45deg); }
 .nav__burger[aria-expanded="true"] span:last-child { top: 9.5px; transform: rotate(-45deg); }
 
+/* two-tone gleam for the bundle: ember arc with a mint shine */
+.gleam--duo { --gleam-accent: var(--c-ember); --gleam-accent-soft: #a3d3d6; }
+.icon-btn--tile-light { background: var(--c-ink-10); }
+.icon-btn--tile-light:hover { background: var(--c-ink); }
+.icon-btn--tile-light:hover img { filter: invert(1); }
+.icon-btn--tile-light.is-added { background: var(--c-ember); }
+.icon-btn--tile-light.is-added img { filter: invert(1); }
+
 /* ---- Shared page chrome for inner pages (solid header, tinted banner) ---- */
 /* ---- Announcement: tinted variant (1:456) -------------------------------- */
 .announcement--tint { background: rgba(15, 17, 20, 0.05); }
