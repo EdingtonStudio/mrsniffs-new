@@ -79,20 +79,6 @@ input { font: inherit; }
   font-size: 16px;
   letter-spacing: var(--tr-mono-wide);
   line-height: var(--lh-body);
-  padding-bottom: 8px;
-}
-/* 50px rule under the eyebrow — draws in on reveal */
-.eyebrow::after {
-  content: "";
-  position: absolute;
-  left: 50%;
-  bottom: 0;
-  width: 50px;
-  height: 1px;
-  background: currentColor;
-  translate: -50% 0;
-  transform: scaleX(var(--rule, 1));
-  transition: transform var(--dur-slow) var(--ease-out) 300ms;
 }
 
 .product-name { font-weight: 500; font-size: 16px; letter-spacing: var(--tr-body); line-height: normal; }
@@ -1199,8 +1185,6 @@ input { font: inherit; }
 }
 .js [data-reveal="fade"] { transform: none; }
 .js [data-reveal].is-in { opacity: 1; transform: none; }
-.js .eyebrow[data-reveal] { --rule: 0; }
-.js .eyebrow[data-reveal].is-in { --rule: 1; }
 
 .split-word { display: inline-block; overflow: hidden; vertical-align: top; padding-bottom: 0.06em; margin-bottom: -0.06em; }
 .split-word > span {
@@ -1222,8 +1206,6 @@ input { font: inherit; }
   padding: var(--section-y) var(--pad-x);
   background: var(--c-paper);
 }
-.why .eyebrow { padding-bottom: 0; }
-.why .eyebrow::after { display: none; }
 .why__proof {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
