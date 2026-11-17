@@ -1,0 +1,319 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>How to Use Incense — Mr. Sniff's</title>
+  <meta name="description" content="New to incense? Set up your space, choose a suitable holder, and follow the directions supplied with your incense." />
+  <link rel="preload" href="assets/fonts/big-shoulders-display-latin-700-normal.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="assets/fonts/inter-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="assets/img/howto-hero.webp" as="image" />
+  <link rel="stylesheet" href="css/tokens.css" />
+  <link rel="stylesheet" href="css/main.css" />
+  <link rel="stylesheet" href="css/howto.css" />
+  <script defer src="js/main.js"></script>
+  <script defer src="js/smoke.js"></script>
+  <script defer src="js/howto.js"></script>
+</head>
+<body class="page-howto">
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <!-- ─── Announcement ─────────────────────────────────────────── -->
+  <div class="announcement announcement--tint" role="region" aria-label="Announcement">
+    <p>ANNOUNCEMENT BANNER — APPROVED FACTUAL MESSAGE ONLY</p>
+  </div>
+
+  <!-- ─── Header (solid) ───────────────────────────────────────── -->
+  <header class="site-header site-header--solid" data-header>
+    <nav class="nav" aria-label="Primary">
+      <ul class="nav__links" id="nav-menu" data-menu>
+        <li><a class="nav__link" href="shop.html">Shop <img class="nav__arrow" src="assets/icons/arrow-up-right-sm-ink.svg" width="14" height="14" alt="" /></a></li>
+        <li><a class="nav__link" href="smell-test.html">Find your scent</a></li>
+        <li><a class="nav__link is-current" href="how-to.html" aria-current="page">How to use</a></li>
+        <li><a class="nav__link" href="index.html#story">Our story</a></li>
+      </ul>
+
+      <a class="nav__logo" href="index.html" aria-label="Mr. Sniff's — home">
+        <img src="assets/icons/logo-ink.svg" width="129" height="54" alt="Mr. Sniff's" />
+      </a>
+
+      <div class="nav__actions">
+        <button class="icon-btn" type="button" aria-label="Search">
+          <img src="assets/icons/search-ink.svg" width="20" height="20" alt="" />
+        </button>
+        <a class="icon-btn nav__cart" href="#cart" aria-label="Cart, 0 items" data-cart-link>
+          <img src="assets/icons/bag-ink.svg" width="20" height="20" alt="" />
+          <span class="cart-count" data-cart-count hidden>0</span>
+        </a>
+        <button class="nav__burger" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="nav-menu" data-burger>
+          <span></span><span></span>
+        </button>
+      </div>
+    </nav>
+  </header>
+
+  <main id="main">
+    <!-- ─── Hero (99:616) ──────────────────────────────────────── -->
+    <section class="ht-hero" aria-labelledby="ht-title" data-ht-hero>
+      <img class="ht-hero__img" src="assets/img/howto-hero.webp" width="2200" height="1228" alt="Yoga Studio and Bonfire boxes beside a burning stick in a round black holder, pine branches behind" fetchpriority="high" data-parallax="0.1" />
+      <div class="ht-hero__copy">
+        <h1 class="ht-hero__title" id="ht-title" data-split>NEW TO INCENSE? START HERE.</h1>
+        <p data-reveal style="--d: 4">Set up your space, choose a suitable holder, and follow the directions supplied with your incense.</p>
+      </div>
+      <nav class="ht-tabs" aria-label="Guide sections" data-ht-tabs>
+        <a class="ht-tab is-active" href="#setup" data-tab="setup">Setup</a>
+        <a class="ht-tab" href="#use" data-tab="use">Use</a>
+        <a class="ht-tab" href="#use" data-tab="put-it-out" data-burn-step="3">Put it out</a>
+        <a class="ht-tab" href="#clean-up" data-tab="clean-up">Clean up</a>
+        <a class="ht-tab" href="#safety" data-tab="safety">Safety</a>
+      </nav>
+    </section>
+
+    <!-- ─── Before you light (99:631–99:657) ───────────────────── -->
+    <section class="ht-before" id="setup" aria-labelledby="before-title">
+      <div class="ht-before__intro">
+        <h2 class="display-l" id="before-title" data-reveal>BEFORE YOU LIGHT</h2>
+        <p class="lede" data-reveal style="--d: 1">A few essentials for a safe and simple incense experience.</p>
+      </div>
+
+      <article class="ht-card" data-reveal style="--d: 1">
+        <div class="ht-card__media ht-card__media--holder">
+          <img src="assets/img/howto-card-holder.webp" width="900" height="900" alt="Stachin' Ash moustache holder with a stick standing upright" loading="lazy" />
+        </div>
+        <div class="ht-card__body">
+          <h3><span class="ht-icon"><img src="assets/icons/howto-shield.svg" width="24" height="24" alt="" /></span>A suitable holder</h3>
+          <p>Use a heatproof incense holder.</p>
+        </div>
+      </article>
+
+      <article class="ht-card ht-card--drop" data-reveal style="--d: 2">
+        <div class="ht-card__media ht-card__media--surface">
+          <img src="assets/img/howto-card-surface.webp" width="720" height="900" alt="Incense stick resting on a dark stone surface" loading="lazy" />
+        </div>
+        <div class="ht-card__body">
+          <h3><span class="ht-icon"><img src="assets/icons/howto-stack.svg" width="24" height="24" alt="" /></span>A heat-resistant surface</h3>
+          <p>Use a stable, heat-resistant surface.</p>
+        </div>
+      </article>
+
+      <article class="ht-card" data-reveal style="--d: 3">
+        <div class="ht-card__media ht-card__media--vent">
+          <img src="assets/img/howto-card-vent.webp" width="1400" height="788" alt="Sheer curtains moving beside an open window" loading="lazy" />
+        </div>
+        <div class="ht-card__body">
+          <h3><span class="ht-icon"><img src="assets/icons/howto-wind.svg" width="24" height="24" alt="" /></span>Ventilation</h3>
+          <p>Burn incense in a well-ventilated space.</p>
+        </div>
+      </article>
+    </section>
+
+    <!-- ─── How to burn incense (99:698) ───────────────────────── -->
+    <section class="burn section--ink" id="use" aria-labelledby="burn-title" data-burn style="--steps: 4">
+      <div class="burn__track">
+        <div class="burn__stage">
+          <header class="section-head burn__head">
+            <h2 class="display-l" id="burn-title">HOW TO BURN INCENSE</h2>
+            <p class="lede lede--on-ink">Follow these simple steps to light, enjoy, and safely extinguish your incense.</p>
+          </header>
+
+          <div class="burn__body">
+            <ol class="burn__steps" aria-label="Steps">
+              <li><button type="button" class="burn__step" data-i="0">Light</button></li>
+              <li><button type="button" class="burn__step" data-i="1">Let it catch</button></li>
+              <li><button type="button" class="burn__step" data-i="2">Place in the holder</button></li>
+              <li><button type="button" class="burn__step" data-i="3">Put it out</button></li>
+            </ol>
+
+            <div class="burn__frames">
+              <figure class="burn__frame" data-i="0">
+                <img src="assets/img/howto-burn-light.webp" width="1100" height="619" alt="Incense stick resting in a black holder" loading="lazy" />
+                <figcaption class="burn__cap"><strong>Light</strong>Light the incense tip.</figcaption>
+              </figure>
+              <figure class="burn__frame" data-i="1">
+                <img src="assets/img/howto-burn-catch.webp" width="1400" height="788" alt="A match lighting the tip of an incense stick" loading="lazy" />
+                <figcaption class="burn__cap"><strong>Let it catch</strong>Let the tip burn, then blow out the flame. Ensure it glows and releases a steady stream of smoke.</figcaption>
+              </figure>
+              <figure class="burn__frame" data-i="2">
+                <img src="assets/img/howto-burn-place.webp" width="1100" height="619" alt="Smoking incense stick placed in a black holder" loading="lazy" />
+                <figcaption class="burn__cap"><strong>Place in the holder</strong>Rest securely in holder.</figcaption>
+              </figure>
+              <figure class="burn__frame" data-i="3">
+                <img src="assets/img/howto-burn-out.webp" width="880" height="1100" alt="Last wisp of smoke rising from a holder" loading="lazy" />
+                <figcaption class="burn__cap"><strong>Put it out</strong>Extinguish completely after use.</figcaption>
+              </figure>
+            </div>
+
+            <div class="burn__descs" aria-live="polite">
+              <p class="burn__desc" data-i="0">Light the incense tip.</p>
+              <p class="burn__desc" data-i="1">Let the tip burn, then blow out the flame. Ensure it glows and releases a steady stream of smoke.</p>
+              <p class="burn__desc" data-i="2">Rest securely in holder.</p>
+              <p class="burn__desc" data-i="3">Extinguish completely after use.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── Burn with care (99:633, 99:667–99:691) ─────────────── -->
+    <section class="ht-care" id="safety" aria-labelledby="care-title">
+      <div class="ht-care__intro">
+        <div data-reveal>
+          <h2 class="display-l" id="care-title">BURN WITH CARE</h2>
+          <p class="lede">A few essential safety precautions to keep in mind while your incense burns, ensuring a safe and enjoyable experience.</p>
+        </div>
+        <div class="ht-care__media" data-reveal="fade">
+          <img src="assets/img/howto-care.webp" width="1400" height="843" alt="Hand lighting a stick in a black holder beside a Yoga Studio box on a wooden table" loading="lazy" />
+        </div>
+      </div>
+
+      <div class="ht-care__grid">
+        <article class="ht-tile" data-reveal style="--d: 1">
+          <span class="ht-icon"><img src="assets/icons/howto-eye.svg" width="20" height="20" alt="" /></span>
+          <div><h3>Supervision</h3><p>Never leave burning incense unattended. Always keep it within sight.</p></div>
+        </article>
+        <article class="ht-tile" data-reveal style="--d: 2">
+          <span class="ht-icon"><img src="assets/icons/howto-fan.svg" width="24" height="24" alt="" /></span>
+          <div><h3>Ventilation</h3><p>Always burn incense in a well-ventilated area to allow proper airflow.</p></div>
+        </article>
+        <article class="ht-tile" data-reveal style="--d: 3">
+          <span class="ht-icon"><img src="assets/icons/howto-paw.svg" width="24" height="24" alt="" /></span>
+          <div><h3>Pets and children</h3><p>Keep burning incense away from children and pets.</p></div>
+        </article>
+        <article class="ht-tile ht-tile--tint" data-reveal style="--d: 4">
+          <span class="ht-icon"><img src="assets/icons/howto-pin.svg" width="24" height="24" alt="" /></span>
+          <div><h3>Placement</h3><p>Keep burning incense away from curtains and other flammable materials.</p></div>
+        </article>
+      </div>
+    </section>
+
+    <!-- ─── When the smoke clears (99:715) ─────────────────────── -->
+    <section class="ht-clears" id="clean-up" aria-labelledby="clears-title">
+      <img class="ht-clears__img" src="assets/img/howto-clears.webp" width="1200" height="948" alt="Ash and a spent stick in a black holder" loading="lazy" data-parallax="-0.05" />
+      <header class="ht-clears__head" data-reveal>
+        <h2 class="display-l" id="clears-title">WHEN THE SMOKE CLEARS</h2>
+        <p class="lede">A few easy steps to safely clean up after your incense burns.</p>
+      </header>
+      <ol class="ht-clears__cols">
+        <li class="ht-clear" data-reveal style="--d: 1">
+          <span class="ht-clear__num" aria-hidden="true">01</span>
+          <div class="ht-clear__text"><h3>LET IT COOL</h3><p>Let the incense stick and ash cool completely before touching or removing anything.</p></div>
+        </li>
+        <li class="ht-clear" data-reveal style="--d: 3">
+          <span class="ht-clear__num" aria-hidden="true">02</span>
+          <div class="ht-clear__text"><h3>DISPOSE OF ASH</h3><p>Once completely cool, dispose of the ash and any remaining incense safely.</p></div>
+        </li>
+        <li class="ht-clear" data-reveal style="--d: 5">
+          <span class="ht-clear__num" aria-hidden="true">03</span>
+          <div class="ht-clear__text"><h3>HOLDER CARE</h3><p>Remove leftover residue and clean your holder according to its material and care instructions.</p></div>
+        </li>
+      </ol>
+    </section>
+
+    <!-- ─── FAQ (99:737) + mascot (99:761) ─────────────────────── -->
+    <section class="faq ht-faq" id="faq" aria-labelledby="faq-title">
+      <img class="faq__mascot" src="assets/img/mascot.svg" width="494" height="536" alt="" aria-hidden="true" loading="lazy" />
+      <div class="faq__inner">
+        <h2 class="display-l" id="faq-title" data-reveal>BEFORE YOU LIGHT ONE</h2>
+        <div class="accordion" data-reveal style="--d: 1">
+          <details class="accordion__item" data-accordion>
+            <summary><span>Is it suitable for a small room?</span><img src="assets/icons/plus.svg" width="18" height="18" alt="" /></summary>
+            <div class="accordion__panel"><p>Always burn incense in a well-ventilated area to allow proper airflow.</p></div>
+          </details>
+          <details class="accordion__item" data-accordion>
+            <summary><span>What if smoke bothers me?</span><img src="assets/icons/plus.svg" width="18" height="18" alt="" /></summary>
+            <div class="accordion__panel"><p>[Pending — approved guidance for smoke sensitivity goes here.]</p></div>
+          </details>
+          <details class="accordion__item" data-accordion>
+            <summary><span>Which holders work with these sticks?</span><img src="assets/icons/plus.svg" width="18" height="18" alt="" /></summary>
+            <div class="accordion__panel"><p>Use a heatproof incense holder that fits 210 mm incense sticks. Set it up safely and let the scent do its thing.</p></div>
+          </details>
+          <details class="accordion__item" data-accordion>
+            <summary><span>Can I use it around pets?</span><img src="assets/icons/plus.svg" width="18" height="18" alt="" /></summary>
+            <div class="accordion__panel"><p>Keep burning incense away from children and pets.</p></div>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── Closing CTA (99:762) ───────────────────────────────── -->
+    <section class="ht-cta section--ink" aria-labelledby="cta-title" data-ht-cta>
+      <img class="ht-cta__img" src="assets/img/howto-cta.webp" width="1906" height="825" alt="Bonfire and Yoga Studio boxes leaning on driftwood under a blue sky" loading="lazy" data-parallax="0.06" />
+      <div class="ht-cta__copy">
+        <h2 class="display-l" id="cta-title" data-split>READY TO LIGHT ONE?</h2>
+        <p data-reveal style="--d: 2">We're here to make incense that actually makes an impression. Hand-rolled sticks, real wood and bold fragrance loads.</p>
+        <div class="ht-cta__actions" data-reveal style="--d: 3">
+          <a class="btn btn--light btn--sm" href="shop.html">Shop incense</a>
+          <a class="btn btn--ghost-light btn--sm" href="index.html#holders">Shop holders</a>
+          <a class="ht-iconbtn" href="#contact" aria-label="Contact us by phone">
+            <img src="assets/icons/howto-phone.svg" width="16" height="16" alt="" />
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ─── Footer (99:547) ────────────────────────────────────────── -->
+  <footer class="footer section--ink">
+    <img class="footer__wordmark" src="assets/img/footer-wordmark.svg" width="1220" height="511" alt="" aria-hidden="true" loading="lazy" data-parallax="-0.08" />
+
+    <div class="signup">
+      <h2 class="display-s">JOIN THE LIST</h2>
+      <p class="lede lede--on-ink">Get first whiff of new scents.</p>
+      <form class="signup__form" data-signup novalidate>
+        <div class="signup__row">
+          <label class="sr-only" for="signup-email">Email address</label>
+          <input class="signup__input" id="signup-email" name="email" type="email" placeholder="your@email.com" autocomplete="email" required />
+          <button class="btn btn--light" type="submit">Sign up</button>
+        </div>
+        <label class="consent">
+          <input type="checkbox" name="consent" required />
+          <span class="consent__box" aria-hidden="true"></span>
+          <span>Yes, email me about new scents and restocks. Unsubscribe anytime.</span>
+        </label>
+        <p class="form-msg" data-signup-msg role="status"></p>
+      </form>
+    </div>
+
+    <nav class="footer__nav" aria-label="Footer">
+      <div class="footer__col">
+        <h3>SHOP</h3>
+        <ul>
+          <li><a href="shop.html">Incense</a></li>
+          <li><a href="index.html#holders">Incense Holders</a></li>
+          <li><a href="shop.html#duo">The Duo</a></li>
+          <li><a href="shop.html">All products</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <h3>LEARN</h3>
+        <ul>
+          <li><a href="smell-test.html">Find your scent</a></li>
+          <li><a href="how-to.html">How to use incense</a></li>
+          <li><a href="index.html#story">Our story</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <h3>HELP</h3>
+        <ul>
+          <li><a href="#faq">FAQ</a></li>
+          <li><a href="#contact">Contact</a></li>
+          <li><a href="#shipping">Shipping &amp; Returns</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <h3>POLICIES</h3>
+        <ul>
+          <li><a href="#shipping-policy">Shipping policy</a></li>
+          <li><a href="#refund-policy">Refund policy</a></li>
+          <li><a href="#privacy-policy">Privacy policy</a></li>
+          <li><a href="#terms">Terms of service</a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <div class="footer__bar">
+      <p>© 2026 Mr. Sniff's. We just make scents.</p>
+    </div>
+  </footer>
+</body>
+</html>
