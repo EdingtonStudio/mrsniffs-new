@@ -379,7 +379,15 @@
 .callout--burn     { --x: 124;  --y: 473; --dx: 321; --dy: 50; }
 .callout--materials{ --x: 1008; --y: 608; --dx: -47; --dy: 50; }
 .callout--holder   { --x: 17;   --y: 738; --dx: 422; --dy: 50; }
-.callout--madein   { --x: 870;  --y: 822; --dx: -36; --dy: 33; }
+.callout--madein   { --x: 870;  --y: 822; --dx: -47; --dy: 33; }
+
+/* Left callouts hang off their right edge, so the photo always sits 39em from
+   its dot no matter how long the label runs (matches the right-hand side). */
+.callout--sticks { --edge: 556; }
+.callout--burn   { --edge: 406; }
+.callout--holder { --edge: 400; }
+.callout--left { left: auto; right: calc((1440 - var(--edge)) * 1em); }
+.callout--left .callout__dot { left: auto; right: -47em; }
 
 .callout__dot {
   position: absolute;
