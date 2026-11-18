@@ -3,9 +3,7 @@
    Builds on tokens.css + main.css. Page-scoped; nothing here leaks out.
    ========================================================================== */
 
-/* ---- Header: the PDP uses the compact 56px solid header (99:43) ---------- */
-.page-pdp .site-header--solid .nav__logo img,
-.page-pdp .site-header--solid.is-scrolled .nav__logo img { width: 57px; height: 24px; }
+/* Header: same as every other page (logo sizing lives in main.css) */
 
 /* ==========================================================================
    1 · Gallery (99:60) + sticky product info (99:78)
@@ -40,6 +38,35 @@
 .pdp-tile--main img { position: absolute; left: -9.08%; top: 1.76%; width: 115.5%; height: 112.37%; max-width: none; }
 
 .pdp-tile--man img { width: 100%; height: 100%; object-fit: cover; }
+
+/* hanging-branch shot: keep the boxes in frame, not the branch */
+.pdp-tile--show-boxes img { object-position: 50% 92%; }
+
+/* main shot as a plain cover photo (Yoga Studio, Duo, holders) */
+.pdp-tile--photo img { left: 0; top: 0; width: 100%; height: 100%; object-fit: cover; }
+
+/* labeled placeholder until the Dec shoot lands — swap for a real <img> */
+.pdp-tile--placeholder,
+.note__img--placeholder,
+.inbox__placeholder {
+  display: flex;
+  align-items: flex-end;
+  padding: 12px;
+  background: var(--c-stone);
+  color: var(--c-ink-60);
+  font-family: var(--f-mono);
+  font-size: var(--fs-micro);
+  letter-spacing: var(--tr-mono-wide);
+  text-transform: uppercase;
+}
+.note__img--placeholder { padding: 6px; font-size: 8px; }
+/* the inbox stage sizes everything in em (1em ≈ 1px), so keep its font-size and scale the label only */
+.inbox__placeholder { font-size: inherit; justify-content: center; align-items: center; text-align: center; }
+.inbox__placeholder span { font-size: 10px; }
+/* closed box standing in for the open-box shot, tilted to match Bonfire's angle */
+.inbox__box--angled { object-fit: contain; transform: rotate(36deg) scale(0.82); }
+/* light photography behind "What it smells like" needs knocking back for the white headline */
+.pdp-smells--scrim .pdp-smells__bg { filter: brightness(0.42) saturate(0.9); }
 
 /* holder in living room — 418×458 at -6,-88 */
 .pdp-tile--holder img { position: absolute; left: -1.7%; top: -23.78%; width: 118.75%; height: 123.8%; max-width: none; object-fit: cover; }
@@ -246,6 +273,11 @@
   object-position: bottom;
 }
 .pdp-smells__head { position: absolute; left: 0; right: 0; top: 8.05%; }
+/* Yoga Studio + Duo: shorter stage so the notes sit closer to the headline */
+.pdp-smells--scrim { aspect-ratio: 1440 / 560; }
+.pdp-smells--scrim .pdp-smells__bg { top: 0; height: 100%; object-position: 50% 62%; }
+.pdp-smells--scrim .pdp-smells__head { top: 9%; }
+.pdp-smells--scrim .notes { top: auto; bottom: 9%; }
 .notes {
   position: absolute;
   left: 50%;
@@ -347,7 +379,15 @@
 .callout--burn     { --x: 124;  --y: 473; --dx: 321; --dy: 50; }
 .callout--materials{ --x: 1008; --y: 608; --dx: -47; --dy: 50; }
 .callout--holder   { --x: 17;   --y: 738; --dx: 422; --dy: 50; }
-.callout--madein   { --x: 870;  --y: 822; --dx: -36; --dy: 33; }
+.callout--madein   { --x: 870;  --y: 822; --dx: -47; --dy: 33; }
+
+/* Left callouts hang off their right edge, so the photo always sits 39em from
+   its dot no matter how long the label runs (matches the right-hand side). */
+.callout--sticks { --edge: 556; }
+.callout--burn   { --edge: 406; }
+.callout--holder { --edge: 400; }
+.callout--left { left: auto; right: calc((1440 - var(--edge)) * 1em); }
+.callout--left .callout__dot { left: auto; right: -47em; }
 
 .callout__dot {
   position: absolute;
@@ -490,6 +530,7 @@
   object-fit: cover;
   transition: transform 1400ms var(--ease-out);
 }
+.pdp-policy__fg--cover { left: 0; top: 0; width: 100%; height: 100%; object-position: 50% 50%; }
 .pdp-policy__media:hover .pdp-policy__fg { transform: scale(1.03); }
 .pdp-policy__copy {
   display: flex;

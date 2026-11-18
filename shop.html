@@ -12,6 +12,8 @@
   <link rel="stylesheet" href="css/main.css" />
   <link rel="stylesheet" href="css/shop.css" />
   <script defer src="js/main.js"></script>
+  <script defer src="js/cart.js"></script>
+  <script defer src="js/search.js"></script>
   <script defer src="js/smoke.js"></script>
 </head>
 <body class="page-shop">
@@ -19,7 +21,7 @@
 
   <!-- ─── Announcement (1:456) ─────────────────────────────────── -->
   <div class="announcement announcement--tint" role="region" aria-label="Announcement">
-    <p>ANNOUNCEMENT BANNER — APPROVED FACTUAL MESSAGE ONLY</p>
+    <p>FREE US SHIPPING ON ORDERS OVER $50</p>
   </div>
 
   <!-- ─── Header, solid variant (1:1199) ───────────────────────── -->
@@ -29,11 +31,11 @@
         <li><a class="nav__link is-current" href="shop.html" aria-current="page">Shop <img class="nav__arrow" src="assets/icons/arrow-up-right-sm-ink.svg" width="14" height="14" alt="" /></a></li>
         <li><a class="nav__link" href="smell-test.html">Find your scent</a></li>
         <li><a class="nav__link" href="how-to.html">How to use</a></li>
-        <li><a class="nav__link" href="index.html#story">Our story</a></li>
+        <li><a class="nav__link" href="story.html">Our story</a></li>
       </ul>
 
       <a class="nav__logo" href="index.html" aria-label="Mr. Sniff's — home">
-        <img src="assets/icons/logo-ink.svg" width="129" height="54" alt="Mr. Sniff's" />
+        <img src="assets/icons/logo-ink.svg" width="119" height="50" alt="Mr. Sniff's" />
       </a>
 
       <div class="nav__actions">
@@ -78,7 +80,7 @@
             </div>
             <div class="shop-card__actions">
               <a class="btn btn--solid btn--sm" href="bonfire.html">Meet Bonfire</a>
-              <button class="icon-btn icon-btn--tile icon-btn--tile-light" type="button" aria-label="Add Bonfire to cart" data-add-to-cart>
+              <button class="icon-btn icon-btn--tile icon-btn--tile-light" type="button" aria-label="Add Bonfire to cart" data-add-to-cart="bonfire">
                 <img src="assets/icons/cart-ink.svg" width="16" height="16" alt="" />
               </button>
             </div>
@@ -86,7 +88,7 @@
         </article>
 
         <article class="holder-card gleam gleam--yoga gleam--light" id="yoga-studio" data-reveal style="--d: 1">
-          <a class="holder-card__media" href="#yoga-studio" aria-label="Meet Yoga Studio">
+          <a class="holder-card__media" href="yoga-studio.html" aria-label="Meet Yoga Studio">
             <img src="assets/img/shop-yoga.webp" width="821" height="1100" alt="Yoga Studio Palo Santo incense box on grey" loading="lazy" />
           </a>
           <div class="holder-card__body">
@@ -98,8 +100,8 @@
               <p class="product-price">$24</p>
             </div>
             <div class="shop-card__actions">
-              <a class="btn btn--solid btn--sm" href="#yoga-studio">Meet Yoga Studio</a>
-              <button class="icon-btn icon-btn--tile icon-btn--tile-light" type="button" aria-label="Add Yoga Studio to cart" data-add-to-cart>
+              <a class="btn btn--solid btn--sm" href="yoga-studio.html">Meet Yoga Studio</a>
+              <button class="icon-btn icon-btn--tile icon-btn--tile-light" type="button" aria-label="Add Yoga Studio to cart" data-add-to-cart="yoga-studio">
                 <img src="assets/icons/cart-ink.svg" width="16" height="16" alt="" />
               </button>
             </div>
@@ -107,7 +109,7 @@
         </article>
 
         <article class="holder-card gleam gleam--duo gleam--light" id="duo" data-reveal style="--d: 2">
-          <a class="holder-card__media" href="#duo" aria-label="Meet the Duo">
+          <a class="holder-card__media" href="duo.html" aria-label="Meet the Duo">
             <img src="assets/img/shop-duo.webp" width="879" height="1100" alt="Yoga Studio and Bonfire boxes standing side by side" loading="lazy" />
           </a>
           <div class="holder-card__body">
@@ -119,8 +121,8 @@
               <p class="product-price">$42</p>
             </div>
             <div class="shop-card__actions">
-              <a class="btn btn--solid btn--sm" href="#duo">Meet the Duo</a>
-              <button class="icon-btn icon-btn--tile icon-btn--tile-light" type="button" aria-label="Add the Duo to cart" data-add-to-cart>
+              <a class="btn btn--solid btn--sm" href="duo.html">Meet the Duo</a>
+              <button class="icon-btn icon-btn--tile icon-btn--tile-light" type="button" aria-label="Add the Duo to cart" data-add-to-cart="duo">
                 <img src="assets/icons/cart-ink.svg" width="16" height="16" alt="" />
               </button>
             </div>
@@ -176,9 +178,9 @@
           <tfoot>
             <tr>
               <td class="compare__corner"></td>
-              <td><button class="btn btn--solid btn--sm btn--block" type="button" data-add-to-cart>Add to cart</button></td>
-              <td><button class="btn btn--solid btn--sm btn--block" type="button" data-add-to-cart>Add to cart</button></td>
-              <td><a class="btn btn--solid btn--sm btn--block" href="#duo">Meet the Duo</a></td>
+              <td><button class="btn btn--solid btn--sm btn--block" type="button" data-add-to-cart="bonfire">Add to cart</button></td>
+              <td><button class="btn btn--solid btn--sm btn--block" type="button" data-add-to-cart="yoga-studio">Add to cart</button></td>
+              <td><a class="btn btn--solid btn--sm btn--block" href="duo.html">Meet the Duo</a></td>
             </tr>
           </tfoot>
         </table>
@@ -291,7 +293,7 @@
         <ul>
           <li><a href="shop.html">Incense</a></li>
           <li><a href="index.html#holders">Incense Holders</a></li>
-          <li><a href="#duo">The Duo</a></li>
+          <li><a href="duo.html">The Duo</a></li>
           <li><a href="shop.html">All products</a></li>
         </ul>
       </div>
@@ -300,24 +302,24 @@
         <ul>
           <li><a href="smell-test.html">Find your scent</a></li>
           <li><a href="how-to.html">How to use incense</a></li>
-          <li><a href="index.html#story">Our story</a></li>
+          <li><a href="story.html">Our story</a></li>
         </ul>
       </div>
       <div class="footer__col">
         <h3>HELP</h3>
         <ul>
-          <li><a href="#faq">FAQ</a></li>
-          <li><a href="#contact">Contact</a></li>
-          <li><a href="#shipping">Shipping &amp; Returns</a></li>
+          <li><a href="faq.html">FAQ</a></li>
+          <li><a href="contact.html">Contact</a></li>
+          <li><a href="shipping-policy.html">Shipping &amp; Returns</a></li>
         </ul>
       </div>
       <div class="footer__col">
         <h3>POLICIES</h3>
         <ul>
-          <li><a href="#shipping-policy">Shipping policy</a></li>
-          <li><a href="#refund-policy">Refund policy</a></li>
-          <li><a href="#privacy-policy">Privacy policy</a></li>
-          <li><a href="#terms">Terms of service</a></li>
+          <li><a href="shipping-policy.html">Shipping policy</a></li>
+          <li><a href="refund-policy.html">Refund policy</a></li>
+          <li><a href="privacy-policy.html">Privacy policy</a></li>
+          <li><a href="terms.html">Terms of service</a></li>
         </ul>
       </div>
     </nav>

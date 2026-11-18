@@ -11,6 +11,8 @@
   <link rel="stylesheet" href="css/tokens.css" />
   <link rel="stylesheet" href="css/main.css" />
   <script defer src="js/main.js"></script>
+  <script defer src="js/cart.js"></script>
+  <script defer src="js/search.js"></script>
   <script defer src="js/smoke.js"></script>
 </head>
 <body>
@@ -18,7 +20,7 @@
 
   <!-- ─── Announcement ─────────────────────────────────────────── -->
   <div class="announcement" role="region" aria-label="Announcement">
-    <p>ANNOUNCEMENT BANNER — APPROVED FACTUAL MESSAGE ONLY</p>
+    <p>FREE US SHIPPING ON ORDERS OVER $50</p>
   </div>
 
   <!-- ─── Header / Nav ─────────────────────────────────────────── -->
@@ -28,7 +30,7 @@
         <li><a class="nav__link is-current" href="shop.html">Shop <img class="nav__arrow" src="assets/icons/arrow-up-right-sm.svg" width="14" height="14" alt="" /></a></li>
         <li><a class="nav__link" href="smell-test.html">Find your scent</a></li>
         <li><a class="nav__link" href="how-to.html">How to use</a></li>
-        <li><a class="nav__link" href="#story">Our story</a></li>
+        <li><a class="nav__link" href="story.html">Our story</a></li>
       </ul>
 
       <a class="nav__logo" href="#top" aria-label="Mr. Sniff's — home">
@@ -86,6 +88,85 @@
       </ul>
     </section>
 
+    <!-- ─── Why Mr. Sniff's (differentiation, Nov 17 feedback) ─── -->
+    <section class="why" id="why" aria-labelledby="why-title">
+      <header class="section-head" data-reveal>
+        <p class="eyebrow">Why Mr. Sniff's</p>
+        <h2 class="display-l" id="why-title">NOTHING BUT WOOD.</h2>
+        <p class="lede">Most incense is a bamboo stick dipped in perfume. Ours is wood all the way through.</p>
+      </header>
+
+      <ul class="why__proof">
+        <li class="why__point" data-reveal>
+          <span class="why__icon"><img src="assets/icons/pdp-i-materials.svg" width="24" height="24" alt="" /></span>
+          <h3 class="display-s">All wood</h3>
+          <p class="lede">Aromatic wood powder, a little odorless bark to hold it together, and water. That's the whole ingredient list.</p>
+        </li>
+        <li class="why__point" data-reveal style="--d: 1">
+          <span class="why__icon"><img src="assets/icons/pdp-i-burn.svg" width="24" height="24" alt="" /></span>
+          <h3 class="display-s">Nothing fake</h3>
+          <p class="lede">No synthetic fragrance, no perfume dip, no dyes. The smell is the oil that was already in the wood.</p>
+        </li>
+        <li class="why__point" data-reveal style="--d: 2">
+          <span class="why__icon"><img src="assets/icons/pdp-i-madein.svg" width="24" height="24" alt="" /></span>
+          <h3 class="display-s">Nothing to hide</h3>
+          <p class="lede">Pressed and sun-dried in Taiwan, the Japanese way. Our palo santo comes from trees that fell on their own.</p>
+        </li>
+      </ul>
+
+      <div class="compare__scroll" data-reveal style="--d: 1">
+        <table class="compare__table why__table">
+          <caption class="sr-only">Mr. Sniff's incense compared with typical stick incense</caption>
+          <thead>
+            <tr>
+              <td class="compare__corner"></td>
+              <th scope="col" class="compare__head compare__head--bonfire"><span><img class="is-flipped" src="assets/icons/cmp-flame.svg" width="13" height="16" alt="" />Mr. Sniff's</span></th>
+              <th scope="col" class="compare__head compare__head--both"><span>Typical stick incense</span></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row"><span><img src="assets/icons/pdp-i-sticks.svg" width="16" height="16" alt="" />Core</span></th>
+              <td>Solid wood, end to end</td>
+              <td>Bamboo stick</td>
+            </tr>
+            <tr>
+              <th scope="row"><span><img class="is-flipped" src="assets/icons/cmp-scent.svg" width="16" height="16" alt="" />Where the scent comes from</span></th>
+              <td>Oils already in the wood</td>
+              <td>Fragrance oil dip</td>
+            </tr>
+            <tr>
+              <th scope="row"><span><img src="assets/icons/pdp-i-burn.svg" width="16" height="16" alt="" />Dyes</span></th>
+              <td>None</td>
+              <td>Often, for color</td>
+            </tr>
+            <tr>
+              <th scope="row"><span><img src="assets/icons/pdp-i-materials.svg" width="15" height="15" alt="" />Binder</span></th>
+              <td>Odorless bark powder</td>
+              <td>Rarely listed</td>
+            </tr>
+            <tr>
+              <th scope="row"><span><img src="assets/icons/pdp-i-madein.svg" width="16" height="16" alt="" />How it's made</span></th>
+              <td>Extruded and sun-dried in Taiwan</td>
+              <td>Hand-dipped, origin rarely listed</td>
+            </tr>
+            <tr>
+              <th scope="row"><span><img src="assets/icons/cmp-pack.svg" width="16" height="15" alt="" />Ingredient list</span></th>
+              <td>On the box</td>
+              <td>Usually missing</td>
+            </tr>
+          </tbody>
+          <tfoot>
+            <tr>
+              <td class="compare__corner"></td>
+              <td><a class="btn btn--solid btn--sm btn--block" href="shop.html">Shop incense</a></td>
+              <td><a class="btn btn--outline btn--sm btn--block" href="how-to.html">How to use incense</a></td>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
+    </section>
+
     <!-- ─── Two scents ─────────────────────────────────────────── -->
     <section class="scents section--ink" id="scents" aria-labelledby="scents-title">
       <header class="section-head" data-reveal>
@@ -109,7 +190,7 @@
             </div>
             <div class="scent-card__actions">
               <a class="btn btn--light btn--sm btn--w195" href="bonfire.html">Meet Bonfire</a>
-              <button class="icon-btn icon-btn--tile" type="button" aria-label="Add Bonfire to cart" data-add-to-cart>
+              <button class="icon-btn icon-btn--tile" type="button" aria-label="Add Bonfire to cart" data-add-to-cart="bonfire">
                 <img src="assets/icons/cart.svg" width="16" height="16" alt="" />
               </button>
             </div>
@@ -117,7 +198,7 @@
         </article>
 
         <article class="scent-card scent-card--yoga gleam gleam--yoga" data-reveal style="--d: 1">
-          <a class="scent-card__media" href="#yoga-studio" aria-label="Meet Yoga Studio">
+          <a class="scent-card__media" href="yoga-studio.html" aria-label="Meet Yoga Studio">
             <img class="scent-card__shadow" src="assets/icons/box-shadow.svg" width="366" height="237" alt="" />
             <span class="scent-card__box"><img src="assets/img/box-yoga.webp" width="197" height="600" alt="Yoga Studio Palo Santo incense box" loading="lazy" /></span>
           </a>
@@ -130,8 +211,8 @@
               <p class="product-price">$24</p>
             </div>
             <div class="scent-card__actions">
-              <a class="btn btn--light btn--sm btn--w195" href="#yoga-studio">Meet Yoga Studio</a>
-              <button class="icon-btn icon-btn--tile" type="button" aria-label="Add Yoga Studio to cart" data-add-to-cart>
+              <a class="btn btn--light btn--sm btn--w195" href="yoga-studio.html">Meet Yoga Studio</a>
+              <button class="icon-btn icon-btn--tile" type="button" aria-label="Add Yoga Studio to cart" data-add-to-cart="yoga-studio">
                 <img src="assets/icons/cart.svg" width="16" height="16" alt="" />
               </button>
             </div>
@@ -164,7 +245,7 @@
       </div>
       <div class="duo__track">
         <div class="duo__sticky">
-          <a class="btn btn--solid btn--w165 duo__cta" href="#duo" data-reveal style="--d: 2">Meet the duo</a>
+          <a class="btn btn--solid btn--w165 duo__cta" href="duo.html" data-reveal style="--d: 2">Meet the duo</a>
         </div>
       </div>
     </section>
@@ -185,7 +266,7 @@
           <div class="holder-card__body">
             <div class="holder-card__info">
               <div>
-                <h3 class="product-name">Ash Catchum</h3>
+                <h3 class="product-name"><a href="ash-catchum.html">Ash Catchum</a></h3>
                 <p class="product-desc">Matte-black stoneware ash catcher for incense sticks.</p>
               </div>
               <p class="product-price">$22</p>
@@ -205,17 +286,24 @@
         <article class="holder-card gleam gleam--bonfire gleam--light" data-reveal style="--d: 1">
           <div class="holder-card__media">
             <img src="assets/img/holder-stachin-ash.webp" width="886" height="1100" alt="Stachin' Ash moustache-shaped stoneware holder with a burning stick" loading="lazy" />
+            <span class="chip">Sold-out</span>
           </div>
           <div class="holder-card__body">
             <div class="holder-card__info">
               <div>
-                <h3 class="product-name">Stachin’ Ash</h3>
+                <h3 class="product-name"><a href="stachin-ash.html">Stachin’ Ash</a></h3>
                 <p class="product-desc">Moustache-shaped black stoneware ash catcher.</p>
               </div>
               <p class="product-price">$38</p>
             </div>
-            <div class="holder-card__actions">
-              <button class="btn btn--solid btn--sm btn--block" type="button" data-add-to-cart>Add to cart</button>
+            <div class="holder-card__actions" data-notify>
+              <button class="btn btn--solid btn--sm btn--block" type="button" data-notify-open>Notify me</button>
+              <form class="notify-form" data-notify-form novalidate hidden>
+                <label class="sr-only" for="notify-stachin">Email for Stachin’ Ash restock</label>
+                <input id="notify-stachin" type="email" placeholder="your@email.com" required autocomplete="email" />
+                <button class="btn btn--solid btn--sm" type="submit">Send</button>
+              </form>
+              <p class="form-msg" data-notify-msg role="status"></p>
             </div>
           </div>
         </article>
@@ -228,7 +316,7 @@
           <div class="holder-card__body">
             <div class="holder-card__info">
               <div>
-                <h3 class="product-name">Brass Monkey</h3>
+                <h3 class="product-name"><a href="brass-monkey.html">Brass Monkey</a></h3>
                 <p class="product-desc">Blackened brass incense holder.</p>
               </div>
               <p class="product-price">$85</p>
@@ -246,7 +334,6 @@
         </article>
       </div>
 
-      <p class="footnote" data-reveal>All three sold out at audit · Notify-me only if supported and approved</p>
     </section>
 
     <!-- ─── How to use ─────────────────────────────────────────── -->
@@ -302,7 +389,7 @@
         <h2 class="display-l story__title" id="story-title" data-split>GOOD SCENTS. A LITTLE PERSONALITY.</h2>
         <p data-reveal style="--d: 2">Meet the people behind Mr. Sniff's.</p>
         <p data-reveal style="--d: 3">We're here to make incense that actually makes an impression. Hand-rolled sticks, real wood and bold fragrance loads — no shortcuts, no unnecessary extras. Just good scents with a point of view.</p>
-        <a class="btn btn--ghost-light btn--sm" href="#story" data-reveal style="--d: 4">Read our story</a>
+        <a class="btn btn--ghost-light btn--sm" href="story.html" data-reveal style="--d: 4">Read our story</a>
       </div>
     </section>
 
@@ -367,7 +454,7 @@
         <ul>
           <li><a href="shop.html">Incense</a></li>
           <li><a href="#holders">Incense Holders</a></li>
-          <li><a href="#duo">The Duo</a></li>
+          <li><a href="duo.html">The Duo</a></li>
           <li><a href="shop.html">All products</a></li>
         </ul>
       </div>
@@ -376,24 +463,24 @@
         <ul>
           <li><a href="smell-test.html">Find your scent</a></li>
           <li><a href="how-to.html">How to use incense</a></li>
-          <li><a href="#story">Our story</a></li>
+          <li><a href="story.html">Our story</a></li>
         </ul>
       </div>
       <div class="footer__col">
         <h3>HELP</h3>
         <ul>
-          <li><a href="#faq">FAQ</a></li>
-          <li><a href="#contact">Contact</a></li>
-          <li><a href="#shipping">Shipping &amp; Returns</a></li>
+          <li><a href="faq.html">FAQ</a></li>
+          <li><a href="contact.html">Contact</a></li>
+          <li><a href="shipping-policy.html">Shipping &amp; Returns</a></li>
         </ul>
       </div>
       <div class="footer__col">
         <h3>POLICIES</h3>
         <ul>
-          <li><a href="#shipping-policy">Shipping policy</a></li>
-          <li><a href="#refund-policy">Refund policy</a></li>
-          <li><a href="#privacy-policy">Privacy policy</a></li>
-          <li><a href="#terms">Terms of service</a></li>
+          <li><a href="shipping-policy.html">Shipping policy</a></li>
+          <li><a href="refund-policy.html">Refund policy</a></li>
+          <li><a href="privacy-policy.html">Privacy policy</a></li>
+          <li><a href="terms.html">Terms of service</a></li>
         </ul>
       </div>
     </nav>

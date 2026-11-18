@@ -15,7 +15,7 @@
   /* ---- Buttons: build the interactive-hover markup from the text ------- */
   const ARROW = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>';
 
-  $$('.btn').forEach((btn) => {
+  const buildBtn = (btn) => {
     if (btn.querySelector('.btn__label')) return;
     const text = btn.textContent.trim();
     btn.textContent = '';
@@ -31,7 +31,8 @@
     dot.className = 'btn__dot';
     dot.setAttribute('aria-hidden', 'true');
     btn.append(label, hover, dot);
-  });
+  };
+  $$('.btn').forEach(buildBtn);
 
   // Centre the dot in the label's reserved left slot (the original's 20%
   // lands on the text on wide buttons). Re-measure when a button resizes.
@@ -44,6 +45,10 @@
   const dotRO = 'ResizeObserver' in window ? new ResizeObserver((es) => es.forEach((e) => placeDot(e.target))) : null;
   $$('.btn').forEach((btn) => { placeDot(btn); dotRO?.observe(btn); });
   document.fonts?.ready.then(() => $$('.btn').forEach(placeDot));
+  // late-rendered buttons (cart drawer, smell test) ask for the same treatment
+  document.addEventListener('mrsniffs:buttons', (e) => {
+    $$('.btn', e.detail?.root || document).forEach((btn) => { buildBtn(btn); placeDot(btn); dotRO?.observe(btn); });
+  });
 
   const setBtnLabel = (btn, text) => {
     const label = btn.querySelector('.btn__label');
@@ -169,35 +174,22 @@
     }
   }
 
-  /* ---- Cart (front-end stub — swap for Shopify /cart/add.js) ------------ */
-  const cartCount = $('[data-cart-count]');
-  const cartLink = $('[data-cart-link]');
-  let count = 0;
-  const bumpCart = () => {
-    count += 1;
-    if (!cartCount) return;
-    cartCount.hidden = false;
-    cartCount.textContent = String(count);
-    cartLink?.setAttribute('aria-label', `Cart, ${count} item${count === 1 ? '' : 's'}`);
-    cartCount.classList.remove('is-bump');
-    void cartCount.offsetWidth; // restart animation
-    cartCount.classList.add('is-bump');
-  };
-
+  /* ---- Add-to-cart button feedback (the cart itself lives in cart.js) -- */
   $$('[data-add-to-cart]').forEach((btn) => {
+    if (btn.hasAttribute('data-cart-proxy')) return;
     btn.addEventListener('click', () => {
-      bumpCart();
       if (btn.classList.contains('icon-btn')) {
         btn.classList.remove('is-added');
         void btn.offsetWidth;
         btn.classList.add('is-added');
         setTimeout(() => btn.classList.remove('is-added'), 1400);
       } else {
+        const was = btn.querySelector('.btn__label')?.textContent || btn.textContent;
         btn.classList.add('is-done');
         setBtnLabel(btn, 'Added ✓');
         setTimeout(() => {
           btn.classList.remove('is-done');
-          setBtnLabel(btn, 'Add to cart');
+          setBtnLabel(btn, was);
         }, 1600);
       }
     });
