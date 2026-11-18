@@ -1381,6 +1381,80 @@ html.cart-open { overflow: hidden; }
 .cart-empty__actions { display: flex; flex-wrap: wrap; justify-content: center; gap: var(--s-12); margin-top: var(--s-12); }
 
 /* ==========================================================================
+   Search overlay (js/search.js builds the markup)
+   ========================================================================== */
+html.search-open { overflow: hidden; }
+.search { position: fixed; inset: 0; z-index: calc(var(--z-menu) + 10); }
+.search__scrim { position: absolute; inset: 0; background: rgba(15, 17, 20, 0.5); opacity: 0; transition: opacity var(--dur) var(--ease-out); }
+.search__panel {
+  position: relative;
+  max-height: 86vh;
+  display: flex;
+  flex-direction: column;
+  background: var(--c-white);
+  color: var(--c-ink);
+  transform: translateY(-100%);
+  transition: transform 480ms var(--ease-out);
+}
+.search.is-open .search__scrim { opacity: 1; }
+.search.is-open .search__panel { transform: none; }
+.search__bar {
+  display: flex;
+  align-items: center;
+  gap: var(--s-16);
+  padding: var(--s-24) var(--pad-x);
+  border-bottom: 1px solid var(--c-line);
+}
+.search__input {
+  flex: 1;
+  min-width: 0;
+  border: 0;
+  background: none;
+  font-family: var(--f-display);
+  font-weight: 700;
+  font-size: var(--fs-display-l);
+  letter-spacing: var(--tr-display);
+  text-transform: uppercase;
+  color: var(--c-ink);
+}
+.search__input::placeholder { color: var(--c-ink-25); }
+.search__input:focus { outline: none; }
+.search__input::-webkit-search-cancel-button { display: none; }
+.search__close { position: relative; flex: none; width: 36px; height: 36px; border: 0; background: none; cursor: pointer; }
+.search__close span { position: absolute; left: 7px; right: 7px; top: 50%; height: 1.5px; background: var(--c-ink); }
+.search__close span:first-child { transform: rotate(45deg); }
+.search__close span:last-child { transform: rotate(-45deg); }
+.search__results { overflow-y: auto; padding: var(--s-24) var(--pad-x) var(--s-36); display: flex; flex-direction: column; gap: var(--s-12); }
+.search__label { font-family: var(--f-mono); font-size: 12px; letter-spacing: var(--tr-mono-wide); text-transform: uppercase; color: var(--c-ink-60); margin-top: var(--s-12); }
+.search__chips { display: flex; flex-wrap: wrap; gap: 10px; }
+.search__chip {
+  padding: 8px 14px;
+  border: 1px solid var(--c-ink);
+  background: none;
+  font-family: var(--f-mono);
+  font-size: 13px;
+  letter-spacing: var(--tr-mono);
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background-color var(--dur-fast), color var(--dur-fast);
+}
+.search__chip:hover { background: var(--c-ink); color: var(--c-white); }
+.search__none { color: var(--c-ink-60); }
+.search__products { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--s-16); margin: 0; padding: 0; list-style: none; }
+.search-hit { display: grid; grid-template-columns: 64px 1fr auto; align-items: center; gap: var(--s-12); padding: 10px; border: 1px solid var(--c-line); transition: border-color var(--dur-fast); }
+.search-hit:hover { border-color: var(--c-ink); }
+.search-hit__img { display: block; width: 64px; height: 76px; background: var(--c-stone); overflow: hidden; }
+.search-hit__img img { width: 100%; height: 100%; object-fit: cover; }
+.search-hit__img--box img { object-fit: contain; padding: 6px 0; }
+.search-hit__text { display: flex; flex-direction: column; gap: 4px; min-width: 0; }
+.search-hit__title { font-weight: 500; }
+.search-hit__note { font-size: var(--fs-sm); color: var(--c-ink-60); }
+.search-hit__price { font-weight: 500; font-variant-numeric: tabular-nums; }
+.search__pages { margin: 0; padding: 0; list-style: none; border-top: 1px solid var(--c-line); }
+.search-page { display: flex; justify-content: space-between; gap: var(--s-16); padding: 14px 0; border-bottom: 1px solid var(--c-line); }
+.search-page:hover span:first-child { text-decoration: underline; text-underline-offset: 3px; }
+
+/* ==========================================================================
    Responsive
    ========================================================================== */
 @media (max-width: 1200px) {
@@ -1400,6 +1474,7 @@ html.cart-open { overflow: hidden; }
     background: var(--c-paper);
   }
   .why__proof { grid-template-columns: 1fr; }
+  .search__products { grid-template-columns: 1fr; }
   .site-header--solid { padding: 12px var(--gutter); }
   .site-header--solid .nav__logo img,
   .site-header--solid.is-scrolled .nav__logo img { width: 95px; height: 40px; }
