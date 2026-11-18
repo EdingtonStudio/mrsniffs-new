@@ -12,6 +12,7 @@
   <link rel="stylesheet" href="css/main.css" />
   <link rel="stylesheet" href="css/pdp.css" />
   <script defer src="js/main.js"></script>
+  <script defer src="js/cart.js"></script>
   <script defer src="js/smoke.js"></script>
   <script defer src="js/pdp.js"></script>
 </head>
@@ -107,7 +108,7 @@
                   <button class="qty__btn" type="button" aria-label="Increase quantity" data-qty-inc><img src="assets/icons/plus.svg" width="18" height="18" alt="" /></button>
                 </div>
                 <button class="btn btn--solid pdp-buy__cta" type="button" data-pdp-add>Add to cart</button>
-                <button type="button" data-add-to-cart data-cart-proxy hidden tabindex="-1" aria-hidden="true">add</button>
+                <button type="button" data-add-to-cart="yoga-studio" data-cart-proxy hidden tabindex="-1" aria-hidden="true">add</button>
               </div>
             </div>
           </div>
@@ -342,7 +343,7 @@
               <p class="product-price">$38</p>
             </div>
             <div class="holder-card__actions">
-              <button class="btn btn--solid btn--sm btn--block" type="button" data-add-to-cart>Add to cart</button>
+              <button class="btn btn--solid btn--sm btn--block" type="button" data-add-to-cart="stachin-ash">Add to cart</button>
             </div>
           </div>
         </article>
@@ -395,7 +396,7 @@
             <div class="pdp-acc__panel" id="acc-ship">
               <div class="pacc__body">
                 <p>Wondering when your incense will arrive? Find your available shipping options and estimated delivery window at checkout.</p>
-                <a class="btn btn--outline btn--sm" href="#shipping-policy">Read the policy</a>
+                <a class="btn btn--outline btn--sm" href="shipping-policy.html">Read the policy</a>
               </div>
             </div>
           </div>
@@ -408,7 +409,7 @@
             <div class="pdp-acc__panel" id="acc-returns" hidden>
               <div class="pacc__body">
                 <p>[Pending — approved returns &amp; exchanges copy goes here.]</p>
-                <a class="btn btn--outline btn--sm" href="#refund-policy">Read the policy</a>
+                <a class="btn btn--outline btn--sm" href="refund-policy.html">Read the policy</a>
               </div>
             </div>
           </div>
@@ -465,7 +466,7 @@
             </div>
             <div class="scent-card__actions">
               <a class="btn btn--light btn--sm btn--w195" href="bonfire.html">Meet Bonfire</a>
-              <button class="icon-btn icon-btn--tile" type="button" aria-label="Add Bonfire to cart" data-add-to-cart>
+              <button class="icon-btn icon-btn--tile" type="button" aria-label="Add Bonfire to cart" data-add-to-cart="bonfire">
                 <img src="assets/icons/cart.svg" width="16" height="16" alt="" />
               </button>
             </div>
@@ -488,7 +489,7 @@
             </div>
             <div class="scent-card__actions">
               <a class="btn btn--light btn--sm btn--w195" href="duo.html">Meet the Duo</a>
-              <button class="icon-btn icon-btn--tile" type="button" aria-label="Add the Duo to cart" data-add-to-cart>
+              <button class="icon-btn icon-btn--tile" type="button" aria-label="Add the Duo to cart" data-add-to-cart="duo">
                 <img src="assets/icons/cart.svg" width="16" height="16" alt="" />
               </button>
             </div>
@@ -575,18 +576,18 @@
       <div class="footer__col">
         <h3>HELP</h3>
         <ul>
-          <li><a href="#faq">FAQ</a></li>
-          <li><a href="#contact">Contact</a></li>
-          <li><a href="#shipping">Shipping &amp; Returns</a></li>
+          <li><a href="faq.html">FAQ</a></li>
+          <li><a href="contact.html">Contact</a></li>
+          <li><a href="shipping-policy.html">Shipping &amp; Returns</a></li>
         </ul>
       </div>
       <div class="footer__col">
         <h3>POLICIES</h3>
         <ul>
-          <li><a href="#shipping-policy">Shipping policy</a></li>
-          <li><a href="#refund-policy">Refund policy</a></li>
-          <li><a href="#privacy-policy">Privacy policy</a></li>
-          <li><a href="#terms">Terms of service</a></li>
+          <li><a href="shipping-policy.html">Shipping policy</a></li>
+          <li><a href="refund-policy.html">Refund policy</a></li>
+          <li><a href="privacy-policy.html">Privacy policy</a></li>
+          <li><a href="terms.html">Terms of service</a></li>
         </ul>
       </div>
     </nav>
