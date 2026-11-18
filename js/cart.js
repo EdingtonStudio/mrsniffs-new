@@ -45,6 +45,8 @@
     write(getCart().map((l) => (l.id === id ? { ...l, qty } : l)).filter((l) => l.qty > 0));
   };
 
+  const FREE_SHIP = 50;                       // free US shipping threshold, $
+
   /* ---- Drawer markup (Shopify: sections/cart-drawer.liquid) ------------ */
   const drawer = document.createElement('div');
   drawer.className = 'cart';
@@ -58,6 +60,10 @@
       </header>
       <div class="cart__body" data-cart-body></div>
       <footer class="cart__foot" data-cart-foot>
+        <div class="cart-ship" data-cart-ship>
+          <p class="cart-ship__msg" data-cart-ship-msg></p>
+          <div class="cart-ship__bar" aria-hidden="true"><span data-cart-ship-fill></span></div>
+        </div>
         <div class="cart__row"><span>Subtotal</span><span class="cart__subtotal" data-cart-subtotal></span></div>
         <p class="cart__fine">Shipping and taxes calculated at checkout.</p>
         <a class="btn btn--solid btn--block cart__checkout" href="${CHECKOUT_URL}">Checkout</a>
@@ -124,6 +130,12 @@
     cartLink?.setAttribute('aria-label', `Cart, ${n} item${n === 1 ? '' : 's'}`);
     $('[data-cart-n]', drawer).textContent = n ? `(${n})` : '';
     $('[data-cart-subtotal]', drawer).textContent = money(subtotal);
+    // Free-shipping nudge (Shopify: read the threshold from a theme setting)
+    const left = FREE_SHIP - subtotal;
+    $('[data-cart-ship-msg]', drawer).innerHTML = left > 0
+      ? `You're <strong>${money(left)}</strong> away from free shipping.`
+      : 'Free shipping unlocked.';
+    $('[data-cart-ship-fill]', drawer).style.width = `${Math.min(100, (subtotal / FREE_SHIP) * 100)}%`;
     foot.hidden = n === 0;
     body.innerHTML = n
       ? `<ul class="cart__lines">${items.map(lineHTML).join('')}</ul>${upsellHTML(items)}`

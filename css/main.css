@@ -1368,6 +1368,11 @@ html.cart-open { overflow: hidden; }
 .cart__foot { display: flex; flex-direction: column; gap: var(--s-12); padding: var(--s-24); border-top: 1px solid var(--c-line); }
 .cart__row { display: flex; justify-content: space-between; font-weight: 500; font-size: 18px; }
 .cart__subtotal { font-variant-numeric: tabular-nums; }
+.cart-ship { display: flex; flex-direction: column; gap: 8px; padding-bottom: 16px; border-bottom: 1px solid var(--c-line); }
+.cart-ship__msg { font-size: 14px; color: var(--c-ink-60); }
+.cart-ship__msg strong { font-weight: 500; color: var(--c-ink); }
+.cart-ship__bar { height: 3px; background: var(--c-line); overflow: hidden; }
+.cart-ship__bar span { display: block; height: 100%; width: 0; background: var(--c-ember); transition: width 500ms var(--ease-out); }
 .cart__fine { font-family: var(--f-mono); font-size: 11px; letter-spacing: var(--tr-mono); text-transform: uppercase; color: var(--c-ink-60); }
 .cart__continue { align-self: center; border: 0; background: none; cursor: pointer; color: var(--c-ink); font-size: 13px; }
 
