@@ -12,8 +12,8 @@
   if (!trigger) return;
 
   const INDEX = [
-    { type: 'product', title: 'Bonfire · Agarwood', note: 'Incense · dark resin and smoke', price: '$24', url: 'bonfire.html', img: 'assets/img/box-bonfire.webp', box: true, words: 'bonfire agarwood oud incense smoky dark resin night woody' },
-    { type: 'product', title: 'Yoga Studio · Palo Santo', note: 'Incense · warm resin and citrus', price: '$24', url: 'yoga-studio.html', img: 'assets/img/box-yoga.webp', box: true, words: 'yoga studio palo santo incense citrus calm reset resin' },
+    { type: 'product', title: 'Bonfire · Agarwood', note: 'Incense · dark resin and smoke', price: '$24', url: 'bonfire.html', img: 'assets/img/shop-bonfire.webp', words: 'bonfire agarwood oud incense smoky dark resin night woody' },
+    { type: 'product', title: 'Yoga Studio · Palo Santo', note: 'Incense · warm resin and citrus', price: '$24', url: 'yoga-studio.html', img: 'assets/img/shop-yoga.webp', words: 'yoga studio palo santo incense citrus calm reset resin' },
     { type: 'product', title: 'The Duo', note: 'Bonfire + Yoga Studio', price: '$42', url: 'duo.html', img: 'assets/img/shop-duo.webp', words: 'duo bundle both two pack gift set' },
     { type: 'product', title: 'Ash Catchum', note: 'Stoneware ash catcher · sold out', price: '$22', url: 'ash-catchum.html', img: 'assets/img/holder-ash-catchum.webp', words: 'ash catchum holder holders stoneware round dish ash catcher' },
     { type: 'product', title: 'Stachin’ Ash', note: 'Moustache ash catcher', price: '$38', url: 'stachin-ash.html', img: 'assets/img/holder-stachin-ash.webp', words: 'stachin ash holder holders moustache mustache stoneware' },

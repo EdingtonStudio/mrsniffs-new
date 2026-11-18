@@ -13,8 +13,8 @@
 
   /* ---- Catalog (Shopify: comes from the product/variant objects) ------- */
   const PRODUCTS = {
-    'bonfire':      { name: 'Bonfire · Agarwood',     note: 'Incense · 50 sticks',            price: 24, img: 'assets/img/box-bonfire.webp',        url: 'bonfire.html',      kind: 'box' },
-    'yoga-studio':  { name: 'Yoga Studio · Palo Santo', note: 'Incense · 50 sticks',          price: 24, img: 'assets/img/box-yoga.webp',           url: 'yoga-studio.html',  kind: 'box' },
+    'bonfire':      { name: 'Bonfire · Agarwood',     note: 'Incense · 50 sticks',            price: 24, img: 'assets/img/shop-bonfire.webp',       url: 'bonfire.html' },
+    'yoga-studio':  { name: 'Yoga Studio · Palo Santo', note: 'Incense · 50 sticks',          price: 24, img: 'assets/img/shop-yoga.webp',          url: 'yoga-studio.html' },
     'duo':          { name: 'The Duo',                note: 'Bonfire + Yoga Studio',          price: 42, img: 'assets/img/shop-duo.webp',           url: 'duo.html' },
     'ash-catchum':  { name: 'Ash Catchum',            note: 'Stoneware ash catcher',          price: 22, img: 'assets/img/holder-ash-catchum.webp', url: 'ash-catchum.html' },
     'stachin-ash':  { name: 'Stachin’ Ash',           note: 'Moustache ash catcher',          price: 38, img: 'assets/img/holder-stachin-ash.webp', url: 'stachin-ash.html' },
