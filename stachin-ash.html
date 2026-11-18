@@ -70,7 +70,7 @@
         <div class="pdp-info__inner" data-sticky-info>
           <div class="pdp-info__top">
             <div class="pdp-info__head">
-              <p class="pdp-eyebrow">INCENSE HOLDER</p>
+              <p class="pdp-eyebrow">INCENSE HOLDER · SOLD OUT</p>
               <div class="pdp-info__title">
                 <h1 class="pdp-title" id="pdp-title">Stachin’ Ash</h1>
                 <p class="lede">A moustache-shaped ash catcher. Yes, really.</p>
@@ -87,14 +87,14 @@
                 <p class="pdp-price">$38</p>
                 <p class="lede">Holder only · Incense sold separately</p>
               </div>
-              <div class="pdp-buy__row">
-                <div class="qty" data-qty>
-                  <button class="qty__btn" type="button" aria-label="Decrease quantity" data-qty-dec><img src="assets/icons/pdp-minus.svg" width="18" height="18" alt="" /></button>
-                  <output class="qty__value" aria-live="polite" data-qty-value>1</output>
-                  <button class="qty__btn" type="button" aria-label="Increase quantity" data-qty-inc><img src="assets/icons/plus.svg" width="18" height="18" alt="" /></button>
-                </div>
-                <button class="btn btn--solid pdp-buy__cta" type="button" data-pdp-add>Add to cart</button>
-                <button type="button" data-add-to-cart="stachin-ash" data-cart-proxy hidden tabindex="-1" aria-hidden="true">add</button>
+              <div class="pdp-buy__row pdp-notify" data-notify>
+                <button class="btn btn--solid pdp-buy__cta" type="button" data-notify-open>Notify me</button>
+                <form class="notify-form" data-notify-form novalidate hidden>
+                  <label class="sr-only" for="pdp-notify-stachin-ash">Email for Stachin’ Ash restock</label>
+                  <input id="pdp-notify-stachin-ash" type="email" placeholder="your@email.com" required autocomplete="email" />
+                  <button class="btn btn--solid btn--sm" type="submit">Send</button>
+                </form>
+                <p class="form-msg" data-notify-msg role="status"></p>
               </div>
             </div>
           </div>

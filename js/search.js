@@ -16,7 +16,7 @@
     { type: 'product', title: 'Yoga Studio · Palo Santo', note: 'Incense · warm resin and citrus', price: '$24', url: 'yoga-studio.html', img: 'assets/img/shop-yoga.webp', words: 'yoga studio palo santo incense citrus calm reset resin' },
     { type: 'product', title: 'The Duo', note: 'Bonfire + Yoga Studio', price: '$42', url: 'duo.html', img: 'assets/img/shop-duo.webp', words: 'duo bundle both two pack gift set' },
     { type: 'product', title: 'Ash Catchum', note: 'Stoneware ash catcher · sold out', price: '$22', url: 'ash-catchum.html', img: 'assets/img/holder-ash-catchum.webp', words: 'ash catchum holder holders stoneware round dish ash catcher' },
-    { type: 'product', title: 'Stachin’ Ash', note: 'Moustache ash catcher', price: '$38', url: 'stachin-ash.html', img: 'assets/img/holder-stachin-ash.webp', words: 'stachin ash holder holders moustache mustache stoneware' },
+    { type: 'product', title: 'Stachin’ Ash', note: 'Moustache ash catcher · sold out', price: '$38', url: 'stachin-ash.html', img: 'assets/img/holder-stachin-ash.webp', words: 'stachin ash holder holders moustache mustache stoneware' },
     { type: 'product', title: 'Brass Monkey', note: 'Blackened brass holder · sold out', price: '$85', url: 'brass-monkey.html', img: 'assets/img/holder-brass-monkey.webp', words: 'brass monkey holder holders metal tray' },
     { type: 'page', title: 'Shop all', note: 'Incense and holders', url: 'shop.html', words: 'shop all products collection compare' },
     { type: 'page', title: 'Find your scent', note: 'The Smell Test · 4 questions', url: 'smell-test.html', words: 'smell test quiz find your scent whiff recommend which' },

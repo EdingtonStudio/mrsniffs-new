@@ -336,6 +336,7 @@
         <article class="holder-card gleam gleam--bonfire gleam--light" data-reveal style="--d: 1">
           <div class="holder-card__media">
             <img src="assets/img/holder-stachin-ash.webp" width="886" height="1100" alt="Stachin' Ash moustache-shaped stoneware holder with a burning stick" loading="lazy" />
+            <span class="chip">Sold-out</span>
           </div>
           <div class="holder-card__body">
             <div class="holder-card__info">
@@ -345,8 +346,14 @@
               </div>
               <p class="product-price">$38</p>
             </div>
-            <div class="holder-card__actions">
-              <button class="btn btn--solid btn--sm btn--block" type="button" data-add-to-cart="stachin-ash">Add to cart</button>
+            <div class="holder-card__actions" data-notify>
+              <button class="btn btn--solid btn--sm btn--block" type="button" data-notify-open>Notify me</button>
+              <form class="notify-form" data-notify-form novalidate hidden>
+                <label class="sr-only" for="notify-stachin">Email for Stachin’ Ash restock</label>
+                <input id="notify-stachin" type="email" placeholder="your@email.com" required autocomplete="email" />
+                <button class="btn btn--solid btn--sm" type="submit">Send</button>
+              </form>
+              <p class="form-msg" data-notify-msg role="status"></p>
             </div>
           </div>
         </article>
