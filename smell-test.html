@@ -15,6 +15,7 @@
   <script defer src="js/cart.js"></script>
   <script defer src="js/search.js"></script>
   <script defer src="js/smoke.js"></script>
+  <script defer src="js/smell.js"></script>
 </head>
 <body class="page-smell">
   <a class="skip-link" href="#main">Skip to content</a>
@@ -65,6 +66,145 @@
           <div class="smell-hero__actions" data-reveal style="--d: 5">
             <a class="btn btn--light btn--sm" href="#smell-test">Start the Smell Test</a>
             <a class="btn btn--ghost-light btn--sm" href="shop.html#compare">Compare scents instead</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── The Smell Test: 4 questions → result ───────────────── -->
+    <section class="st" id="smell-test" aria-label="The Smell Test" data-smell-test>
+      <div class="st__inner">
+        <div class="st__bar" data-st-bar>
+          <button class="st__back" type="button" data-st-back hidden>← Back</button>
+          <p class="st__count" data-st-count aria-live="polite">Question 1 of 4</p>
+          <div class="st__progress" aria-hidden="true"><span data-st-fill></span></div>
+        </div>
+        <fieldset class="st-q" data-step="1">
+          <legend class="display-l st-q__title">When do you usually light one?</legend>
+          <div class="st-opts">
+            <button class="st-opt" type="button" data-lean="b">
+              <span class="st-opt__key">A</span>
+              <span class="st-opt__label">After dark</span>
+              <span class="st-opt__sub">Lights low, the day's done</span>
+            </button>
+            <button class="st-opt" type="button" data-lean="y">
+              <span class="st-opt__key">B</span>
+              <span class="st-opt__label">Morning or midday</span>
+              <span class="st-opt__sub">A reset between things</span>
+            </button>
+            <button class="st-opt" type="button" data-lean="both">
+              <span class="st-opt__key">C</span>
+              <span class="st-opt__label">Whenever, honestly</span>
+              <span class="st-opt__sub">No schedule, just vibes</span>
+            </button>
+          </div>
+        </fieldset>
+        <fieldset class="st-q" data-step="2" hidden>
+          <legend class="display-l st-q__title">Where does it burn?</legend>
+          <div class="st-opts">
+            <button class="st-opt" type="button" data-lean="b">
+              <span class="st-opt__key">A</span>
+              <span class="st-opt__label">Couch, friends over</span>
+              <span class="st-opt__sub">Records on, someone's telling a story</span>
+            </button>
+            <button class="st-opt" type="button" data-lean="y">
+              <span class="st-opt__key">B</span>
+              <span class="st-opt__label">Mat, desk or bath</span>
+              <span class="st-opt__sub">Somewhere you go to breathe</span>
+            </button>
+            <button class="st-opt" type="button" data-lean="both">
+              <span class="st-opt__key">C</span>
+              <span class="st-opt__label">All over the house</span>
+              <span class="st-opt__sub">Wherever it needs it</span>
+            </button>
+          </div>
+        </fieldset>
+        <fieldset class="st-q" data-step="3" hidden>
+          <legend class="display-l st-q__title">Which smell pulls you in?</legend>
+          <div class="st-opts">
+            <button class="st-opt" type="button" data-lean="b">
+              <span class="st-opt__key">A</span>
+              <span class="st-opt__label">Campfire and leather</span>
+              <span class="st-opt__sub">Smoky, deep, a little mysterious</span>
+            </button>
+            <button class="st-opt" type="button" data-lean="y">
+              <span class="st-opt__key">B</span>
+              <span class="st-opt__label">Citrus and clean wood</span>
+              <span class="st-opt__sub">Bright, fresh, easy</span>
+            </button>
+            <button class="st-opt" type="button" data-lean="both">
+              <span class="st-opt__key">C</span>
+              <span class="st-opt__label">A bit of both</span>
+              <span class="st-opt__sub">Depends on the day</span>
+            </button>
+          </div>
+        </fieldset>
+        <fieldset class="st-q" data-step="4" hidden>
+          <legend class="display-l st-q__title">Pick your ideal night.</legend>
+          <div class="st-opts">
+            <button class="st-opt" type="button" data-lean="b">
+              <span class="st-opt__key">A</span>
+              <span class="st-opt__label">Fire pit, late talks</span>
+              <span class="st-opt__sub">Nobody's in a rush to leave</span>
+            </button>
+            <button class="st-opt" type="button" data-lean="y">
+              <span class="st-opt__key">B</span>
+              <span class="st-opt__label">Early night, long stretch</span>
+              <span class="st-opt__sub">Phone down, deep exhale</span>
+            </button>
+            <button class="st-opt" type="button" data-lean="both">
+              <span class="st-opt__key">C</span>
+              <span class="st-opt__label">Whatever comes up</span>
+              <span class="st-opt__sub">Plans are overrated</span>
+            </button>
+          </div>
+        </fieldset>
+        <div class="st-result st-result--bonfire" data-result="bonfire" hidden>
+          <div class="st-result__media" style="--tint: var(--c-tint-bonfire)">
+            <img src="assets/img/box-bonfire.webp" width="267" height="800" alt="Bonfire Agarwood incense box" loading="lazy" />
+          </div>
+          <div class="st-result__copy">
+            <p class="st-result__eyebrow">Your whiff is</p>
+            <h2 class="display-xl">Bonfire</h2>
+            <p class="st-result__line">Agarwood · dark resin and smoke</p>
+            <p class="lede">You like your evenings long and your rooms a little smoky. Bonfire smells like having nowhere to be.</p>
+            <div class="btn-row">
+              <button class="btn btn--solid" type="button" data-add-to-cart="bonfire">Add to cart · $24</button>
+              <a class="btn btn--outline" href="bonfire.html">Meet Bonfire</a>
+            </div>
+            <button class="text-link st-retake" type="button" data-retake><span>Retake the Smell Test</span></button>
+          </div>
+        </div>
+        <div class="st-result st-result--yoga" data-result="yoga" hidden>
+          <div class="st-result__media" style="--tint: var(--c-tint-yoga)">
+            <img src="assets/img/box-yoga.webp" width="197" height="600" alt="Yoga Studio Palo Santo incense box" loading="lazy" />
+          </div>
+          <div class="st-result__copy">
+            <p class="st-result__eyebrow">Your whiff is</p>
+            <h2 class="display-xl">Yoga Studio</h2>
+            <p class="st-result__line">Palo santo · warm resin and a citrus edge</p>
+            <p class="lede">You light up to reset, not to wind down. Yoga Studio feels like a deep stretch and a long exhale.</p>
+            <div class="btn-row">
+              <button class="btn btn--solid" type="button" data-add-to-cart="yoga-studio">Add to cart · $24</button>
+              <a class="btn btn--outline" href="yoga-studio.html">Meet Yoga Studio</a>
+            </div>
+            <button class="text-link st-retake" type="button" data-retake><span>Retake the Smell Test</span></button>
+          </div>
+        </div>
+        <div class="st-result st-result--duo" data-result="duo" hidden>
+          <div class="st-result__media" style="--tint: var(--c-stone)">
+            <img src="assets/img/shop-duo.webp" width="879" height="1100" alt="Bonfire and Yoga Studio boxes side by side" loading="lazy" />
+          </div>
+          <div class="st-result__copy">
+            <p class="st-result__eyebrow">Your whiff is</p>
+            <h2 class="display-xl">The Duo</h2>
+            <p class="st-result__line">Bonfire + Yoga Studio · one of each</p>
+            <p class="lede">You're a little of both, so don't pick. Bonfire for after dark, Yoga Studio for the reset, and $6 back in your pocket.</p>
+            <div class="btn-row">
+              <button class="btn btn--solid" type="button" data-add-to-cart="duo">Add to cart · $42</button>
+              <a class="btn btn--outline" href="duo.html">Meet the Duo</a>
+            </div>
+            <button class="text-link st-retake" type="button" data-retake><span>Retake the Smell Test</span></button>
           </div>
         </div>
       </div>

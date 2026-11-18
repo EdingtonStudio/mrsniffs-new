@@ -14,35 +14,38 @@ Style source: Figma file "Mr. Sniff's Style Guide + Emails" (tokens, type styles
 | The Duo PDP | `duo.html` | $42, one pack of each. Final contents still pending |
 | Holder PDPs | `ash-catchum.html`, `stachin-ash.html`, `brass-monkey.html` | Notify me on sold-out holders. Lifestyle/detail photos, dimensions and care copy pending |
 | How to Use Incense | `how-to.html` | Logo renders small in Chrome |
-| Smell Test intro | `smell-test.html` | Intro only. Questions and results not built |
+| Smell Test | `smell-test.html` | Intro + 4 questions + 3 results (Bonfire, Yoga Studio, Duo on a tie). Add to cart from the result |
+| Cart drawer | `js/cart.js` | Every page. Quantity, remove, Duo swap, empty state, persists between pages |
+| Search | `js/search.js` | Nav magnifier or "/" key. Products, pages, help topics |
+| FAQ | `faq.html` | Four topic groups. Storage answer still pending |
+| Contact | `contact.html` | Validated form (front-end only). Email address to confirm |
+| Policies | `shipping-policy.html`, `refund-policy.html`, `privacy-policy.html`, `terms.html` | **Drafts.** Bracketed details needed, then counsel review |
+| 404 | `404.html` | |
+| Coming soon | `password.html` | For Shopify's password page before Dec 15 |
+| Checkout preview | `checkout.html` | Stand-in only. Deleted at Shopify port; Checkout goes to Shopify's /checkout |
 
-## P1 — Launch blockers
+## P1 — Left before launch
 
-| # | Page or component | Build from | Notes |
-|---|---|---|---|
-| 1 | **Cart drawer** | New | Every page has a dead `#cart`. Line items, quantity, subtotal, Duo upsell, checkout button, empty state |
-| 2 | **Smell Test: 4 questions + results** | `smell-test.html` | One question per screen with progress. Three results: Bonfire, Yoga Studio, The Duo. No email gate |
-| 3 | **Our Story** | Vijay's design (in progress) | Every "Our story" link points to `index.html#story` |
-| 4 | **FAQ page** | Homepage accordion | Full answers. Homepage answers 2–4 are still placeholders |
-| 5 | **Contact** | New, simple | Email, form, response time |
-| 6 | **Policy pages ×4** | One text template | Shipping, Refunds, Privacy, Terms. Footer links are dead anchors today |
-| 7 | **404** | New | Mascot, short line, Shop and Smell Test buttons |
-| 8 | **Password / coming-soon page** | New | Shopify password page with email capture, for teasing before Dec 15 |
-| 9 | **Search overlay** | New | Keep search (Chris, Nov 17). Opens from the nav icon: input, live results for products and pages, empty state |
+| # | Item | Owner / notes |
+|---|---|---|
+| 1 | **Our Story** | Vijay designing. Every "Our story" link points to `index.html#story` until then |
+| 2 | **Shopify port** | Convert pages to theme sections/templates; swap the Cart API block in `js/cart.js` and `search()` in `js/search.js` for Shopify's AJAX endpoints; contact form → `{% form 'contact' %}`. Target: done by Dec 8 to leave a week for QA |
+| 3 | **Checkout styling** | Shopify admin → Checkout: logo, Ink/White/Ember colors, Big Shoulders + Inter, square buttons. About an hour |
+| 4 | **Policy details + review** | Fill bracketed items (company name, address, shipping rates, return window), then counsel review |
+| 5 | **Mobile pass** | After desktop sign-off |
 
 ## P2 — States and conversion
 
 | # | Item | Notes |
 |---|---|---|
 | 1 | PDP reviews block | Klaviyo reviews widget; plan is 15–20 reviews live on day one |
-| 2 | Add-to-cart confirmation | Toast or drawer open, used on every Add button |
-| 3 | Empty and sold-out states | Figma "REQUIRED STATES" frame (1:783) |
-| 4 | Exit-intent pop-up | Email capture, "try before you buy" sample marked coming soon |
-| 5 | Newsletter success and error states | Footer form is a stub today |
+| 2 | Empty and sold-out states | Figma "REQUIRED STATES" frame (1:783) |
+| 3 | Exit-intent pop-up | Email capture, "try before you buy" sample marked coming soon |
+| 4 | Newsletter success and error states | Footer form is a stub today |
 
 ## Decided (Nov 17)
 
-- **Search**: keep it. Built as a custom overlay (P1-9).
+- **Search**: keep it. Built as a custom overlay.
 - **Holders**: keep them, with their own product pages (built Nov 17).
 - **Account pages**: Shopify's default customer accounts for now; style after launch.
 

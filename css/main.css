@@ -45,6 +45,9 @@ input { font: inherit; }
 }
 .skip-link:focus { top: 16px; }
 
+/* hidden always wins over component display rules */
+[hidden] { display: none !important; }
+
 /* ---- Type primitives ----------------------------------------------------- */
 .display-xl,
 .display-l,
