@@ -28,7 +28,7 @@ Style source: Figma file "Mr. Sniff's Style Guide + Emails" (tokens, type styles
 
 | # | Item | Owner / notes |
 |---|---|---|
-| 1 | **Our Story** | Vijay designing. Every "Our story" link points to `index.html#story` until then |
+| 1 | **Our Story** | Built (`story.html`). Placeholders to swap: team names, roles and portraits (4), founder quote attribution, POV panels 2–3 copy |
 | 2 | **Shopify port** | Convert pages to theme sections/templates; swap the Cart API block in `js/cart.js` and `search()` in `js/search.js` for Shopify's AJAX endpoints; contact form → `{% form 'contact' %}`. Target: done by Dec 8 to leave a week for QA |
 | 3 | **Checkout styling** | Shopify admin → Checkout: logo, Ink/White/Ember colors, Big Shoulders + Inter, square buttons. About an hour |
 | 4 | **Policy details + review** | Fill bracketed items (company name, address, shipping rates, return window), then counsel review |

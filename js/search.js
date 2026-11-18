@@ -20,6 +20,7 @@
     { type: 'product', title: 'Brass Monkey', note: 'Blackened brass holder · sold out', price: '$85', url: 'brass-monkey.html', img: 'assets/img/holder-brass-monkey.webp', words: 'brass monkey holder holders metal tray' },
     { type: 'page', title: 'Shop all', note: 'Incense and holders', url: 'shop.html', words: 'shop all products collection compare' },
     { type: 'page', title: 'Find your scent', note: 'The Smell Test · 4 questions', url: 'smell-test.html', words: 'smell test quiz find your scent whiff recommend which' },
+    { type: 'page', title: 'Our story', note: 'Why we started and who we are', url: 'story.html', words: 'our story about us team founder why started people' },
     { type: 'page', title: 'How to use incense', note: 'Set up, light, put out, clean up', url: 'how-to.html', words: 'how to use light burn safety clean up guide' },
     { type: 'page', title: 'FAQ', note: 'Scents, burning, orders and returns', url: 'faq.html', words: 'faq questions help sticks burn time made of ingredients' },
     { type: 'page', title: 'Shipping', note: 'Where we ship and how long it takes', url: 'shipping-policy.html', words: 'shipping delivery tracking where ship time' },
