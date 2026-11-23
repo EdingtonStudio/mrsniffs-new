@@ -1,9 +1,8 @@
 /* ==========================================================================
    Mr. Sniff's — Our Story interactions
-   1. Team: hover / click / arrows enlarge a portrait and swap the name
-   2. Why we started: pinned quote lights up word by word while photos drift
+   1. Why we started: pinned quote lights up word by word while photos drift
       past at different speeds and loop (reference: caspia.framer.media)
-   3. Point of view: scroll steps through three tabs; tabs are also clickable
+   2. Point of view: scroll steps through three tabs; tabs are also clickable
    ========================================================================== */
 (() => {
   const $ = (sel, ctx = document) => ctx.querySelector(sel);
@@ -17,31 +16,7 @@
     return run > 0 ? clamp(-r.top / run) : (r.top < 0 ? 1 : 0);
   };
 
-  /* ---- 1. Team ------------------------------------------------------------- */
-  const team = $('[data-team]');
-  if (team) {
-    const members = $$('[data-member]', team);
-    let active = 0;
-    const setActive = (i) => {
-      active = (i + members.length) % members.length;
-      members.forEach((m, k) => {
-        const on = k === active;
-        m.classList.toggle('is-active', on);
-        $('.member__media', m).setAttribute('aria-pressed', String(on));
-        $('.member__info', m).setAttribute('aria-hidden', String(!on));
-      });
-    };
-    members.forEach((m, i) => {
-      const media = $('.member__media', m);
-      media.addEventListener('mouseenter', () => setActive(i));
-      media.addEventListener('focus', () => setActive(i));
-      media.addEventListener('click', () => setActive(i));
-    });
-    $('[data-team-prev]', team)?.addEventListener('click', () => setActive(active - 1));
-    $('[data-team-next]', team)?.addEventListener('click', () => setActive(active + 1));
-  }
-
-  /* ---- 2. Why we started -------------------------------------------------- */
+  /* ---- 1. Why we started -------------------------------------------------- */
   const why = $('[data-why]');
   const words = why ? $$('.why__word', why) : [];
   const cards = why ? $$('[data-why-card]', why).map((el) => ({
@@ -69,7 +44,7 @@
     });
   };
 
-  /* ---- 3. Point of view ---------------------------------------------------- */
+  /* ---- 2. Point of view ---------------------------------------------------- */
   const pov = $('[data-pov]');
   const tabs = pov ? $$('[data-pov-tab]', pov) : [];
   const panels = pov ? $$('[data-pov-panel]', pov) : [];

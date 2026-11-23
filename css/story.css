@@ -34,82 +34,39 @@
 .story-hero__title { position: absolute; left: 13.47%; top: 48.46%; white-space: nowrap; }
 .story-hero__lede { position: absolute; left: 64.65%; top: 50.26%; width: calc(402 * var(--s)); font-size: 16px; line-height: var(--lh-body); letter-spacing: var(--tr-body); }
 
-/* ---- Team (132:128) --------------------------------------------------------- */
-.team { padding: var(--section-y) var(--gutter) var(--s-60); }
-.team__head { display: flex; align-items: flex-end; justify-content: space-between; gap: var(--s-24); }
-.team__head .display-l { max-width: 640px; }
-.team__head .lede { margin-top: 12px; }
-.team__nav { display: flex; gap: 8px; }
-.team__arrow {
+/* ---- Origin story (stands in for the team row until the headshot shoot) - */
+.origin {
   display: grid;
-  place-items: center;
-  width: 44px;
-  height: 44px;
-  border: 1px solid var(--c-ink-15);
-  background: var(--c-white);
-  color: var(--c-ink);
-  cursor: pointer;
-  transition: background-color var(--dur-fast), color var(--dur-fast), border-color var(--dur-fast);
+  grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
+  gap: var(--s-72);
+  align-items: start;
+  padding: calc(var(--section-y) * 1.5) var(--pad-x);
 }
-.team__arrow:hover { background: var(--c-ink); color: var(--c-white); border-color: var(--c-ink); }
-
-/* four portraits: the active one grows (Figma 381×481 vs 241×271, scaled to 4-up) */
-.team__row {
-  display: flex;
-  align-items: flex-end;
-  gap: 16px;
-  margin: var(--s-48) 0 0;
-  padding: 0;
-  list-style: none;
-  height: calc(592 * var(--s));
+.origin__head .display-l { margin-top: var(--s-16); max-width: 560px; }
+.origin__head .lede { margin-top: var(--s-16); max-width: 460px; }
+.origin__beats { list-style: none; margin: var(--s-48) 0 0; padding: 0; border-top: 1px solid var(--c-line); }
+.origin__beat {
+  display: grid;
+  grid-template-columns: 56px 1fr;
+  column-gap: var(--s-16);
+  row-gap: var(--s-8);
+  padding: var(--s-24) 0;
+  border-bottom: 1px solid var(--c-line);
 }
-.member {
-  position: relative;
-  flex: 297 1 0;
-  min-width: 0;
-  height: calc(334 * var(--s));
-  transition: flex-grow 700ms var(--ease-out), height 700ms var(--ease-out);
-}
-.member.is-active { flex-grow: 469; height: 100%; }
-.member__media {
-  display: block;
-  width: 100%;
-  height: 100%;
-  padding: 0;
-  border: 0;
+.origin__num { grid-row: span 2; padding-top: 4px; font-size: var(--fs-sm); letter-spacing: var(--tr-mono-wide); color: var(--c-ember); }
+.origin__title { font-weight: 500; font-size: 20px; letter-spacing: -0.4px; line-height: 1.2; }
+.origin__beat p { color: var(--c-ink-60); line-height: var(--lh-body); letter-spacing: var(--tr-body); max-width: 520px; }
+.origin__sign { margin-top: var(--s-36); font-size: var(--fs-sm); letter-spacing: var(--tr-mono-wide); }
+.origin__media {
+  position: sticky;
+  top: calc(var(--header-h, 72px) + var(--s-24));
+  margin: 0;
+  aspect-ratio: 4 / 5;
   overflow: hidden;
-  background: #f1f1f1;
-  cursor: pointer;
+  background: var(--c-stone);
 }
-.member__media img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: 50% 18%;
-  filter: grayscale(0.35);
-  transition: transform 900ms var(--ease-out), filter 500ms var(--ease-out);
-}
-.member.is-active .member__media img { filter: none; }
-.member__media:hover img { transform: scale(1.03); }
-.member__media:focus-visible { outline: 2px solid var(--c-ink); outline-offset: 3px; }
-/* name sits beside the active portrait, above the next one (Figma 132:142) */
-.member__info {
-  position: absolute;
-  left: calc(100% + 16px);
-  top: calc(70 * var(--s));
-  width: max-content;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  opacity: 0;
-  translate: 0 10px;
-  pointer-events: none;
-  transition: opacity 400ms var(--ease-out), translate 500ms var(--ease-out);
-}
-.member.is-active .member__info { opacity: 1; translate: 0 0; transition-delay: 250ms; }
-.member:last-child .member__info { left: auto; right: calc(100% + 16px); text-align: right; }
-.member__name { font-weight: 500; font-size: 24px; letter-spacing: -0.48px; }
-.member__role { font-size: 16px; letter-spacing: var(--tr-body); color: rgba(20, 20, 20, 0.6); }
+.origin__media img { width: 100%; height: 100%; object-fit: cover; object-position: 58% 50%; transition: transform 900ms var(--ease-out); }
+.origin__media:hover img { transform: scale(1.03); }
 
 /* ---- Why we started (132:268): pinned quote, photos drift past --------- */
 .page-story .why { display: block; position: relative; height: 260vh; padding: 0; gap: 0; background: var(--c-ink); color: var(--c-white); }
@@ -281,9 +238,9 @@
   .story-hero { aspect-ratio: auto; height: 78svh; }
   .story-hero__title { left: var(--pad-x); top: auto; bottom: 120px; white-space: normal; }
   .story-hero__lede { left: var(--pad-x); top: auto; bottom: 64px; width: auto; right: var(--pad-x); }
-  .team__row { height: auto; overflow-x: auto; scroll-snap-type: x mandatory; }
-  .member, .member.is-active { flex: 0 0 72%; height: auto; aspect-ratio: 4 / 5; scroll-snap-align: start; }
-  .member__info { position: static; opacity: 1; translate: none; margin-top: 10px; }
+  .origin { grid-template-columns: 1fr; gap: var(--s-36); }
+  .origin__media { position: relative; top: auto; order: -1; aspect-ratio: 4 / 3; }
+  .origin__beat { grid-template-columns: 36px 1fr; }
   .pov { height: auto; }
   .pov__stage { position: relative; height: auto; grid-template-columns: 1fr; }
   .pov__media { height: 70vw; }

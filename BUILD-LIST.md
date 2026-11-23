@@ -28,7 +28,7 @@ Style source: Figma file "Mr. Sniff's Style Guide + Emails" (tokens, type styles
 
 | # | Item | Owner / notes |
 |---|---|---|
-| 1 | **Our Story** | Built (`story.html`). Placeholders to swap: team names, roles and portraits (4), founder quote attribution, POV panels 2–3 copy |
+| 1 | **Our Story** | Built (`story.html`). Team row replaced with the origin story (Nov 23); team returns after the January headshot shoot in Greenville. Origin copy and the reworked pull quote need Don and Kyle's sign-off. POV panels 2–3 copy still open |
 | 2 | **Shopify port** | Convert pages to theme sections/templates; swap the Cart API block in `js/cart.js` and `search()` in `js/search.js` for Shopify's AJAX endpoints; contact form → `{% form 'contact' %}`. Target: done by Dec 8 to leave a week for QA |
 | 3 | **Checkout styling** | Shopify admin → Checkout: logo, Ink/White/Ember colors, Big Shoulders + Inter, square buttons. About an hour |
 | 4 | **Policy details + review** | Fill bracketed items (company name, address, shipping rates, return window), then counsel review |
@@ -53,6 +53,8 @@ Style source: Figma file "Mr. Sniff's Style Guide + Emails" (tokens, type styles
 
 - Logo renders small on How to Use in Chrome.
 - Upside-down product photo on the PDP gallery.
+- Product photography: the real box prints the wordmark and the label in opposite reading directions, so a horizontal shot can show one upright, never both. Bonfire "What it smells like" now shows the wordmark upright (Nov 23); `howto-care.webp` still shows the label upright.
+- `shop-duo.webp` side panel reads "MBGNIFFS.CO" (AI artifact).
 - Holder stock: homepage/Figma shows Ash Catchum and Brass Monkey sold out, Stachin' Ash in stock. All product pages now follow that; the homepage footnote still says all three are sold out.
 - Mono45 Headline license files still missing (DM Mono stands in).
 - Copy conflict: the homepage and How to Use story blocks say "hand-rolled sticks" and "bold fragrance loads", but the PDP and emails say extruded, sun-dried, no added fragrance. Pick one.
