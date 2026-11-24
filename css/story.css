@@ -238,6 +238,9 @@
   .story-hero { aspect-ratio: auto; height: 78svh; }
   .story-hero__title { left: var(--pad-x); top: auto; bottom: 120px; white-space: normal; }
   .story-hero__lede { left: var(--pad-x); top: auto; bottom: 64px; width: auto; right: var(--pad-x); }
+  .story-hero::after { opacity: 1; background: linear-gradient(180deg, transparent 38%, rgba(15, 17, 20, 0.55) 62%, rgba(15, 17, 20, 0.92) 100%); }
+  .story-hero__title, .story-hero__lede { color: var(--c-white); }
+  .story-hero__lede { color: var(--c-white-60); }
   .origin { grid-template-columns: 1fr; gap: var(--s-36); }
   .origin__media { position: relative; top: auto; order: -1; aspect-ratio: 4 / 3; }
   .origin__beat { grid-template-columns: 36px 1fr; }
