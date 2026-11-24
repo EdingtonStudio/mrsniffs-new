@@ -1568,6 +1568,7 @@ html.search-open { overflow: hidden; }
   .story { height: auto; display: flex; flex-direction: column; }
   .story__art { position: relative; height: 420px; overflow: hidden; }
   .story__hand { left: -10%; top: -40%; width: 120%; height: 200%; }
+  .story__vignette { background: radial-gradient(ellipse 85% 70% at 42% 48%, rgba(15,17,20,0) 35%, rgba(15,17,20,0.55) 75%, var(--c-ink) 100%), linear-gradient(180deg, rgba(15,17,20,0) 65%, var(--c-ink) 100%); }
   .story__copy { position: relative; left: auto; top: auto; translate: none; width: auto; padding: var(--s-36) var(--pad-x) var(--section-y); }
 
   .faq { padding-top: var(--section-y); }
