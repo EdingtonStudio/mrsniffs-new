@@ -11,7 +11,7 @@ Style source: Figma file "Mr. Sniff's Style Guide + Emails" (tokens, type styles
 | Shop / Collection | `shop.html` | |
 | Bonfire PDP | `bonfire.html` | Template for every other PDP |
 | Yoga Studio PDP | `yoga-studio.html` | Specs match Bonfire. Palo santo + citrus note photos and an open-box shot still needed |
-| The Duo PDP | `duo.html` | $42, one pack of each. Final contents still pending |
+| The Duo PDP | `duo.html` | $42, one box of each (confirmed Nov 24) |
 | Holder PDPs | `ash-catchum.html`, `stachin-ash.html`, `brass-monkey.html` | Notify me on sold-out holders. Lifestyle/detail photos, dimensions and care copy pending |
 | How to Use Incense | `how-to.html` | Logo renders small in Chrome |
 | Smell Test | `smell-test.html` | Intro + 4 questions + 3 results (Bonfire, Yoga Studio, Duo on a tie). Add to cart from the result |
@@ -58,3 +58,7 @@ Style source: Figma file "Mr. Sniff's Style Guide + Emails" (tokens, type styles
 - Holder stock: homepage/Figma shows Ash Catchum and Brass Monkey sold out, Stachin' Ash in stock. All product pages now follow that; the homepage footnote still says all three are sold out.
 - Mono45 Headline license files still missing (DM Mono stands in).
 - ~~Copy conflict~~ Resolved Nov 24: homepage and How to Use now match the PDPs (real wood, sun-dried, nothing poured on top). Check the emails say the same.
+
+## Shopify port notes
+
+- Social share tags point at `https://mrsniffs.co` with `.html` paths. On Shopify, set `og:url` to `{{ canonical_url }}` and `og:image` to the uploaded `og-image.jpg` in `theme.liquid`.
