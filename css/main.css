@@ -1519,16 +1519,16 @@ html.search-open { overflow: hidden; }
   .nav__actions { gap: 22px; position: relative; z-index: calc(var(--z-menu) + 1); }
   .nav__burger { display: block; }
 
-  .hero { --hh: min(78svh, 640px); }
+  /* Mobile: keep the desktop composition (bg + boxes locked together), centred on the boxes */
+  .hero { --hh: min(118vw, 74svh, 600px); --sw: calc(var(--hh) * 1408 / 872); --sl: calc(50% - var(--sw) * 0.485); }
   .hero__frame { aspect-ratio: auto; height: var(--hh); }
-  .hero__bg { top: -18%; height: 136%; }
-  /* keep the boxes centred: product sits at ~48.5% of the layer width.
-     (no `translate` here — JS parallax owns that property) */
+  .hero__bg { top: -8%; height: 116%; width: var(--sw); max-width: none; left: var(--sl); }
+  /* (no `translate` here — JS parallax owns that property) */
   .hero__product {
     top: -5.05%;
-    height: calc(var(--hh) * 1.2003);
-    width: calc(var(--hh) * 1.2003 * 1455 / 1047);
-    left: calc(50% - var(--hh) * 1.2003 * 1455 / 1047 * 0.485);
+    height: 120.03%;
+    width: calc(var(--sw) * 1.0337);
+    left: calc(var(--sl) - var(--sw) * 0.0014);
   }
 
   .whiff__intro { position: relative; top: auto; }
