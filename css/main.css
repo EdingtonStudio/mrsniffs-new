@@ -1483,7 +1483,10 @@ html.search-open { overflow: hidden; }
   }
   .why__proof { grid-template-columns: 1fr; }
   .search__products { grid-template-columns: 1fr; }
-  .site-header--solid { padding: 12px var(--gutter); }
+  .site-header--solid,
+  .site-header--solid.is-scrolled { padding: 14px var(--gutter); }   /* 48px bar + 14px either side around the 40px logo */
+  .site-header { padding-top: 14px; padding-bottom: 14px; }
+  .site-header.is-scrolled { padding-top: 10px; padding-bottom: 10px; }
   .site-header--solid .nav__logo img,
   .site-header--solid.is-scrolled .nav__logo img { width: 95px; height: 40px; }
   .site-header--solid .nav__links { background: var(--c-white); }
@@ -1510,7 +1513,8 @@ html.search-open { overflow: hidden; }
   .nav__link { font-family: var(--f-display); font-weight: 700; font-size: 44px; letter-spacing: var(--tr-display); }
   .nav__link::after { bottom: 4px; height: 2px; }
   .nav__arrow { width: 24px; height: 24px; }
-  .nav__logo { position: absolute; left: 50%; translate: -50% 0; z-index: calc(var(--z-menu) + 1); }
+  .nav { min-height: 48px; }
+  .nav__logo { position: absolute; left: 50%; top: 50%; translate: -50% -50%; z-index: calc(var(--z-menu) + 1); }
   .nav__logo img { width: 95px; height: 40px; }
   .nav__actions { gap: 22px; position: relative; z-index: calc(var(--z-menu) + 1); }
   .nav__burger { display: block; }
