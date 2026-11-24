@@ -57,4 +57,4 @@ Style source: Figma file "Mr. Sniff's Style Guide + Emails" (tokens, type styles
 - AI type artifacts cleaned (Nov 23): scent labels on every product and scene shot, the side line ("INCENSE MADE FOR PEOPLE WHO HAVE A NOSE · MRSNIFFS.CO") on `shop-duo`, `story/why-2`, `duo-branch`, `howto`, and the base copy on `shop-duo` and `hero`. Base copy on the other shots is too small to read and left as is.
 - Holder stock: homepage/Figma shows Ash Catchum and Brass Monkey sold out, Stachin' Ash in stock. All product pages now follow that; the homepage footnote still says all three are sold out.
 - Mono45 Headline license files still missing (DM Mono stands in).
-- Copy conflict: the homepage and How to Use story blocks say "hand-rolled sticks" and "bold fragrance loads", but the PDP and emails say extruded, sun-dried, no added fragrance. Pick one.
+- ~~Copy conflict~~ Resolved Nov 24: homepage and How to Use now match the PDPs (real wood, sun-dried, nothing poured on top). Check the emails say the same.
