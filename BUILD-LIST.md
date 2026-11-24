@@ -53,8 +53,8 @@ Style source: Figma file "Mr. Sniff's Style Guide + Emails" (tokens, type styles
 
 - Logo renders small on How to Use in Chrome.
 - Upside-down product photo on the PDP gallery.
-- Product photography: the real box prints the wordmark and the label in opposite reading directions, so a horizontal shot can show one upright, never both. Retouched shots favour the wordmark (`pdp-smell-bg`, `howto-care`). Reshoot or packaging fix if that matters.
-- AI type artifacts cleaned (Nov 23): scent labels on every product and scene shot, the side line ("INCENSE MADE FOR PEOPLE WHO HAVE A NOSE · MRSNIFFS.CO") on `shop-duo`, `story/why-2`, `duo-branch`, `howto`, and the base copy on `shop-duo` and `hero`. Base copy on the other shots is too small to read and left as is.
+- Product photography: the real box prints the wordmark and the label in opposite reading directions, so a horizontal shot can show one upright, never both. Retouched shots favour the wordmark (`pdp-smell-bg`); `howto-care` is back to the original. Reshoot or packaging fix if that matters.
+- AI type artifacts cleaned (Nov 23): scent labels on every product and scene shot, the side line ("INCENSE MADE FOR PEOPLE WHO HAVE A NOSE · MRSNIFFS.CO") on `story/why-2` and `howto`, and the base copy on `hero`. Reverted to originals at Chris's call (Nov 24): `howto-care`, `smell-hero`, `shop-duo`, `duo-branch`, `pdp-lineup-duo`. Base copy on the other shots is too small to read and left as is.
 - Holder stock: homepage/Figma shows Ash Catchum and Brass Monkey sold out, Stachin' Ash in stock. All product pages now follow that; the homepage footnote still says all three are sold out.
 - Mono45 Headline license files still missing (DM Mono stands in).
 - ~~Copy conflict~~ Resolved Nov 24: homepage and How to Use now match the PDPs (real wood, sun-dried, nothing poured on top). Check the emails say the same.
