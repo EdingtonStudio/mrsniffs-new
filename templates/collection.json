@@ -231,14 +231,14 @@
           "type": "question",
           "settings": {
             "question": "When will the holders be back?",
-            "answer": "<p>[Pending — approved restock messaging goes here.]</p>"
+            "answer": "<p>No date yet. Tap Notify me on any sold-out holder and we'll email you the moment it's back.</p>"
           }
         },
         "q_pack": {
           "type": "question",
           "settings": {
             "question": "What is in each pack?",
-            "answer": "<p>[Pending confirmation — approved pack contents go here.]</p>"
+            "answer": "<p>About 50 sticks (25 g) of 210 mm incense. The Duo comes with one box of each scent.</p>"
           }
         }
       },
