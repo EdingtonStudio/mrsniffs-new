@@ -10,7 +10,7 @@
 -%}
 <div class="info-layout">
   <aside class="info-side">
-    {%- assign menu = linklists[section.settings.menu] -%}
+    {%- assign menu = section.settings.menu -%}
     {%- if menu.links.size > 0 -%}
       <nav class="info-nav" aria-label="{{ section.settings.nav_label | escape }}">
         <p class="info-side__label">{{ section.settings.nav_label }}</p>
