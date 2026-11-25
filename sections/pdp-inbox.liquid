@@ -1,4 +1,5 @@
 {{ 'pdp.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'pdp.js' | asset_url }}" defer></script>
 {%- assign line_d = 'M193.672 2H537C550.255 2 561 12.7452 561 26V104.834C561 118.089 550.255 128.834 537 128.834H26C12.7452 128.834 2 139.579 2 152.834V247.223C2 260.478 12.7452 271.223 26 271.223H537C550.255 271.223 561 281.968 561 295.223V378.843C561 392.097 550.255 402.843 537 402.843H26C12.7452 402.843 2.00002 413.588 2.00002 426.843L2 513C2 526.255 12.7452 537 26 537H397.226' -%}
 <section class="inbox" aria-labelledby="inbox-title-{{ section.id }}" data-inbox>
   {% render 'pdp-img', image: section.settings.branch_image, asset: 'pdp-branch.webp', alt: '', class: 'inbox__branch', sizes: '54vw', attrs: 'aria-hidden="true"' %}

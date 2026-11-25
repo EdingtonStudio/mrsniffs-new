@@ -200,7 +200,7 @@
     const open = $('[data-notify-open]', wrap);
     const form = $('[data-notify-form]', wrap);
     const msg = $('[data-notify-msg]', wrap);
-    const input = $('input', form);
+    const input = $('input[type="email"]', form) || $('input', form);
 
     open.addEventListener('click', () => {
       open.hidden = true;

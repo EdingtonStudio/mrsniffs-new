@@ -8,7 +8,7 @@
         {%- if section.settings.lede != blank -%}<p class="lede">{{ section.settings.lede }}</p>{%- endif -%}
       </header>
       <div class="pov__body">
-        <ul class="pov__tabs" role="tablist" aria-label="{{ section.settings.heading | escape }}">
+        <ul class="pov__tabs" role="tablist" aria-label="{{ section.settings.tabs_label | default: section.settings.heading | escape }}">
           {%- for block in section.blocks -%}
             <li><button class="pov__tab{% if forloop.first %} is-active{% endif %}" type="button" role="tab" aria-selected="{% if forloop.first %}true{% else %}false{% endif %}" aria-controls="pov-panel-{{ section.id }}-{{ forloop.index0 }}" id="pov-tab-{{ section.id }}-{{ forloop.index0 }}" data-pov-tab="{{ forloop.index0 }}">{{ block.settings.tab_label }}</button></li>
           {%- endfor -%}
@@ -38,7 +38,8 @@
   "max_blocks": 5,
   "settings": [
     { "type": "text", "id": "heading", "label": "Heading", "default": "OUR POINT OF VIEW" },
-    { "type": "textarea", "id": "lede", "label": "Intro", "default": "Good scents. A little personality. Here's what goes into making Mr. Sniff's different." }
+    { "type": "textarea", "id": "lede", "label": "Intro", "default": "Good scents. A little personality. Here's what goes into making Mr. Sniff's different." },
+    { "type": "text", "id": "tabs_label", "label": "Tabs label (screen readers)", "default": "Our point of view" }
   ],
   "blocks": [
     {

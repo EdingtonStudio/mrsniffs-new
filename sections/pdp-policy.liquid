@@ -1,4 +1,5 @@
 {{ 'pdp.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'pdp.js' | asset_url }}" defer></script>
 <section class="pdp-policy" aria-labelledby="policy-title-{{ section.id }}">
   <div class="pdp-policy__media" data-reveal="fade">
     {% render 'pdp-img', image: section.settings.bg_image, asset: 'pdp-ship-bg.webp', alt: '', class: 'pdp-policy__bg', sizes: '(max-width: 900px) 100vw, 50vw' %}

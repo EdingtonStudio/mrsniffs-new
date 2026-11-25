@@ -4,6 +4,8 @@
    and the shared cart badge listener is live.
    ========================================================================== */
 (() => {
+  if (window.MrSniffsPdp) return;          // sections may each include this script
+  window.MrSniffsPdp = true;
   const $ = (s, c = document) => c.querySelector(s);
   const $$ = (s, c = document) => [...c.querySelectorAll(s)];
   const reduce = window.matchMedia('(prefers-reduced-motion: reduce)');
@@ -97,16 +99,39 @@
     });
   }
 
-  /* ---- Notify me: main.js validates and shows the message; this posts the
-     Shopify contact form (tagged notify-me) in the background. ------------ */
+  /* ---- Notify me (Shopify contact form tagged notify-me) ----------------
+     Shopify's {% form %} puts hidden inputs first, so main.js's
+     `$('input', form)` would validate form_type instead of the email.
+     Handle the submit here in the capture phase (before main.js), same
+     validation + messages, and post the form in the background. */
   const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
-  $$('form[data-notify-form]').forEach((f) => {
-    if (!f.getAttribute('action')) return;
-    f.addEventListener('submit', () => {
-      const input = $('input[type="email"]', f);
-      if (!input || !EMAIL_RE.test(input.value.trim())) return;
+  document.addEventListener('submit', (e) => {
+    const f = e.target.closest && e.target.closest('form[data-notify-form]');
+    if (!f) return;
+    e.preventDefault();
+    e.stopImmediatePropagation();
+    const wrap = f.closest('[data-notify]');
+    const msg = wrap && $('[data-notify-msg]', wrap);
+    const input = $('input[type="email"]', f);
+    f.classList.remove('is-error');
+    if (!input || !EMAIL_RE.test(input.value.trim())) {
+      void f.offsetWidth;
+      f.classList.add('is-error');
+      if (msg) { msg.className = 'form-msg is-error'; msg.textContent = 'Enter a valid email address.'; }
+      return;
+    }
+    if (f.getAttribute('action')) {
       fetch(f.action, { method: 'POST', body: new FormData(f), headers: { Accept: 'text/html' } }).catch(() => {});
-    });
+    }
+    f.hidden = true;
+    if (msg) { msg.className = 'form-msg is-success'; msg.textContent = "You're on the list for this one."; }
+  }, true);
+  // main.js focuses the form's first input (a hidden one); move focus to the email field
+  document.addEventListener('click', (e) => {
+    const btn = e.target.closest && e.target.closest('[data-notify-open]');
+    const wrap = btn && btn.closest('[data-notify]');
+    const input = wrap && $('form[data-notify-form] input[type="email"]', wrap);
+    if (input) setTimeout(() => input.focus(), 0);
   });
 
   /* ---- Info + policy accordions (independent of the FAQ's single-open) --- */

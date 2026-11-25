@@ -1,0 +1,229 @@
+{
+  "sections": {
+    "main": {
+      "type": "pdp-main",
+      "settings": {
+        "gallery_source": "auto",
+        "eyebrow": "INCENSE HOLDER",
+        "sold_out_eyebrow": "SOLD OUT",
+        "title_override": "",
+        "lede": "A round stoneware dish that catches every last bit of ash.",
+        "tags_label": "Scent notes",
+        "price_note": "Holder only · Incense sold separately",
+        "add_label": "Add to cart",
+        "sold_out_label": "Sold out",
+        "notify_when_sold_out": true,
+        "notify_label": "Notify me",
+        "notify_placeholder": "your@email.com",
+        "notify_send": "Send",
+        "get_heading": "What you get",
+        "use_description": true,
+        "get_text": "One Ash Catchum. Matte-black stoneware ash catcher for incense sticks. Made to fit our 210 mm sticks. Incense sold separately.",
+        "delivery_heading": "Delivery",
+        "delivery_text": "<p>[Pending — approved delivery copy goes here.]</p>",
+        "find_title": "Pair it with a scent.",
+        "find_text": "Bonfire for after dark, Yoga Studio for the reset, or bring home both.",
+        "find_link_label": "Compare the two scents side by side",
+        "find_url": "/collections/shop",
+        "find_anchor": "compare"
+      },
+      "blocks": {
+        "tile_1": {
+          "type": "tile",
+          "settings": {
+            "style": "photo",
+            "asset": "holder-ash-catchum.webp",
+            "alt": "Ash Catchum round stoneware ash catcher with a burning stick"
+          }
+        },
+        "tile_2": {
+          "type": "tile",
+          "settings": {
+            "style": "placeholder",
+            "asset": "",
+            "alt": "Photo coming soon",
+            "placeholder_text": "Lifestyle photo coming soon"
+          }
+        },
+        "tile_3": {
+          "type": "tile",
+          "settings": {
+            "style": "placeholder",
+            "asset": "",
+            "alt": "Photo coming soon",
+            "placeholder_text": "Detail photo coming soon"
+          }
+        },
+        "tag_1": {
+          "type": "tag",
+          "settings": {
+            "text": "MATTE BLACK"
+          }
+        },
+        "tag_2": {
+          "type": "tag",
+          "settings": {
+            "text": "STONEWARE"
+          }
+        },
+        "tag_3": {
+          "type": "tag",
+          "settings": {
+            "text": "CATCHES ASH"
+          }
+        },
+        "bullet_1": {
+          "type": "bullet",
+          "settings": {
+            "text": "Material: Matte-black stoneware"
+          }
+        },
+        "bullet_2": {
+          "type": "bullet",
+          "settings": {
+            "text": "Fits Mr. Sniff's 210 mm sticks"
+          }
+        },
+        "bullet_3": {
+          "type": "bullet",
+          "settings": {
+            "text": "[Pending — dimensions]"
+          }
+        }
+      },
+      "block_order": [
+        "tile_1",
+        "tile_2",
+        "tile_3",
+        "tag_1",
+        "tag_2",
+        "tag_3",
+        "bullet_1",
+        "bullet_2",
+        "bullet_3"
+      ]
+    },
+    "scents": {
+      "type": "pdp-scents",
+      "settings": {
+        "title": "Pair it with a scent.",
+        "lede": "Every holder fits our 210 mm sticks. Pick a mood, or bring home both."
+      },
+      "blocks": {
+        "card_1": {
+          "type": "card",
+          "settings": {
+            "style": "bonfire",
+            "name": "Bonfire · Agarwood Incense",
+            "short_name": "Bonfire",
+            "note": "Dark resin + smoke",
+            "price": "$24",
+            "cta_label": "Meet Bonfire",
+            "url": "/products/bonfire"
+          }
+        },
+        "card_2": {
+          "type": "card",
+          "settings": {
+            "style": "yoga",
+            "name": "Yoga Studio · Palo Santo Incense",
+            "short_name": "Yoga Studio",
+            "note": "Warm resin + citrus peel",
+            "price": "$24",
+            "cta_label": "Meet Yoga Studio",
+            "url": "/products/yoga-studio"
+          }
+        }
+      },
+      "block_order": [
+        "card_1",
+        "card_2"
+      ]
+    },
+    "policy": {
+      "type": "pdp-policy",
+      "settings": {
+        "title": "SHIPPING & RETURNS",
+        "lede": "The short version. Full policies are linked below.",
+        "first_open": true,
+        "fg_asset": "decide-holder.webp",
+        "fg_alt": "Round black stoneware holder on a bar beside a drink",
+        "fg_cover": true
+      },
+      "blocks": {
+        "item_1": {
+          "type": "item",
+          "settings": {
+            "icon": "ship",
+            "title": "Shipping & Delivery",
+            "text": "<p>Wondering when your incense will arrive? Find your available shipping options and estimated delivery window at checkout.</p>",
+            "link_label": "Read the policy",
+            "link_url": "/policies/shipping-policy"
+          }
+        },
+        "item_2": {
+          "type": "item",
+          "settings": {
+            "icon": "returns",
+            "title": "Returns & Exchanges",
+            "text": "<p>[Pending — approved returns &amp; exchanges copy goes here.]</p>",
+            "link_label": "Read the policy",
+            "link_url": "/policies/refund-policy"
+          }
+        }
+      },
+      "block_order": [
+        "item_1",
+        "item_2"
+      ]
+    },
+    "faq": {
+      "type": "pdp-faq",
+      "settings": {
+        "title": "BEFORE YOU LIGHT ONE"
+      },
+      "blocks": {
+        "question_1": {
+          "type": "question",
+          "settings": {
+            "question": "Does it fit Mr. Sniff's sticks?",
+            "answer": "<p>Yes. Every holder is made for our 210 mm (8.25 in) sticks.</p>"
+          }
+        },
+        "question_2": {
+          "type": "question",
+          "settings": {
+            "question": "Does it come with incense?",
+            "answer": "<p>No. Holders are sold on their own. Add Bonfire, Yoga Studio or the Duo to your order.</p>"
+          }
+        },
+        "question_3": {
+          "type": "question",
+          "settings": {
+            "question": "How do I clean it?",
+            "answer": "<p>[Pending — approved care guidance goes here.]</p>"
+          }
+        },
+        "question_4": {
+          "type": "question",
+          "settings": {
+            "question": "When will it be back in stock?",
+            "answer": "<p>Tap Notify me and we'll email you the moment it's back.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "question_1",
+        "question_2",
+        "question_3",
+        "question_4"
+      ]
+    }
+  },
+  "order": [
+    "main",
+    "scents",
+    "policy",
+    "faq"
+  ]
+}

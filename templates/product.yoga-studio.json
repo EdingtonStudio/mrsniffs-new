@@ -1,0 +1,531 @@
+{
+  "sections": {
+    "main": {
+      "type": "pdp-main",
+      "settings": {
+        "gallery_source": "auto",
+        "eyebrow": "INCENSE STICKS",
+        "sold_out_eyebrow": "SOLD OUT",
+        "title_override": "Yoga Studio · Palo Santo",
+        "lede": "Meet your reset scent. Warm resin and a citrus edge.",
+        "tags_label": "Scent notes",
+        "price_note": "About 50 incense sticks · About 45 minutes per stick",
+        "add_label": "Add to cart",
+        "sold_out_label": "Sold out",
+        "notify_when_sold_out": true,
+        "notify_label": "Notify me",
+        "notify_placeholder": "your@email.com",
+        "notify_send": "Send",
+        "get_heading": "What you get",
+        "use_description": false,
+        "get_text": "One pack of Yoga Studio · Palo Santo incense, made with aromatic wood, botanical binder and water. No synthetic fragrance, no added perfume, no dyes. Just the good stuff, packed and ready to burn.",
+        "delivery_heading": "Delivery",
+        "delivery_text": "<p>[Pending — approved delivery copy goes here.]</p>",
+        "find_title": "Find your kind of scent.",
+        "find_text": "Two scents. Two different moods. Find the one that feels like you.",
+        "find_link_label": "Compare the two scents side by side",
+        "find_url": "/collections/shop",
+        "find_anchor": "compare"
+      },
+      "blocks": {
+        "tile_1": {
+          "type": "tile",
+          "settings": {
+            "style": "photo",
+            "asset": "shop-yoga.webp",
+            "alt": "Yoga Studio Palo Santo incense box standing on grey"
+          }
+        },
+        "tile_2": {
+          "type": "tile",
+          "settings": {
+            "style": "cover",
+            "asset": "gallery-4.webp",
+            "alt": "Hands in a mint suit holding a Mr. Sniff's box"
+          }
+        },
+        "tile_3": {
+          "type": "tile",
+          "settings": {
+            "style": "cover",
+            "asset": "pdp-lineup-yoga.webp",
+            "alt": "Yoga Studio box tucked into driftwood with fresh herbs and palo santo"
+          }
+        },
+        "tile_4": {
+          "type": "tile",
+          "settings": {
+            "style": "angled",
+            "asset": "box-yoga.webp",
+            "alt": "Yoga Studio box lying at an angle"
+          }
+        },
+        "tile_5": {
+          "type": "tile",
+          "settings": {
+            "style": "stick",
+            "asset": "pdp-gallery-stick.webp",
+            "alt": "Hand holding a single burning incense stick",
+            "caption_1": "210 mm",
+            "caption_2": "8.25 in"
+          }
+        },
+        "tag_1": {
+          "type": "tag",
+          "settings": {
+            "text": "WOODY"
+          }
+        },
+        "tag_2": {
+          "type": "tag",
+          "settings": {
+            "text": "RESINOUS"
+          }
+        },
+        "tag_3": {
+          "type": "tag",
+          "settings": {
+            "text": "CITRUS"
+          }
+        },
+        "bullet_1": {
+          "type": "bullet",
+          "settings": {
+            "text": "About 50 incense sticks"
+          }
+        },
+        "bullet_2": {
+          "type": "bullet",
+          "settings": {
+            "text": "Approximately 45 minutes of burn time per stick"
+          }
+        },
+        "bullet_3": {
+          "type": "bullet",
+          "settings": {
+            "text": "One Yoga Studio · Palo Santo retail box"
+          }
+        }
+      },
+      "block_order": [
+        "tile_1",
+        "tile_2",
+        "tile_3",
+        "tile_4",
+        "tile_5",
+        "tag_1",
+        "tag_2",
+        "tag_3",
+        "bullet_1",
+        "bullet_2",
+        "bullet_3"
+      ]
+    },
+    "smells": {
+      "type": "pdp-smells",
+      "settings": {
+        "asset": "pdp-lineup-yoga.webp",
+        "alt": "Yoga Studio box tucked into driftwood with fresh herbs and palo santo",
+        "compact": true,
+        "title": "WHAT IT SMELLS LIKE",
+        "lede": "Curious what Yoga Studio actually smells like? Here's the lowdown."
+      },
+      "blocks": {
+        "note_1": {
+          "type": "note",
+          "settings": {
+            "asset": "",
+            "crop": "default",
+            "placeholder_text": "Photo",
+            "name": "PALO SANTO",
+            "text": "Sweet, woody and grounding."
+          }
+        },
+        "note_2": {
+          "type": "note",
+          "settings": {
+            "asset": "pdp-note-resin.webp",
+            "crop": "resin",
+            "placeholder_text": "Photo",
+            "name": "WARM RESIN",
+            "text": "Soft, golden and balsamic."
+          }
+        },
+        "note_3": {
+          "type": "note",
+          "settings": {
+            "asset": "",
+            "crop": "default",
+            "placeholder_text": "Photo",
+            "name": "CITRUS",
+            "text": "Bright, clean and a little zesty."
+          }
+        }
+      },
+      "block_order": [
+        "note_1",
+        "note_2",
+        "note_3"
+      ]
+    },
+    "inbox": {
+      "type": "pdp-inbox",
+      "settings": {
+        "title": "WHAT IS IN THE BOX",
+        "lede": "A closer look at what's included, what it's made of, and what to expect.",
+        "box_asset": "box-yoga.webp",
+        "box_alt": "Yoga Studio box",
+        "box_angled": true,
+        "sleeve_asset": ""
+      },
+      "blocks": {
+        "callout_1": {
+          "type": "callout",
+          "settings": {
+            "position": "sticks",
+            "label": "Sticks per pack",
+            "text": "About 50 incense sticks per box (25 g)",
+            "asset": "pdp-t-sticks.webp"
+          }
+        },
+        "callout_2": {
+          "type": "callout",
+          "settings": {
+            "position": "length",
+            "label": "Stick length",
+            "text": "210 mm (8.25 in)",
+            "asset": "pdp-t-length.webp"
+          }
+        },
+        "callout_3": {
+          "type": "callout",
+          "settings": {
+            "position": "burn",
+            "label": "Burn time",
+            "text": "Approximately\n45 minutes per stick",
+            "asset": "pdp-t-burn.webp"
+          }
+        },
+        "callout_4": {
+          "type": "callout",
+          "settings": {
+            "position": "materials",
+            "label": "Materials",
+            "text": "Aromatic wood powder,\nnatural bark binder and water",
+            "asset": "pdp-t-materials.webp"
+          }
+        },
+        "callout_5": {
+          "type": "callout",
+          "settings": {
+            "position": "holder",
+            "label": "Holder included",
+            "text": "No · Sold separately",
+            "asset": "pdp-t-holder.webp"
+          }
+        },
+        "callout_6": {
+          "type": "callout",
+          "settings": {
+            "position": "madein",
+            "label": "Made in",
+            "text": "Taiwan · Extruded and sun-dried",
+            "asset": "pdp-t-flag.webp"
+          }
+        }
+      },
+      "block_order": [
+        "callout_1",
+        "callout_2",
+        "callout_3",
+        "callout_4",
+        "callout_5",
+        "callout_6"
+      ]
+    },
+    "steps": {
+      "type": "pdp-steps",
+      "settings": {
+        "title": "SOMEWHERE TO STICK IT",
+        "lede": "A few simple steps for a better burn.",
+        "cta_label": "Read the full guide",
+        "cta_url": "/pages/how-to-use"
+      },
+      "blocks": {
+        "step_1": {
+          "type": "step",
+          "settings": {
+            "title": "Set Up",
+            "text": "Choose a heatproof surface.",
+            "asset": "pdp-step-1.webp",
+            "alt": "Black stoneware holder and an unlit stick on a dark surface"
+          }
+        },
+        "step_2": {
+          "type": "step",
+          "settings": {
+            "title": "Light",
+            "text": "Light the incense tip.",
+            "asset": "pdp-step-2.webp",
+            "alt": "Flame catching the tip of an incense stick"
+          }
+        },
+        "step_3": {
+          "type": "step",
+          "settings": {
+            "title": "Place",
+            "text": "Rest securely in holder.",
+            "asset": "pdp-step-3.webp",
+            "alt": "Burning stick resting in a long black holder"
+          }
+        },
+        "step_4": {
+          "type": "step",
+          "settings": {
+            "title": "Put Out",
+            "text": "Extinguish completely after use.",
+            "asset": "pdp-step-4.webp",
+            "alt": "Stick put out in the holder with a last wisp of smoke"
+          }
+        }
+      },
+      "block_order": [
+        "step_1",
+        "step_2",
+        "step_3",
+        "step_4"
+      ]
+    },
+    "holders": {
+      "type": "pdp-holders",
+      "settings": {
+        "title": "SOMEWHERE TO STICK IT",
+        "lede": "Optional. Never preselected. Sold-out status respected.",
+        "add_label": "Add to cart",
+        "notify_label": "Notify me",
+        "notify_placeholder": "your@email.com",
+        "notify_send": "Send"
+      },
+      "blocks": {
+        "holder_1": {
+          "type": "holder",
+          "settings": {
+            "name": "Ash Catchum",
+            "desc": "Matte-black stoneware ash catcher for incense sticks.",
+            "price": "$22",
+            "url": "/products/ash-catchum",
+            "asset": "holder-ash-catchum.webp",
+            "alt": "Ash Catchum round stoneware ash catcher with a burning stick",
+            "chip": "Sold-out"
+          }
+        },
+        "holder_2": {
+          "type": "holder",
+          "settings": {
+            "name": "Stachin’ Ash",
+            "desc": "Moustache-shaped black stoneware ash catcher.",
+            "price": "$38",
+            "url": "/products/stachin-ash",
+            "asset": "holder-stachin-ash.webp",
+            "alt": "Stachin' Ash moustache-shaped stoneware holder with a burning stick",
+            "chip": "Sold-out"
+          }
+        },
+        "holder_3": {
+          "type": "holder",
+          "settings": {
+            "name": "Brass Monkey",
+            "desc": "Blackened brass incense holder.",
+            "price": "$85",
+            "url": "/products/brass-monkey",
+            "asset": "holder-brass-monkey.webp",
+            "alt": "Brass Monkey blackened brass holder with a burning stick",
+            "chip": "Sold-out"
+          }
+        }
+      },
+      "block_order": [
+        "holder_1",
+        "holder_2",
+        "holder_3"
+      ]
+    },
+    "policy": {
+      "type": "pdp-policy",
+      "settings": {
+        "title": "BONFIRE OR YOGA STUDIO?",
+        "lede": "Qualitative scent language only. No intensity score.",
+        "first_open": true,
+        "fg_asset": "howto-care.webp",
+        "fg_alt": "Hand in a wool sleeve lighting a stick in a black holder, a Yoga Studio box lying on the walnut table",
+        "fg_cover": true
+      },
+      "blocks": {
+        "item_1": {
+          "type": "item",
+          "settings": {
+            "icon": "ship",
+            "title": "Shipping & Delivery",
+            "text": "<p>Wondering when your incense will arrive? Find your available shipping options and estimated delivery window at checkout.</p>",
+            "link_label": "Read the policy",
+            "link_url": "/policies/shipping-policy"
+          }
+        },
+        "item_2": {
+          "type": "item",
+          "settings": {
+            "icon": "returns",
+            "title": "Returns & Exchanges",
+            "text": "<p>[Pending — approved returns &amp; exchanges copy goes here.]</p>",
+            "link_label": "Read the policy",
+            "link_url": "/policies/refund-policy"
+          }
+        }
+      },
+      "block_order": [
+        "item_1",
+        "item_2"
+      ]
+    },
+    "faq": {
+      "type": "pdp-faq",
+      "settings": {
+        "title": "BEFORE YOU LIGHT ONE"
+      },
+      "blocks": {
+        "question_1": {
+          "type": "question",
+          "settings": {
+            "question": "Do I need a holder?",
+            "answer": "<p>Yes. Burn incense in a stable, heat-resistant holder that catches falling ash.</p>"
+          }
+        },
+        "question_2": {
+          "type": "question",
+          "settings": {
+            "question": "How many sticks come in a pack?",
+            "answer": "<p>About 50 sticks per box (25 g).</p>"
+          }
+        },
+        "question_3": {
+          "type": "question",
+          "settings": {
+            "question": "How should I store them?",
+            "answer": "<p>[Pending — approved storage guidance goes here.]</p>"
+          }
+        },
+        "question_4": {
+          "type": "question",
+          "settings": {
+            "question": "What is the Duo Bundle?",
+            "answer": "<p>Bonfire and Yoga Studio, together. Get to know both sides of the lineup.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "question_1",
+        "question_2",
+        "question_3",
+        "question_4"
+      ]
+    },
+    "scents": {
+      "type": "pdp-scents",
+      "settings": {
+        "title": "One, two or both.",
+        "lede": "Explore individual scents or bring both into your space with the Duo Bundle."
+      },
+      "blocks": {
+        "card_1": {
+          "type": "card",
+          "settings": {
+            "style": "bonfire",
+            "name": "Bonfire · Agarwood Incense",
+            "short_name": "Bonfire",
+            "note": "Dark resin + smoke",
+            "price": "$24",
+            "cta_label": "Meet Bonfire",
+            "url": "/products/bonfire"
+          }
+        },
+        "card_2": {
+          "type": "card",
+          "settings": {
+            "style": "duo",
+            "name": "The Duo Bundle",
+            "short_name": "the Duo",
+            "note": "Both scents · In stock",
+            "price": "$42",
+            "cta_label": "Meet the Duo",
+            "url": "/products/duo"
+          }
+        }
+      },
+      "block_order": [
+        "card_1",
+        "card_2"
+      ]
+    },
+    "lineup": {
+      "type": "pdp-lineup",
+      "settings": {
+        "title": "MEET THE LINEUP.",
+        "lede": "Two distinct scents, each with its own character. Available individually or together."
+      },
+      "blocks": {
+        "card_1": {
+          "type": "card",
+          "settings": {
+            "url": "/products/bonfire",
+            "asset": "pdp-lineup-bonfire.webp",
+            "alt": "Bonfire box on gnarled driftwood with resin and curling smoke",
+            "crop": "default",
+            "tag": "BONFIRE",
+            "title": "Meet your after-dark scent.",
+            "text": "Dark resin and smoke. Meet Bonfire, then make the night your own."
+          }
+        },
+        "card_2": {
+          "type": "card",
+          "settings": {
+            "url": "/products/yoga-studio",
+            "asset": "pdp-lineup-yoga.webp",
+            "alt": "Yoga Studio box tucked into driftwood with fresh herbs and palo santo",
+            "crop": "yoga",
+            "tag": "YOGA STUDIO",
+            "title": "A little room for yourself.",
+            "text": "Warm resin and a citrus edge. Meet Yoga Studio and find your own kind of moment."
+          }
+        },
+        "card_3": {
+          "type": "card",
+          "settings": {
+            "url": "/products/duo",
+            "asset": "pdp-lineup-duo.webp",
+            "alt": "Bonfire and Yoga Studio boxes on driftwood with resin and palo santo",
+            "crop": "duo",
+            "tag": "THE DUO",
+            "title": "Why pick just one?",
+            "text": "Bonfire and Yoga Studio, together. Get to know both sides of the lineup."
+          }
+        }
+      },
+      "block_order": [
+        "card_1",
+        "card_2",
+        "card_3"
+      ]
+    }
+  },
+  "order": [
+    "main",
+    "smells",
+    "inbox",
+    "steps",
+    "holders",
+    "policy",
+    "faq",
+    "scents",
+    "lineup"
+  ]
+}
