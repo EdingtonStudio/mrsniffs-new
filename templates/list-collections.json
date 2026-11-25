@@ -1,0 +1,25 @@
+{
+  "sections": {
+    "hero": {
+      "type": "shop-hero",
+      "settings": {
+        "image_alt": "Woman with eyes closed breathing in smoke from an incense stick",
+        "heading": "SHOP",
+        "subheading": "Two scents. Find your favorite."
+      }
+    },
+    "collections": {
+      "type": "shop-collections",
+      "settings": {
+        "aria_label": "Collections",
+        "button_label": "Shop [name]",
+        "show_count": true,
+        "count_label": "[count] products",
+        "pagination_label": "Pagination",
+        "prev_label": "Previous",
+        "next_label": "Next"
+      }
+    }
+  },
+  "order": ["hero", "collections"]
+}

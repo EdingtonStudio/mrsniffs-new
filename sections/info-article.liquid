@@ -1,0 +1,31 @@
+{{ 'info.css' | asset_url | stylesheet_tag }}
+<header class="info-hero">
+  <div class="info-hero__inner" data-reveal>
+    {%- if section.settings.show_blog_link -%}<p class="info-hero__eyebrow"><a href="{{ blog.url }}">{{ blog.title }}</a></p>{%- endif -%}
+    <h1 class="display-l">{{ article.title }}</h1>
+    <p class="info-hero__meta">{{ article.published_at | time_tag: '%B %-d, %Y' }}{% if section.settings.show_author and article.author != blank %} · {{ article.author }}{% endif %}</p>
+  </div>
+</header>
+<div class="info-layout info-layout--single">
+  <article class="prose rte">
+    {%- if article.image and section.settings.show_image -%}
+      {{ article.image | image_url: width: 1600 | image_tag: class: 'info-article__img', widths: '600, 1000, 1600', sizes: '(max-width: 900px) 100vw, 720px', alt: article.image.alt | default: article.title }}
+    {%- endif -%}
+    {{ article.content }}
+    {%- if section.settings.back_label != blank -%}
+      <p class="prose__contact"><a href="{{ blog.url }}">{{ section.settings.back_label }}</a></p>
+    {%- endif -%}
+  </article>
+</div>
+
+{% schema %}
+{
+  "name": "Blog post",
+  "settings": [
+    { "type": "checkbox", "id": "show_blog_link", "label": "Show blog name", "default": true },
+    { "type": "checkbox", "id": "show_author", "label": "Show author", "default": false },
+    { "type": "checkbox", "id": "show_image", "label": "Show featured image", "default": true },
+    { "type": "text", "id": "back_label", "label": "Back link label", "default": "← Back to all posts" }
+  ]
+}
+{% endschema %}

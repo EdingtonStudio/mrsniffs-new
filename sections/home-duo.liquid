@@ -1,0 +1,59 @@
+{%- liquid
+  assign p = section.settings.product
+  if p == blank
+    assign p = settings.duo_product
+  endif
+  assign price = section.settings.price
+  assign url = section.settings.url | default: '#'
+  if p != blank
+    assign url = p.url
+    assign price = p.price | money_without_trailing_zeros
+    if p.price_varies
+      assign price = 'From ' | append: price
+    endif
+  endif
+-%}
+<section class="duo" id="duo" aria-labelledby="duo-title">
+  {% render 'ms-image', image: section.settings.image, fallback: 'duo-branch.webp', alt: section.settings.image_alt, width: 942, height: 1400, class: 'duo__branch', sizes: '(max-width: 767px) 100vw, 50vw', loading: 'lazy', attrs: 'data-parallax="-0.06"' %}
+  <div class="duo__track duo__track--blend">
+    <div class="duo__sticky">
+      <div class="duo__row">
+        <div class="duo__col">
+          <h2 class="display-l" id="duo-title" data-reveal>{{ section.settings.heading }}</h2>
+          {%- if section.settings.copy != blank -%}<p class="lede duo__copy" data-reveal style="--d: 1">{{ section.settings.copy }}</p>{%- endif -%}
+        </div>
+        <div class="duo__col duo__col--price">
+          <p class="display-l" data-reveal>{{ price }}</p>
+          {%- if section.settings.price_copy != blank -%}<p class="lede duo__copy" data-reveal style="--d: 1">{{ section.settings.price_copy }}</p>{%- endif -%}
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="duo__track">
+    <div class="duo__sticky">
+      {%- if section.settings.button_label != blank -%}
+        <a class="btn btn--solid btn--w165 duo__cta" href="{{ url }}" data-reveal style="--d: 2">{{ section.settings.button_label | escape }}</a>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Home: the duo",
+  "class": "section-home-duo",
+  "settings": [
+    { "type": "product", "id": "product", "label": "Duo product", "info": "Sets the price and button link. Falls back to the Duo product in Theme settings › Cart." },
+    { "type": "image_picker", "id": "image", "label": "Hanging image", "info": "Transparent cut-out, about 942 × 1400 px" },
+    { "type": "text", "id": "image_alt", "label": "Image alt text", "default": "Bonfire and Yoga Studio boxes hanging by twine from a driftwood branch" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "WHY PICK JUST ONE?" },
+    { "type": "textarea", "id": "copy", "label": "Text", "default": "Bonfire and Yoga Studio, together. Get to know both sides of the lineup." },
+    { "type": "textarea", "id": "price_copy", "label": "Text under price", "default": "One box of each: Bonfire and Yoga Studio, about 50 sticks apiece." },
+    { "type": "text", "id": "button_label", "label": "Button label", "default": "Meet the duo" },
+    { "type": "header", "content": "Used until a product is picked" },
+    { "type": "text", "id": "price", "label": "Price", "default": "$42" },
+    { "type": "url", "id": "url", "label": "Button link" }
+  ],
+  "presets": [{ "name": "Home: the duo" }]
+}
+{% endschema %}

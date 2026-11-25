@@ -1,0 +1,35 @@
+<section class="story section--ink" id="story" aria-labelledby="story-title">
+  <div class="story__art" aria-hidden="true">
+    {% render 'ms-image', image: section.settings.image, fallback: 'gallery-3.webp', alt: '', width: 1200, height: 1800, class: 'story__hand', sizes: '(max-width: 767px) 100vw, 60vw', loading: 'lazy', attrs: 'data-parallax="0.08"' %}
+    <div class="story__vignette"></div>
+    {%- if section.settings.show_smoke -%}
+      {% render 'ms-image', image: section.settings.smoke_image, fallback: 'story-smoke.webp', alt: '', width: 598, height: 800, class: 'story__smoke', sizes: '600px', loading: 'lazy' %}
+    {%- endif -%}
+  </div>
+  <div class="story__copy">
+    <h2 class="display-l story__title" id="story-title" data-split>{{ section.settings.heading | escape }}</h2>
+    {%- if section.settings.text_1 != blank -%}<p data-reveal style="--d: 2">{{ section.settings.text_1 }}</p>{%- endif -%}
+    {%- if section.settings.text_2 != blank -%}<p data-reveal style="--d: 3">{{ section.settings.text_2 }}</p>{%- endif -%}
+    {%- if section.settings.button_label != blank -%}
+      <a class="btn btn--ghost-light btn--sm" href="{{ section.settings.button_url | default: '#' }}" data-reveal style="--d: 4">{{ section.settings.button_label | escape }}</a>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Home: story",
+  "class": "section-home-story",
+  "settings": [
+    { "type": "image_picker", "id": "image", "label": "Image", "info": "Decorative, sits behind a dark vignette. 1200 × 1800 px recommended." },
+    { "type": "checkbox", "id": "show_smoke", "label": "Show smoke overlay", "default": true },
+    { "type": "image_picker", "id": "smoke_image", "label": "Smoke overlay image" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "GOOD SCENTS. A LITTLE PERSONALITY.", "info": "Revealed word by word" },
+    { "type": "textarea", "id": "text_1", "label": "Paragraph 1", "default": "A few friends, one bad stick of incense and a better idea." },
+    { "type": "textarea", "id": "text_2", "label": "Paragraph 2", "default": "We're here to make incense that actually makes an impression. Real wood, sun-dried, with nothing poured on top. No shortcuts, no unnecessary extras. Just good scents with a point of view." },
+    { "type": "text", "id": "button_label", "label": "Button label", "default": "Read our story" },
+    { "type": "url", "id": "button_url", "label": "Button link" }
+  ],
+  "presets": [{ "name": "Home: story" }]
+}
+{% endschema %}

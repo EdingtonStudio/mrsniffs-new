@@ -1,0 +1,319 @@
+{{ 'pdp.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'pdp.js' | asset_url }}" defer></script>
+{%- liquid
+  assign current_variant = product.selected_or_first_available_variant
+  assign display_title = section.settings.title_override | default: product.title
+  assign lede = product.metafields.custom.tagline.value | default: section.settings.lede
+  assign tiles = section.blocks | where: 'type', 'tile'
+  assign tags = section.blocks | where: 'type', 'tag'
+  assign bullets = section.blocks | where: 'type', 'bullet'
+
+  assign use_media = false
+  if section.settings.gallery_source != 'custom' and product.media.size > 0
+    assign use_media = true
+  endif
+
+  assign notify_mode = false
+  if product.available == false and section.settings.notify_when_sold_out
+    assign notify_mode = true
+  endif
+-%}
+<section class="pdp-hero" aria-labelledby="pdp-title" data-pdp data-section-id="{{ section.id }}">
+  <div class="pdp-gallery" aria-label="{{ display_title | escape }} photos">
+    {%- if use_media -%}
+      {%- assign m = product.media[0] -%}
+      {%- assign m_alt = m.alt | default: display_title -%}
+      <figure class="pdp-tile pdp-tile--main pdp-tile--photo">
+        {{ m.preview_image | image_url: width: 1600 | image_tag: widths: '480, 800, 1200, 1600', sizes: '(max-width: 900px) 84vw, 50vw', alt: m_alt, loading: 'eager', fetchpriority: 'high' }}
+      </figure>
+      {%- if product.media.size > 1 -%}
+        {%- for m in product.media offset: 1 -%}
+          {%- assign m_alt = m.alt | default: display_title -%}
+          {%- assign odd = forloop.index | modulo: 2 -%}
+          {%- if odd == 1 %}<div class="pdp-gallery__row">{% endif -%}
+          <figure class="pdp-tile pdp-tile--man">
+            {{ m.preview_image | image_url: width: 1200 | image_tag: widths: '480, 800, 1200', sizes: '(max-width: 900px) 84vw, 25vw', alt: m_alt, loading: 'lazy' }}
+          </figure>
+          {%- if odd == 0 or forloop.last %}</div>{% endif -%}
+        {%- endfor -%}
+      {%- else -%}
+        {%- for tile in tiles offset: 1 -%}
+          {%- assign odd = forloop.index | modulo: 2 -%}
+          {%- if odd == 1 %}<div class="pdp-gallery__row">{% endif -%}
+          {% render 'pdp-tile', block: tile, main: false %}
+          {%- if odd == 0 or forloop.last %}</div>{% endif -%}
+        {%- endfor -%}
+      {%- endif -%}
+    {%- else -%}
+      {%- for tile in tiles -%}
+        {%- if forloop.first -%}
+          {% render 'pdp-tile', block: tile, main: true %}
+        {%- else -%}
+          {%- assign pos = forloop.index0 | modulo: 2 -%}
+          {%- if pos == 1 %}<div class="pdp-gallery__row">{% endif -%}
+          {% render 'pdp-tile', block: tile, main: false %}
+          {%- if pos == 0 or forloop.last %}</div>{% endif -%}
+        {%- endif -%}
+      {%- endfor -%}
+    {%- endif -%}
+  </div>
+
+  <div class="pdp-info">
+    <div class="pdp-info__inner" data-sticky-info>
+      <div class="pdp-info__top">
+        <div class="pdp-info__head">
+          {%- if section.settings.eyebrow != blank -%}
+            <p class="pdp-eyebrow">{{ section.settings.eyebrow }}{% if product.available == false and section.settings.sold_out_eyebrow != blank %} · {{ section.settings.sold_out_eyebrow }}{% endif %}</p>
+          {%- endif -%}
+          <div class="pdp-info__title">
+            <h1 class="pdp-title" id="pdp-title">{{ display_title }}</h1>
+            {%- if lede != blank -%}<p class="lede">{{ lede }}</p>{%- endif -%}
+          </div>
+          {%- assign mf_tags = product.metafields.custom.scent_tags.value -%}
+          {%- if mf_tags != blank -%}
+            <ul class="pdp-tags" aria-label="{{ section.settings.tags_label | escape }}">
+              {%- for t in mf_tags -%}<li>{{ t }}</li>{%- endfor -%}
+            </ul>
+          {%- elsif tags.size > 0 -%}
+            <ul class="pdp-tags" aria-label="{{ section.settings.tags_label | escape }}">
+              {%- for b in tags -%}<li {{ b.shopify_attributes }}>{{ b.settings.text }}</li>{%- endfor -%}
+            </ul>
+          {%- endif -%}
+        </div>
+
+        {%- capture price_block -%}
+          <div>
+            <p class="pdp-price" data-pdp-price>
+              {%- if current_variant.compare_at_price > current_variant.price -%}
+                <s class="pdp-price__compare" data-pdp-compare>{{ current_variant.compare_at_price | money_without_trailing_zeros }}</s>
+              {%- endif -%}
+              <span data-pdp-price-value>{{ current_variant.price | money_without_trailing_zeros }}</span>
+            </p>
+            {%- if section.settings.price_note != blank -%}<p class="lede">{{ section.settings.price_note }}</p>{%- endif -%}
+          </div>
+        {%- endcapture -%}
+
+        {%- if notify_mode -%}
+          <div class="pdp-buy">
+            {{ price_block }}
+            {%- assign notify_id = 'pdp-notify-' | append: section.id -%}
+            <div class="pdp-buy__row pdp-notify" data-notify>
+              <button class="btn btn--solid pdp-buy__cta" type="button" data-notify-open>{{ section.settings.notify_label }}</button>
+              {%- form 'contact', id: notify_id, class: 'notify-form', data-notify-form: '', novalidate: 'novalidate', hidden: 'hidden' -%}
+                <input type="hidden" name="contact[tags]" value="notify-me">
+                <input type="hidden" name="contact[product]" value="{{ product.title | escape }}">
+                <input type="hidden" name="contact[body]" value="Notify me when {{ product.title | escape }} is back in stock. {{ request.origin }}{{ product.url }}">
+                <label class="sr-only" for="{{ notify_id }}-email">Email for {{ product.title | escape }} restock</label>
+                <input id="{{ notify_id }}-email" name="contact[email]" type="email" placeholder="{{ section.settings.notify_placeholder | escape }}" required autocomplete="email">
+                <button class="btn btn--solid btn--sm" type="submit">{{ section.settings.notify_send }}</button>
+              {%- endform -%}
+              <p class="form-msg" data-notify-msg role="status"></p>
+            </div>
+          </div>
+        {%- else -%}
+          {%- form 'product', product, class: 'pdp-buy', data-product-form: '', novalidate: 'novalidate' -%}
+            {{ price_block }}
+            {%- if product.has_only_default_variant -%}
+              <input type="hidden" name="id" value="{{ current_variant.id }}" data-pdp-variant>
+            {%- else -%}
+              <div class="pdp-variant">
+                <label class="sr-only" for="pdp-variant-{{ section.id }}">{{ product.options | join: ' / ' }}</label>
+                <select class="pdp-variant__select" id="pdp-variant-{{ section.id }}" name="id" data-pdp-variant>
+                  {%- for v in product.variants -%}
+                    <option value="{{ v.id }}"{% if v.id == current_variant.id %} selected{% endif %}>{{ v.title }}{% unless v.available %} · {{ section.settings.sold_out_label }}{% endunless %}</option>
+                  {%- endfor -%}
+                </select>
+              </div>
+              <script type="application/json" data-pdp-variants>{{ product.variants | json }}</script>
+            {%- endif -%}
+            <div class="pdp-buy__row">
+              <div class="qty" data-qty>
+                <button class="qty__btn" type="button" aria-label="Decrease quantity" data-qty-dec>{% render 'icon', name: 'pdp-minus.svg', size: 18 %}</button>
+                <output class="qty__value" aria-live="polite" data-qty-value>1</output>
+                <button class="qty__btn" type="button" aria-label="Increase quantity" data-qty-inc>{% render 'icon', name: 'plus.svg', size: 18 %}</button>
+                <input type="hidden" name="quantity" value="1" data-qty-input>
+              </div>
+              <button class="btn btn--solid pdp-buy__cta" type="submit" data-pdp-add data-label="{{ section.settings.add_label | escape }}" data-sold-out="{{ section.settings.sold_out_label | escape }}"{% unless current_variant.available %} disabled{% endunless %}>
+                {%- if current_variant.available -%}{{ section.settings.add_label }}{%- else -%}{{ section.settings.sold_out_label }}{%- endif -%}
+              </button>
+            </div>
+          {%- endform -%}
+        {%- endif -%}
+      </div>
+
+      <div class="pdp-details">
+        <div class="pdp-acc is-open" data-pdp-acc>
+          <button class="pdp-acc__head" type="button" aria-expanded="true" aria-controls="acc-get">
+            <span class="pdp-acc__label">{% render 'icon', name: 'pdp-box.svg', size: 20 %}{{ section.settings.get_heading }}</span>
+            <span class="pm" aria-hidden="true"></span>
+          </button>
+          <div class="pdp-acc__panel" id="acc-get">
+            <div class="pdp-acc__body">
+              {%- if section.settings.use_description and product.description != blank -%}
+                {{ product.description | replace: '<ul>', '<ul class="pdp-bullets">' }}
+              {%- else -%}
+                {%- if section.settings.get_text != blank -%}<p>{{ section.settings.get_text }}</p>{%- endif -%}
+                {%- if bullets.size > 0 -%}
+                  <ul class="pdp-bullets">
+                    {%- for b in bullets -%}<li {{ b.shopify_attributes }}>{{ b.settings.text }}</li>{%- endfor -%}
+                  </ul>
+                {%- endif -%}
+              {%- endif -%}
+            </div>
+          </div>
+        </div>
+        {%- if section.settings.delivery_heading != blank -%}
+          <div class="pdp-acc" data-pdp-acc>
+            <button class="pdp-acc__head" type="button" aria-expanded="false" aria-controls="acc-delivery">
+              <span class="pdp-acc__label">{% render 'icon', name: 'pdp-truck.svg', size: 20 %}{{ section.settings.delivery_heading }}</span>
+              <span class="pm" aria-hidden="true"></span>
+            </button>
+            <div class="pdp-acc__panel" id="acc-delivery" hidden>
+              <div class="pdp-acc__body">
+                {{ section.settings.delivery_text }}
+              </div>
+            </div>
+          </div>
+        {%- endif -%}
+        {%- if section.settings.find_title != blank or section.settings.find_text != blank -%}
+          <div class="pdp-find">
+            {%- if section.settings.find_title != blank -%}<p class="pdp-find__title">{{ section.settings.find_title }}</p>{%- endif -%}
+            {%- if section.settings.find_text != blank -%}<p class="lede">{{ section.settings.find_text }}</p>{%- endif -%}
+            {%- if section.settings.find_link_label != blank -%}
+              {%- assign find_href = section.settings.find_url | default: routes.all_products_collection_url -%}
+              {%- if section.settings.find_anchor != blank -%}{%- assign find_href = find_href | append: '#' | append: section.settings.find_anchor -%}{%- endif -%}
+              <a class="text-link pdp-find__link" href="{{ find_href }}"><span>{{ section.settings.find_link_label }}</span></a>
+            {%- endif -%}
+          </div>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</section>
+
+{%- liquid
+  assign ld_desc = product.description | strip_html | strip | truncate: 500
+  if ld_desc == blank
+    assign ld_desc = lede
+  endif
+  if product.featured_image
+    assign ld_image = product.featured_image | image_url: width: 1200 | prepend: 'https:'
+  else
+    assign first_tile = tiles | first
+    assign ld_image = first_tile.settings.asset | default: 'og-image.jpg' | asset_url | prepend: 'https:'
+  endif
+-%}
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "name": {{ product.title | json }},
+    "url": {{ request.origin | append: product.url | json }},
+    "image": [{{ ld_image | json }}],
+    "description": {{ ld_desc | json }},
+    {%- if current_variant.sku != blank %}"sku": {{ current_variant.sku | json }},{% endif %}
+    "brand": { "@type": "Brand", "name": {{ shop.name | json }} },
+    "offers": [
+      {%- for v in product.variants -%}
+        {
+          "@type": "Offer",
+          "price": {{ v.price | divided_by: 100.0 | json }},
+          "priceCurrency": {{ cart.currency.iso_code | json }},
+          "availability": "https://schema.org/{% if v.available %}InStock{% else %}OutOfStock{% endif %}",
+          "url": {{ request.origin | append: v.url | json }}
+          {%- if v.sku != blank %}, "sku": {{ v.sku | json }}{% endif %}
+        }{% unless forloop.last %},{% endunless %}
+      {%- endfor -%}
+    ]
+  }
+</script>
+
+{% schema %}
+{
+  "name": "Product",
+  "tag": "div",
+  "class": "pdp-main-section",
+  "settings": [
+    { "type": "header", "content": "Gallery" },
+    {
+      "type": "select",
+      "id": "gallery_source",
+      "label": "Gallery photos",
+      "options": [
+        { "value": "auto", "label": "Product media, else the tiles below" },
+        { "value": "custom", "label": "Always use the tiles below" }
+      ],
+      "default": "auto",
+      "info": "With product media: the first media replaces the first tile. With more than one media, the product media fill the whole gallery."
+    },
+    { "type": "header", "content": "Heading" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "INCENSE STICKS" },
+    { "type": "text", "id": "sold_out_eyebrow", "label": "Eyebrow suffix when sold out", "default": "SOLD OUT" },
+    { "type": "text", "id": "title_override", "label": "Display name", "info": "Leave empty to use the product title." },
+    { "type": "text", "id": "lede", "label": "Tagline", "default": "Meet your after-dark scent. Dark resin and smoke.", "info": "A product metafield custom.tagline (single line text) overrides this." },
+    { "type": "text", "id": "tags_label", "label": "Tags accessible label", "default": "Scent notes", "info": "Tags come from the Tag blocks, or from a product metafield custom.scent_tags (list of single line text)." },
+    { "type": "header", "content": "Buy box" },
+    { "type": "text", "id": "price_note", "label": "Text under price", "default": "About 50 incense sticks · About 45 minutes per stick" },
+    { "type": "text", "id": "add_label", "label": "Add to cart label", "default": "Add to cart" },
+    { "type": "text", "id": "sold_out_label", "label": "Sold out label", "default": "Sold out" },
+    { "type": "checkbox", "id": "notify_when_sold_out", "label": "Show Notify me when sold out", "default": true, "info": "Sends a contact form tagged notify-me with the product name." },
+    { "type": "text", "id": "notify_label", "label": "Notify me button", "default": "Notify me" },
+    { "type": "text", "id": "notify_placeholder", "label": "Notify email placeholder", "default": "your@email.com" },
+    { "type": "text", "id": "notify_send", "label": "Notify send button", "default": "Send" },
+    { "type": "header", "content": "What you get" },
+    { "type": "text", "id": "get_heading", "label": "Heading", "default": "What you get" },
+    { "type": "checkbox", "id": "use_description", "label": "Use the product description when it has one", "default": false, "info": "Lists in the description get the bullet style. Otherwise the text and Bullet blocks below are used." },
+    { "type": "textarea", "id": "get_text", "label": "Text", "default": "One pack of Bonfire · Agarwood incense, made with aromatic wood, botanical binder and water. No synthetic fragrance, no added perfume, no dyes. Just the good stuff, packed and ready to burn." },
+    { "type": "header", "content": "Delivery" },
+    { "type": "text", "id": "delivery_heading", "label": "Heading", "default": "Delivery" },
+    { "type": "richtext", "id": "delivery_text", "label": "Text", "default": "<p>[Pending — approved delivery copy goes here.]</p>" },
+    { "type": "header", "content": "Compare prompt" },
+    { "type": "text", "id": "find_title", "label": "Title", "default": "Find your kind of scent." },
+    { "type": "text", "id": "find_text", "label": "Text", "default": "Two scents. Two different moods. Find the one that feels like you." },
+    { "type": "text", "id": "find_link_label", "label": "Link label", "default": "Compare the two scents side by side" },
+    { "type": "url", "id": "find_url", "label": "Link" },
+    { "type": "text", "id": "find_anchor", "label": "Link anchor (without #)", "default": "compare" }
+  ],
+  "blocks": [
+    {
+      "type": "tile",
+      "name": "Gallery tile",
+      "settings": [
+        {
+          "type": "select",
+          "id": "style",
+          "label": "Style",
+          "options": [
+            { "value": "main_crop", "label": "Studio crop (Bonfire main shot)" },
+            { "value": "photo", "label": "Photo, cover" },
+            { "value": "cover", "label": "Portrait, cover" },
+            { "value": "cover_low", "label": "Portrait, cover, aligned low" },
+            { "value": "holder", "label": "Holder close-up crop" },
+            { "value": "angled", "label": "Box lying at an angle" },
+            { "value": "stick", "label": "Stick with measurement" },
+            { "value": "placeholder", "label": "Placeholder (text only)" }
+          ],
+          "default": "photo",
+          "info": "The first tile is the large one."
+        },
+        { "type": "image_picker", "id": "image", "label": "Image" },
+        { "type": "text", "id": "asset", "label": "Theme image file", "info": "Used when no image is picked, e.g. gallery-1.webp" },
+        { "type": "text", "id": "alt", "label": "Alt text" },
+        { "type": "text", "id": "caption_1", "label": "Measurement 1 (stick style)", "default": "210 mm" },
+        { "type": "text", "id": "caption_2", "label": "Measurement 2 (stick style)", "default": "8.25 in" },
+        { "type": "text", "id": "placeholder_text", "label": "Placeholder text", "default": "Photo coming soon" }
+      ]
+    },
+    {
+      "type": "tag",
+      "name": "Tag",
+      "settings": [{ "type": "text", "id": "text", "label": "Text", "default": "WOODY" }]
+    },
+    {
+      "type": "bullet",
+      "name": "What you get bullet",
+      "settings": [{ "type": "text", "id": "text", "label": "Text", "default": "About 50 incense sticks" }]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,58 @@
+<footer class="footer section--ink">
+  {% render 'ms-image', image: section.settings.wordmark, fallback: 'footer-wordmark.svg', alt: '', width: 1220, height: 511, class: 'footer__wordmark', attrs: 'aria-hidden="true" data-parallax="-0.08"' %}
+
+  {%- if section.settings.show_signup and template.suffix != 'story' -%}
+    <div class="signup">
+      <h2 class="display-s">{{ section.settings.signup_heading }}</h2>
+      {%- if section.settings.signup_text != blank -%}<p class="lede lede--on-ink">{{ section.settings.signup_text }}</p>{%- endif -%}
+      {% render 'signup-form', id: 'footer-signup', class: 'signup__form', consent_text: section.settings.consent_text, button_label: section.settings.button_label, klaviyo_list: section.settings.klaviyo_list %}
+    </div>
+  {%- endif -%}
+
+  <nav class="footer__nav" aria-label="{{ 'general.footer_nav' | t }}">
+    {%- for block in section.blocks -%}
+      <div class="footer__col" {{ block.shopify_attributes }}>
+        {%- if block.settings.heading != blank -%}<h3>{{ block.settings.heading }}</h3>{%- endif -%}
+        <ul>
+          {%- for link in block.settings.menu.links -%}
+            <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+          {%- endfor -%}
+        </ul>
+      </div>
+    {%- endfor -%}
+  </nav>
+
+  <div class="footer__bar">
+    <p>{{ section.settings.copyright }}</p>
+  </div>
+</footer>
+
+{% schema %}
+{
+  "name": "Footer",
+  "class": "section-footer",
+  "max_blocks": 6,
+  "settings": [
+    { "type": "header", "content": "Sign-up" },
+    { "type": "checkbox", "id": "show_signup", "label": "Show sign-up", "default": true, "info": "Hidden automatically on the Our Story page, which has its own sign-up" },
+    { "type": "text", "id": "signup_heading", "label": "Heading", "default": "JOIN THE LIST" },
+    { "type": "text", "id": "signup_text", "label": "Text", "default": "Get first whiff of new scents." },
+    { "type": "text", "id": "button_label", "label": "Button label", "default": "Sign up" },
+    { "type": "text", "id": "consent_text", "label": "Consent text", "default": "Yes, email me about new scents and restocks. Unsubscribe anytime." },
+    { "type": "text", "id": "klaviyo_list", "label": "Klaviyo list ID", "info": "Optional. Overrides the list in Theme settings › Email sign-up." },
+    { "type": "header", "content": "Bottom bar" },
+    { "type": "text", "id": "copyright", "label": "Copyright line", "default": "© 2026 Mr. Sniff's. We just make scents." },
+    { "type": "image_picker", "id": "wordmark", "label": "Background wordmark", "info": "Defaults to the Mr. Sniff's script wordmark" }
+  ],
+  "blocks": [
+    {
+      "type": "menu",
+      "name": "Link column",
+      "settings": [
+        { "type": "text", "id": "heading", "label": "Heading", "default": "SHOP" },
+        { "type": "link_list", "id": "menu", "label": "Menu" }
+      ]
+    }
+  ]
+}
+{% endschema %}

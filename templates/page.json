@@ -1,0 +1,54 @@
+{
+  "sections": {
+    "main": {
+      "type": "info-page",
+      "blocks": {
+        "shipping": {
+          "type": "link",
+          "settings": {
+            "label": "Shipping",
+            "link": "/policies/shipping-policy"
+          }
+        },
+        "refund": {
+          "type": "link",
+          "settings": {
+            "label": "Returns & refunds",
+            "link": "/policies/refund-policy"
+          }
+        },
+        "privacy": {
+          "type": "link",
+          "settings": {
+            "label": "Privacy",
+            "link": "/policies/privacy-policy"
+          }
+        },
+        "terms": {
+          "type": "link",
+          "settings": {
+            "label": "Terms of service",
+            "link": "/policies/terms-of-service"
+          }
+        }
+      },
+      "block_order": [
+        "shipping",
+        "refund",
+        "privacy",
+        "terms"
+      ],
+      "settings": {
+        "eyebrow": "Policies",
+        "lede": "",
+        "meta": "",
+        "nav_label": "Policies",
+        "show_toc": true,
+        "toc_label": "On this page"
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

@@ -1,0 +1,78 @@
+{{ 'story.css' | asset_url | stylesheet_tag }}
+
+<section class="pov" aria-labelledby="pov-title-{{ section.id }}" data-pov>
+  <div class="pov__stage">
+    <div class="pov__copy">
+      <header class="pov__head">
+        <h2 class="display-l" id="pov-title-{{ section.id }}">{{ section.settings.heading }}</h2>
+        {%- if section.settings.lede != blank -%}<p class="lede">{{ section.settings.lede }}</p>{%- endif -%}
+      </header>
+      <div class="pov__body">
+        <ul class="pov__tabs" role="tablist" aria-label="{{ section.settings.heading | escape }}">
+          {%- for block in section.blocks -%}
+            <li><button class="pov__tab{% if forloop.first %} is-active{% endif %}" type="button" role="tab" aria-selected="{% if forloop.first %}true{% else %}false{% endif %}" aria-controls="pov-panel-{{ section.id }}-{{ forloop.index0 }}" id="pov-tab-{{ section.id }}-{{ forloop.index0 }}" data-pov-tab="{{ forloop.index0 }}">{{ block.settings.tab_label }}</button></li>
+          {%- endfor -%}
+        </ul>
+        <div class="pov__track" aria-hidden="true"><span class="pov__dot" data-pov-dot></span></div>
+        <div class="pov__panels">
+          {%- for block in section.blocks -%}
+            <div class="pov__panel{% if forloop.first %} is-active{% endif %}" role="tabpanel" id="pov-panel-{{ section.id }}-{{ forloop.index0 }}" aria-labelledby="pov-tab-{{ section.id }}-{{ forloop.index0 }}" data-pov-panel="{{ forloop.index0 }}" {{ block.shopify_attributes }}><h3>{{ block.settings.heading }}</h3><p>{{ block.settings.text }}</p></div>
+          {%- endfor -%}
+        </div>
+      </div>
+    </div>
+    <div class="pov__media">
+      {%- for block in section.blocks -%}
+        {%- capture pov_attrs -%}data-pov-img="{{ forloop.index0 }}"{%- endcapture -%}
+        {%- capture pov_class -%}pov__img{% if forloop.first %} is-active{% endif %}{%- endcapture -%}
+        {% render 'ms-image', image: block.settings.image, fallback: block.settings.fallback, alt: block.settings.image_alt, width: 1200, height: 1600, class: pov_class, sizes: '(max-width: 900px) 100vw, 41vw', attrs: pov_attrs %}
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Story point of view",
+  "class": "section-story-pov",
+  "max_blocks": 5,
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading", "default": "OUR POINT OF VIEW" },
+    { "type": "textarea", "id": "lede", "label": "Intro", "default": "Good scents. A little personality. Here's what goes into making Mr. Sniff's different." }
+  ],
+  "blocks": [
+    {
+      "type": "tab",
+      "name": "Tab",
+      "settings": [
+        { "type": "text", "id": "tab_label", "label": "Tab label", "default": "Scene first" },
+        { "type": "text", "id": "heading", "label": "Heading", "default": "Good incense sets the mood." },
+        { "type": "textarea", "id": "text", "label": "Text", "default": "We make incense for real spaces and real moments. From slow evenings to last-minute resets, every scent has a scene to call its own." },
+        { "type": "image_picker", "id": "image", "label": "Photo" },
+        {
+          "type": "select",
+          "id": "fallback",
+          "label": "Bundled photo",
+          "info": "Shown when no photo is picked",
+          "default": "story-pov.webp",
+          "options": [
+            { "value": "story-pov.webp", "label": "Sunglasses sniff" },
+            { "value": "pdp-lineup-duo.webp", "label": "Duo on driftwood" },
+            { "value": "gallery-1.webp", "label": "Yellow leather jacket" }
+          ]
+        },
+        { "type": "text", "id": "image_alt", "label": "Photo alt text", "default": "Man in round sunglasses holding a lit incense stick under his nose" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Story point of view",
+      "blocks": [
+        { "type": "tab" },
+        { "type": "tab", "settings": { "tab_label": "A small lineup", "heading": "Two scents. On purpose.", "fallback": "pdp-lineup-duo.webp" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

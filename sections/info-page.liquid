@@ -1,0 +1,73 @@
+{{ 'info.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'info.js' | asset_url }}" defer></script>
+{%- liquid
+  assign s = section.settings
+  assign has_side = false
+  if section.blocks.size > 0 or s.show_toc
+    assign has_side = true
+  endif
+-%}
+<header class="info-hero">
+  <div class="info-hero__inner" data-reveal>
+    {%- if s.eyebrow != blank -%}<p class="info-hero__eyebrow">{{ s.eyebrow }}</p>{%- endif -%}
+    <h1 class="display-l">{{ page.title }}</h1>
+    {%- if s.lede != blank -%}<p class="lede">{{ s.lede }}</p>{%- endif -%}
+    {%- if s.meta != blank -%}<p class="info-hero__meta">{{ s.meta }}</p>{%- endif -%}
+  </div>
+</header>
+<div class="info-layout{% unless has_side %} info-layout--single{% endunless %}">
+  {%- if has_side -%}
+    <aside class="info-side">
+      {%- if section.blocks.size > 0 -%}
+        <nav class="info-nav" aria-label="{{ s.nav_label | default: 'Pages' | escape }}">
+          {%- if s.nav_label != blank -%}<p class="info-side__label">{{ s.nav_label }}</p>{%- endif -%}
+          <ul>
+            {%- for block in section.blocks -%}
+              <li {{ block.shopify_attributes }}><a href="{{ block.settings.link | default: '#' }}"{% if block.settings.link == request.path %} aria-current="page"{% endif %}>{{ block.settings.label }}</a></li>
+            {%- endfor -%}
+          </ul>
+        </nav>
+      {%- endif -%}
+      {%- if s.show_toc -%}
+        <nav class="info-toc" aria-label="{{ s.toc_label | default: 'On this page' | escape }}" data-page-toc hidden>
+          {%- if s.toc_label != blank -%}<p class="info-side__label">{{ s.toc_label }}</p>{%- endif -%}
+          <ul></ul>
+        </nav>
+      {%- endif -%}
+    </aside>
+  {%- endif -%}
+  <article class="prose rte" data-page-content>
+    {{ page.content }}
+    {%- if s.contact_note != blank -%}
+      <p class="prose__contact">{{ s.contact_note }}</p>
+    {%- endif -%}
+  </article>
+</div>
+
+{% schema %}
+{
+  "name": "Page content",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Policies" },
+    { "type": "text", "id": "lede", "label": "Intro" },
+    { "type": "text", "id": "meta", "label": "Small print (e.g. last updated)" },
+    { "type": "header", "content": "Side navigation" },
+    { "type": "text", "id": "nav_label", "label": "Links label", "default": "Policies" },
+    { "type": "checkbox", "id": "show_toc", "label": "Show \"On this page\" list", "info": "Built from the page's headings.", "default": true },
+    { "type": "text", "id": "toc_label", "label": "\"On this page\" label", "default": "On this page" },
+    { "type": "header", "content": "Footer note" },
+    { "type": "inline_richtext", "id": "contact_note", "label": "Contact note", "default": "Questions about this policy? Email <a href=\"mailto:hello@mrsniffs.co\">hello@mrsniffs.co</a> or use the <a href=\"/pages/contact\">contact form</a>." }
+  ],
+  "blocks": [
+    {
+      "type": "link",
+      "name": "Side link",
+      "settings": [
+        { "type": "text", "id": "label", "label": "Label", "default": "Shipping" },
+        { "type": "url", "id": "link", "label": "Link" }
+      ]
+    }
+  ],
+  "max_blocks": 12
+}
+{% endschema %}

@@ -1,0 +1,125 @@
+<section class="scents section--ink" id="scents" aria-labelledby="scents-title">
+  <header class="section-head" data-reveal>
+    <h2 class="display-l" id="scents-title">{{ section.settings.heading }}</h2>
+    {%- if section.settings.lede != blank -%}<p class="lede lede--on-ink">{{ section.settings.lede }}</p>{%- endif -%}
+  </header>
+
+  <div class="scents__grid">
+    {%- for block in section.blocks -%}
+      {%- liquid
+        assign p = block.settings.product
+        assign style = block.settings.style
+        if style == 'yoga'
+          assign fb = 'box-yoga.webp'
+          assign fw = 197
+          assign fh = 600
+        else
+          assign fb = 'box-bonfire.webp'
+          assign fw = 267
+          assign fh = 800
+        endif
+        assign name = block.settings.name
+        if name == blank and p != blank
+          assign name = p.title
+        endif
+        assign short = block.settings.short_name | default: name
+        assign url = block.settings.url | default: '#'
+        assign price = block.settings.price
+        if p != blank
+          assign url = p.url
+          assign price = p.price | money_without_trailing_zeros
+          if p.price_varies
+            assign price = 'From ' | append: price
+          endif
+        endif
+      -%}
+      <article class="scent-card scent-card--{{ style }} gleam gleam--{{ style }}" data-reveal{% unless forloop.first %} style="--d: {{ forloop.index0 }}"{% endunless %} {{ block.shopify_attributes }}>
+        <a class="scent-card__media" href="{{ url }}" aria-label="{{ block.settings.link_label | escape }}">
+          <img class="scent-card__shadow" src="{{ 'box-shadow.svg' | asset_url }}" width="366" height="237" alt="">
+          <span class="scent-card__box">{% render 'ms-image', image: block.settings.image, fallback: fb, alt: block.settings.image_alt, width: fw, height: fh, sizes: '400px', loading: 'lazy' %}</span>
+        </a>
+        <div class="scent-card__body">
+          <div class="scent-card__info">
+            <div>
+              <h3 class="product-name">{{ name }}</h3>
+              {%- if block.settings.note != blank -%}<p class="product-note">{{ block.settings.note }}</p>{%- endif -%}
+            </div>
+            <p class="product-price">{{ price }}</p>
+          </div>
+          <div class="scent-card__actions">
+            <a class="btn btn--light btn--sm btn--w195" href="{{ url }}">{{ block.settings.link_label }}</a>
+            {%- if p != blank -%}
+              {%- if p.available -%}
+                <button class="icon-btn icon-btn--tile" type="button" aria-label="{{ block.settings.cart_label | replace: '[name]', short | escape }}" data-add-to-cart="{{ p.selected_or_first_available_variant.id }}">
+                  <img src="{{ 'cart.svg' | asset_url }}" width="16" height="16" alt="">
+                </button>
+              {%- else -%}
+                <button class="icon-btn icon-btn--tile" type="button" aria-label="{{ short | escape }}: {{ 'products.sold_out' | t }}" disabled>
+                  <img src="{{ 'cart.svg' | asset_url }}" width="16" height="16" alt="">
+                </button>
+              {%- endif -%}
+            {%- else -%}
+              <button class="icon-btn icon-btn--tile" type="button" aria-label="{{ block.settings.cart_label | replace: '[name]', short | escape }}">
+                <img src="{{ 'cart.svg' | asset_url }}" width="16" height="16" alt="">
+              </button>
+            {%- endif -%}
+          </div>
+        </div>
+      </article>
+    {%- endfor -%}
+  </div>
+
+  {%- if section.settings.compare_text != blank -%}
+    <a class="text-link text-link--on-ink" href="{{ section.settings.compare_url | default: '#compare' }}" data-reveal>
+      <span>{{ section.settings.compare_text }}</span>
+      <img src="{{ 'arrow-up-right.svg' | asset_url }}" width="20" height="20" alt="">
+    </a>
+  {%- endif -%}
+</section>
+
+{% schema %}
+{
+  "name": "Home: scents",
+  "class": "section-home-scents",
+  "max_blocks": 4,
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading", "default": "TWO SCENTS. FIND YOUR FAVORITE." },
+    { "type": "text", "id": "lede", "label": "Intro text", "default": "Compare them here or take the Smell Test." },
+    { "type": "header", "content": "Compare link" },
+    { "type": "text", "id": "compare_text", "label": "Link text", "default": "Compare the two scents side by side" },
+    { "type": "url", "id": "compare_url", "label": "Link", "info": "Leave empty to jump to #compare on this page" }
+  ],
+  "blocks": [
+    {
+      "type": "scent-card",
+      "name": "Scent card",
+      "settings": [
+        { "type": "product", "id": "product", "label": "Product", "info": "Sets the link, price and add-to-cart button" },
+        { "type": "select", "id": "style", "label": "Colorway", "default": "bonfire", "options": [
+          { "value": "bonfire", "label": "Bonfire (ember)" },
+          { "value": "yoga", "label": "Yoga Studio (teal)" }
+        ] },
+        { "type": "image_picker", "id": "image", "label": "Box image", "info": "Transparent cut-out of the box. Defaults to the colorway's box." },
+        { "type": "text", "id": "image_alt", "label": "Image alt text", "default": "Bonfire Agarwood incense box" },
+        { "type": "text", "id": "name", "label": "Display name", "default": "Bonfire · Agarwood Incense", "info": "Leave empty to use the product title" },
+        { "type": "text", "id": "short_name", "label": "Short name", "default": "Bonfire", "info": "Used in the add-to-cart label for screen readers" },
+        { "type": "text", "id": "note", "label": "Scent note", "default": "Dark resin + smoke" },
+        { "type": "text", "id": "link_label", "label": "Button label", "default": "Meet Bonfire" },
+        { "type": "text", "id": "cart_label", "label": "Add-to-cart label (screen readers)", "default": "Add [name] to cart", "info": "[name] is replaced with the short name" },
+        { "type": "header", "content": "Used until a product is picked" },
+        { "type": "text", "id": "price", "label": "Price", "default": "$24" },
+        { "type": "url", "id": "url", "label": "Link" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Home: scents",
+      "blocks": [
+        { "type": "scent-card" },
+        { "type": "scent-card", "settings": { "style": "yoga", "image_alt": "Yoga Studio Palo Santo incense box", "name": "Yoga Studio · Palo Santo Incense", "short_name": "Yoga Studio", "note": "Warm resin + citrus peel", "link_label": "Meet Yoga Studio" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,30 @@
+{%- doc -%}
+  Newsletter form. Subscribes through Klaviyo when keys are set in theme settings,
+  otherwise submits the Shopify customer form (Klaviyo syncs it from Shopify).
+
+  @param {string} id - unique id prefix for this form
+  @param {string} [klaviyo_list] - Klaviyo list ID override for this form
+  @param {string} [consent_text] - consent checkbox label
+  @param {string} [button_label] - submit button label
+  @param {string} [placeholder] - email placeholder
+  @param {string} [success_text] - message shown after signing up
+  @param {string} [class] - extra classes on the form
+{%- enddoc -%}
+{%- form 'customer', id: id, class: class, data-signup: '', data-klaviyo-list: klaviyo_list, data-success: success_text, novalidate: 'novalidate' -%}
+  <input type="hidden" name="contact[tags]" value="newsletter">
+  <input type="hidden" name="contact[accepts_marketing]" value="true">
+  {%- if form.posted_successfully? -%}<span hidden data-posted></span>{%- endif -%}
+  <div class="signup__row">
+    <label class="sr-only" for="{{ id }}-email">{{ 'newsletter.email_label' | t }}</label>
+    <input class="signup__input" id="{{ id }}-email" name="contact[email]" type="email" placeholder="{{ placeholder | default: 'your@email.com' }}" autocomplete="email" required>
+    <button class="btn btn--light" type="submit">{{ button_label | default: 'Sign up' }}</button>
+  </div>
+  <label class="consent">
+    <input type="checkbox" name="consent" required>
+    <span class="consent__box" aria-hidden="true"></span>
+    <span>{{ consent_text | default: 'Yes, email me about new scents and restocks. Unsubscribe anytime.' }}</span>
+  </label>
+  <p class="form-msg{% if form.posted_successfully? %} is-success{% elsif form.errors %} is-error{% endif %}" data-signup-msg role="status">
+    {%- if form.posted_successfully? -%}{{ success_text | default: "You're in. First whiff is yours." }}{%- elsif form.errors -%}{{ form.errors.translated_fields.email | capitalize }} {{ form.errors.messages.email }}{%- endif -%}
+  </p>
+{%- endform -%}

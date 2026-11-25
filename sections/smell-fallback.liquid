@@ -1,0 +1,105 @@
+{{ 'smell.css' | asset_url | stylesheet_tag }}
+{%- comment -%} Shown only when JavaScript is unavailable (the quiz needs it). {%- endcomment -%}
+<noscript>
+  <section class="smell-fallback" aria-labelledby="fallback-title-{{ section.id }}">
+    <header class="section-head">
+      <h2 class="display-l" id="fallback-title-{{ section.id }}">{{ section.settings.heading }}</h2>
+      {%- if section.settings.lede != blank -%}<p class="lede">{{ section.settings.lede }}</p>{%- endif -%}
+    </header>
+    <div class="scents__grid">
+      {%- for block in section.blocks -%}
+        {%- liquid
+          assign product = block.settings.product
+          assign card_url = block.settings.url | default: '#'
+          assign card_name = block.settings.name
+          if product != blank
+            assign card_url = product.url
+            if card_name == blank
+              assign card_name = product.title
+            endif
+          endif
+          if block.settings.style == 'yoga'
+            assign fallback = 'box-yoga.webp'
+            assign fw = 197
+            assign fh = 600
+          else
+            assign fallback = 'box-bonfire.webp'
+            assign fw = 267
+            assign fh = 800
+          endif
+        -%}
+        <article class="scent-card scent-card--{{ block.settings.style }}" {{ block.shopify_attributes }}>
+          <a class="scent-card__media" href="{{ card_url }}" aria-label="{{ block.settings.media_label | default: card_name | escape }}">
+            <img class="scent-card__shadow" src="{{ 'box-shadow.svg' | asset_url }}" width="366" height="237" alt="">
+            <span class="scent-card__box">{% render 'ms-image', image: block.settings.image, fallback: fallback, alt: block.settings.image_alt, width: fw, height: fh, sizes: '270px' %}</span>
+          </a>
+          <div class="scent-card__body">
+            <div class="scent-card__info">
+              <div>
+                <h3 class="product-name">{{ card_name }}</h3>
+                {%- if block.settings.note != blank -%}<p class="product-note">{{ block.settings.note }}</p>{%- endif -%}
+              </div>
+              <p class="product-price">
+                {%- if product != blank -%}
+                  {%- if product.price_varies -%}From {% endif -%}{{ product.price | money_without_trailing_zeros }}
+                {%- else -%}
+                  {{ block.settings.price }}
+                {%- endif -%}
+              </p>
+            </div>
+            <div class="scent-card__actions"><a class="btn btn--solid btn--sm" href="{{ card_url }}">{{ block.settings.button_label }}</a></div>
+          </div>
+        </article>
+      {%- endfor -%}
+    </div>
+  </section>
+</noscript>
+
+{% schema %}
+{
+  "name": "Smell Test no-JS fallback",
+  "class": "section-smell-fallback",
+  "max_blocks": 3,
+  "settings": [
+    { "type": "paragraph", "content": "Only visible to visitors with JavaScript turned off, in place of the quiz." },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "TWO SCENTS. FIND YOUR FAVORITE." },
+    { "type": "text", "id": "lede", "label": "Intro", "default": "Compare them here or take the Smell Test." }
+  ],
+  "blocks": [
+    {
+      "type": "scent",
+      "name": "Scent card",
+      "settings": [
+        { "type": "product", "id": "product", "label": "Product" },
+        { "type": "text", "id": "name", "label": "Display name", "info": "Leave blank to use the product title", "default": "Bonfire · Agarwood Incense" },
+        { "type": "text", "id": "note", "label": "Note", "default": "Dark resin + smoke" },
+        { "type": "text", "id": "price", "label": "Price (used until a product is picked)", "default": "$24" },
+        { "type": "url", "id": "url", "label": "Link (used until a product is picked)" },
+        { "type": "text", "id": "button_label", "label": "Button label", "default": "View" },
+        { "type": "text", "id": "media_label", "label": "Image link label (screen readers)", "default": "View Bonfire" },
+        { "type": "image_picker", "id": "image", "label": "Box image" },
+        { "type": "text", "id": "image_alt", "label": "Box image alt text", "default": "Bonfire Agarwood incense box" },
+        {
+          "type": "select",
+          "id": "style",
+          "label": "Style",
+          "default": "bonfire",
+          "options": [
+            { "value": "bonfire", "label": "Bonfire" },
+            { "value": "yoga", "label": "Yoga Studio" }
+          ]
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Smell Test no-JS fallback",
+      "blocks": [
+        { "type": "scent" },
+        { "type": "scent", "settings": { "name": "Yoga Studio · Palo Santo Incense", "note": "Warm resin + citrus peel", "image_alt": "Yoga Studio Palo Santo incense box", "media_label": "View Yoga Studio", "style": "yoga" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

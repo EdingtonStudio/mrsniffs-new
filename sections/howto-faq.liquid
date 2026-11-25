@@ -1,0 +1,50 @@
+{{ 'howto.css' | asset_url | stylesheet_tag }}
+
+<section class="faq ht-faq"{% if section.settings.anchor != blank %} id="{{ section.settings.anchor | remove: '#' | strip | escape }}"{% endif %} aria-labelledby="faq-title-{{ section.id }}">
+  {%- if section.settings.show_mascot -%}
+    <img class="faq__mascot" src="{{ 'mascot.svg' | asset_url }}" width="494" height="536" alt="" aria-hidden="true" loading="lazy">
+  {%- endif -%}
+  <div class="faq__inner">
+    <h2 class="display-l" id="faq-title-{{ section.id }}" data-reveal>{{ section.settings.heading }}</h2>
+    <div class="accordion" data-reveal style="--d: 1">
+      {%- for block in section.blocks -%}
+        <details class="accordion__item" data-accordion {{ block.shopify_attributes }}>
+          <summary><span>{{ block.settings.question }}</span>{% render 'icon', name: 'plus.svg', size: 18 %}</summary>
+          <div class="accordion__panel">{{ block.settings.answer }}</div>
+        </details>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "How-to FAQ",
+  "class": "section-howto-faq",
+  "max_blocks": 12,
+  "settings": [
+    { "type": "text", "id": "anchor", "label": "Section ID", "default": "faq" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "BEFORE YOU LIGHT ONE" },
+    { "type": "checkbox", "id": "show_mascot", "label": "Show Mr. Sniff mascot", "default": true }
+  ],
+  "blocks": [
+    {
+      "type": "question",
+      "name": "Question",
+      "settings": [
+        { "type": "text", "id": "question", "label": "Question", "default": "Is it suitable for a small room?" },
+        { "type": "richtext", "id": "answer", "label": "Answer", "default": "<p>Always burn incense in a well-ventilated area to allow proper airflow.</p>" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "How-to FAQ",
+      "blocks": [
+        { "type": "question" },
+        { "type": "question", "settings": { "question": "Can I use it around pets?", "answer": "<p>Keep burning incense away from children and pets.</p>" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

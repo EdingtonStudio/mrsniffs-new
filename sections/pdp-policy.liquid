@@ -1,0 +1,86 @@
+{{ 'pdp.css' | asset_url | stylesheet_tag }}
+<section class="pdp-policy" aria-labelledby="policy-title-{{ section.id }}">
+  <div class="pdp-policy__media" data-reveal="fade">
+    {% render 'pdp-img', image: section.settings.bg_image, asset: 'pdp-ship-bg.webp', alt: '', class: 'pdp-policy__bg', sizes: '(max-width: 900px) 100vw, 50vw' %}
+    {%- assign fg_class = 'pdp-policy__fg' -%}
+    {%- if section.settings.fg_cover -%}{%- assign fg_class = fg_class | append: ' pdp-policy__fg--cover' -%}{%- endif -%}
+    {% render 'pdp-img', image: section.settings.fg_image, asset: section.settings.fg_asset, alt: section.settings.fg_alt, class: fg_class, sizes: '(max-width: 900px) 100vw, 50vw' %}
+  </div>
+  <div class="pdp-policy__copy">
+    <header class="pdp-policy__head" data-reveal>
+      <h2 class="display-l" id="policy-title-{{ section.id }}">{{ section.settings.title | escape }}</h2>
+      {%- if section.settings.lede != blank -%}<p class="lede">{{ section.settings.lede }}</p>{%- endif -%}
+    </header>
+    <div class="pdp-policy__list" data-reveal style="--d: 1">
+      {%- for block in section.blocks -%}
+        {%- assign s = block.settings -%}
+        {%- assign open = false -%}
+        {%- if forloop.first and section.settings.first_open -%}{%- assign open = true -%}{%- endif -%}
+        <div class="pacc{% if open %} is-open{% endif %}" data-pdp-acc {{ block.shopify_attributes }}>
+          <button class="pacc__head" type="button" aria-expanded="{{ open }}" aria-controls="pacc-{{ block.id }}">
+            <span class="pacc__icon">{%- if s.icon == 'returns' -%}{% render 'icon', name: 'pdp-returns.svg', size: 19 %}{%- else -%}{% render 'icon', name: 'pdp-ship.svg', size: 20 %}{%- endif -%}</span>
+            <span class="pacc__title">{{ s.title | escape }}</span>
+            <span class="pm" aria-hidden="true"></span>
+          </button>
+          <div class="pdp-acc__panel" id="pacc-{{ block.id }}"{% unless open %} hidden{% endunless %}>
+            <div class="pacc__body">
+              {{ s.text }}
+              {%- if s.link_label != blank -%}
+                <a class="btn btn--outline btn--sm" href="{{ s.link_url | default: '#' }}">{{ s.link_label }}</a>
+              {%- endif -%}
+            </div>
+          </div>
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Shipping and returns",
+  "settings": [
+    { "type": "text", "id": "title", "label": "Heading", "default": "SHIPPING & RETURNS" },
+    { "type": "text", "id": "lede", "label": "Text", "default": "The short version. Full policies are linked below." },
+    { "type": "checkbox", "id": "first_open", "label": "Open the first item", "default": true },
+    { "type": "header", "content": "Images" },
+    { "type": "image_picker", "id": "bg_image", "label": "Background image" },
+    { "type": "image_picker", "id": "fg_image", "label": "Foreground image" },
+    { "type": "text", "id": "fg_asset", "label": "Foreground theme image file", "default": "pdp-ship-fg.webp", "info": "Used when no image is picked" },
+    { "type": "text", "id": "fg_alt", "label": "Foreground alt text", "default": "Bonfire box standing on driftwood and moss in warm light" },
+    { "type": "checkbox", "id": "fg_cover", "label": "Foreground fills the frame", "default": false, "info": "Off keeps the Bonfire cut-out crop." }
+  ],
+  "blocks": [
+    {
+      "type": "item",
+      "name": "Policy",
+      "settings": [
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Icon",
+          "options": [
+            { "value": "ship", "label": "Shipping" },
+            { "value": "returns", "label": "Returns" }
+          ],
+          "default": "ship"
+        },
+        { "type": "text", "id": "title", "label": "Heading", "default": "Shipping & Delivery" },
+        { "type": "richtext", "id": "text", "label": "Text", "default": "<p>Wondering when your incense will arrive? Find your available shipping options and estimated delivery window at checkout.</p>" },
+        { "type": "text", "id": "link_label", "label": "Button label", "default": "Read the policy" },
+        { "type": "url", "id": "link_url", "label": "Button link" }
+      ]
+    }
+  ],
+  "max_blocks": 4,
+  "presets": [
+    {
+      "name": "Shipping and returns",
+      "blocks": [
+        { "type": "item" },
+        { "type": "item", "settings": { "icon": "returns", "title": "Returns & Exchanges", "text": "<p>[Pending — approved returns &amp; exchanges copy goes here.]</p>" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

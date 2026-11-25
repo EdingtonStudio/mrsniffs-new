@@ -1,0 +1,57 @@
+{
+  "type": "footer",
+  "name": "Footer group",
+  "sections": {
+    "footer": {
+      "type": "footer",
+      "settings": {
+        "show_signup": true,
+        "signup_heading": "JOIN THE LIST",
+        "signup_text": "Get first whiff of new scents.",
+        "button_label": "Sign up",
+        "consent_text": "Yes, email me about new scents and restocks. Unsubscribe anytime.",
+        "klaviyo_list": "",
+        "copyright": "© 2026 Mr. Sniff's. We just make scents."
+      },
+      "blocks": {
+        "shop": {
+          "type": "menu",
+          "settings": {
+            "heading": "SHOP",
+            "menu": "footer-shop"
+          }
+        },
+        "learn": {
+          "type": "menu",
+          "settings": {
+            "heading": "LEARN",
+            "menu": "footer-learn"
+          }
+        },
+        "help": {
+          "type": "menu",
+          "settings": {
+            "heading": "HELP",
+            "menu": "footer-help"
+          }
+        },
+        "policies": {
+          "type": "menu",
+          "settings": {
+            "heading": "POLICIES",
+            "menu": "footer-policies"
+          }
+        }
+      },
+      "block_order": [
+        "shop",
+        "learn",
+        "help",
+        "policies"
+      ]
+    }
+  },
+  "order": [
+    "footer"
+  ]
+}

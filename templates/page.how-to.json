@@ -1,0 +1,323 @@
+{
+  "sections": {
+    "hero": {
+      "type": "howto-hero",
+      "blocks": {
+        "tab-1": {
+          "type": "tab",
+          "settings": {
+            "label": "Setup",
+            "anchor": "setup",
+            "burn_step": "none"
+          }
+        },
+        "tab-2": {
+          "type": "tab",
+          "settings": {
+            "label": "Use",
+            "anchor": "use",
+            "burn_step": "none"
+          }
+        },
+        "tab-3": {
+          "type": "tab",
+          "settings": {
+            "label": "Put it out",
+            "anchor": "use",
+            "burn_step": "3"
+          }
+        },
+        "tab-4": {
+          "type": "tab",
+          "settings": {
+            "label": "Clean up",
+            "anchor": "clean-up",
+            "burn_step": "none"
+          }
+        },
+        "tab-5": {
+          "type": "tab",
+          "settings": {
+            "label": "Safety",
+            "anchor": "safety",
+            "burn_step": "none"
+          }
+        }
+      },
+      "block_order": [
+        "tab-1",
+        "tab-2",
+        "tab-3",
+        "tab-4",
+        "tab-5"
+      ],
+      "settings": {
+        "image_alt": "Yoga Studio and Bonfire boxes beside a burning stick in a round black holder, pine branches behind",
+        "title": "NEW TO INCENSE? START HERE.",
+        "text": "Set up your space, choose a suitable holder, and follow the directions supplied with your incense.",
+        "tabs_label": "Guide sections"
+      }
+    },
+    "before": {
+      "type": "howto-before",
+      "blocks": {
+        "card-1": {
+          "type": "card",
+          "settings": {
+            "heading": "A suitable holder",
+            "text": "Use a heatproof incense holder.",
+            "icon": "howto-shield.svg",
+            "image_alt": "Stachin' Ash moustache holder with a stick standing upright",
+            "crop": "holder",
+            "drop": false
+          }
+        },
+        "card-2": {
+          "type": "card",
+          "settings": {
+            "heading": "A heat-resistant surface",
+            "text": "Use a stable, heat-resistant surface.",
+            "icon": "howto-stack.svg",
+            "image_alt": "Incense stick resting on a dark stone surface",
+            "crop": "surface",
+            "drop": true
+          }
+        },
+        "card-3": {
+          "type": "card",
+          "settings": {
+            "heading": "Ventilation",
+            "text": "Burn incense in a well-ventilated space.",
+            "icon": "howto-wind.svg",
+            "image_alt": "Sheer curtains moving beside an open window",
+            "crop": "vent",
+            "drop": false
+          }
+        }
+      },
+      "block_order": [
+        "card-1",
+        "card-2",
+        "card-3"
+      ],
+      "settings": {
+        "anchor": "setup",
+        "heading": "BEFORE YOU LIGHT",
+        "lede": "A few essentials for a safe and simple incense experience."
+      }
+    },
+    "burn": {
+      "type": "howto-burn",
+      "blocks": {
+        "step-1": {
+          "type": "step",
+          "settings": {
+            "label": "Light",
+            "text": "Light the incense tip.",
+            "fallback": "howto-burn-light.webp",
+            "image_alt": "Incense stick resting in a black holder"
+          }
+        },
+        "step-2": {
+          "type": "step",
+          "settings": {
+            "label": "Let it catch",
+            "text": "Let the tip burn, then blow out the flame. Ensure it glows and releases a steady stream of smoke.",
+            "fallback": "howto-burn-catch.webp",
+            "image_alt": "A match lighting the tip of an incense stick"
+          }
+        },
+        "step-3": {
+          "type": "step",
+          "settings": {
+            "label": "Place in the holder",
+            "text": "Rest securely in holder.",
+            "fallback": "howto-burn-place.webp",
+            "image_alt": "Smoking incense stick placed in a black holder"
+          }
+        },
+        "step-4": {
+          "type": "step",
+          "settings": {
+            "label": "Put it out",
+            "text": "Extinguish completely after use.",
+            "fallback": "howto-burn-out.webp",
+            "image_alt": "Last wisp of smoke rising from a holder"
+          }
+        }
+      },
+      "block_order": [
+        "step-1",
+        "step-2",
+        "step-3",
+        "step-4"
+      ],
+      "settings": {
+        "anchor": "use",
+        "heading": "HOW TO BURN INCENSE",
+        "lede": "Follow these simple steps to light, enjoy, and safely extinguish your incense.",
+        "steps_label": "Steps"
+      }
+    },
+    "care": {
+      "type": "howto-care",
+      "blocks": {
+        "tile-1": {
+          "type": "tile",
+          "settings": {
+            "heading": "Supervision",
+            "text": "Never leave burning incense unattended. Always keep it within sight.",
+            "icon": "howto-eye.svg",
+            "tint": false
+          }
+        },
+        "tile-2": {
+          "type": "tile",
+          "settings": {
+            "heading": "Ventilation",
+            "text": "Always burn incense in a well-ventilated area to allow proper airflow.",
+            "icon": "howto-fan.svg",
+            "tint": false
+          }
+        },
+        "tile-3": {
+          "type": "tile",
+          "settings": {
+            "heading": "Pets and children",
+            "text": "Keep burning incense away from children and pets.",
+            "icon": "howto-paw.svg",
+            "tint": false
+          }
+        },
+        "tile-4": {
+          "type": "tile",
+          "settings": {
+            "heading": "Placement",
+            "text": "Keep burning incense away from curtains and other flammable materials.",
+            "icon": "howto-pin.svg",
+            "tint": true
+          }
+        }
+      },
+      "block_order": [
+        "tile-1",
+        "tile-2",
+        "tile-3",
+        "tile-4"
+      ],
+      "settings": {
+        "anchor": "safety",
+        "heading": "BURN WITH CARE",
+        "lede": "A few essential safety precautions to keep in mind while your incense burns, ensuring a safe and enjoyable experience.",
+        "image_alt": "Hand in a wool sleeve lighting a stick in a black holder, a Yoga Studio box lying on the walnut table"
+      }
+    },
+    "clears": {
+      "type": "howto-clears",
+      "blocks": {
+        "step-1": {
+          "type": "step",
+          "settings": {
+            "number": "01",
+            "heading": "LET IT COOL",
+            "text": "Let the incense stick and ash cool completely before touching or removing anything."
+          }
+        },
+        "step-2": {
+          "type": "step",
+          "settings": {
+            "number": "02",
+            "heading": "DISPOSE OF ASH",
+            "text": "Once completely cool, dispose of the ash and any remaining incense safely."
+          }
+        },
+        "step-3": {
+          "type": "step",
+          "settings": {
+            "number": "03",
+            "heading": "HOLDER CARE",
+            "text": "Remove leftover residue and clean your holder according to its material and care instructions."
+          }
+        }
+      },
+      "block_order": [
+        "step-1",
+        "step-2",
+        "step-3"
+      ],
+      "settings": {
+        "anchor": "clean-up",
+        "heading": "WHEN THE SMOKE CLEARS",
+        "lede": "A few easy steps to safely clean up after your incense burns.",
+        "image_alt": "Ash and a spent stick in a black holder"
+      }
+    },
+    "faq": {
+      "type": "howto-faq",
+      "blocks": {
+        "question-1": {
+          "type": "question",
+          "settings": {
+            "question": "Is it suitable for a small room?",
+            "answer": "<p>Always burn incense in a well-ventilated area to allow proper airflow.</p>"
+          }
+        },
+        "question-2": {
+          "type": "question",
+          "settings": {
+            "question": "What if smoke bothers me?",
+            "answer": "<p>[Pending — approved guidance for smoke sensitivity goes here.]</p>"
+          }
+        },
+        "question-3": {
+          "type": "question",
+          "settings": {
+            "question": "Which holders work with these sticks?",
+            "answer": "<p>Use a heatproof incense holder that fits 210 mm incense sticks. Set it up safely and let the scent do its thing.</p>"
+          }
+        },
+        "question-4": {
+          "type": "question",
+          "settings": {
+            "question": "Can I use it around pets?",
+            "answer": "<p>Keep burning incense away from children and pets.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "question-1",
+        "question-2",
+        "question-3",
+        "question-4"
+      ],
+      "settings": {
+        "anchor": "faq",
+        "heading": "BEFORE YOU LIGHT ONE",
+        "show_mascot": true
+      }
+    },
+    "cta": {
+      "type": "howto-cta",
+      "settings": {
+        "heading": "READY TO LIGHT ONE?",
+        "text": "We're here to make incense that actually makes an impression. Real wood, sun-dried, with nothing poured on top.",
+        "image_alt": "Bonfire and Yoga Studio boxes leaning on driftwood under a blue sky",
+        "button_1_label": "Shop incense",
+        "button_1_link": "/collections/shop",
+        "button_2_label": "Shop holders",
+        "button_2_link": "/#holders",
+        "contact_link": "/pages/contact",
+        "contact_label": "Contact us by phone"
+      }
+    }
+  },
+  "order": [
+    "hero",
+    "before",
+    "burn",
+    "care",
+    "clears",
+    "faq",
+    "cta"
+  ]
+}

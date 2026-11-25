@@ -1,0 +1,35 @@
+{{ 'info.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'info.js' | asset_url }}" defer></script>
+<aside class="info-side">
+  <nav class="info-toc" aria-label="{{ section.settings.label | default: 'Topics' | escape }}"{% if section.blocks.size == 0 %} data-faq-toc{% endif %}>
+    {%- if section.settings.label != blank -%}<p class="info-side__label">{{ section.settings.label }}</p>{%- endif -%}
+    <ul>
+      {%- for block in section.blocks -%}
+        <li {{ block.shopify_attributes }}><a href="{{ block.settings.link | default: '#' }}">{{ block.settings.label }}</a></li>
+      {%- endfor -%}
+    </ul>
+  </nav>
+</aside>
+
+{% schema %}
+{
+  "name": "FAQ topic list",
+  "class": "ms-faq-side",
+  "settings": [
+    { "type": "text", "id": "label", "label": "Label", "default": "Topics" },
+    { "type": "paragraph", "content": "With no links added, the list is built automatically from the FAQ topic sections on this page." }
+  ],
+  "blocks": [
+    {
+      "type": "link",
+      "name": "Link",
+      "settings": [
+        { "type": "text", "id": "label", "label": "Label", "default": "Topic" },
+        { "type": "text", "id": "link", "label": "Link", "info": "An anchor like #scents, or a page URL.", "default": "#scents" }
+      ]
+    }
+  ],
+  "max_blocks": 16,
+  "presets": [{ "name": "FAQ topic list" }]
+}
+{% endschema %}

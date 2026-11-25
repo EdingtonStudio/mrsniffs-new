@@ -1,0 +1,490 @@
+{{ 'smell.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'smell.js' | asset_url }}" defer></script>
+{%- comment -%}
+  The quiz is driven by assets/smell.js from these data attributes:
+  each answer's data-lean (bonfire / yoga / both) scores a result; the highest
+  score wins and a tie shows the result named in data-tie.
+{%- endcomment -%}
+<section class="st" id="smell-test" aria-label="{{ section.settings.aria_label | escape }}" data-smell-test data-tie="duo" data-count-text="{{ section.settings.count_text | escape }}">
+  <div class="st__inner">
+    <div class="st__bar" data-st-bar>
+      <button class="st__back" type="button" data-st-back hidden>{{ section.settings.back_label }}</button>
+      <p class="st__count" data-st-count aria-live="polite">{%- assign total = section.blocks.size | append: '' -%}{{ section.settings.count_text | replace: '[n]', '1' | replace: '[total]', total }}</p>
+      <div class="st__progress" aria-hidden="true"><span data-st-fill></span></div>
+    </div>
+    {%- assign answer_letters = 'a,b,c,d' | split: ',' -%}
+    {%- assign result_keys = 'bonfire,yoga,duo' | split: ',' -%}
+    {%- for block in section.blocks -%}
+      <fieldset class="st-q" data-step="{{ forloop.index }}"{% unless forloop.first %} hidden{% endunless %} {{ block.shopify_attributes }}>
+        <legend class="display-l st-q__title">{{ block.settings.title }}</legend>
+        <div class="st-opts">
+          {%- assign key_index = 0 -%}
+          {%- for letter in answer_letters -%}
+            {%- capture label_id -%}{{ letter }}_label{%- endcapture -%}
+            {%- capture sub_id -%}{{ letter }}_sub{%- endcapture -%}
+            {%- capture lean_id -%}{{ letter }}_lean{%- endcapture -%}
+            {%- if block.settings[label_id] != blank -%}
+              {%- assign key = 'ABCD' | slice: key_index -%}
+              {%- assign key_index = key_index | plus: 1 -%}
+              <button class="st-opt" type="button" data-lean="{{ block.settings[lean_id] }}">
+                <span class="st-opt__key">{{ key }}</span>
+                <span class="st-opt__label">{{ block.settings[label_id] }}</span>
+                {%- if block.settings[sub_id] != blank -%}<span class="st-opt__sub">{{ block.settings[sub_id] }}</span>{%- endif -%}
+              </button>
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
+      </fieldset>
+    {%- endfor -%}
+
+    {%- for key in result_keys -%}
+      {%- liquid
+        assign p_id = key | append: '_product'
+        assign product = section.settings[p_id]
+        if key == 'duo' and product == blank
+          assign product = settings.duo_product
+        endif
+        assign img_id = key | append: '_image'
+        assign alt_id = key | append: '_image_alt'
+        assign title_id = key | append: '_title'
+        assign line_id = key | append: '_line'
+        assign text_id = key | append: '_text'
+        assign price_id = key | append: '_price'
+        assign link_label_id = key | append: '_link_label'
+        assign link_id = key | append: '_link'
+        assign link = section.settings[link_id] | default: '#'
+        assign price = section.settings[price_id]
+        if product != blank
+          assign link = product.url
+          assign price = product.price | money_without_trailing_zeros
+          if product.price_varies
+            assign price = 'From ' | append: price
+          endif
+        endif
+        case key
+          when 'bonfire'
+            assign tint = 'var(--c-tint-bonfire)'
+            assign fallback = 'shop-bonfire.webp'
+            assign fw = 879
+          when 'yoga'
+            assign tint = 'var(--c-tint-yoga)'
+            assign fallback = 'shop-yoga.webp'
+            assign fw = 821
+          else
+            assign tint = 'var(--c-stone)'
+            assign fallback = 'shop-duo.webp'
+            assign fw = 879
+        endcase
+      -%}
+      <div class="st-result st-result--{{ key }}" data-result="{{ key }}" hidden>
+        <div class="st-result__media" style="--tint: {{ tint }}">
+          {% render 'ms-image', image: section.settings[img_id], fallback: fallback, alt: section.settings[alt_id], width: fw, height: 1100, sizes: '(max-width: 900px) 100vw, 45vw' %}
+        </div>
+        <div class="st-result__copy">
+          {%- if section.settings.result_eyebrow != blank -%}<p class="st-result__eyebrow">{{ section.settings.result_eyebrow }}</p>{%- endif -%}
+          <h2 class="display-xl">{{ section.settings[title_id] }}</h2>
+          {%- if section.settings[line_id] != blank -%}<p class="st-result__line">{{ section.settings[line_id] }}</p>{%- endif -%}
+          {%- if section.settings[text_id] != blank -%}<p class="lede">{{ section.settings[text_id] }}</p>{%- endif -%}
+          <div class="btn-row">
+            {%- if product != blank -%}
+              {%- if product.available -%}
+                <button class="btn btn--solid" type="button" data-add-to-cart="{{ product.selected_or_first_available_variant.id }}">{{ section.settings.add_label }} · {{ price }}</button>
+              {%- else -%}
+                <button class="btn btn--solid" type="button" disabled aria-disabled="true">{{ 'products.sold_out' | t }}</button>
+              {%- endif -%}
+            {%- else -%}
+              <button class="btn btn--solid" type="button">{{ section.settings.add_label }} · {{ price }}</button>
+            {%- endif -%}
+            {%- if section.settings[link_label_id] != blank -%}
+              <a class="btn btn--outline" href="{{ link }}">{{ section.settings[link_label_id] }}</a>
+            {%- endif -%}
+          </div>
+          <button class="text-link st-retake" type="button" data-retake><span>{{ section.settings.retake_label }}</span></button>
+        </div>
+      </div>
+    {%- endfor -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Smell Test quiz",
+  "class": "section-smell-quiz",
+  "max_blocks": 8,
+  "settings": [
+    {
+      "type": "text",
+      "id": "aria_label",
+      "label": "Section label (screen readers)",
+      "default": "The Smell Test"
+    },
+    {
+      "type": "text",
+      "id": "count_text",
+      "label": "Progress text",
+      "info": "[n] = current question, [total] = number of questions",
+      "default": "Question [n] of [total]"
+    },
+    {
+      "type": "text",
+      "id": "back_label",
+      "label": "Back button label",
+      "default": "← Back"
+    },
+    {
+      "type": "text",
+      "id": "result_eyebrow",
+      "label": "Result eyebrow",
+      "default": "Your whiff is"
+    },
+    {
+      "type": "text",
+      "id": "add_label",
+      "label": "Add to cart label",
+      "info": "The price is added after it",
+      "default": "Add to cart"
+    },
+    {
+      "type": "text",
+      "id": "retake_label",
+      "label": "Retake label",
+      "default": "Retake the Smell Test"
+    },
+    {
+      "type": "header",
+      "content": "Result: Bonfire"
+    },
+    {
+      "type": "product",
+      "id": "bonfire_product",
+      "label": "Product",
+      "info": "Shown when Bonfire answers win Price, link and add-to-cart come from the product."
+    },
+    {
+      "type": "image_picker",
+      "id": "bonfire_image",
+      "label": "Image"
+    },
+    {
+      "type": "text",
+      "id": "bonfire_image_alt",
+      "label": "Image alt text",
+      "default": "Bonfire Agarwood incense box standing on grey"
+    },
+    {
+      "type": "text",
+      "id": "bonfire_title",
+      "label": "Title",
+      "default": "Bonfire"
+    },
+    {
+      "type": "text",
+      "id": "bonfire_line",
+      "label": "Scent line",
+      "default": "Agarwood · dark resin and smoke"
+    },
+    {
+      "type": "textarea",
+      "id": "bonfire_text",
+      "label": "Text",
+      "default": "You like your evenings long and your rooms a little smoky. Bonfire smells like having nowhere to be."
+    },
+    {
+      "type": "text",
+      "id": "bonfire_price",
+      "label": "Price (used until a product is picked)",
+      "default": "$24"
+    },
+    {
+      "type": "text",
+      "id": "bonfire_link_label",
+      "label": "Link label",
+      "default": "Meet Bonfire"
+    },
+    {
+      "type": "url",
+      "id": "bonfire_link",
+      "label": "Link (used until a product is picked)"
+    },
+    {
+      "type": "header",
+      "content": "Result: Yoga Studio"
+    },
+    {
+      "type": "product",
+      "id": "yoga_product",
+      "label": "Product",
+      "info": "Shown when Yoga Studio answers win Price, link and add-to-cart come from the product."
+    },
+    {
+      "type": "image_picker",
+      "id": "yoga_image",
+      "label": "Image"
+    },
+    {
+      "type": "text",
+      "id": "yoga_image_alt",
+      "label": "Image alt text",
+      "default": "Yoga Studio Palo Santo incense box standing on grey"
+    },
+    {
+      "type": "text",
+      "id": "yoga_title",
+      "label": "Title",
+      "default": "Yoga Studio"
+    },
+    {
+      "type": "text",
+      "id": "yoga_line",
+      "label": "Scent line",
+      "default": "Palo santo · warm resin and a citrus edge"
+    },
+    {
+      "type": "textarea",
+      "id": "yoga_text",
+      "label": "Text",
+      "default": "You light up to reset, not to wind down. Yoga Studio feels like a deep stretch and a long exhale."
+    },
+    {
+      "type": "text",
+      "id": "yoga_price",
+      "label": "Price (used until a product is picked)",
+      "default": "$24"
+    },
+    {
+      "type": "text",
+      "id": "yoga_link_label",
+      "label": "Link label",
+      "default": "Meet Yoga Studio"
+    },
+    {
+      "type": "url",
+      "id": "yoga_link",
+      "label": "Link (used until a product is picked)"
+    },
+    {
+      "type": "header",
+      "content": "Result: The Duo (tie)"
+    },
+    {
+      "type": "product",
+      "id": "duo_product",
+      "label": "Product",
+      "info": "Shown on a tie. Uses the Duo product from Theme settings if none is picked here. Price, link and add-to-cart come from the product."
+    },
+    {
+      "type": "image_picker",
+      "id": "duo_image",
+      "label": "Image"
+    },
+    {
+      "type": "text",
+      "id": "duo_image_alt",
+      "label": "Image alt text",
+      "default": "Bonfire and Yoga Studio boxes side by side"
+    },
+    {
+      "type": "text",
+      "id": "duo_title",
+      "label": "Title",
+      "default": "The Duo"
+    },
+    {
+      "type": "text",
+      "id": "duo_line",
+      "label": "Scent line",
+      "default": "Bonfire + Yoga Studio · one of each"
+    },
+    {
+      "type": "textarea",
+      "id": "duo_text",
+      "label": "Text",
+      "default": "You're a little of both, so don't pick. Bonfire for after dark, Yoga Studio for the reset, and $6 back in your pocket."
+    },
+    {
+      "type": "text",
+      "id": "duo_price",
+      "label": "Price (used until a product is picked)",
+      "default": "$42"
+    },
+    {
+      "type": "text",
+      "id": "duo_link_label",
+      "label": "Link label",
+      "default": "Meet the Duo"
+    },
+    {
+      "type": "url",
+      "id": "duo_link",
+      "label": "Link (used until a product is picked)"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "question",
+      "name": "Question",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Question",
+          "default": "When do you usually light one?"
+        },
+        {
+          "type": "header",
+          "content": "Answer A"
+        },
+        {
+          "type": "text",
+          "id": "a_label",
+          "label": "Answer",
+          "default": "After dark"
+        },
+        {
+          "type": "text",
+          "id": "a_sub",
+          "label": "Detail",
+          "default": "Lights low, the day's done"
+        },
+        {
+          "type": "select",
+          "id": "a_lean",
+          "label": "Points to",
+          "options": [
+            {
+              "value": "bonfire",
+              "label": "Bonfire"
+            },
+            {
+              "value": "yoga",
+              "label": "Yoga Studio"
+            },
+            {
+              "value": "both",
+              "label": "Both (counts for each)"
+            }
+          ],
+          "default": "bonfire"
+        },
+        {
+          "type": "header",
+          "content": "Answer B"
+        },
+        {
+          "type": "text",
+          "id": "b_label",
+          "label": "Answer",
+          "default": "Morning or midday"
+        },
+        {
+          "type": "text",
+          "id": "b_sub",
+          "label": "Detail",
+          "default": "A reset between things"
+        },
+        {
+          "type": "select",
+          "id": "b_lean",
+          "label": "Points to",
+          "options": [
+            {
+              "value": "bonfire",
+              "label": "Bonfire"
+            },
+            {
+              "value": "yoga",
+              "label": "Yoga Studio"
+            },
+            {
+              "value": "both",
+              "label": "Both (counts for each)"
+            }
+          ],
+          "default": "yoga"
+        },
+        {
+          "type": "header",
+          "content": "Answer C"
+        },
+        {
+          "type": "text",
+          "id": "c_label",
+          "label": "Answer",
+          "default": "Whenever, honestly"
+        },
+        {
+          "type": "text",
+          "id": "c_sub",
+          "label": "Detail",
+          "default": "No schedule, just vibes"
+        },
+        {
+          "type": "select",
+          "id": "c_lean",
+          "label": "Points to",
+          "options": [
+            {
+              "value": "bonfire",
+              "label": "Bonfire"
+            },
+            {
+              "value": "yoga",
+              "label": "Yoga Studio"
+            },
+            {
+              "value": "both",
+              "label": "Both (counts for each)"
+            }
+          ],
+          "default": "both"
+        },
+        {
+          "type": "header",
+          "content": "Answer D"
+        },
+        {
+          "type": "text",
+          "id": "d_label",
+          "label": "Answer",
+          "info": "Leave empty to hide this answer"
+        },
+        {
+          "type": "text",
+          "id": "d_sub",
+          "label": "Detail"
+        },
+        {
+          "type": "select",
+          "id": "d_lean",
+          "label": "Points to",
+          "options": [
+            {
+              "value": "bonfire",
+              "label": "Bonfire"
+            },
+            {
+              "value": "yoga",
+              "label": "Yoga Studio"
+            },
+            {
+              "value": "both",
+              "label": "Both (counts for each)"
+            }
+          ],
+          "default": "both"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Smell Test quiz",
+      "blocks": [
+        {
+          "type": "question"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

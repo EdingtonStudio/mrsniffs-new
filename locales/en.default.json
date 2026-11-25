@@ -1,0 +1,48 @@
+{
+  "general": {
+    "skip_to_content": "Skip to content",
+    "announcement": "Announcement",
+    "primary_nav": "Primary",
+    "footer_nav": "Footer",
+    "home": "home",
+    "search": "Search",
+    "open_menu": "Open menu",
+    "page": "Page {{ page }}"
+  },
+  "cart": {
+    "label": "Cart, {{ count }} items",
+    "empty_title": "Nothing to sniff here yet.",
+    "empty_text": "Your cart is empty. Start with a scent, or let the Smell Test pick one.",
+    "shop_cta": "Shop incense",
+    "quiz_cta": "Find your scent",
+    "title": "Your cart",
+    "subtotal": "Subtotal",
+    "taxes": "Shipping and taxes calculated at checkout.",
+    "checkout": "Checkout",
+    "remove": "Remove",
+    "quantity": "Quantity",
+    "update": "Update"
+  },
+  "newsletter": {
+    "email_label": "Email address"
+  },
+  "products": {
+    "add_to_cart": "Add to cart",
+    "sold_out": "Sold out",
+    "unavailable": "Unavailable",
+    "choose_product": "Pick a product in the theme editor"
+  },
+  "search": {
+    "title": "Search",
+    "placeholder": "Search scents, holders, help",
+    "results": "{{ count }} results for “{{ terms }}”",
+    "no_results": "Nothing matches “{{ terms }}”. Try a scent name, “holder” or “shipping”.",
+    "submit": "Search"
+  },
+  "password": {
+    "enter": "Enter",
+    "password": "Password",
+    "owner": "Store owner?",
+    "login": "Log in here"
+  }
+}

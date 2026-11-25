@@ -1,0 +1,7 @@
+{%- doc -%}
+  Inline theme icon image.
+  @param {string} name - asset filename, e.g. 'cart-ink.svg'
+  @param {number} [size] - width and height (default 20)
+  @param {string} [class] - class attribute
+{%- enddoc -%}
+<img{% if class != blank %} class="{{ class }}"{% endif %} src="{{ name | asset_url }}" width="{{ size | default: 20 }}" height="{{ size | default: 20 }}" alt="">

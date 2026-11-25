@@ -1,0 +1,67 @@
+{%- doc -%}
+  One PDP gallery tile from a "tile" block of sections/pdp-main.liquid.
+
+  @param {object} block - the tile block
+  @param {boolean} [main] - true for the large first tile
+{%- enddoc -%}
+{%- liquid
+  assign s = block.settings
+  assign cls = 'pdp-tile'
+  if main
+    assign cls = cls | append: ' pdp-tile--main'
+  endif
+  case s.style
+    when 'photo'
+      if main
+        assign cls = cls | append: ' pdp-tile--photo'
+      else
+        assign cls = cls | append: ' pdp-tile--man'
+      endif
+    when 'main_crop'
+      unless main
+        assign cls = cls | append: ' pdp-tile--man'
+      endunless
+    when 'cover'
+      assign cls = cls | append: ' pdp-tile--man'
+    when 'cover_low'
+      assign cls = cls | append: ' pdp-tile--man pdp-tile--show-boxes'
+    when 'holder'
+      assign cls = cls | append: ' pdp-tile--holder'
+    when 'angled'
+      assign cls = cls | append: ' pdp-tile--angled'
+    when 'stick'
+      assign cls = cls | append: ' pdp-tile--stick'
+    when 'placeholder'
+      assign cls = cls | append: ' pdp-tile--placeholder'
+  endcase
+  if main
+    assign img_loading = 'eager'
+    assign img_attrs = 'fetchpriority="high"'
+    assign img_sizes = '(max-width: 900px) 84vw, 50vw'
+  else
+    assign img_loading = 'lazy'
+    assign img_attrs = ''
+    assign img_sizes = '(max-width: 900px) 84vw, 25vw'
+  endif
+-%}
+{%- case s.style -%}
+  {%- when 'placeholder' -%}
+    <figure class="{{ cls }}" aria-label="{{ s.alt | default: 'Photo coming soon' | escape }}" {{ block.shopify_attributes }}>{{ s.placeholder_text }}</figure>
+  {%- when 'angled' -%}
+    <figure class="{{ cls }}" {{ block.shopify_attributes }}>
+      <img class="pdp-tile__shadow" src="{{ 'pdp-gallery-shadow.svg' | asset_url }}" width="392" height="243" alt="">
+      <span class="pdp-tile__box">{% render 'pdp-img', image: s.image, asset: s.asset, alt: s.alt, loading: img_loading, attrs: img_attrs, sizes: '200px' %}</span>
+    </figure>
+  {%- when 'stick' -%}
+    <figure class="{{ cls }}" {{ block.shopify_attributes }}>
+      {% render 'pdp-img', image: s.image, asset: s.asset, alt: s.alt, loading: img_loading, attrs: img_attrs, sizes: img_sizes %}
+      <span class="pdp-tile__measure" aria-hidden="true"></span>
+      {%- if s.caption_1 != blank or s.caption_2 != blank -%}
+        <figcaption><span>{{ s.caption_1 }}</span><span>{{ s.caption_2 }}</span></figcaption>
+      {%- endif -%}
+    </figure>
+  {%- else -%}
+    <figure class="{{ cls }}" {{ block.shopify_attributes }}>
+      {% render 'pdp-img', image: s.image, asset: s.asset, alt: s.alt, loading: img_loading, attrs: img_attrs, sizes: img_sizes %}
+    </figure>
+{%- endcase -%}

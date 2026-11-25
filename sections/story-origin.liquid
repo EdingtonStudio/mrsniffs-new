@@ -1,0 +1,64 @@
+{{ 'story.css' | asset_url | stylesheet_tag }}
+
+<section class="origin" aria-labelledby="origin-title-{{ section.id }}">
+  <div class="origin__copy">
+    <header class="origin__head" data-reveal>
+      {%- if section.settings.eyebrow != blank -%}<p class="eyebrow">{{ section.settings.eyebrow }}</p>{%- endif -%}
+      <h2 class="display-l" id="origin-title-{{ section.id }}">{{ section.settings.heading }}</h2>
+      {%- if section.settings.lede != blank -%}<p class="lede">{{ section.settings.lede }}</p>{%- endif -%}
+    </header>
+    <ol class="origin__beats">
+      {%- for block in section.blocks -%}
+        <li class="origin__beat" data-reveal style="--d: {{ forloop.index }}" {{ block.shopify_attributes }}>
+          <span class="origin__num mono">{{ block.settings.number }}</span>
+          <h3 class="origin__title">{{ block.settings.title }}</h3>
+          <p>{{ block.settings.text }}</p>
+        </li>
+      {%- endfor -%}
+    </ol>
+    {%- if section.settings.sign != blank -%}
+      <p class="origin__sign mono" data-reveal style="--d: {{ section.blocks.size | plus: 1 }}">{{ section.settings.sign }}</p>
+    {%- endif -%}
+  </div>
+  <figure class="origin__media" data-reveal style="--d: 1">
+    {% render 'ms-image', image: section.settings.image, fallback: 'smell-hero.webp', alt: section.settings.image_alt, width: 1800, height: 1005, sizes: '(max-width: 900px) 100vw, 55vw' %}
+  </figure>
+</section>
+
+{% schema %}
+{
+  "name": "Story origin",
+  "class": "section-story-origin",
+  "max_blocks": 6,
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "How it started" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "HOW MR. SNIFF’S GOT ITS NOSE." },
+    { "type": "textarea", "id": "lede", "label": "Intro", "default": "It started the way most good ideas do: a few friends, a late night and one very bad stick of incense." },
+    { "type": "text", "id": "sign", "label": "Sign-off line", "default": "Two scents. One nose. Come get a whiff." },
+    { "type": "header", "content": "Image" },
+    { "type": "image_picker", "id": "image", "label": "Image", "info": "Defaults to the boxes-on-books photo" },
+    { "type": "text", "id": "image_alt", "label": "Image alt text", "default": "Bonfire and Yoga Studio boxes on a stack of books beside a moustache holder with a burning stick" }
+  ],
+  "blocks": [
+    {
+      "type": "beat",
+      "name": "Story beat",
+      "settings": [
+        { "type": "text", "id": "number", "label": "Number", "default": "01" },
+        { "type": "text", "id": "title", "label": "Title", "default": "The bad stick." },
+        { "type": "textarea", "id": "text", "label": "Text", "default": "Somebody lit a stick from a gas-station counter." }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Story origin",
+      "blocks": [
+        { "type": "beat", "settings": { "number": "01", "title": "The bad stick." } },
+        { "type": "beat", "settings": { "number": "02", "title": "The fix." } },
+        { "type": "beat", "settings": { "number": "03", "title": "The name." } }
+      ]
+    }
+  ]
+}
+{% endschema %}

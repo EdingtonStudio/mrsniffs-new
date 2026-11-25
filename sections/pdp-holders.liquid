@@ -1,0 +1,108 @@
+{{ 'pdp.css' | asset_url | stylesheet_tag }}
+<section class="holders pdp-holders" id="holders" aria-labelledby="holders-title-{{ section.id }}">
+  <header class="section-head" data-reveal>
+    <h2 class="display-l" id="holders-title-{{ section.id }}">{{ section.settings.title }}</h2>
+    {%- if section.settings.lede != blank -%}<p class="lede">{{ section.settings.lede }}</p>{%- endif -%}
+  </header>
+
+  <div class="holders__grid">
+    {%- for block in section.blocks -%}
+      {%- liquid
+        assign s = block.settings
+        assign p = s.product
+        assign name = s.name
+        assign href = s.url
+        assign sold_out = true
+        if p != blank
+          if name == blank
+            assign name = p.title
+          endif
+          assign href = p.url
+          if p.available
+            assign sold_out = false
+          endif
+        endif
+        assign notify_id = 'notify-' | append: block.id
+      -%}
+      <article class="holder-card gleam gleam--bonfire gleam--light" data-reveal{% if forloop.index0 > 0 %} style="--d: {{ forloop.index0 }}"{% endif %} {{ block.shopify_attributes }}>
+        <div class="holder-card__media">
+          {%- if s.image == blank and s.asset == blank and p.featured_image -%}
+            {{ p.featured_image | image_url: width: 900 | image_tag: widths: '450, 900', sizes: '(max-width: 900px) 80vw, 33vw', alt: name, loading: 'lazy' }}
+          {%- else -%}
+            {% render 'pdp-img', image: s.image, asset: s.asset, alt: s.alt, sizes: '(max-width: 900px) 80vw, 33vw' %}
+          {%- endif -%}
+          {%- if sold_out and s.chip != blank -%}<span class="chip">{{ s.chip }}</span>{%- endif -%}
+        </div>
+        <div class="holder-card__body">
+          <div class="holder-card__info">
+            <div>
+              <h3 class="product-name"><a href="{{ href | default: '#' }}">{{ name }}</a></h3>
+              {%- if s.desc != blank -%}<p class="product-desc">{{ s.desc }}</p>{%- endif -%}
+            </div>
+            <p class="product-price">{% if p != blank %}{% if p.price_varies %}From {% endif %}{{ p.price | money_without_trailing_zeros }}{% else %}{{ s.price }}{% endif %}</p>
+          </div>
+          {%- if sold_out -%}
+            <div class="holder-card__actions" data-notify>
+              <button class="btn btn--solid btn--sm btn--block" type="button" data-notify-open>{{ section.settings.notify_label }}</button>
+              {%- form 'contact', id: notify_id, class: 'notify-form', data-notify-form: '', novalidate: 'novalidate', hidden: 'hidden' -%}
+                <input type="hidden" name="contact[tags]" value="notify-me">
+                <input type="hidden" name="contact[product]" value="{{ name | escape }}">
+                <input type="hidden" name="contact[body]" value="Notify me when {{ name | escape }} is back in stock.">
+                <label class="sr-only" for="{{ notify_id }}-email">Email for {{ name | escape }} restock</label>
+                <input id="{{ notify_id }}-email" name="contact[email]" type="email" placeholder="{{ section.settings.notify_placeholder | escape }}" required autocomplete="email">
+                <button class="btn btn--solid btn--sm" type="submit">{{ section.settings.notify_send }}</button>
+              {%- endform -%}
+              <p class="form-msg" data-notify-msg role="status"></p>
+            </div>
+          {%- else -%}
+            <div class="holder-card__actions">
+              <button class="btn btn--solid btn--sm btn--block" type="button" data-add-to-cart="{{ p.selected_or_first_available_variant.id }}">{{ section.settings.add_label }}</button>
+            </div>
+          {%- endif -%}
+        </div>
+      </article>
+    {%- endfor -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Holders",
+  "settings": [
+    { "type": "text", "id": "title", "label": "Heading", "default": "SOMEWHERE TO STICK IT" },
+    { "type": "text", "id": "lede", "label": "Text", "default": "Optional. Never preselected. Sold-out status respected." },
+    { "type": "text", "id": "add_label", "label": "Add to cart label (in stock)", "default": "Add to cart" },
+    { "type": "text", "id": "notify_label", "label": "Notify me button (sold out)", "default": "Notify me" },
+    { "type": "text", "id": "notify_placeholder", "label": "Notify email placeholder", "default": "your@email.com" },
+    { "type": "text", "id": "notify_send", "label": "Notify send button", "default": "Send" }
+  ],
+  "blocks": [
+    {
+      "type": "holder",
+      "name": "Holder",
+      "settings": [
+        { "type": "product", "id": "product", "label": "Product", "info": "Sets link, price and stock. Sold out shows Notify me." },
+        { "type": "text", "id": "name", "label": "Display name", "default": "Ash Catchum", "info": "Empty uses the product title" },
+        { "type": "text", "id": "desc", "label": "Description", "default": "Matte-black stoneware ash catcher for incense sticks." },
+        { "type": "text", "id": "price", "label": "Price (no product picked)", "default": "$22" },
+        { "type": "url", "id": "url", "label": "Link (no product picked)" },
+        { "type": "image_picker", "id": "image", "label": "Image" },
+        { "type": "text", "id": "asset", "label": "Theme image file", "default": "holder-ash-catchum.webp", "info": "Used when no image is picked. Clear both to use the product image." },
+        { "type": "text", "id": "alt", "label": "Alt text", "default": "Ash Catchum round stoneware ash catcher with a burning stick" },
+        { "type": "text", "id": "chip", "label": "Sold-out badge", "default": "Sold-out" }
+      ]
+    }
+  ],
+  "max_blocks": 6,
+  "presets": [
+    {
+      "name": "Holders",
+      "blocks": [
+        { "type": "holder" },
+        { "type": "holder", "settings": { "name": "Stachin’ Ash", "desc": "Moustache-shaped black stoneware ash catcher.", "price": "$38", "asset": "holder-stachin-ash.webp", "alt": "Stachin' Ash moustache-shaped stoneware holder with a burning stick" } },
+        { "type": "holder", "settings": { "name": "Brass Monkey", "desc": "Blackened brass incense holder.", "price": "$85", "asset": "holder-brass-monkey.webp", "alt": "Brass Monkey blackened brass holder with a burning stick" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

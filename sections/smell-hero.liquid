@@ -1,0 +1,40 @@
+{{ 'smell.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'smell.js' | asset_url }}" defer></script>
+
+<section class="smell-hero" aria-labelledby="smell-title-{{ section.id }}">
+  <div class="smell-hero__frame">
+    {% render 'ms-image', image: section.settings.image, fallback: 'smell-hero.webp', alt: section.settings.image_alt, width: 1800, height: 1005, class: 'smell-hero__img', loading: 'eager', attrs: 'fetchpriority="high" data-parallax="0.08"' %}
+    <div class="smell-hero__copy">
+      <h1 class="smell-hero__title" id="smell-title-{{ section.id }}" data-split>{{ section.settings.title | escape }}</h1>
+      {%- if section.settings.lede != blank -%}<p class="smell-hero__lede" data-reveal style="--d: 3">{{ section.settings.lede }}</p>{%- endif -%}
+      {%- if section.settings.meta != blank -%}<p class="smell-hero__meta" data-reveal style="--d: 4">{{ section.settings.meta }}</p>{%- endif -%}
+      <div class="smell-hero__actions" data-reveal style="--d: 5">
+        {%- if section.settings.start_label != blank -%}
+          <a class="btn btn--light btn--sm" href="#smell-test">{{ section.settings.start_label }}</a>
+        {%- endif -%}
+        {%- if section.settings.compare_label != blank -%}
+          <a class="btn btn--ghost-light btn--sm" href="{{ section.settings.compare_link | default: routes.all_products_collection_url }}">{{ section.settings.compare_label }}</a>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Smell Test intro",
+  "class": "section-smell-hero",
+  "settings": [
+    { "type": "image_picker", "id": "image", "label": "Background image", "info": "Defaults to the boxes-on-books photo" },
+    { "type": "text", "id": "image_alt", "label": "Image alt text", "default": "Bonfire and Yoga Studio boxes on a stack of books beside a moustache holder with a burning stick" },
+    { "type": "text", "id": "title", "label": "Headline", "default": "FIND YOUR WHIFF." },
+    { "type": "text", "id": "lede", "label": "Intro line", "default": "A few quick picks. A scent to meet." },
+    { "type": "text", "id": "meta", "label": "Small print", "default": "4 QUESTIONS · ABOUT 30 SECONDS · NO EMAIL NEEDED" },
+    { "type": "header", "content": "Buttons" },
+    { "type": "text", "id": "start_label", "label": "Start button label", "info": "Scrolls down to the Smell Test section", "default": "Start the Smell Test" },
+    { "type": "text", "id": "compare_label", "label": "Second button label", "default": "Compare scents instead" },
+    { "type": "url", "id": "compare_link", "label": "Second button link" }
+  ],
+  "presets": [{ "name": "Smell Test intro" }]
+}
+{% endschema %}

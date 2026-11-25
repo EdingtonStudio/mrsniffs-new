@@ -1,0 +1,67 @@
+{{ 'shop.css' | asset_url | stylesheet_tag }}
+{%- assign title_id = 'faq-title-' | append: section.id -%}
+<section class="faq faq--wide" id="{{ section.settings.anchor | default: 'faq' | handleize }}" aria-labelledby="{{ title_id }}">
+  <div class="faq__inner">
+    <h2 class="display-l" id="{{ title_id }}" data-reveal>{{ section.settings.heading | escape }}</h2>
+    <div class="accordion" data-reveal style="--d: 1">
+      {%- for block in section.blocks -%}
+        <details class="accordion__item" data-accordion {{ block.shopify_attributes }}>
+          <summary><span>{{ block.settings.question | escape }}</span>{% render 'icon', name: 'plus.svg', size: 18 %}</summary>
+          <div class="accordion__panel">{{ block.settings.answer }}</div>
+        </details>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Shop FAQ",
+  "max_blocks": 20,
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "QUESTIONS BEFORE YOU BUY"
+    },
+    {
+      "type": "text",
+      "id": "anchor",
+      "label": "Anchor id",
+      "default": "faq"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "question",
+      "name": "Question",
+      "settings": [
+        {
+          "type": "text",
+          "id": "question",
+          "label": "Question",
+          "default": "How long do they burn?"
+        },
+        {
+          "type": "richtext",
+          "id": "answer",
+          "label": "Answer",
+          "default": "<p>Snap a piece for a 10-minute reset, or light a full stick for about a 45-minute burn.</p>"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Shop FAQ",
+      "blocks": [
+        { "type": "question" },
+        { "type": "question", "settings": { "question": "Do I need a holder?", "answer": "<p>Yes. Burn incense in a stable, heat-resistant holder that catches falling ash.</p>" } },
+        { "type": "question", "settings": { "question": "When will the holders be back?", "answer": "<p>[Pending — approved restock messaging goes here.]</p>" } },
+        { "type": "question", "settings": { "question": "What is in each pack?", "answer": "<p>[Pending confirmation — approved pack contents go here.]</p>" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

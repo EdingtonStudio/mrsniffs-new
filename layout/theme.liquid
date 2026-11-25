@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="{{ request.locale.iso_code }}"{% if request.design_mode %} class="shopify-design-mode"{% endif %}>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="canonical" href="{{ canonical_url }}">
+  {%- if settings.favicon != blank -%}
+    <link rel="icon" type="image/png" href="{{ settings.favicon | image_url: width: 64, height: 64 }}">
+  {%- endif -%}
+  <title>{{ page_title }}{% if current_page != 1 %} — {{ 'general.page' | t: page: current_page }}{% endif %}{% unless page_title contains shop.name %} — {{ shop.name }}{% endunless %}</title>
+  {%- if page_description -%}<meta name="description" content="{{ page_description | escape }}">{%- endif -%}
+  {% render 'meta-tags' %}
+
+  {{ 'big-shoulders-display-latin-700-normal.woff2' | asset_url | preload_tag: as: 'font', type: 'font/woff2', crossorigin: true }}
+  {{ 'inter-latin-400-normal.woff2' | asset_url | preload_tag: as: 'font', type: 'font/woff2', crossorigin: true }}
+  {{ 'tokens.css' | asset_url | stylesheet_tag }}
+  {{ 'main.css' | asset_url | stylesheet_tag }}
+  {{ 'theme-shopify.css' | asset_url | stylesheet_tag }}
+
+  <script>
+    window.MrSniffs = {
+      routes: {
+        root: {{ routes.root_url | json }},
+        cart: {{ routes.cart_url | json }},
+        cartAdd: {{ routes.cart_add_url | json }},
+        cartChange: {{ routes.cart_change_url | json }},
+        search: {{ routes.search_url | json }},
+        predictiveSearch: {{ routes.predictive_search_url | json }},
+        shop: {% if settings.shop_link != blank %}{{ settings.shop_link | json }}{% else %}{{ routes.all_products_collection_url | json }}{% endif %},
+        quiz: {{ settings.quiz_link | default: '' | json }}
+      },
+      moneyFormat: {{ shop.money_format | json }},
+      freeShippingCents: {{ settings.free_shipping_threshold | times: 100 | json }},
+      duo: {% if settings.duo_product != blank %}{ "variantId": {{ settings.duo_product.selected_or_first_available_variant.id | json }}, "price": {{ settings.duo_product.price | json }}, "title": {{ settings.duo_product.title | json }}, "image": {% if settings.duo_product.featured_image %}{{ settings.duo_product.featured_image | image_url: width: 240 | json }}{% else %}{{ 'shop-duo.webp' | asset_url | json }}{% endif %} }{% else %}null{% endif %},
+      scentHandles: [{% for p in settings.scent_products %}{{ p.handle | json }}{% unless forloop.last %},{% endunless %}{% endfor %}],
+      klaviyo: { companyId: {{ settings.klaviyo_company_id | json }}, listId: {{ settings.klaviyo_list_id | json }} },
+      searchSuggestions: {{ settings.search_suggestions | split: ',' | json }},
+      assets: { bagInk: {{ 'bag-ink.svg' | asset_url | json }}, searchInk: {{ 'search-ink.svg' | asset_url | json }} },
+      strings: {
+        emptyTitle: {{ 'cart.empty_title' | t | json }},
+        emptyText: {{ 'cart.empty_text' | t | json }},
+        shopCta: {{ 'cart.shop_cta' | t | json }},
+        quizCta: {{ 'cart.quiz_cta' | t | json }}
+      }
+    };
+  </script>
+  <script src="{{ 'main.js' | asset_url }}" defer></script>
+  <script src="{{ 'cart.js' | asset_url }}" defer></script>
+  <script src="{{ 'search.js' | asset_url }}" defer></script>
+  {%- if settings.smoke_cursor -%}<script src="{{ 'smoke.js' | asset_url }}" defer></script>{%- endif -%}
+
+  {{ content_for_header }}
+</head>
+{%- liquid
+  assign body_class = 'template-' | append: template.name
+  if template.suffix
+    assign body_class = body_class | append: ' template-' | append: template.name | append: '--' | append: template.suffix
+  endif
+  case template.name
+    when 'product'
+      assign body_class = body_class | append: ' page-pdp'
+    when 'collection' or 'list-collections'
+      assign body_class = body_class | append: ' page-shop'
+    when 'page'
+      case template.suffix
+        when 'story'
+          assign body_class = body_class | append: ' page-story'
+        when 'how-to'
+          assign body_class = body_class | append: ' page-howto'
+        when 'smell-test'
+          assign body_class = body_class | append: ' page-smell'
+        else
+          assign body_class = body_class | append: ' page-info'
+      endcase
+    when 'index'
+    else
+      assign body_class = body_class | append: ' page-info'
+  endcase
+  if request.page_type == 'policy'
+    assign body_class = body_class | append: ' page-info page-policy'
+  endif
+-%}
+<body class="{{ body_class }}">
+  <a class="skip-link" href="#main">{{ 'general.skip_to_content' | t }}</a>
+  {% sections 'header-group' %}
+  <main id="main">
+    {{ content_for_layout }}
+  </main>
+  {% sections 'footer-group' %}
+</body>
+</html>

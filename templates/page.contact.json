@@ -1,0 +1,54 @@
+{
+  "sections": {
+    "hero": {
+      "type": "info-hero",
+      "settings": {
+        "eyebrow": "Help",
+        "heading": "Get in touch",
+        "lede": "Order question, scent question or a wild collab idea. We read every message.",
+        "meta": ""
+      }
+    },
+    "contact": {
+      "type": "info-contact",
+      "blocks": {
+        "faq": {
+          "type": "link",
+          "settings": {
+            "label": "FAQ",
+            "link": "/pages/faq"
+          }
+        },
+        "shipping": {
+          "type": "link",
+          "settings": {
+            "label": "Shipping",
+            "link": "/policies/shipping-policy"
+          }
+        },
+        "returns": {
+          "type": "link",
+          "settings": {
+            "label": "Returns & refunds",
+            "link": "/policies/refund-policy"
+          }
+        }
+      },
+      "block_order": [
+        "faq",
+        "shipping",
+        "returns"
+      ],
+      "settings": {
+        "email_label": "Email",
+        "email": "hello@mrsniffs.co",
+        "reply_note": "We reply within 1–3 business days.",
+        "links_label": "Quick answers"
+      }
+    }
+  },
+  "order": [
+    "hero",
+    "contact"
+  ]
+}

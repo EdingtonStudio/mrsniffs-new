@@ -1,0 +1,62 @@
+{{ 'pdp.css' | asset_url | stylesheet_tag }}
+<section class="pdp-steps" aria-labelledby="steps-title-{{ section.id }}" data-steps-align>
+  <div class="pdp-steps__head">
+    <div data-reveal>
+      <h2 class="display-l" id="steps-title-{{ section.id }}">{{ section.settings.title }}</h2>
+      {%- if section.settings.lede != blank -%}<p class="lede">{{ section.settings.lede }}</p>{%- endif -%}
+    </div>
+    {%- if section.settings.cta_label != blank -%}
+      <a class="btn btn--outline btn--sm pdp-steps__cta" href="{{ section.settings.cta_url | default: '#' }}" data-reveal>{{ section.settings.cta_label }}</a>
+    {%- endif -%}
+  </div>
+  <ol class="pdp-steps__list">
+    {%- for block in section.blocks -%}
+      {%- assign s = block.settings -%}
+      {%- assign crop = forloop.index | at_most: 4 -%}
+      <li class="pstep" style="--i: {{ forloop.index0 }}" {{ block.shopify_attributes }}>
+        <span class="pstep__num">{% if forloop.index < 10 %}0{% endif %}{{ forloop.index }}</span>
+        <div class="pstep__body">
+          <div class="pstep__text"><h3>{{ s.title }}</h3><p>{{ s.text }}</p></div>
+          <div class="pstep__img pstep__img--{{ crop }}">{% render 'pdp-img', image: s.image, asset: s.asset, alt: s.alt, sizes: '(max-width: 900px) 100vw, 25vw' %}</div>
+        </div>
+      </li>
+    {%- endfor -%}
+  </ol>
+</section>
+
+{% schema %}
+{
+  "name": "Steps",
+  "settings": [
+    { "type": "text", "id": "title", "label": "Heading", "default": "SOMEWHERE TO STICK IT" },
+    { "type": "text", "id": "lede", "label": "Text", "default": "A few simple steps for a better burn." },
+    { "type": "text", "id": "cta_label", "label": "Button label", "default": "Read the full guide" },
+    { "type": "url", "id": "cta_url", "label": "Button link" }
+  ],
+  "blocks": [
+    {
+      "type": "step",
+      "name": "Step",
+      "settings": [
+        { "type": "text", "id": "title", "label": "Heading", "default": "Set Up" },
+        { "type": "text", "id": "text", "label": "Text", "default": "Choose a heatproof surface." },
+        { "type": "image_picker", "id": "image", "label": "Image" },
+        { "type": "text", "id": "asset", "label": "Theme image file", "info": "Used when no image is picked" },
+        { "type": "text", "id": "alt", "label": "Alt text" }
+      ]
+    }
+  ],
+  "max_blocks": 4,
+  "presets": [
+    {
+      "name": "Steps",
+      "blocks": [
+        { "type": "step", "settings": { "title": "Set Up", "text": "Choose a heatproof surface.", "asset": "pdp-step-1.webp", "alt": "Black stoneware holder and an unlit stick on a dark surface" } },
+        { "type": "step", "settings": { "title": "Light", "text": "Light the incense tip.", "asset": "pdp-step-2.webp", "alt": "Flame catching the tip of an incense stick" } },
+        { "type": "step", "settings": { "title": "Place", "text": "Rest securely in holder.", "asset": "pdp-step-3.webp", "alt": "Burning stick resting in a long black holder" } },
+        { "type": "step", "settings": { "title": "Put Out", "text": "Extinguish completely after use.", "asset": "pdp-step-4.webp", "alt": "Stick put out in the holder with a last wisp of smoke" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

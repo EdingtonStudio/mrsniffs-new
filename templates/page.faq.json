@@ -1,0 +1,183 @@
+{
+  "sections": {
+    "hero": {
+      "type": "info-hero",
+      "settings": {
+        "eyebrow": "Help",
+        "heading": "Before you light one",
+        "lede": "Answers to the questions we hear most. Still stuck? <a href=\"/pages/contact\">Get in touch</a>.",
+        "meta": ""
+      }
+    },
+    "topics": {
+      "type": "info-faq-nav",
+      "settings": {
+        "label": "Topics"
+      }
+    },
+    "topic-scents": {
+      "type": "info-faq-topic",
+      "blocks": {
+        "q1": {
+          "type": "question",
+          "settings": {
+            "question": "What's the difference between Bonfire and Yoga Studio?",
+            "answer": "<p>Bonfire is agarwood: dark resin and smoke, made for after dark. Yoga Studio is palo santo: warm resin with a citrus edge, made for a reset. Not sure? <a href=\"/pages/smell-test\">Take the Smell Test</a> or get <a href=\"/products/duo\">the Duo</a>.</p>"
+          }
+        },
+        "q2": {
+          "type": "question",
+          "settings": {
+            "question": "What are the sticks made of?",
+            "answer": "<p>Aromatic wood powder, a natural bark binder and water. No synthetic fragrance, no added perfume and no dyes. There's no bamboo core; it's wood all the way through.</p>"
+          }
+        },
+        "q3": {
+          "type": "question",
+          "settings": {
+            "question": "How many sticks come in a pack, and how long do they burn?",
+            "answer": "<p>About 50 sticks per box (25 g). Each stick is 210 mm (8.25 in) and burns for about 45 minutes.</p>"
+          }
+        },
+        "q4": {
+          "type": "question",
+          "settings": {
+            "question": "Where are they made?",
+            "answer": "<p>In Taiwan. The sticks are extruded and sun-dried, the Japanese way.</p>"
+          }
+        },
+        "q5": {
+          "type": "question",
+          "settings": {
+            "question": "How should I store them?",
+            "answer": "<p>Keep sticks in the box, somewhere cool and dry, away from direct sun.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "q1",
+        "q2",
+        "q3",
+        "q4",
+        "q5"
+      ],
+      "settings": {
+        "heading": "Scents and sticks",
+        "anchor": "scents"
+      }
+    },
+    "topic-burning": {
+      "type": "info-faq-topic",
+      "blocks": {
+        "q1": {
+          "type": "question",
+          "settings": {
+            "question": "Do I need a holder?",
+            "answer": "<p>Yes. Burn incense in a stable, heat-resistant holder that catches falling ash. Ours are made for our 210 mm sticks.</p>"
+          }
+        },
+        "q2": {
+          "type": "question",
+          "settings": {
+            "question": "How do I light a stick?",
+            "answer": "<p>Light the tip, let it catch for a few seconds, then blow out the flame so it glows. Full steps are in <a href=\"/pages/how-to-use\">How to use incense</a>.</p>"
+          }
+        },
+        "q3": {
+          "type": "question",
+          "settings": {
+            "question": "Is it safe around pets and kids?",
+            "answer": "<p>Keep burning incense out of reach, burn in a ventilated room and never leave a lit stick unattended.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "q1",
+        "q2",
+        "q3"
+      ],
+      "settings": {
+        "heading": "Burning and safety",
+        "anchor": "burning"
+      }
+    },
+    "topic-orders": {
+      "type": "info-faq-topic",
+      "blocks": {
+        "q1": {
+          "type": "question",
+          "settings": {
+            "question": "Where do you ship?",
+            "answer": "<p>Within the United States for now. Details in our <a href=\"/policies/shipping-policy\">Shipping policy</a>.</p>"
+          }
+        },
+        "q2": {
+          "type": "question",
+          "settings": {
+            "question": "How long does delivery take?",
+            "answer": "<p>Most orders ship within 1–3 business days. Options and delivery estimates show at checkout.</p>"
+          }
+        },
+        "q3": {
+          "type": "question",
+          "settings": {
+            "question": "What's in the Duo?",
+            "answer": "<p>One pack of Bonfire and one pack of Yoga Studio for $42, $6 less than buying them separately.</p>"
+          }
+        },
+        "q4": {
+          "type": "question",
+          "settings": {
+            "question": "A holder is sold out. Will it come back?",
+            "answer": "<p>Yes. Tap Notify me on the holder's page and we'll email you when it's back.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "q1",
+        "q2",
+        "q3",
+        "q4"
+      ],
+      "settings": {
+        "heading": "Orders and shipping",
+        "anchor": "orders"
+      }
+    },
+    "topic-returns": {
+      "type": "info-faq-topic",
+      "blocks": {
+        "q1": {
+          "type": "question",
+          "settings": {
+            "question": "Can I return my order?",
+            "answer": "<p>Unopened items can be returned within 30 days. Opened incense can't be returned. See the <a href=\"/policies/refund-policy\">Returns &amp; refunds policy</a>.</p>"
+          }
+        },
+        "q2": {
+          "type": "question",
+          "settings": {
+            "question": "My order arrived damaged.",
+            "answer": "<p>Sorry about that. Email us a photo and your order number and we'll make it right.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "q1",
+        "q2"
+      ],
+      "settings": {
+        "heading": "Returns",
+        "anchor": "returns"
+      }
+    }
+  },
+  "order": [
+    "hero",
+    "topics",
+    "topic-scents",
+    "topic-burning",
+    "topic-orders",
+    "topic-returns"
+  ]
+}

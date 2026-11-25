@@ -1,0 +1,207 @@
+{%- doc -%}
+  PDP image: a merchant-picked image, else a bundled theme asset whose intrinsic
+  size is looked up here (so blocks only need the asset filename).
+
+  @param {object} [image] - image from an image_picker setting
+  @param {string} [asset] - theme asset filename used when no image is picked
+  @param {string} [alt] - alt text (empty string for decorative images)
+  @param {string} [class] - class attribute
+  @param {string} [sizes] - sizes attribute
+  @param {string} [loading] - 'lazy' (default) or 'eager'
+  @param {string} [attrs] - extra raw attributes
+{%- enddoc -%}
+{%- liquid
+  assign w = 1200
+  assign h = 1200
+  case asset
+    when 'box-bonfire.webp'
+      assign w = 267
+      assign h = 800
+    when 'box-yoga.webp'
+      assign w = 197
+      assign h = 600
+    when 'decide-burn.webp'
+      assign w = 733
+      assign h = 1100
+    when 'decide-holder.webp'
+      assign w = 886
+      assign h = 1100
+    when 'duo-branch.webp'
+      assign w = 942
+      assign h = 1400
+    when 'footer-wordmark.svg'
+      assign w = 1220
+      assign h = 511
+    when 'gallery-1.webp'
+      assign w = 615
+      assign h = 1100
+    when 'gallery-2.webp'
+      assign w = 615
+      assign h = 1100
+    when 'gallery-3.webp'
+      assign w = 1200
+      assign h = 1800
+    when 'gallery-4.webp'
+      assign w = 733
+      assign h = 1100
+    when 'gallery-5.webp'
+      assign w = 733
+      assign h = 1100
+    when 'gallery-6.webp'
+      assign w = 615
+      assign h = 1100
+    when 'gallery-7.webp'
+      assign w = 733
+      assign h = 1100
+    when 'hero-bg.webp'
+      assign w = 2200
+      assign h = 1228
+    when 'hero.webp'
+      assign w = 2400
+      assign h = 1728
+    when 'holder-ash-catchum.webp'
+      assign w = 886
+      assign h = 1100
+    when 'holder-brass-monkey.webp'
+      assign w = 886
+      assign h = 1100
+    when 'holder-stachin-ash.webp'
+      assign w = 886
+      assign h = 1100
+    when 'howto-burn-catch.webp'
+      assign w = 1400
+      assign h = 788
+    when 'howto-burn-light.webp'
+      assign w = 1100
+      assign h = 619
+    when 'howto-burn-out.webp'
+      assign w = 880
+      assign h = 1100
+    when 'howto-burn-place.webp'
+      assign w = 1100
+      assign h = 619
+    when 'howto-card-holder.webp'
+      assign w = 900
+      assign h = 900
+    when 'howto-card-surface.webp'
+      assign w = 720
+      assign h = 900
+    when 'howto-card-vent.webp'
+      assign w = 1400
+      assign h = 788
+    when 'howto-care.webp'
+      assign w = 1400
+      assign h = 843
+    when 'howto-clears.webp'
+      assign w = 1200
+      assign h = 948
+    when 'howto-cta.webp'
+      assign w = 1906
+      assign h = 825
+    when 'howto-hero.webp'
+      assign w = 2200
+      assign h = 1228
+    when 'howto.webp'
+      assign w = 1800
+      assign h = 1005
+    when 'mascot.svg'
+      assign w = 494
+      assign h = 536
+    when 'pdp-box-open.webp'
+      assign w = 704
+      assign h = 951
+    when 'pdp-box-sleeve.webp'
+      assign w = 488
+      assign h = 750
+    when 'pdp-branch.webp'
+      assign w = 1600
+      assign h = 667
+    when 'pdp-gallery-holder.webp'
+      assign w = 1005
+      assign h = 1100
+    when 'pdp-gallery-main.webp'
+      assign w = 1254
+      assign h = 1254
+    when 'pdp-gallery-stick.webp'
+      assign w = 825
+      assign h = 1100
+    when 'pdp-lineup-bonfire.webp'
+      assign w = 1254
+      assign h = 1254
+    when 'pdp-lineup-duo.webp'
+      assign w = 900
+      assign h = 720
+    when 'pdp-lineup-yoga.webp'
+      assign w = 900
+      assign h = 720
+    when 'pdp-note-agarwood.webp'
+      assign w = 240
+      assign h = 240
+    when 'pdp-note-resin.webp'
+      assign w = 240
+      assign h = 240
+    when 'pdp-note-smoke.webp'
+      assign w = 600
+      assign h = 600
+    when 'pdp-ship-bg.webp'
+      assign w = 1214
+      assign h = 1295
+    when 'pdp-ship-fg.webp'
+      assign w = 1040
+      assign h = 1300
+    when 'pdp-smell-bg.webp'
+      assign w = 1024
+      assign h = 572
+    when 'pdp-step-1.webp'
+      assign w = 1000
+      assign h = 581
+    when 'pdp-step-2.webp'
+      assign w = 800
+      assign h = 466
+    when 'pdp-step-3.webp'
+      assign w = 640
+      assign h = 800
+    when 'pdp-step-4.webp'
+      assign w = 640
+      assign h = 800
+    when 'pdp-t-burn.webp'
+      assign w = 675
+      assign h = 900
+    when 'pdp-t-flag.webp'
+      assign w = 300
+      assign h = 200
+    when 'pdp-t-holder.webp'
+      assign w = 300
+      assign h = 300
+    when 'pdp-t-length.webp'
+      assign w = 240
+      assign h = 600
+    when 'pdp-t-materials.webp'
+      assign w = 500
+      assign h = 333
+    when 'pdp-t-sticks.webp'
+      assign w = 900
+      assign h = 600
+    when 'shop-bonfire.webp'
+      assign w = 879
+      assign h = 1100
+    when 'shop-duo.webp'
+      assign w = 879
+      assign h = 1100
+    when 'shop-hero.webp'
+      assign w = 1440
+      assign h = 2576
+    when 'shop-yoga.webp'
+      assign w = 821
+      assign h = 1100
+    when 'smell-hero.webp'
+      assign w = 1800
+      assign h = 1005
+    when 'story-smoke.webp'
+      assign w = 598
+      assign h = 800
+  endcase
+  if image != blank or asset != blank
+    render 'ms-image', image: image, fallback: asset, alt: alt, width: w, height: h, class: class, sizes: sizes, loading: loading, attrs: attrs
+  endif
+-%}

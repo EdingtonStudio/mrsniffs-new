@@ -1,0 +1,90 @@
+{{ 'pdp.css' | asset_url | stylesheet_tag }}
+<section class="lineup" aria-labelledby="lineup-title-{{ section.id }}">
+  <header class="lineup__head" data-reveal>
+    <h2 class="display-l" id="lineup-title-{{ section.id }}">{{ section.settings.title }}</h2>
+    {%- if section.settings.lede != blank -%}<p class="lede">{{ section.settings.lede }}</p>{%- endif -%}
+  </header>
+  <div class="lineup__grid">
+    {%- for block in section.blocks -%}
+      {%- liquid
+        assign s = block.settings
+        assign p = s.product
+        assign href = s.url | default: '#'
+        if p != blank
+          assign href = p.url
+        endif
+        assign media_class = 'lineup-card__media'
+        if s.crop != 'default'
+          assign media_class = media_class | append: ' lineup-card__media--' | append: s.crop
+        endif
+        if forloop.first
+          assign sizes = '(max-width: 900px) 100vw, 50vw'
+        else
+          assign sizes = '(max-width: 900px) 100vw, 25vw'
+        endif
+      -%}
+      <a class="lineup-card{% if forloop.first %} lineup-card--feature{% endif %}" href="{{ href }}" data-reveal{% if forloop.index0 > 0 %} style="--d: {{ forloop.index0 }}"{% endif %} {{ block.shopify_attributes }}>
+        <span class="{{ media_class }}">
+          {%- if s.image == blank and s.asset == blank and p.featured_image -%}
+            {{ p.featured_image | image_url: width: 1200 | image_tag: widths: '600, 900, 1200', sizes: sizes, alt: p.title, loading: 'lazy' }}
+          {%- else -%}
+            {% render 'pdp-img', image: s.image, asset: s.asset, alt: s.alt, sizes: sizes %}
+          {%- endif -%}
+        </span>
+        <span class="lineup-card__text">
+          {%- if s.tag != blank -%}<span class="lineup-card__tag">{{ s.tag }}</span>{%- endif -%}
+          <span class="lineup-card__title">{{ s.title | default: p.title }}</span>
+          {%- if s.text != blank -%}<span class="lineup-card__desc">{{ s.text }}</span>{%- endif -%}
+        </span>
+      </a>
+    {%- endfor -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Meet the lineup",
+  "settings": [
+    { "type": "text", "id": "title", "label": "Heading", "default": "MEET THE LINEUP." },
+    { "type": "text", "id": "lede", "label": "Text", "default": "Two distinct scents, each with its own character. Available individually or together." }
+  ],
+  "blocks": [
+    {
+      "type": "card",
+      "name": "Lineup card",
+      "settings": [
+        { "type": "product", "id": "product", "label": "Product", "info": "Sets the link. The first card is the large feature card." },
+        { "type": "url", "id": "url", "label": "Link (no product picked)" },
+        { "type": "image_picker", "id": "image", "label": "Image" },
+        { "type": "text", "id": "asset", "label": "Theme image file", "info": "Used when no image is picked. Clear both to use the product image." },
+        { "type": "text", "id": "alt", "label": "Alt text" },
+        {
+          "type": "select",
+          "id": "crop",
+          "label": "Image crop",
+          "options": [
+            { "value": "default", "label": "Default" },
+            { "value": "yoga", "label": "Yoga Studio shot" },
+            { "value": "duo", "label": "Duo shot" }
+          ],
+          "default": "default"
+        },
+        { "type": "text", "id": "tag", "label": "Tag", "default": "BONFIRE" },
+        { "type": "text", "id": "title", "label": "Title", "default": "Meet your after-dark scent." },
+        { "type": "textarea", "id": "text", "label": "Text", "default": "Dark resin and smoke. Meet Bonfire, then make the night your own." }
+      ]
+    }
+  ],
+  "max_blocks": 3,
+  "presets": [
+    {
+      "name": "Meet the lineup",
+      "blocks": [
+        { "type": "card", "settings": { "asset": "pdp-lineup-bonfire.webp", "alt": "Bonfire box on gnarled driftwood with resin and curling smoke" } },
+        { "type": "card", "settings": { "asset": "pdp-lineup-yoga.webp", "alt": "Yoga Studio box tucked into driftwood with fresh herbs and palo santo", "crop": "yoga", "tag": "YOGA STUDIO", "title": "A little room for yourself.", "text": "Warm resin and a citrus edge. Meet Yoga Studio and find your own kind of moment." } },
+        { "type": "card", "settings": { "asset": "pdp-lineup-duo.webp", "alt": "Bonfire and Yoga Studio boxes on driftwood with resin and palo santo", "crop": "duo", "tag": "THE DUO", "title": "Why pick just one?", "text": "Bonfire and Yoga Studio, together. Get to know both sides of the lineup." } }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,421 @@
+{{ 'shop.css' | asset_url | stylesheet_tag }}
+{%- comment -%}
+  Compare table. Columns = up to 3 products (section settings), rows = blocks.
+  A column is shown when it has a product or a header name.
+{%- endcomment -%}
+{%- liquid
+  assign title_id = 'compare-title-' | append: section.id
+  assign col_ids = '1,2,3' | split: ','
+-%}
+<section class="compare" id="compare" aria-labelledby="{{ title_id }}">
+  <header class="section-head" data-reveal>
+    <h2 class="display-l" id="{{ title_id }}">{{ section.settings.heading | escape }}</h2>
+    {%- if section.settings.lede != blank -%}
+      <p class="lede">{{ section.settings.lede | escape }}</p>
+    {%- endif -%}
+  </header>
+
+  <div class="compare__scroll" data-reveal style="--d: 1">
+    <table class="compare__table">
+      <caption class="sr-only">{{ section.settings.caption | escape }}</caption>
+      <thead>
+        <tr>
+          <td class="compare__corner"></td>
+          {%- for c in col_ids -%}
+            {%- liquid
+              assign key_product = 'col_' | append: c | append: '_product'
+              assign key_name = 'col_' | append: c | append: '_name'
+              assign key_icon = 'col_' | append: c | append: '_icon'
+              assign key_tint = 'col_' | append: c | append: '_tint'
+              assign p = section.settings[key_product]
+              assign name = section.settings[key_name]
+              if name == blank and p != blank
+                assign name = p.title
+              endif
+              if name == blank
+                continue
+              endif
+              assign icon = section.settings[key_icon]
+            -%}
+            <th scope="col" class="compare__head compare__head--{{ section.settings[key_tint] }}"><span>
+              {%- case icon -%}
+                {%- when 'cmp-flame.svg' -%}<img class="is-flipped" src="{{ icon | asset_url }}" width="13" height="16" alt="">
+                {%- when 'cmp-lotus.svg' -%}<img class="is-flipped" src="{{ icon | asset_url }}" width="16" height="13" alt="">
+                {%- when 'cmp-scent.svg' -%}<img class="is-flipped" src="{{ icon | asset_url }}" width="16" height="16" alt="">
+                {%- when 'cmp-pack.svg' -%}<img src="{{ icon | asset_url }}" width="16" height="15" alt="">
+                {%- when 'none' -%}
+                {%- else -%}<img src="{{ icon | asset_url }}" width="16" height="16" alt="">
+              {%- endcase -%}
+              {{- name | escape -}}
+            </span></th>
+          {%- endfor -%}
+        </tr>
+      </thead>
+      <tbody>
+        {%- for block in section.blocks -%}
+          {%- assign icon = block.settings.icon -%}
+          <tr {{ block.shopify_attributes }}>
+            <th scope="row"><span>
+              {%- case icon -%}
+                {%- when 'cmp-flame.svg' -%}<img class="is-flipped" src="{{ icon | asset_url }}" width="13" height="16" alt="">
+                {%- when 'cmp-lotus.svg' -%}<img class="is-flipped" src="{{ icon | asset_url }}" width="16" height="13" alt="">
+                {%- when 'cmp-scent.svg' -%}<img class="is-flipped" src="{{ icon | asset_url }}" width="16" height="16" alt="">
+                {%- when 'cmp-pack.svg' -%}<img src="{{ icon | asset_url }}" width="16" height="15" alt="">
+                {%- when 'none' -%}
+                {%- else -%}<img src="{{ icon | asset_url }}" width="16" height="16" alt="">
+              {%- endcase -%}
+              {{- block.settings.label | escape -}}
+            </span></th>
+            {%- for c in col_ids -%}
+              {%- liquid
+                assign key_product = 'col_' | append: c | append: '_product'
+                assign key_name = 'col_' | append: c | append: '_name'
+                assign key_cell = 'cell_' | append: c
+                assign p = section.settings[key_product]
+                if section.settings[key_name] == blank and p == blank
+                  continue
+                endif
+              -%}
+              <td>
+                {%- if block.settings.row_type == 'price' and p != blank -%}
+                  {%- if p.price_varies -%}{{ section.settings.price_from | escape }} {% endif -%}
+                  {{- p.price | money_without_trailing_zeros -}}
+                {%- else -%}
+                  {{- block.settings[key_cell] | escape -}}
+                {%- endif -%}
+              </td>
+            {%- endfor -%}
+          </tr>
+        {%- endfor -%}
+      </tbody>
+      <tfoot>
+        <tr>
+          <td class="compare__corner"></td>
+          {%- for c in col_ids -%}
+            {%- liquid
+              assign key_product = 'col_' | append: c | append: '_product'
+              assign key_name = 'col_' | append: c | append: '_name'
+              assign key_action = 'col_' | append: c | append: '_action'
+              assign key_label = 'col_' | append: c | append: '_button_label'
+              assign key_link = 'col_' | append: c | append: '_link'
+              assign p = section.settings[key_product]
+              if section.settings[key_name] == blank and p == blank
+                continue
+              endif
+              assign label = section.settings[key_label]
+              assign link = section.settings[key_link] | default: '#'
+              if p != blank
+                assign link = p.url
+              endif
+            -%}
+            <td>
+              {%- if section.settings[key_action] == 'link' -%}
+                <a class="btn btn--solid btn--sm btn--block" href="{{ link }}">{{ label | escape }}</a>
+              {%- elsif p != blank and p.available == false -%}
+                <button class="btn btn--solid btn--sm btn--block" type="button" disabled>{{ section.settings.sold_out_label | escape }}</button>
+              {%- else -%}
+                <button class="btn btn--solid btn--sm btn--block" type="button"{% if p != blank %} data-add-to-cart="{{ p.selected_or_first_available_variant.id }}"{% endif %}>{{ label | escape }}</button>
+              {%- endif -%}
+            </td>
+          {%- endfor -%}
+        </tr>
+      </tfoot>
+    </table>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Compare table",
+  "max_blocks": 12,
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "BONFIRE OR YOGA STUDIO?"
+    },
+    {
+      "type": "text",
+      "id": "lede",
+      "label": "Intro",
+      "default": "Qualitative scent language only. No intensity score."
+    },
+    {
+      "type": "text",
+      "id": "caption",
+      "label": "Table caption (screen readers)",
+      "default": "Bonfire, Yoga Studio and the Duo compared"
+    },
+    {
+      "type": "text",
+      "id": "sold_out_label",
+      "label": "Sold out label",
+      "default": "Sold out"
+    },
+    {
+      "type": "text",
+      "id": "price_from",
+      "label": "Price prefix when variants vary",
+      "default": "From"
+    },
+    {
+      "type": "header",
+      "content": "Column 1"
+    },
+    {
+      "type": "product",
+      "id": "col_1_product",
+      "label": "Product"
+    },
+    {
+      "type": "text",
+      "id": "col_1_name",
+      "label": "Header name",
+      "info": "Leave blank to use the product title.",
+      "default": "Bonfire"
+    },
+    {
+      "type": "select",
+      "id": "col_1_icon",
+      "label": "Header icon",
+      "options": [
+        { "value": "cmp-flame.svg", "label": "Flame" },
+        { "value": "cmp-lotus.svg", "label": "Lotus" },
+        { "value": "cmp-both.svg", "label": "Both" },
+        { "value": "cmp-scent.svg", "label": "Scent" },
+        { "value": "cmp-pack.svg", "label": "Pack" },
+        { "value": "cmp-price.svg", "label": "Price" },
+        { "value": "none", "label": "None" }
+      ],
+      "default": "cmp-flame.svg"
+    },
+    {
+      "type": "select",
+      "id": "col_1_tint",
+      "label": "Header color",
+      "options": [
+        { "value": "bonfire", "label": "Bonfire (peach)" },
+        { "value": "yoga", "label": "Yoga Studio (mint)" },
+        { "value": "both", "label": "Both (grey)" }
+      ],
+      "default": "bonfire"
+    },
+    {
+      "type": "select",
+      "id": "col_1_action",
+      "label": "Button",
+      "options": [
+        { "value": "add", "label": "Add to cart" },
+        { "value": "link", "label": "Link to product" }
+      ],
+      "default": "add"
+    },
+    {
+      "type": "text",
+      "id": "col_1_button_label",
+      "label": "Button label",
+      "default": "Add to cart"
+    },
+    {
+      "type": "url",
+      "id": "col_1_link",
+      "label": "Button link (when no product is picked)"
+    },
+    {
+      "type": "header",
+      "content": "Column 2"
+    },
+    {
+      "type": "product",
+      "id": "col_2_product",
+      "label": "Product"
+    },
+    {
+      "type": "text",
+      "id": "col_2_name",
+      "label": "Header name",
+      "info": "Leave blank to use the product title.",
+      "default": "Yoga Studio"
+    },
+    {
+      "type": "select",
+      "id": "col_2_icon",
+      "label": "Header icon",
+      "options": [
+        { "value": "cmp-flame.svg", "label": "Flame" },
+        { "value": "cmp-lotus.svg", "label": "Lotus" },
+        { "value": "cmp-both.svg", "label": "Both" },
+        { "value": "cmp-scent.svg", "label": "Scent" },
+        { "value": "cmp-pack.svg", "label": "Pack" },
+        { "value": "cmp-price.svg", "label": "Price" },
+        { "value": "none", "label": "None" }
+      ],
+      "default": "cmp-lotus.svg"
+    },
+    {
+      "type": "select",
+      "id": "col_2_tint",
+      "label": "Header color",
+      "options": [
+        { "value": "bonfire", "label": "Bonfire (peach)" },
+        { "value": "yoga", "label": "Yoga Studio (mint)" },
+        { "value": "both", "label": "Both (grey)" }
+      ],
+      "default": "yoga"
+    },
+    {
+      "type": "select",
+      "id": "col_2_action",
+      "label": "Button",
+      "options": [
+        { "value": "add", "label": "Add to cart" },
+        { "value": "link", "label": "Link to product" }
+      ],
+      "default": "add"
+    },
+    {
+      "type": "text",
+      "id": "col_2_button_label",
+      "label": "Button label",
+      "default": "Add to cart"
+    },
+    {
+      "type": "url",
+      "id": "col_2_link",
+      "label": "Button link (when no product is picked)"
+    },
+    {
+      "type": "header",
+      "content": "Column 3"
+    },
+    {
+      "type": "product",
+      "id": "col_3_product",
+      "label": "Product"
+    },
+    {
+      "type": "text",
+      "id": "col_3_name",
+      "label": "Header name",
+      "info": "Leave blank to use the product title. Clear it and the product to hide this column.",
+      "default": "Both"
+    },
+    {
+      "type": "select",
+      "id": "col_3_icon",
+      "label": "Header icon",
+      "options": [
+        { "value": "cmp-flame.svg", "label": "Flame" },
+        { "value": "cmp-lotus.svg", "label": "Lotus" },
+        { "value": "cmp-both.svg", "label": "Both" },
+        { "value": "cmp-scent.svg", "label": "Scent" },
+        { "value": "cmp-pack.svg", "label": "Pack" },
+        { "value": "cmp-price.svg", "label": "Price" },
+        { "value": "none", "label": "None" }
+      ],
+      "default": "cmp-both.svg"
+    },
+    {
+      "type": "select",
+      "id": "col_3_tint",
+      "label": "Header color",
+      "options": [
+        { "value": "bonfire", "label": "Bonfire (peach)" },
+        { "value": "yoga", "label": "Yoga Studio (mint)" },
+        { "value": "both", "label": "Both (grey)" }
+      ],
+      "default": "both"
+    },
+    {
+      "type": "select",
+      "id": "col_3_action",
+      "label": "Button",
+      "options": [
+        { "value": "add", "label": "Add to cart" },
+        { "value": "link", "label": "Link to product" }
+      ],
+      "default": "link"
+    },
+    {
+      "type": "text",
+      "id": "col_3_button_label",
+      "label": "Button label",
+      "default": "Meet the Duo"
+    },
+    {
+      "type": "url",
+      "id": "col_3_link",
+      "label": "Button link (when no product is picked)"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "row",
+      "name": "Row",
+      "settings": [
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Icon",
+          "options": [
+            { "value": "cmp-scent.svg", "label": "Scent" },
+            { "value": "cmp-flame.svg", "label": "Flame" },
+            { "value": "cmp-lotus.svg", "label": "Lotus" },
+            { "value": "cmp-both.svg", "label": "Both" },
+            { "value": "cmp-pack.svg", "label": "Pack" },
+            { "value": "cmp-price.svg", "label": "Price" },
+            { "value": "none", "label": "None" }
+          ],
+          "default": "cmp-scent.svg"
+        },
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Label",
+          "default": "Scent"
+        },
+        {
+          "type": "select",
+          "id": "row_type",
+          "label": "Row type",
+          "options": [
+            { "value": "text", "label": "Text" },
+            { "value": "price", "label": "Price (uses the column's product price when picked)" }
+          ],
+          "default": "text"
+        },
+        {
+          "type": "text",
+          "id": "cell_1",
+          "label": "Column 1",
+          "default": "Dark resin, smoke"
+        },
+        {
+          "type": "text",
+          "id": "cell_2",
+          "label": "Column 2",
+          "default": "Warm resin, citrus edge"
+        },
+        {
+          "type": "text",
+          "id": "cell_3",
+          "label": "Column 3",
+          "default": "One of each"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Compare table",
+      "blocks": [
+        { "type": "row" },
+        { "type": "row", "settings": { "icon": "cmp-flame.svg", "label": "Feels like", "cell_1": "After dark", "cell_2": "A little room for yourself", "cell_3": "Why pick just one?" } },
+        { "type": "row", "settings": { "icon": "cmp-pack.svg", "label": "Pack contents", "cell_1": "About 50 sticks · 25 g", "cell_2": "About 50 sticks · 25 g", "cell_3": "One of each · about 100 sticks" } },
+        { "type": "row", "settings": { "icon": "cmp-price.svg", "label": "Price", "row_type": "price", "cell_1": "$24", "cell_2": "$24", "cell_3": "$42" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

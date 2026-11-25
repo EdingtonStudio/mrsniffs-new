@@ -1,0 +1,25 @@
+{
+  "type": "header",
+  "name": "Header group",
+  "sections": {
+    "announcement": {
+      "type": "announcement-bar",
+      "settings": {
+        "text": "FREE US SHIPPING ON ORDERS OVER $50",
+        "link": ""
+      }
+    },
+    "header": {
+      "type": "header",
+      "settings": {
+        "menu": "main-menu",
+        "arrow_first": true,
+        "transparent_home": true
+      }
+    }
+  },
+  "order": [
+    "announcement",
+    "header"
+  ]
+}

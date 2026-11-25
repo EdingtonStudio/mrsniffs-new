@@ -1,0 +1,70 @@
+{{ 'pdp.css' | asset_url | stylesheet_tag }}
+<section class="pdp-smells{% if section.settings.compact %} pdp-smells--scrim{% endif %} section--ink" aria-labelledby="smells-title-{{ section.id }}">
+  {% render 'pdp-img', image: section.settings.image, asset: section.settings.asset, alt: section.settings.alt, class: 'pdp-smells__bg', sizes: '100vw' %}
+  <header class="section-head pdp-smells__head" data-reveal>
+    <h2 class="display-l" id="smells-title-{{ section.id }}">{{ section.settings.title }}</h2>
+    {%- if section.settings.lede != blank -%}<p class="lede lede--on-ink">{{ section.settings.lede }}</p>{%- endif -%}
+  </header>
+  <ul class="notes">
+    {%- for block in section.blocks -%}
+      {%- assign s = block.settings -%}
+      <li class="note" data-reveal style="--d: {{ forloop.index }}" {{ block.shopify_attributes }}>
+        {%- if s.image == blank and s.asset == blank -%}
+          <span class="note__img note__img--placeholder" aria-hidden="true">{{ s.placeholder_text }}</span>
+        {%- else -%}
+          <span class="note__img{% if s.crop != 'default' %} note__img--{{ s.crop }}{% endif %}">{% render 'pdp-img', image: s.image, asset: s.asset, alt: '', sizes: '110px' %}</span>
+        {%- endif -%}
+        <span class="note__text"><strong>{{ s.name }}</strong><span>{{ s.text }}</span></span>
+      </li>
+    {%- endfor -%}
+  </ul>
+</section>
+
+{% schema %}
+{
+  "name": "What it smells like",
+  "settings": [
+    { "type": "image_picker", "id": "image", "label": "Background image" },
+    { "type": "text", "id": "asset", "label": "Background theme image file", "default": "pdp-smell-bg.webp", "info": "Used when no image is picked" },
+    { "type": "text", "id": "alt", "label": "Background alt text", "default": "Bonfire box among dark resin, agarwood chips and charcoal with a burning stick in a round holder" },
+    { "type": "checkbox", "id": "compact", "label": "Shorter stage with darkened photo", "default": false, "info": "Use with light photography (Yoga Studio, Duo)." },
+    { "type": "text", "id": "title", "label": "Heading", "default": "WHAT IT SMELLS LIKE" },
+    { "type": "text", "id": "lede", "label": "Text", "default": "Curious what Bonfire actually smells like? Here's the lowdown." }
+  ],
+  "blocks": [
+    {
+      "type": "note",
+      "name": "Note",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Image" },
+        { "type": "text", "id": "asset", "label": "Theme image file", "info": "Used when no image is picked. Leave both empty for a placeholder." },
+        {
+          "type": "select",
+          "id": "crop",
+          "label": "Image crop",
+          "options": [
+            { "value": "default", "label": "Centered" },
+            { "value": "resin", "label": "Bottom" },
+            { "value": "smoke", "label": "Smoke close-up" }
+          ],
+          "default": "default"
+        },
+        { "type": "text", "id": "placeholder_text", "label": "Placeholder text", "default": "Photo" },
+        { "type": "text", "id": "name", "label": "Name", "default": "DARK RESIN" },
+        { "type": "text", "id": "text", "label": "Description", "default": "Deep, rich and balsamic." }
+      ]
+    }
+  ],
+  "max_blocks": 4,
+  "presets": [
+    {
+      "name": "What it smells like",
+      "blocks": [
+        { "type": "note", "settings": { "asset": "pdp-note-resin.webp", "crop": "resin", "name": "DARK RESIN", "text": "Deep, rich and balsamic." } },
+        { "type": "note", "settings": { "asset": "pdp-note-agarwood.webp", "name": "AGARWOOD", "text": "Earthy, woody and complex." } },
+        { "type": "note", "settings": { "asset": "pdp-note-smoke.webp", "crop": "smoke", "name": "SMOKE", "text": "Dry, lingering and atmospheric." } }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,83 @@
+{{ 'story.css' | asset_url | stylesheet_tag }}
+
+<section class="into section--ink" aria-labelledby="into-title-{{ section.id }}">
+  {% render 'ms-image', image: section.settings.bg_image, fallback: 'story-into-bg.webp', alt: '', width: 1672, height: 941, class: 'into__bg', attrs: 'aria-hidden="true"' %}
+  {% render 'ms-image', image: section.settings.hand_image, fallback: 'story-into-hand.webp', alt: section.settings.hand_alt, width: 1732, height: 908, class: 'into__hand', attrs: 'data-parallax="-0.04"' %}
+  <header class="into__head" data-reveal>
+    <h2 class="display-l" id="into-title-{{ section.id }}">{{ section.settings.heading }}</h2>
+    {%- if section.settings.lede != blank -%}<p class="lede lede--on-ink">{{ section.settings.lede }}</p>{%- endif -%}
+  </header>
+  <ul class="into__list">
+    {%- for block in section.blocks -%}
+      <li class="into__item" style="--x:{{ block.settings.x }};--y:{{ block.settings.y }};--d:{{ forloop.index }}" data-reveal {{ block.shopify_attributes }}>
+        <span class="into__thumb">{% render 'ms-image', image: block.settings.image, fallback: block.settings.fallback, alt: '', width: 400, height: 400, sizes: '86px' %}</span>
+        <span class="into__text"><span class="into__label"><img class="into__icon{% if block.settings.flip_icon %} into__icon--flip{% endif %}" src="{{ block.settings.icon | asset_url }}" width="24" height="24" alt="">{{ block.settings.label }}</span><span class="into__desc">{{ block.settings.text }}</span></span>
+      </li>
+    {%- endfor -%}
+  </ul>
+</section>
+
+{% schema %}
+{
+  "name": "Story ingredients",
+  "class": "section-story-into",
+  "max_blocks": 4,
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading", "default": "WHAT GOES INTO IT" },
+    { "type": "textarea", "id": "lede", "label": "Intro", "default": "Real wood, simple ingredients, and a whole lot of character in every burn." },
+    { "type": "header", "content": "Images" },
+    { "type": "image_picker", "id": "bg_image", "label": "Background texture", "info": "Decorative; shown faded" },
+    { "type": "image_picker", "id": "hand_image", "label": "Foreground photo", "info": "Defaults to the hand holding a lit stick" },
+    { "type": "text", "id": "hand_alt", "label": "Foreground photo alt text", "default": "Hand holding a lit incense stick trailing smoke" }
+  ],
+  "blocks": [
+    {
+      "type": "ingredient",
+      "name": "Ingredient",
+      "settings": [
+        { "type": "text", "id": "label", "label": "Name", "default": "Aromatic wood powder" },
+        { "type": "text", "id": "text", "label": "Description", "default": "Gives every stick its naturally smoky, warm character." },
+        { "type": "image_picker", "id": "image", "label": "Thumbnail" },
+        {
+          "type": "select",
+          "id": "fallback",
+          "label": "Bundled thumbnail",
+          "info": "Shown when no thumbnail is picked",
+          "default": "story-into-1.webp",
+          "options": [
+            { "value": "story-into-1.webp", "label": "Wood powder" },
+            { "value": "story-into-2.webp", "label": "Bark binder" },
+            { "value": "story-into-3.webp", "label": "No fragrance" }
+          ]
+        },
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Icon",
+          "default": "story-into-i1.svg",
+          "options": [
+            { "value": "story-into-i1.svg", "label": "Wood grain" },
+            { "value": "story-into-i2.svg", "label": "Binder" },
+            { "value": "story-into-i3a.svg", "label": "Plain square" },
+            { "value": "story-into-i3b.svg", "label": "No fragrance" }
+          ]
+        },
+        { "type": "checkbox", "id": "flip_icon", "label": "Flip icon vertically", "default": false },
+        { "type": "header", "content": "Desktop position (on a 1440 × 761 stage)" },
+        { "type": "number", "id": "x", "label": "Left (x)", "default": 858 },
+        { "type": "number", "id": "y", "label": "Top (y)", "default": 175 }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Story ingredients",
+      "blocks": [
+        { "type": "ingredient" },
+        { "type": "ingredient", "settings": { "label": "Plant-based bark binder", "text": "Holds the wood ingredients together.", "fallback": "story-into-2.webp", "icon": "story-into-i2.svg", "x": 1032, "y": 379 } },
+        { "type": "ingredient", "settings": { "label": "No added fragrance", "text": "No perfume or fragrance oils.", "fallback": "story-into-3.webp", "icon": "story-into-i3b.svg", "flip_icon": true, "x": 880, "y": 583 } }
+      ]
+    }
+  ]
+}
+{% endschema %}

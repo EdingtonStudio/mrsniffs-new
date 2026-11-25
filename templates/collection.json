@@ -1,0 +1,193 @@
+{
+  "sections": {
+    "hero": {
+      "type": "shop-hero",
+      "settings": {
+        "image_alt": "Woman with eyes closed breathing in smoke from an incense stick",
+        "heading": "INCENSE",
+        "subheading": "Two scents. Find your favorite."
+      }
+    },
+    "products": {
+      "type": "shop-products",
+      "blocks": {
+        "card_bonfire": {
+          "type": "placeholder-card",
+          "settings": {
+            "fallback_image": "shop-bonfire.webp",
+            "image_alt": "Bonfire Agarwood incense box on grey",
+            "name": "Bonfire · Agarwood",
+            "short_name": "Bonfire",
+            "note": "Dark resin + smoke",
+            "price": "$24",
+            "link": "/products/bonfire",
+            "gleam": "bonfire",
+            "anchor": "bonfire"
+          }
+        },
+        "card_yoga": {
+          "type": "placeholder-card",
+          "settings": {
+            "fallback_image": "shop-yoga.webp",
+            "image_alt": "Yoga Studio Palo Santo incense box on grey",
+            "name": "Yoga Studio · Palo Santo Incense",
+            "short_name": "Yoga Studio",
+            "note": "Warm resin + citrus peel",
+            "price": "$24",
+            "link": "/products/yoga-studio",
+            "gleam": "yoga",
+            "anchor": "yoga-studio"
+          }
+        },
+        "card_duo": {
+          "type": "placeholder-card",
+          "settings": {
+            "fallback_image": "shop-duo.webp",
+            "image_alt": "Yoga Studio and Bonfire boxes standing side by side",
+            "name": "The Duo Bundle",
+            "short_name": "the Duo",
+            "note": "Both scents · In stock",
+            "price": "$42",
+            "link": "/products/duo",
+            "gleam": "duo",
+            "anchor": "duo"
+          }
+        }
+      },
+      "block_order": ["card_bonfire", "card_yoga", "card_duo"],
+      "settings": {
+        "aria_label": "Incense",
+        "meet_label": "Meet [name]",
+        "add_label": "Add [name] to cart",
+        "sold_out_label": "Sold out",
+        "price_from": "From",
+        "pagination_label": "Pagination",
+        "prev_label": "Previous",
+        "next_label": "Next"
+      }
+    },
+    "compare": {
+      "type": "shop-compare",
+      "blocks": {
+        "row_scent": {
+          "type": "row",
+          "settings": { "icon": "cmp-scent.svg", "label": "Scent", "row_type": "text", "cell_1": "Dark resin, smoke", "cell_2": "Warm resin, citrus edge", "cell_3": "One of each" }
+        },
+        "row_feels": {
+          "type": "row",
+          "settings": { "icon": "cmp-flame.svg", "label": "Feels like", "row_type": "text", "cell_1": "After dark", "cell_2": "A little room for yourself", "cell_3": "Why pick just one?" }
+        },
+        "row_pack": {
+          "type": "row",
+          "settings": { "icon": "cmp-pack.svg", "label": "Pack contents", "row_type": "text", "cell_1": "About 50 sticks · 25 g", "cell_2": "About 50 sticks · 25 g", "cell_3": "One of each · about 100 sticks" }
+        },
+        "row_price": {
+          "type": "row",
+          "settings": { "icon": "cmp-price.svg", "label": "Price", "row_type": "price", "cell_1": "$24", "cell_2": "$24", "cell_3": "$42" }
+        }
+      },
+      "block_order": ["row_scent", "row_feels", "row_pack", "row_price"],
+      "settings": {
+        "heading": "BONFIRE OR YOGA STUDIO?",
+        "lede": "Qualitative scent language only. No intensity score.",
+        "caption": "Bonfire, Yoga Studio and the Duo compared",
+        "sold_out_label": "Sold out",
+        "price_from": "From",
+        "col_1_name": "Bonfire",
+        "col_1_icon": "cmp-flame.svg",
+        "col_1_tint": "bonfire",
+        "col_1_action": "add",
+        "col_1_button_label": "Add to cart",
+        "col_1_link": "/products/bonfire",
+        "col_2_name": "Yoga Studio",
+        "col_2_icon": "cmp-lotus.svg",
+        "col_2_tint": "yoga",
+        "col_2_action": "add",
+        "col_2_button_label": "Add to cart",
+        "col_2_link": "/products/yoga-studio",
+        "col_3_name": "Both",
+        "col_3_icon": "cmp-both.svg",
+        "col_3_tint": "both",
+        "col_3_action": "link",
+        "col_3_button_label": "Meet the Duo",
+        "col_3_link": "/products/duo"
+      }
+    },
+    "decide": {
+      "type": "shop-decide",
+      "blocks": {
+        "card_scent": {
+          "type": "card",
+          "settings": {
+            "fallback_image": "gallery-7.webp",
+            "burn_crop": false,
+            "image_alt": "Rows of Bonfire and Yoga Studio boxes on black",
+            "pill": "FIND YOUR SCENT",
+            "title": "What's your kind of reset?",
+            "text": "Choose your mood. Bonfire brings smoky agarwood warmth; Yoga Studio keeps it clean with palo santo and subtle citrus.",
+            "button_label": "Find your scent",
+            "button_link": "/pages/smell-test"
+          }
+        },
+        "card_burn": {
+          "type": "card",
+          "settings": {
+            "fallback_image": "decide-burn.webp",
+            "burn_crop": true,
+            "image_alt": "Single incense stick burning against a warm brown backdrop",
+            "pill": "HOW TO USE INCENSE",
+            "title": "Snap. Light. Reset.",
+            "text": "Snap a piece, light it, and enjoy a 10-minute reset or a full 45-minute burn.",
+            "button_label": "Learn how to burn",
+            "button_link": "/pages/how-to-use"
+          }
+        },
+        "card_holder": {
+          "type": "card",
+          "settings": {
+            "fallback_image": "decide-holder.webp",
+            "burn_crop": false,
+            "image_alt": "Tattooed hand beside a black stoneware holder on a bar top",
+            "pill": "HOLDER COMPATIBILITY",
+            "title": "Give your incense a place.",
+            "text": "Find a heat-safe holder for your 210 mm incense sticks. Set it up safely and let the scent do its thing.",
+            "button_label": "Find your scent",
+            "button_link": "/#holders"
+          }
+        }
+      },
+      "block_order": ["card_scent", "card_burn", "card_holder"],
+      "settings": {
+        "heading": "STILL DECIDING?",
+        "lede": "Qualitative scent language only. No intensity score."
+      }
+    },
+    "faq": {
+      "type": "shop-faq",
+      "blocks": {
+        "q_burn": {
+          "type": "question",
+          "settings": { "question": "How long do they burn?", "answer": "<p>Snap a piece for a 10-minute reset, or light a full stick for about a 45-minute burn.</p>" }
+        },
+        "q_holder": {
+          "type": "question",
+          "settings": { "question": "Do I need a holder?", "answer": "<p>Yes. Burn incense in a stable, heat-resistant holder that catches falling ash.</p>" }
+        },
+        "q_restock": {
+          "type": "question",
+          "settings": { "question": "When will the holders be back?", "answer": "<p>[Pending — approved restock messaging goes here.]</p>" }
+        },
+        "q_pack": {
+          "type": "question",
+          "settings": { "question": "What is in each pack?", "answer": "<p>[Pending confirmation — approved pack contents go here.]</p>" }
+        }
+      },
+      "block_order": ["q_burn", "q_holder", "q_restock", "q_pack"],
+      "settings": {
+        "heading": "QUESTIONS BEFORE YOU BUY",
+        "anchor": "faq"
+      }
+    }
+  },
+  "order": ["hero", "products", "compare", "decide", "faq"]
+}

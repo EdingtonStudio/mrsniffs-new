@@ -1,0 +1,142 @@
+{{ 'pdp.css' | asset_url | stylesheet_tag }}
+{%- assign line_d = 'M193.672 2H537C550.255 2 561 12.7452 561 26V104.834C561 118.089 550.255 128.834 537 128.834H26C12.7452 128.834 2 139.579 2 152.834V247.223C2 260.478 12.7452 271.223 26 271.223H537C550.255 271.223 561 281.968 561 295.223V378.843C561 392.097 550.255 402.843 537 402.843H26C12.7452 402.843 2.00002 413.588 2.00002 426.843L2 513C2 526.255 12.7452 537 26 537H397.226' -%}
+<section class="inbox" aria-labelledby="inbox-title-{{ section.id }}" data-inbox>
+  {% render 'pdp-img', image: section.settings.branch_image, asset: 'pdp-branch.webp', alt: '', class: 'inbox__branch', sizes: '54vw', attrs: 'aria-hidden="true"' %}
+  <div class="inbox__stage">
+    <header class="inbox__head" data-reveal>
+      <h2 class="display-l" id="inbox-title-{{ section.id }}">{{ section.settings.title }}</h2>
+      {%- if section.settings.lede != blank -%}<p class="lede">{{ section.settings.lede }}</p>{%- endif -%}
+    </header>
+
+    <svg class="inbox__line inbox__line--back" viewBox="0 0 563 539" width="563" height="539" aria-hidden="true" focusable="false">
+      <path data-inbox-path d="{{ line_d }}" />
+    </svg>
+
+    <div class="inbox__boxes">
+      {%- assign box_class = 'inbox__box inbox__box--open' -%}
+      {%- if section.settings.box_angled -%}{%- assign box_class = box_class | append: ' inbox__box--angled' -%}{%- endif -%}
+      {% render 'pdp-img', image: section.settings.box_image, asset: section.settings.box_asset, alt: section.settings.box_alt, class: box_class, sizes: '(max-width: 900px) 78vw, 50vw' %}
+      {%- if section.settings.sleeve_image != blank or section.settings.sleeve_asset != blank -%}
+        {% render 'pdp-img', image: section.settings.sleeve_image, asset: section.settings.sleeve_asset, alt: '', class: 'inbox__box inbox__box--sleeve', sizes: '(max-width: 900px) 55vw, 34vw' %}
+      {%- endif -%}
+    </div>
+
+    <svg class="inbox__line inbox__line--front" viewBox="0 0 563 539" width="563" height="539" aria-hidden="true" focusable="false">
+      <defs>
+        <clipPath id="inbox-front-runs-{{ section.id }}">
+          <rect x="0" y="122" width="563" height="14" />
+          <rect x="0" y="396" width="563" height="14" />
+        </clipPath>
+      </defs>
+      <path data-inbox-path clip-path="url(#inbox-front-runs-{{ section.id }})" d="{{ line_d }}" />
+    </svg>
+
+    <ul class="inbox__callouts">
+      {%- for block in section.blocks -%}
+        {%- liquid
+          assign s = block.settings
+          assign pos = s.position
+          assign side = 'right'
+          assign icon_size = 20
+          case pos
+            when 'sticks'
+              assign side = 'left'
+              assign dx = 599
+              assign dy = 325
+            when 'length'
+              assign dx = 965
+              assign dy = 391
+            when 'burn'
+              assign side = 'left'
+              assign dx = 449
+              assign dy = 527
+            when 'materials'
+              assign dx = 965
+              assign dy = 662
+              assign icon_size = 15
+            when 'holder'
+              assign side = 'left'
+              assign dx = 443
+              assign dy = 792
+            when 'madein'
+              assign dx = 838
+              assign dy = 859
+          endcase
+          assign icon = 'pdp-i-' | append: pos | append: '.svg'
+        -%}
+        {%- capture callout_text -%}
+          <div class="callout__text">
+            <p class="callout__label">{% render 'icon', name: icon, size: icon_size %}{{ s.label }}</p>
+            <p>{{ s.text | escape | newline_to_br }}</p>
+          </div>
+        {%- endcapture -%}
+        {%- capture callout_thumb -%}
+          <span class="callout__thumb">{% render 'pdp-img', image: s.image, asset: s.asset, alt: '', sizes: '220px' %}</span>
+        {%- endcapture -%}
+        <li class="callout callout--{{ pos }} callout--{{ side }}" data-callout data-dot-x="{{ dx }}" data-dot-y="{{ dy }}" {{ block.shopify_attributes }}>
+          <span class="callout__dot" aria-hidden="true"></span>
+          {%- if side == 'left' -%}{{ callout_text }}{{ callout_thumb }}{%- else -%}{{ callout_thumb }}{{ callout_text }}{%- endif -%}
+        </li>
+      {%- endfor -%}
+    </ul>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "What is in the box",
+  "settings": [
+    { "type": "text", "id": "title", "label": "Heading", "default": "WHAT IS IN THE BOX" },
+    { "type": "text", "id": "lede", "label": "Text", "default": "A closer look at what's included, what it's made of, and what to expect." },
+    { "type": "image_picker", "id": "branch_image", "label": "Branch image", "info": "Decorative, top right" },
+    { "type": "header", "content": "Box" },
+    { "type": "image_picker", "id": "box_image", "label": "Box image" },
+    { "type": "text", "id": "box_asset", "label": "Box theme image file", "default": "pdp-box-open.webp", "info": "Used when no image is picked" },
+    { "type": "text", "id": "box_alt", "label": "Box alt text", "default": "Open Bonfire box with incense sticks showing" },
+    { "type": "checkbox", "id": "box_angled", "label": "Tilt a closed box to the open-box angle", "default": false },
+    { "type": "image_picker", "id": "sleeve_image", "label": "Sleeve image" },
+    { "type": "text", "id": "sleeve_asset", "label": "Sleeve theme image file", "default": "pdp-box-sleeve.webp", "info": "Leave both empty to hide the sleeve" }
+  ],
+  "blocks": [
+    {
+      "type": "callout",
+      "name": "Callout",
+      "settings": [
+        {
+          "type": "select",
+          "id": "position",
+          "label": "Position and icon",
+          "options": [
+            { "value": "sticks", "label": "1 · Left, sticks" },
+            { "value": "length", "label": "2 · Right, length" },
+            { "value": "burn", "label": "3 · Left, burn time" },
+            { "value": "materials", "label": "4 · Right, materials" },
+            { "value": "holder", "label": "5 · Left, holder" },
+            { "value": "madein", "label": "6 · Right, made in" }
+          ],
+          "default": "sticks",
+          "info": "Each position is placed on the red line. Use each one once."
+        },
+        { "type": "text", "id": "label", "label": "Label", "default": "Sticks per pack" },
+        { "type": "textarea", "id": "text", "label": "Text", "default": "About 50 incense sticks per box (25 g)" },
+        { "type": "image_picker", "id": "image", "label": "Thumbnail" },
+        { "type": "text", "id": "asset", "label": "Thumbnail theme image file", "info": "Used when no image is picked" }
+      ]
+    }
+  ],
+  "max_blocks": 6,
+  "presets": [
+    {
+      "name": "What is in the box",
+      "blocks": [
+        { "type": "callout", "settings": { "position": "sticks", "label": "Sticks per pack", "text": "About 50 incense sticks per box (25 g)", "asset": "pdp-t-sticks.webp" } },
+        { "type": "callout", "settings": { "position": "length", "label": "Stick length", "text": "210 mm (8.25 in)", "asset": "pdp-t-length.webp" } },
+        { "type": "callout", "settings": { "position": "burn", "label": "Burn time", "text": "Approximately\n45 minutes per stick", "asset": "pdp-t-burn.webp" } },
+        { "type": "callout", "settings": { "position": "materials", "label": "Materials", "text": "Aromatic wood powder,\nnatural bark binder and water", "asset": "pdp-t-materials.webp" } },
+        { "type": "callout", "settings": { "position": "holder", "label": "Holder included", "text": "No · Sold separately", "asset": "pdp-t-holder.webp" } },
+        { "type": "callout", "settings": { "position": "madein", "label": "Made in", "text": "Taiwan · Extruded and sun-dried", "asset": "pdp-t-flag.webp" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

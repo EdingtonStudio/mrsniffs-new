@@ -1,0 +1,139 @@
+<section class="why" id="why" aria-labelledby="why-title">
+  <header class="section-head" data-reveal>
+    {%- if section.settings.eyebrow != blank -%}<p class="eyebrow">{{ section.settings.eyebrow }}</p>{%- endif -%}
+    <h2 class="display-l" id="why-title">{{ section.settings.heading }}</h2>
+    {%- if section.settings.lede != blank -%}<p class="lede">{{ section.settings.lede }}</p>{%- endif -%}
+  </header>
+
+  <ul class="why__proof">
+    {%- assign n = 0 -%}
+    {%- for block in section.blocks -%}
+      {%- if block.type == 'point' -%}
+        <li class="why__point" data-reveal{% if n > 0 %} style="--d: {{ n }}"{% endif %} {{ block.shopify_attributes }}>
+          <span class="why__icon"><img src="{{ block.settings.icon | asset_url }}" width="24" height="24" alt=""></span>
+          <h3 class="display-s">{{ block.settings.title }}</h3>
+          <p class="lede">{{ block.settings.text }}</p>
+        </li>
+        {%- assign n = n | plus: 1 -%}
+      {%- endif -%}
+    {%- endfor -%}
+  </ul>
+
+  <div class="compare__scroll" data-reveal style="--d: 1">
+    <table class="compare__table why__table">
+      <caption class="sr-only">{{ section.settings.caption }}</caption>
+      <thead>
+        <tr>
+          <td class="compare__corner"></td>
+          <th scope="col" class="compare__head compare__head--bonfire"><span><img class="is-flipped" src="{{ 'cmp-flame.svg' | asset_url }}" width="13" height="16" alt="">{{ section.settings.ours_label }}</span></th>
+          <th scope="col" class="compare__head compare__head--both"><span>{{ section.settings.theirs_label }}</span></th>
+        </tr>
+      </thead>
+      <tbody>
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'row' -%}
+            {%- liquid
+              assign iw = 16
+              assign ih = 16
+              assign flip = false
+              case block.settings.icon
+                when 'pdp-i-materials.svg'
+                  assign iw = 15
+                  assign ih = 15
+                when 'cmp-pack.svg'
+                  assign ih = 15
+                when 'cmp-lotus.svg'
+                  assign ih = 13
+                when 'cmp-scent.svg'
+                  assign flip = true
+              endcase
+            -%}
+            <tr {{ block.shopify_attributes }}>
+              <th scope="row"><span><img{% if flip %} class="is-flipped"{% endif %} src="{{ block.settings.icon | asset_url }}" width="{{ iw }}" height="{{ ih }}" alt="">{{ block.settings.label }}</span></th>
+              <td>{{ block.settings.ours }}</td>
+              <td>{{ block.settings.theirs }}</td>
+            </tr>
+          {%- endif -%}
+        {%- endfor -%}
+      </tbody>
+      <tfoot>
+        <tr>
+          <td class="compare__corner"></td>
+          <td>{%- if section.settings.button_1_label != blank -%}<a class="btn btn--solid btn--sm btn--block" href="{{ section.settings.button_1_url | default: routes.all_products_collection_url }}">{{ section.settings.button_1_label | escape }}</a>{%- endif -%}</td>
+          <td>{%- if section.settings.button_2_label != blank -%}<a class="btn btn--outline btn--sm btn--block" href="{{ section.settings.button_2_url | default: '#' }}">{{ section.settings.button_2_label | escape }}</a>{%- endif -%}</td>
+        </tr>
+      </tfoot>
+    </table>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Home: why Mr. Sniff's",
+  "class": "section-home-why",
+  "max_blocks": 16,
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Why Mr. Sniff's" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "NOTHING BUT WOOD." },
+    { "type": "textarea", "id": "lede", "label": "Intro text", "default": "Most incense is a bamboo stick dipped in perfume. Ours is wood all the way through." },
+    { "type": "header", "content": "Comparison table" },
+    { "type": "text", "id": "caption", "label": "Table caption (screen readers)", "default": "Mr. Sniff's incense compared with typical stick incense" },
+    { "type": "text", "id": "ours_label", "label": "Our column heading", "default": "Mr. Sniff's" },
+    { "type": "text", "id": "theirs_label", "label": "Other column heading", "default": "Typical stick incense" },
+    { "type": "text", "id": "button_1_label", "label": "Button 1 label", "default": "Shop incense" },
+    { "type": "url", "id": "button_1_url", "label": "Button 1 link" },
+    { "type": "text", "id": "button_2_label", "label": "Button 2 label", "default": "How to use incense" },
+    { "type": "url", "id": "button_2_url", "label": "Button 2 link" }
+  ],
+  "blocks": [
+    {
+      "type": "point",
+      "name": "Proof point",
+      "limit": 4,
+      "settings": [
+        { "type": "select", "id": "icon", "label": "Icon", "default": "pdp-i-materials.svg", "options": [
+          { "value": "pdp-i-materials.svg", "label": "Materials" },
+          { "value": "pdp-i-burn.svg", "label": "Flame" },
+          { "value": "pdp-i-madein.svg", "label": "Made in" },
+          { "value": "pdp-i-sticks.svg", "label": "Sticks" },
+          { "value": "pdp-i-holder.svg", "label": "Holder" },
+          { "value": "pdp-i-length.svg", "label": "Length" }
+        ] },
+        { "type": "text", "id": "title", "label": "Title", "default": "All wood" },
+        { "type": "textarea", "id": "text", "label": "Text", "default": "Aromatic wood powder, a little odorless bark to hold it together, and water. That's the whole ingredient list." }
+      ]
+    },
+    {
+      "type": "row",
+      "name": "Table row",
+      "settings": [
+        { "type": "select", "id": "icon", "label": "Icon", "default": "pdp-i-sticks.svg", "options": [
+          { "value": "pdp-i-sticks.svg", "label": "Sticks" },
+          { "value": "cmp-scent.svg", "label": "Scent" },
+          { "value": "pdp-i-burn.svg", "label": "Flame" },
+          { "value": "pdp-i-materials.svg", "label": "Materials" },
+          { "value": "pdp-i-madein.svg", "label": "Made in" },
+          { "value": "cmp-pack.svg", "label": "Pack" },
+          { "value": "cmp-price.svg", "label": "Price" },
+          { "value": "cmp-lotus.svg", "label": "Lotus" }
+        ] },
+        { "type": "text", "id": "label", "label": "Row label", "default": "Core" },
+        { "type": "text", "id": "ours", "label": "Mr. Sniff's", "default": "Solid wood, end to end" },
+        { "type": "text", "id": "theirs", "label": "Typical incense", "default": "Bamboo stick" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Home: why Mr. Sniff's",
+      "blocks": [
+        { "type": "point" },
+        { "type": "point", "settings": { "icon": "pdp-i-burn.svg", "title": "Nothing fake", "text": "No synthetic fragrance, no perfume dip, no dyes. The smell is the oil that was already in the wood." } },
+        { "type": "point", "settings": { "icon": "pdp-i-madein.svg", "title": "Nothing to hide", "text": "Pressed and sun-dried in Taiwan, the Japanese way. Our palo santo comes from trees that fell on their own." } },
+        { "type": "row" },
+        { "type": "row", "settings": { "icon": "cmp-scent.svg", "label": "Where the scent comes from", "ours": "Oils already in the wood", "theirs": "Fragrance oil dip" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

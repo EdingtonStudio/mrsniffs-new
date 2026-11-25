@@ -1,0 +1,87 @@
+<section class="howto" id="how-to" aria-labelledby="howto-title">
+  <div class="howto__inner">
+    <div class="howto__copy">
+      <div class="howto__head" data-reveal>
+        <h2 class="display-l" id="howto-title">{{ section.settings.heading }}</h2>
+        {%- if section.settings.lede != blank -%}<p class="lede">{{ section.settings.lede }}</p>{%- endif -%}
+      </div>
+
+      <ol class="steps" data-steps>
+        {%- for block in section.blocks -%}
+          {%- liquid
+            case block.settings.icon
+              when 'step-shield.svg'
+                assign iw = 16
+                assign ih = 19
+                assign flip = true
+              when 'step-eye.svg'
+                assign iw = 19
+                assign ih = 16
+                assign flip = true
+              else
+                assign iw = 16
+                assign ih = 20
+                assign flip = false
+            endcase
+          -%}
+          <li class="step{% if forloop.first %} is-active{% endif %}" data-reveal style="--d: {{ forloop.index }}" {{ block.shopify_attributes }}>
+            <button class="step__trigger" type="button" aria-pressed="{% if forloop.first %}true{% else %}false{% endif %}">
+              <span class="step__icon"><img{% if flip %} class="is-flipped"{% endif %} src="{{ block.settings.icon | asset_url }}" width="{{ iw }}" height="{{ ih }}" alt=""></span>
+              <span class="step__text">{{ block.settings.text }}</span>
+            </button>
+            <span class="step__progress" aria-hidden="true"></span>
+          </li>
+        {%- endfor -%}
+      </ol>
+
+      {%- if section.settings.button_label != blank -%}
+        {%- assign d = section.blocks.size | plus: 1 -%}
+        <a class="btn btn--solid howto__cta" href="{{ section.settings.button_url | default: '#how-to' }}" data-reveal style="--d: {{ d }}">{{ section.settings.button_label | escape }}</a>
+      {%- endif -%}
+    </div>
+
+    <div class="howto__media" data-reveal="fade">
+      {% render 'ms-image', image: section.settings.image, fallback: 'howto.webp', alt: section.settings.image_alt, width: 1800, height: 1005, sizes: '(max-width: 767px) 100vw, 50vw', loading: 'lazy' %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Home: how to use",
+  "class": "section-home-howto",
+  "max_blocks": 5,
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading", "default": "NEW TO INCENSE? START HERE." },
+    { "type": "textarea", "id": "lede", "label": "Intro text", "default": "Set up your space, choose a suitable holder, and follow the directions supplied with your incense." },
+    { "type": "text", "id": "button_label", "label": "Button label", "default": "How to use incense" },
+    { "type": "url", "id": "button_url", "label": "Button link" },
+    { "type": "image_picker", "id": "image", "label": "Image", "info": "1800 × 1005 px recommended" },
+    { "type": "text", "id": "image_alt", "label": "Image alt text", "default": "Bonfire box and driftwood on sand in front of an orange sun, with a burning stick in a black holder" }
+  ],
+  "blocks": [
+    {
+      "type": "step",
+      "name": "Step",
+      "settings": [
+        { "type": "select", "id": "icon", "label": "Icon", "default": "step-flame.svg", "options": [
+          { "value": "step-flame.svg", "label": "Flame" },
+          { "value": "step-shield.svg", "label": "Shield" },
+          { "value": "step-eye.svg", "label": "Eye" }
+        ] },
+        { "type": "text", "id": "text", "label": "Text", "default": "Choose a stable, heat-resistant incense holder." }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Home: how to use",
+      "blocks": [
+        { "type": "step" },
+        { "type": "step", "settings": { "icon": "step-shield.svg", "text": "Place it away from curtains, drafts and anything flammable." } },
+        { "type": "step", "settings": { "icon": "step-eye.svg", "text": "Never leave a burning incense stick unattended." } }
+      ]
+    }
+  ]
+}
+{% endschema %}

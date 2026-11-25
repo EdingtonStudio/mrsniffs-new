@@ -1,0 +1,42 @@
+{{ 'story.css' | asset_url | stylesheet_tag }}
+
+<section class="story-cta section--ink" aria-labelledby="story-cta-title-{{ section.id }}">
+  {% render 'ms-image', image: section.settings.image, fallback: 'story-cta.webp', alt: section.settings.image_alt, width: 1600, height: 900, class: 'story-cta__img', sizes: '(max-width: 900px) 100vw, 72vw', attrs: 'data-parallax="0.05"' %}
+  <div class="story-cta__copy">
+    <h2 class="display-l" id="story-cta-title-{{ section.id }}" data-split>{{ section.settings.heading | escape }}</h2>
+    {%- if section.settings.text != blank -%}
+      <p data-reveal style="--d: 2">{{ section.settings.text | escape | newline_to_br }}</p>
+    {%- endif -%}
+    <div class="story-cta__form-wrap" data-reveal style="--d: 4">
+      {% render 'signup-form',
+        id: 'story-signup',
+        class: 'signup__form story-cta__form',
+        klaviyo_list: section.settings.klaviyo_list,
+        consent_text: section.settings.consent_text,
+        button_label: section.settings.button_label,
+        placeholder: section.settings.placeholder,
+        success_text: section.settings.success_text
+      %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Story sign-up",
+  "class": "section-story-cta",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Headline", "default": "GOOD SCENTS. SEE YOU AROUND." },
+    { "type": "textarea", "id": "text", "label": "Text", "info": "Line breaks are kept", "default": "Get first whiff of new scents, restocks and the occasional good story.\nNo spam. Unsubscribe anytime." },
+    { "type": "image_picker", "id": "image", "label": "Image", "info": "Defaults to the holder on a wooden table" },
+    { "type": "text", "id": "image_alt", "label": "Image alt text", "default": "Black holder with a burning stick on a wooden table in warm light" },
+    { "type": "header", "content": "Sign-up form" },
+    { "type": "text", "id": "placeholder", "label": "Email placeholder", "default": "your@email.com" },
+    { "type": "text", "id": "button_label", "label": "Button label", "default": "Sign up" },
+    { "type": "text", "id": "consent_text", "label": "Consent text", "default": "Yes, email me about new scents and restocks. Unsubscribe anytime." },
+    { "type": "text", "id": "success_text", "label": "Success message", "default": "You're in. First whiff is yours." },
+    { "type": "text", "id": "klaviyo_list", "label": "Klaviyo list ID", "info": "Optional. Overrides the list in Theme settings › Email sign-up." }
+  ],
+  "presets": [{ "name": "Story sign-up" }]
+}
+{% endschema %}

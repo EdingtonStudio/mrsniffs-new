@@ -1,0 +1,320 @@
+{{ 'shop.css' | asset_url | stylesheet_tag }}
+{%- comment -%}
+  Collection product grid.
+  - Renders the current collection's products (24 per page).
+  - Gleam accent per card comes from a product tag: gleam-bonfire, gleam-yoga or gleam-duo
+    (no tag = plain ember gleam).
+  - Card note line: product metafield custom.card_note (single line text), else the product type.
+  - Short name used in "Meet …" / "Add … to cart": product metafield custom.short_name, else the product title.
+  - When the collection has no products (or there is no collection, e.g. in the editor),
+    the "Placeholder card" blocks render instead, so the page never looks broken.
+{%- endcomment -%}
+{%- liquid
+  assign has_products = false
+  if collection and collection.products_count > 0
+    assign has_products = true
+  endif
+-%}
+<section class="shop-grid" aria-label="{{ section.settings.aria_label | escape }}">
+  {%- if has_products -%}
+    {%- paginate collection.products by 24 -%}
+      <div class="holders__grid shop-grid__list">
+        {%- for product in collection.products -%}
+          {%- liquid
+            assign short = product.metafields.custom.short_name.value | default: product.title
+            assign note = product.metafields.custom.card_note.value | default: product.type
+            assign gleam = ''
+            if product.tags contains 'gleam-bonfire'
+              assign gleam = ' gleam--bonfire'
+            elsif product.tags contains 'gleam-yoga'
+              assign gleam = ' gleam--yoga'
+            elsif product.tags contains 'gleam-duo'
+              assign gleam = ' gleam--duo'
+            endif
+            assign d = forloop.index0 | modulo: 3
+            assign meet = section.settings.meet_label | replace: '[name]', short
+            assign add_label = section.settings.add_label | replace: '[name]', short
+            assign img_alt = product.featured_image.alt | default: product.title
+            assign variant = product.selected_or_first_available_variant
+          -%}
+          <article class="holder-card gleam{{ gleam }} gleam--light" id="{{ product.handle | escape }}" data-reveal{% if d > 0 %} style="--d: {{ d }}"{% endif %}>
+            <a class="holder-card__media" href="{{ product.url }}" aria-label="{{ meet | escape }}">
+              {% render 'ms-image',
+                image: product.featured_image,
+                fallback: 'shop-bonfire.webp',
+                alt: img_alt,
+                width: 879,
+                height: 1100,
+                sizes: '(max-width: 900px) 82vw, 33vw',
+                loading: 'lazy'
+              %}
+            </a>
+            <div class="holder-card__body">
+              <div class="holder-card__info">
+                <div>
+                  <h2 class="product-name">{{ product.title | escape }}</h2>
+                  {%- if note != blank -%}
+                    <p class="product-desc product-desc--md">{{ note | escape }}</p>
+                  {%- endif -%}
+                </div>
+                <p class="product-price">
+                  {%- if product.price_varies -%}{{ section.settings.price_from | escape }} {% endif -%}
+                  {{- product.price | money_without_trailing_zeros -}}
+                </p>
+              </div>
+              <div class="shop-card__actions">
+                <a class="btn btn--solid btn--sm" href="{{ product.url }}">{{ meet | escape }}</a>
+                {%- if product.available -%}
+                  <button class="icon-btn icon-btn--tile icon-btn--tile-light" type="button" aria-label="{{ add_label | escape }}" data-add-to-cart="{{ variant.id }}">
+                    {% render 'icon', name: 'cart-ink.svg', size: 16 %}
+                  </button>
+                {%- else -%}
+                  <button class="icon-btn icon-btn--tile icon-btn--tile-light" type="button" aria-label="{{ section.settings.sold_out_label | escape }}" disabled>
+                    {% render 'icon', name: 'cart-ink.svg', size: 16 %}
+                  </button>
+                {%- endif -%}
+              </div>
+            </div>
+          </article>
+        {%- endfor -%}
+      </div>
+      {%- if paginate.pages > 1 -%}
+        <nav class="ms-pagination shop-grid__pagination" aria-label="{{ section.settings.pagination_label | escape }}">
+          {%- if paginate.previous -%}<a href="{{ paginate.previous.url }}">{{ section.settings.prev_label | escape }}</a>{%- endif -%}
+          <span>{{ paginate.current_page }} / {{ paginate.pages }}</span>
+          {%- if paginate.next -%}<a href="{{ paginate.next.url }}">{{ section.settings.next_label | escape }}</a>{%- endif -%}
+        </nav>
+      {%- endif -%}
+    {%- endpaginate -%}
+  {%- else -%}
+    <div class="holders__grid shop-grid__list">
+      {%- for block in section.blocks -%}
+        {%- liquid
+          assign p = block.settings.product
+          assign name = block.settings.name
+          if name == blank and p != blank
+            assign name = p.title
+          endif
+          assign short = block.settings.short_name | default: name
+          assign meet = section.settings.meet_label | replace: '[name]', short
+          assign add_label = section.settings.add_label | replace: '[name]', short
+          assign link = block.settings.link | default: '#'
+          if p != blank
+            assign link = p.url
+          endif
+          assign fb = block.settings.fallback_image
+          assign fb_w = 879
+          if fb == 'shop-yoga.webp'
+            assign fb_w = 821
+          endif
+          assign img = block.settings.image
+          if img == blank and p != blank
+            assign img = p.featured_image
+          endif
+          assign gleam = ''
+          if block.settings.gleam != 'plain'
+            assign gleam = ' gleam--' | append: block.settings.gleam
+          endif
+          assign d = forloop.index0 | modulo: 3
+        -%}
+        <article class="holder-card gleam{{ gleam }} gleam--light"{% if block.settings.anchor != blank %} id="{{ block.settings.anchor | handleize }}"{% endif %} data-reveal{% if d > 0 %} style="--d: {{ d }}"{% endif %} {{ block.shopify_attributes }}>
+          <a class="holder-card__media" href="{{ link }}" aria-label="{{ meet | escape }}">
+            {% render 'ms-image',
+              image: img,
+              fallback: fb,
+              alt: block.settings.image_alt,
+              width: fb_w,
+              height: 1100,
+              sizes: '(max-width: 900px) 82vw, 33vw',
+              loading: 'lazy'
+            %}
+          </a>
+          <div class="holder-card__body">
+            <div class="holder-card__info">
+              <div>
+                <h2 class="product-name">{{ name | escape }}</h2>
+                {%- if block.settings.note != blank -%}
+                  <p class="product-desc product-desc--md">{{ block.settings.note | escape }}</p>
+                {%- endif -%}
+              </div>
+              <p class="product-price">
+                {%- if p != blank -%}
+                  {%- if p.price_varies -%}{{ section.settings.price_from | escape }} {% endif -%}
+                  {{- p.price | money_without_trailing_zeros -}}
+                {%- else -%}
+                  {{- block.settings.price | escape -}}
+                {%- endif -%}
+              </p>
+            </div>
+            <div class="shop-card__actions">
+              <a class="btn btn--solid btn--sm" href="{{ link }}">{{ meet | escape }}</a>
+              {%- if p != blank and p.available == false -%}
+                <button class="icon-btn icon-btn--tile icon-btn--tile-light" type="button" aria-label="{{ section.settings.sold_out_label | escape }}" disabled>
+                  {% render 'icon', name: 'cart-ink.svg', size: 16 %}
+                </button>
+              {%- else -%}
+                <button class="icon-btn icon-btn--tile icon-btn--tile-light" type="button" aria-label="{{ add_label | escape }}"{% if p != blank %} data-add-to-cart="{{ p.selected_or_first_available_variant.id }}"{% endif %}>
+                  {% render 'icon', name: 'cart-ink.svg', size: 16 %}
+                </button>
+              {%- endif -%}
+            </div>
+          </div>
+        </article>
+      {%- endfor -%}
+    </div>
+  {%- endif -%}
+</section>
+
+{% schema %}
+{
+  "name": "Shop product grid",
+  "class": "shop-products-section",
+  "max_blocks": 6,
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "Shows the products in the current collection. Tag a product gleam-bonfire, gleam-yoga or gleam-duo to set its border glow color. The note line comes from the product metafield custom.card_note (falls back to product type); the short name in buttons comes from custom.short_name (falls back to the product title)."
+    },
+    {
+      "type": "text",
+      "id": "aria_label",
+      "label": "Accessible section label",
+      "default": "Incense"
+    },
+    {
+      "type": "text",
+      "id": "meet_label",
+      "label": "Card button label",
+      "info": "[name] is replaced by the product's short name.",
+      "default": "Meet [name]"
+    },
+    {
+      "type": "text",
+      "id": "add_label",
+      "label": "Add to cart accessible label",
+      "info": "[name] is replaced by the product's short name.",
+      "default": "Add [name] to cart"
+    },
+    {
+      "type": "text",
+      "id": "sold_out_label",
+      "label": "Sold out label",
+      "default": "Sold out"
+    },
+    {
+      "type": "text",
+      "id": "price_from",
+      "label": "Price prefix when variants vary",
+      "default": "From"
+    },
+    {
+      "type": "header",
+      "content": "Pagination"
+    },
+    {
+      "type": "text",
+      "id": "pagination_label",
+      "label": "Pagination accessible label",
+      "default": "Pagination"
+    },
+    {
+      "type": "text",
+      "id": "prev_label",
+      "label": "Previous page label",
+      "default": "Previous"
+    },
+    {
+      "type": "text",
+      "id": "next_label",
+      "label": "Next page label",
+      "default": "Next"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "placeholder-card",
+      "name": "Placeholder card",
+      "settings": [
+        {
+          "type": "paragraph",
+          "content": "Only shown while the collection has no products."
+        },
+        {
+          "type": "product",
+          "id": "product",
+          "label": "Product (optional)"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "select",
+          "id": "fallback_image",
+          "label": "Bundled image (used when no image is picked)",
+          "options": [
+            { "value": "shop-bonfire.webp", "label": "Bonfire box" },
+            { "value": "shop-yoga.webp", "label": "Yoga Studio box" },
+            { "value": "shop-duo.webp", "label": "Duo boxes" }
+          ],
+          "default": "shop-bonfire.webp"
+        },
+        {
+          "type": "text",
+          "id": "image_alt",
+          "label": "Image alt text",
+          "default": "Bonfire Agarwood incense box on grey"
+        },
+        {
+          "type": "text",
+          "id": "name",
+          "label": "Name",
+          "default": "Bonfire · Agarwood"
+        },
+        {
+          "type": "text",
+          "id": "short_name",
+          "label": "Short name for buttons",
+          "default": "Bonfire"
+        },
+        {
+          "type": "text",
+          "id": "note",
+          "label": "Note",
+          "default": "Dark resin + smoke"
+        },
+        {
+          "type": "text",
+          "id": "price",
+          "label": "Price (when no product is picked)",
+          "default": "$24"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link (when no product is picked)"
+        },
+        {
+          "type": "select",
+          "id": "gleam",
+          "label": "Border glow color",
+          "options": [
+            { "value": "plain", "label": "Ember (default)" },
+            { "value": "bonfire", "label": "Bonfire" },
+            { "value": "yoga", "label": "Yoga Studio" },
+            { "value": "duo", "label": "Duo" }
+          ],
+          "default": "bonfire"
+        },
+        {
+          "type": "text",
+          "id": "anchor",
+          "label": "Anchor id",
+          "default": "bonfire"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

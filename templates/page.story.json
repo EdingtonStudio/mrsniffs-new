@@ -1,0 +1,366 @@
+{
+  "sections": {
+    "hero": {
+      "type": "story-hero",
+      "settings": {
+        "image_alt": "Bonfire and Yoga Studio incense boxes on bark with palo santo, resin, orange peel and a smoking stick in a black holder",
+        "title": "MORE THAN INCENSE.",
+        "lede": "Incense for real rooms and real moments, with nothing poured on top."
+      }
+    },
+    "origin": {
+      "type": "story-origin",
+      "blocks": {
+        "beat-1": {
+          "type": "beat",
+          "settings": {
+            "number": "01",
+            "title": "The bad stick.",
+            "text": "Somebody lit a stick from a gas-station counter. Ten minutes later the room smelled like a candle shop on fire. We opened every window, and one question hung around longer than the smoke: why does nearly all incense smell like perfume?"
+          }
+        },
+        "beat-2": {
+          "type": "beat",
+          "settings": {
+            "number": "02",
+            "title": "The fix.",
+            "text": "Most of it is soaked in fragrance oil. So we went the other way: aromatic wood, a plant-based binder and nothing poured on top. What you smell is what’s burning. We lit a lot of test batches on porches, in garages and in living rooms. Two made the cut."
+          }
+        },
+        "beat-3": {
+          "type": "beat",
+          "settings": {
+            "number": "03",
+            "title": "The name.",
+            "text": "Every crew has a friend with a nose for it, the one who knows what’s in the room before their coat is off. We put a moustache on him, called him Mr. Sniff, and made him the boss. He’s never once been wrong about a smell."
+          }
+        }
+      },
+      "block_order": [
+        "beat-1",
+        "beat-2",
+        "beat-3"
+      ],
+      "settings": {
+        "eyebrow": "How it started",
+        "heading": "HOW MR. SNIFF’S GOT ITS NOSE.",
+        "lede": "It started the way most good ideas do: a few friends, a late night and one very bad stick of incense.",
+        "sign": "Two scents. One nose. Come get a whiff.",
+        "image_alt": "Bonfire and Yoga Studio boxes on a stack of books beside a moustache holder with a burning stick"
+      }
+    },
+    "why": {
+      "type": "story-why",
+      "blocks": {
+        "card-1": {
+          "type": "card",
+          "settings": {
+            "fallback": "story-why-1.webp",
+            "back": false,
+            "x": 105,
+            "y": 113,
+            "w": 209,
+            "h": 135,
+            "speed": 0.9
+          }
+        },
+        "card-2": {
+          "type": "card",
+          "settings": {
+            "fallback": "story-why-2.webp",
+            "back": true,
+            "x": 16,
+            "y": 299,
+            "w": 146,
+            "h": 94,
+            "speed": 1.4
+          }
+        },
+        "card-3": {
+          "type": "card",
+          "settings": {
+            "fallback": "story-why-3.webp",
+            "back": false,
+            "x": 916,
+            "y": 65,
+            "w": 207,
+            "h": 134,
+            "speed": 1.1
+          }
+        },
+        "card-4": {
+          "type": "card",
+          "settings": {
+            "fallback": "story-why-4.webp",
+            "back": true,
+            "x": 1157,
+            "y": 173,
+            "w": 151,
+            "h": 98,
+            "speed": 1.6
+          }
+        },
+        "card-5": {
+          "type": "card",
+          "settings": {
+            "fallback": "story-why-5.webp",
+            "back": false,
+            "x": 1216,
+            "y": 496,
+            "w": 181,
+            "h": 117,
+            "speed": 1.0
+          }
+        },
+        "card-6": {
+          "type": "card",
+          "settings": {
+            "fallback": "story-why-6.webp",
+            "back": false,
+            "x": 304,
+            "y": 613,
+            "w": 211,
+            "h": 137,
+            "speed": 1.3
+          }
+        },
+        "card-7": {
+          "type": "card",
+          "settings": {
+            "fallback": "story-why-3.webp",
+            "back": true,
+            "x": 40,
+            "y": 560,
+            "w": 170,
+            "h": 110,
+            "speed": 0.8
+          }
+        },
+        "card-8": {
+          "type": "card",
+          "settings": {
+            "fallback": "story-why-1.webp",
+            "back": true,
+            "x": 1290,
+            "y": 330,
+            "w": 120,
+            "h": 78,
+            "speed": 1.8
+          }
+        },
+        "card-9": {
+          "type": "card",
+          "settings": {
+            "fallback": "story-why-5.webp",
+            "back": true,
+            "x": 560,
+            "y": 40,
+            "w": 130,
+            "h": 84,
+            "speed": 1.5
+          }
+        },
+        "card-10": {
+          "type": "card",
+          "settings": {
+            "fallback": "story-why-6.webp",
+            "back": false,
+            "x": 860,
+            "y": 640,
+            "w": 160,
+            "h": 104,
+            "speed": 0.85
+          }
+        }
+      },
+      "block_order": [
+        "card-1",
+        "card-2",
+        "card-3",
+        "card-4",
+        "card-5",
+        "card-6",
+        "card-7",
+        "card-8",
+        "card-9",
+        "card-10"
+      ],
+      "settings": {
+        "eyebrow": "Why we started",
+        "quote": "Incense shouldn’t smell like a perfume counter, and it shouldn’t take itself so seriously. Real wood, nothing poured on top and a little personality in every burn.",
+        "name": "The Mr. Sniff’s crew",
+        "role": "Founders"
+      }
+    },
+    "pov": {
+      "type": "story-pov",
+      "blocks": {
+        "tab-1": {
+          "type": "tab",
+          "settings": {
+            "tab_label": "Scene first",
+            "heading": "Good incense sets the mood.",
+            "text": "We make incense for real spaces and real moments. From slow evenings to last-minute resets, every scent has a scene to call its own.",
+            "fallback": "story-pov.webp",
+            "image_alt": "Man in round sunglasses holding a lit incense stick under his nose"
+          }
+        },
+        "tab-2": {
+          "type": "tab",
+          "settings": {
+            "tab_label": "A small lineup",
+            "heading": "Two scents. On purpose.",
+            "text": "We'd rather make two great scents than twenty forgettable ones. Bonfire for after dark, Yoga Studio for the reset. New ones show up only when they've earned a spot.",
+            "fallback": "pdp-lineup-duo.webp",
+            "image_alt": "Bonfire and Yoga Studio boxes on driftwood with resin and palo santo"
+          }
+        },
+        "tab-3": {
+          "type": "tab",
+          "settings": {
+            "tab_label": "A little personality",
+            "heading": "Nothing precious about it.",
+            "text": "Incense doesn't need to be serious to be good. We keep the ingredients honest and the jokes a little crude, so lighting one feels like a good time, not a ceremony.",
+            "fallback": "gallery-1.webp",
+            "image_alt": "Man in white sunglasses and a yellow leather jacket holding an incense stick"
+          }
+        }
+      },
+      "block_order": [
+        "tab-1",
+        "tab-2",
+        "tab-3"
+      ],
+      "settings": {
+        "heading": "OUR POINT OF VIEW",
+        "lede": "Good scents. A little personality. Here's what goes into making Mr. Sniff's different."
+      }
+    },
+    "into": {
+      "type": "story-into",
+      "blocks": {
+        "ingredient-1": {
+          "type": "ingredient",
+          "settings": {
+            "label": "Aromatic wood powder",
+            "text": "Gives every stick its naturally smoky, warm character.",
+            "fallback": "story-into-1.webp",
+            "icon": "story-into-i1.svg",
+            "flip_icon": false,
+            "x": 858,
+            "y": 175
+          }
+        },
+        "ingredient-2": {
+          "type": "ingredient",
+          "settings": {
+            "label": "Plant-based bark binder",
+            "text": "Holds the wood ingredients together.",
+            "fallback": "story-into-2.webp",
+            "icon": "story-into-i2.svg",
+            "flip_icon": false,
+            "x": 1032,
+            "y": 379
+          }
+        },
+        "ingredient-3": {
+          "type": "ingredient",
+          "settings": {
+            "label": "No added fragrance",
+            "text": "No perfume or fragrance oils.",
+            "fallback": "story-into-3.webp",
+            "icon": "story-into-i3b.svg",
+            "flip_icon": true,
+            "x": 880,
+            "y": 583
+          }
+        }
+      },
+      "block_order": [
+        "ingredient-1",
+        "ingredient-2",
+        "ingredient-3"
+      ],
+      "settings": {
+        "heading": "WHAT GOES INTO IT",
+        "lede": "Real wood, simple ingredients, and a whole lot of character in every burn.",
+        "hand_alt": "Hand holding a lit incense stick trailing smoke"
+      }
+    },
+    "products": {
+      "type": "story-products",
+      "blocks": {
+        "card-1": {
+          "type": "card",
+          "settings": {
+            "name": "Bonfire · Agarwood",
+            "desc": "Dark resin + smoke",
+            "price": "$24",
+            "url": "/products/bonfire",
+            "button_label": "Meet Bonfire",
+            "cart_label": "Add Bonfire to cart",
+            "image_alt": "Bonfire Agarwood incense box on grey",
+            "gleam": "bonfire"
+          }
+        },
+        "card-2": {
+          "type": "card",
+          "settings": {
+            "name": "Yoga Studio · Palo Santo Incense",
+            "desc": "Warm resin + citrus peel",
+            "price": "$24",
+            "url": "/products/yoga-studio",
+            "button_label": "Meet Yoga Studio",
+            "cart_label": "Add Yoga Studio to cart",
+            "image_alt": "Yoga Studio Palo Santo incense box on grey",
+            "gleam": "yoga"
+          }
+        },
+        "card-3": {
+          "type": "card",
+          "settings": {
+            "name": "The Duo Bundle",
+            "desc": "Both scents · In stock",
+            "price": "$42",
+            "url": "/products/duo",
+            "button_label": "Meet the Duo",
+            "cart_label": "Add the Duo to cart",
+            "image_alt": "Yoga Studio and Bonfire boxes standing side by side",
+            "gleam": "duo"
+          }
+        }
+      },
+      "block_order": [
+        "card-1",
+        "card-2",
+        "card-3"
+      ],
+      "settings": {
+        "heading": "FIND YOUR KIND OF SCENT.",
+        "lede": "Two distinct scents. Two different moods. One good reason to make room for both."
+      }
+    },
+    "signup": {
+      "type": "story-cta",
+      "settings": {
+        "heading": "GOOD SCENTS. SEE YOU AROUND.",
+        "text": "Get first whiff of new scents, restocks and the occasional good story.\nNo spam. Unsubscribe anytime.",
+        "image_alt": "Black holder with a burning stick on a wooden table in warm light",
+        "placeholder": "your@email.com",
+        "button_label": "Sign up",
+        "consent_text": "Yes, email me about new scents and restocks. Unsubscribe anytime.",
+        "success_text": "You're in. First whiff is yours.",
+        "klaviyo_list": ""
+      }
+    }
+  },
+  "order": [
+    "hero",
+    "origin",
+    "why",
+    "pov",
+    "into",
+    "products",
+    "signup"
+  ]
+}

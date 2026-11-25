@@ -1,0 +1,33 @@
+{{ 'info.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'info.js' | asset_url }}" defer></script>
+<header class="info-hero">
+  <div class="info-hero__inner" data-reveal>
+    {%- if section.settings.eyebrow != blank -%}
+      <p class="info-hero__eyebrow">{{ section.settings.eyebrow }}</p>
+    {%- endif -%}
+    <h1 class="display-l">
+      {%- if section.settings.heading != blank -%}{{ section.settings.heading }}{%- else -%}{{ page.title | default: page_title }}{%- endif -%}
+    </h1>
+    {%- if section.settings.lede != blank -%}
+      <p class="lede">{{ section.settings.lede }}</p>
+    {%- endif -%}
+    {%- if section.settings.meta != blank -%}
+      <p class="info-hero__meta">{{ section.settings.meta }}</p>
+    {%- endif -%}
+  </div>
+</header>
+
+{% schema %}
+{
+  "name": "Info hero",
+  "tag": "div",
+  "class": "ms-info-hero",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Help" },
+    { "type": "text", "id": "heading", "label": "Heading", "info": "Leave blank to use the page title.", "default": "Before you light one" },
+    { "type": "inline_richtext", "id": "lede", "label": "Intro", "default": "Answers to the questions we hear most. Still stuck? <a href=\"/pages/contact\">Get in touch</a>." },
+    { "type": "text", "id": "meta", "label": "Small print (e.g. last updated)" }
+  ],
+  "presets": [{ "name": "Info hero" }]
+}
+{% endschema %}

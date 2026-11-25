@@ -1,0 +1,146 @@
+{{ 'shop.css' | asset_url | stylesheet_tag }}
+{%- assign title_id = 'decide-title-' | append: section.id -%}
+<section class="decide" aria-labelledby="{{ title_id }}">
+  <header class="section-head" data-reveal>
+    <h2 class="display-l" id="{{ title_id }}">{{ section.settings.heading | escape }}</h2>
+    {%- if section.settings.lede != blank -%}
+      <p class="lede">{{ section.settings.lede | escape }}</p>
+    {%- endif -%}
+  </header>
+
+  <div class="decide__grid">
+    {%- for block in section.blocks -%}
+      {%- liquid
+        assign d = forloop.index0
+        assign fb = block.settings.fallback_image
+        assign fb_w = 733
+        if fb == 'decide-holder.webp'
+          assign fb_w = 886
+        endif
+      -%}
+      <article class="decide-card" data-reveal{% if d > 0 %} style="--d: {{ d }}"{% endif %} {{ block.shopify_attributes }}>
+        <div class="decide-card__media{% if block.settings.burn_crop %} decide-card__media--burn{% endif %}">
+          {% render 'ms-image',
+            image: block.settings.image,
+            fallback: fb,
+            alt: block.settings.image_alt,
+            width: fb_w,
+            height: 1100,
+            sizes: '(max-width: 900px) 100vw, 33vw',
+            loading: 'lazy'
+          %}
+        </div>
+        <div class="decide-card__body">
+          {%- if block.settings.pill != blank -%}
+            <p class="decide-card__pill">{{ block.settings.pill | escape }}</p>
+          {%- endif -%}
+          <div class="decide-card__text">
+            <h3>{{ block.settings.title | escape }}</h3>
+            {%- if block.settings.text != blank -%}
+              <p>{{ block.settings.text | escape }}</p>
+            {%- endif -%}
+          </div>
+          {%- if block.settings.button_label != blank -%}
+            <a class="btn btn--outline" href="{{ block.settings.button_link | default: '#' }}">{{ block.settings.button_label | escape }}</a>
+          {%- endif -%}
+        </div>
+      </article>
+    {%- endfor -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Still deciding",
+  "max_blocks": 6,
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "STILL DECIDING?"
+    },
+    {
+      "type": "text",
+      "id": "lede",
+      "label": "Intro",
+      "default": "Qualitative scent language only. No intensity score."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "card",
+      "name": "Card",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "select",
+          "id": "fallback_image",
+          "label": "Bundled image (used when no image is picked)",
+          "options": [
+            { "value": "gallery-7.webp", "label": "Rows of boxes" },
+            { "value": "decide-burn.webp", "label": "Burning stick" },
+            { "value": "decide-holder.webp", "label": "Holder on bar top" }
+          ],
+          "default": "gallery-7.webp"
+        },
+        {
+          "type": "checkbox",
+          "id": "burn_crop",
+          "label": "Use the burning-stick crop",
+          "default": false
+        },
+        {
+          "type": "text",
+          "id": "image_alt",
+          "label": "Image alt text",
+          "default": "Rows of Bonfire and Yoga Studio boxes on black"
+        },
+        {
+          "type": "text",
+          "id": "pill",
+          "label": "Label",
+          "default": "FIND YOUR SCENT"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Heading",
+          "default": "What's your kind of reset?"
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Text",
+          "default": "Choose your mood. Bonfire brings smoky agarwood warmth; Yoga Studio keeps it clean with palo santo and subtle citrus."
+        },
+        {
+          "type": "text",
+          "id": "button_label",
+          "label": "Button label",
+          "default": "Find your scent"
+        },
+        {
+          "type": "url",
+          "id": "button_link",
+          "label": "Button link"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Still deciding",
+      "blocks": [
+        { "type": "card" },
+        { "type": "card", "settings": { "fallback_image": "decide-burn.webp", "burn_crop": true, "image_alt": "Single incense stick burning against a warm brown backdrop", "pill": "HOW TO USE INCENSE", "title": "Snap. Light. Reset.", "text": "Snap a piece, light it, and enjoy a 10-minute reset or a full 45-minute burn.", "button_label": "Learn how to burn" } },
+        { "type": "card", "settings": { "fallback_image": "decide-holder.webp", "image_alt": "Tattooed hand beside a black stoneware holder on a bar top", "pill": "HOLDER COMPATIBILITY", "title": "Give your incense a place.", "text": "Find a heat-safe holder for your 210 mm incense sticks. Set it up safely and let the scent do its thing.", "button_label": "Find your scent" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

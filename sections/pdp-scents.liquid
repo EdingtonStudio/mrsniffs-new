@@ -1,0 +1,120 @@
+{{ 'pdp.css' | asset_url | stylesheet_tag }}
+<section class="scents section--ink pdp-both" aria-labelledby="both-title-{{ section.id }}">
+  <header class="section-head" data-reveal>
+    <h2 class="display-l pdp-both__title" id="both-title-{{ section.id }}">{{ section.settings.title }}</h2>
+    {%- if section.settings.lede != blank -%}<p class="lede lede--on-ink">{{ section.settings.lede }}</p>{%- endif -%}
+  </header>
+
+  <div class="scents__grid">
+    {%- for block in section.blocks -%}
+      {%- liquid
+        assign s = block.settings
+        assign p = s.product
+        assign name = s.name
+        assign href = s.url | default: '#'
+        if p != blank
+          if name == blank
+            assign name = p.title
+          endif
+          assign href = p.url
+        endif
+        assign short = s.short_name | default: name
+      -%}
+      <article class="scent-card scent-card--{{ s.style }} gleam gleam--{{ s.style }}" data-reveal{% if forloop.index0 > 0 %} style="--d: {{ forloop.index0 }}"{% endif %} {{ block.shopify_attributes }}>
+        <a class="scent-card__media" href="{{ href }}" aria-label="{{ s.cta_label | default: name | escape }}">
+          {%- if s.style == 'duo' -%}
+            <img class="duo-shadow duo-shadow--a" src="{{ 'pdp-shadow-duo-a.svg' | asset_url }}" width="374" height="239" alt="">
+            <span class="duo-box duo-box--bonfire">{% render 'pdp-img', image: s.box_image, asset: 'box-bonfire.webp', alt: 'Bonfire Agarwood incense box', sizes: '200px' %}</span>
+            <img class="duo-shadow duo-shadow--b" src="{{ 'pdp-shadow-duo-b.svg' | asset_url }}" width="367" height="237" alt="">
+            <span class="duo-box duo-box--yoga">{% render 'pdp-img', image: s.box_image_2, asset: 'box-yoga.webp', alt: 'Yoga Studio Palo Santo incense box', sizes: '200px' %}</span>
+          {%- else -%}
+            {%- if s.style == 'yoga' -%}
+              {%- assign box_asset = 'box-yoga.webp' -%}
+              {%- assign box_alt = 'Yoga Studio Palo Santo incense box' -%}
+            {%- else -%}
+              {%- assign box_asset = 'box-bonfire.webp' -%}
+              {%- assign box_alt = 'Bonfire Agarwood incense box' -%}
+            {%- endif -%}
+            <img class="scent-card__shadow" src="{{ 'box-shadow.svg' | asset_url }}" width="366" height="237" alt="">
+            <span class="scent-card__box">{% render 'pdp-img', image: s.box_image, asset: box_asset, alt: box_alt, sizes: '200px' %}</span>
+          {%- endif -%}
+        </a>
+        <div class="scent-card__body">
+          <div class="scent-card__info">
+            <div>
+              <h3 class="product-name">{{ name }}</h3>
+              {%- if s.note != blank -%}<p class="product-note">{{ s.note }}</p>{%- endif -%}
+            </div>
+            <p class="product-price">{% if p != blank %}{% if p.price_varies %}From {% endif %}{{ p.price | money_without_trailing_zeros }}{% else %}{{ s.price }}{% endif %}</p>
+          </div>
+          <div class="scent-card__actions">
+            {%- if s.cta_label != blank -%}<a class="btn btn--light btn--sm btn--w195" href="{{ href }}">{{ s.cta_label }}</a>{%- endif -%}
+            {%- liquid
+              if p != blank and p.available == false
+                assign btn_label = short | append: ' sold out'
+                assign btn_attrs = 'disabled'
+              elsif p != blank
+                assign btn_label = 'Add ' | append: short | append: ' to cart'
+                assign btn_attrs = 'data-add-to-cart="' | append: p.selected_or_first_available_variant.id | append: '"'
+              else
+                assign btn_label = 'Add ' | append: short | append: ' to cart'
+                assign btn_attrs = ''
+              endif
+            -%}
+            <button class="icon-btn icon-btn--tile" type="button" aria-label="{{ btn_label | escape }}" {{ btn_attrs }}>
+              {% render 'icon', name: 'cart.svg', size: 16 %}
+            </button>
+          </div>
+        </div>
+      </article>
+    {%- endfor -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Scent cards",
+  "settings": [
+    { "type": "text", "id": "title", "label": "Heading", "default": "One, two or both." },
+    { "type": "text", "id": "lede", "label": "Text", "default": "Explore individual scents or bring both into your space with the Duo Bundle." }
+  ],
+  "blocks": [
+    {
+      "type": "card",
+      "name": "Scent card",
+      "settings": [
+        { "type": "product", "id": "product", "label": "Product", "info": "Sets link, price and the cart button" },
+        {
+          "type": "select",
+          "id": "style",
+          "label": "Box art and colour",
+          "options": [
+            { "value": "bonfire", "label": "Bonfire" },
+            { "value": "yoga", "label": "Yoga Studio" },
+            { "value": "duo", "label": "Duo (both boxes)" }
+          ],
+          "default": "yoga"
+        },
+        { "type": "image_picker", "id": "box_image", "label": "Box cut-out", "info": "Transparent PNG/WebP. Duo: left box." },
+        { "type": "image_picker", "id": "box_image_2", "label": "Second box cut-out (Duo)" },
+        { "type": "text", "id": "name", "label": "Display name", "default": "Yoga Studio · Palo Santo Incense", "info": "Empty uses the product title" },
+        { "type": "text", "id": "short_name", "label": "Short name (for screen readers)", "default": "Yoga Studio" },
+        { "type": "text", "id": "note", "label": "Note", "default": "Warm resin + citrus peel" },
+        { "type": "text", "id": "price", "label": "Price (no product picked)", "default": "$24" },
+        { "type": "text", "id": "cta_label", "label": "Button label", "default": "Meet Yoga Studio" },
+        { "type": "url", "id": "url", "label": "Link (no product picked)" }
+      ]
+    }
+  ],
+  "max_blocks": 3,
+  "presets": [
+    {
+      "name": "Scent cards",
+      "blocks": [
+        { "type": "card" },
+        { "type": "card", "settings": { "style": "duo", "name": "The Duo Bundle", "short_name": "the Duo", "note": "Both scents · In stock", "price": "$42", "cta_label": "Meet the Duo" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

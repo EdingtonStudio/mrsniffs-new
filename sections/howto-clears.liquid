@@ -1,0 +1,53 @@
+{{ 'howto.css' | asset_url | stylesheet_tag }}
+
+<section class="ht-clears"{% if section.settings.anchor != blank %} id="{{ section.settings.anchor | remove: '#' | strip | escape }}"{% endif %} aria-labelledby="clears-title-{{ section.id }}">
+  {% render 'ms-image', image: section.settings.image, fallback: 'howto-clears.webp', alt: section.settings.image_alt, width: 1200, height: 948, class: 'ht-clears__img', sizes: '860px', attrs: 'data-parallax="-0.05"' %}
+  <header class="ht-clears__head" data-reveal>
+    <h2 class="display-l" id="clears-title-{{ section.id }}" data-split>{{ section.settings.heading | escape }}</h2>
+    {%- if section.settings.lede != blank -%}<p class="lede">{{ section.settings.lede }}</p>{%- endif -%}
+  </header>
+  <ol class="ht-clears__cols">
+    {%- for block in section.blocks -%}
+      <li class="ht-clear" {{ block.shopify_attributes }}>
+        <span class="ht-clear__mask" aria-hidden="true"><span class="ht-clear__num">{{ block.settings.number }}</span></span>
+        <div class="ht-clear__text"><h3>{{ block.settings.heading }}</h3>{% if block.settings.text != blank %}<p>{{ block.settings.text }}</p>{% endif %}</div>
+      </li>
+    {%- endfor -%}
+  </ol>
+</section>
+
+{% schema %}
+{
+  "name": "How-to clean up",
+  "class": "section-howto-clears",
+  "max_blocks": 3,
+  "settings": [
+    { "type": "text", "id": "anchor", "label": "Section ID", "info": "Used by the guide tabs in the hero", "default": "clean-up" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "WHEN THE SMOKE CLEARS" },
+    { "type": "textarea", "id": "lede", "label": "Intro", "default": "A few easy steps to safely clean up after your incense burns." },
+    { "type": "image_picker", "id": "image", "label": "Image", "info": "Defaults to the spent stick in a holder" },
+    { "type": "text", "id": "image_alt", "label": "Image alt text", "default": "Ash and a spent stick in a black holder" }
+  ],
+  "blocks": [
+    {
+      "type": "step",
+      "name": "Step",
+      "settings": [
+        { "type": "text", "id": "number", "label": "Number", "default": "01" },
+        { "type": "text", "id": "heading", "label": "Heading", "default": "LET IT COOL" },
+        { "type": "textarea", "id": "text", "label": "Text", "default": "Let the incense stick and ash cool completely before touching or removing anything." }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "How-to clean up",
+      "blocks": [
+        { "type": "step" },
+        { "type": "step", "settings": { "number": "02", "heading": "DISPOSE OF ASH", "text": "Once completely cool, dispose of the ash and any remaining incense safely." } },
+        { "type": "step", "settings": { "number": "03", "heading": "HOLDER CARE", "text": "Remove leftover residue and clean your holder according to its material and care instructions." } }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,24 @@
+{{ 'story.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'story.js' | asset_url }}" defer></script>
+
+<section class="story-hero" aria-labelledby="story-title-{{ section.id }}">
+  {% render 'ms-image', image: section.settings.image, fallback: 'story-hero.webp', alt: section.settings.image_alt, width: 2880, height: 1556, class: 'story-hero__img', loading: 'eager', attrs: 'fetchpriority="high" data-parallax="0.06"' %}
+  <h1 class="story-hero__title display-l" id="story-title-{{ section.id }}" data-split>{{ section.settings.title | escape }}</h1>
+  {%- if section.settings.lede != blank -%}
+    <p class="story-hero__lede" data-reveal style="--d: 3">{{ section.settings.lede }}</p>
+  {%- endif -%}
+</section>
+
+{% schema %}
+{
+  "name": "Story hero",
+  "class": "section-story-hero",
+  "settings": [
+    { "type": "image_picker", "id": "image", "label": "Background image", "info": "Defaults to the Our Story hero photo" },
+    { "type": "text", "id": "image_alt", "label": "Image alt text", "default": "Bonfire and Yoga Studio incense boxes on bark with palo santo, resin, orange peel and a smoking stick in a black holder" },
+    { "type": "text", "id": "title", "label": "Headline", "default": "MORE THAN INCENSE." },
+    { "type": "textarea", "id": "lede", "label": "Intro line", "default": "Incense for real rooms and real moments, with nothing poured on top." }
+  ],
+  "presets": [{ "name": "Story hero" }]
+}
+{% endschema %}

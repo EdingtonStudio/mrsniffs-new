@@ -1,0 +1,125 @@
+<section class="holders" id="holders" aria-labelledby="holders-title">
+  <header class="section-head" data-reveal>
+    <h2 class="display-l" id="holders-title">{{ section.settings.heading }}</h2>
+    {%- if section.settings.lede != blank -%}<p class="lede">{{ section.settings.lede }}</p>{%- endif -%}
+  </header>
+
+  <div class="holders__grid">
+    {%- for block in section.blocks -%}
+      {%- liquid
+        assign p = block.settings.product
+        assign name = block.settings.name
+        if name == blank and p != blank
+          assign name = p.title
+        endif
+        assign url = block.settings.url | default: '#'
+        assign price = block.settings.price
+        assign sold_out = block.settings.sold_out
+        if p != blank
+          assign url = p.url
+          assign price = p.price | money_without_trailing_zeros
+          if p.price_varies
+            assign price = 'From ' | append: price
+          endif
+          if p.available
+            assign sold_out = false
+          else
+            assign sold_out = true
+          endif
+        endif
+        assign field_id = 'notify-' | append: block.id
+        assign form_id = 'notify-form-' | append: block.id
+        assign email_label = block.settings.email_label | replace: '[name]', name
+      -%}
+      <article class="holder-card gleam gleam--bonfire gleam--light" data-reveal{% unless forloop.first %} style="--d: {{ forloop.index0 }}"{% endunless %} {{ block.shopify_attributes }}>
+        <div class="holder-card__media">
+          {% render 'ms-image', image: block.settings.image, fallback: block.settings.placeholder, alt: block.settings.image_alt, width: 886, height: 1100, sizes: '(max-width: 767px) 100vw, 33vw', loading: 'lazy' %}
+          {%- if sold_out and section.settings.chip_label != blank -%}<span class="chip">{{ section.settings.chip_label }}</span>{%- endif -%}
+        </div>
+        <div class="holder-card__body">
+          <div class="holder-card__info">
+            <div>
+              <h3 class="product-name"><a href="{{ url }}">{{ name }}</a></h3>
+              {%- if block.settings.description != blank -%}<p class="product-desc">{{ block.settings.description }}</p>{%- endif -%}
+            </div>
+            <p class="product-price">{{ price }}</p>
+          </div>
+          {%- if sold_out -%}
+            <div class="holder-card__actions" data-notify>
+              <button class="btn btn--solid btn--sm btn--block" type="button" data-notify-open>{{ section.settings.notify_label }}</button>
+              {%- form 'contact', id: form_id, class: 'notify-form', data-notify-form: '', novalidate: 'novalidate', hidden: 'hidden' -%}
+                <input type="hidden" name="contact[tags]" value="notify-me">
+                <input type="hidden" name="contact[product]" value="{{ name | escape }}">
+                <input type="hidden" name="contact[body]" value="Restock request: {{ name | escape }}{% if p != blank %} ({{ p.handle }}){% endif %}">
+                <label class="sr-only" for="{{ field_id }}">{{ email_label }}</label>
+                <input id="{{ field_id }}" name="contact[email]" type="email" placeholder="{{ section.settings.placeholder | escape }}" required autocomplete="email">
+                <button class="btn btn--solid btn--sm" type="submit">{{ section.settings.send_label }}</button>
+              {%- endform -%}
+              <p class="form-msg" data-notify-msg role="status"></p>
+            </div>
+          {%- else -%}
+            <div class="holder-card__actions">
+              {%- if p != blank -%}
+                <button class="btn btn--solid btn--sm btn--block" type="button" data-add-to-cart="{{ p.selected_or_first_available_variant.id }}">{{ section.settings.add_label }}</button>
+              {%- else -%}
+                <a class="btn btn--solid btn--sm btn--block" href="{{ url }}">{{ section.settings.add_label }}</a>
+              {%- endif -%}
+            </div>
+          {%- endif -%}
+        </div>
+      </article>
+    {%- endfor -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Home: holders",
+  "class": "section-home-holders",
+  "max_blocks": 6,
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading", "default": "SOMEWHERE TO STICK IT" },
+    { "type": "text", "id": "lede", "label": "Intro text", "default": "Holders. Sold separately." },
+    { "type": "header", "content": "Labels" },
+    { "type": "text", "id": "chip_label", "label": "Sold-out badge", "default": "Sold-out" },
+    { "type": "text", "id": "add_label", "label": "Add-to-cart button", "default": "Add to cart" },
+    { "type": "text", "id": "notify_label", "label": "Notify button", "default": "Notify me" },
+    { "type": "text", "id": "placeholder", "label": "Email placeholder", "default": "your@email.com" },
+    { "type": "text", "id": "send_label", "label": "Send button", "default": "Send" },
+    { "type": "paragraph", "content": "Restock requests are sent through the store contact form, tagged notify-me." }
+  ],
+  "blocks": [
+    {
+      "type": "holder-card",
+      "name": "Holder card",
+      "settings": [
+        { "type": "product", "id": "product", "label": "Product", "info": "Sets the link, price and stock state" },
+        { "type": "image_picker", "id": "image", "label": "Image", "info": "886 × 1100 px recommended" },
+        { "type": "select", "id": "placeholder", "label": "Placeholder (shown until an image is picked)", "default": "holder-ash-catchum.webp", "options": [
+          { "value": "holder-ash-catchum.webp", "label": "Ash Catchum" },
+          { "value": "holder-stachin-ash.webp", "label": "Stachin' Ash" },
+          { "value": "holder-brass-monkey.webp", "label": "Brass Monkey" }
+        ] },
+        { "type": "text", "id": "image_alt", "label": "Image alt text", "default": "Ash Catchum round stoneware ash catcher with a burning stick" },
+        { "type": "text", "id": "name", "label": "Display name", "default": "Ash Catchum", "info": "Leave empty to use the product title" },
+        { "type": "text", "id": "description", "label": "Description", "default": "Matte-black stoneware ash catcher for incense sticks." },
+        { "type": "text", "id": "email_label", "label": "Email field label (screen readers)", "default": "Email for [name] restock", "info": "[name] is replaced with the display name" },
+        { "type": "header", "content": "Used until a product is picked" },
+        { "type": "text", "id": "price", "label": "Price", "default": "$22" },
+        { "type": "url", "id": "url", "label": "Link" },
+        { "type": "checkbox", "id": "sold_out", "label": "Sold out", "default": true, "info": "Once a product is picked, its inventory decides this" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Home: holders",
+      "blocks": [
+        { "type": "holder-card" },
+        { "type": "holder-card", "settings": { "placeholder": "holder-stachin-ash.webp", "image_alt": "Stachin' Ash moustache-shaped stoneware holder with a burning stick", "name": "Stachin’ Ash", "description": "Moustache-shaped black stoneware ash catcher.", "price": "$38" } },
+        { "type": "holder-card", "settings": { "placeholder": "holder-brass-monkey.webp", "image_alt": "Brass Monkey blackened brass holder with a burning stick", "name": "Brass Monkey", "description": "Blackened brass incense holder.", "price": "$85" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

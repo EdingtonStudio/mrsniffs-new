@@ -1,0 +1,97 @@
+<section class="whiff" aria-labelledby="whiff-title">
+  <div class="whiff__intro">
+    <div class="whiff__heading">
+      {%- if section.settings.eyebrow != blank -%}<p class="eyebrow" data-reveal>{{ section.settings.eyebrow }}</p>{%- endif -%}
+      <h1 class="display-xl" id="whiff-title" data-split>{{ section.settings.heading | escape }}</h1>
+    </div>
+    {%- if section.settings.lede != blank -%}
+      <p class="lede whiff__lede" data-reveal style="--d: 2">{{ section.settings.lede }}</p>
+    {%- endif -%}
+    <div class="btn-row" data-reveal style="--d: 3">
+      {%- if section.settings.button_1_label != blank -%}
+        <a class="btn btn--solid btn--w165" href="{{ section.settings.button_1_url | default: routes.all_products_collection_url }}">{{ section.settings.button_1_label | escape }}</a>
+      {%- endif -%}
+      {%- if section.settings.button_2_label != blank -%}
+        <a class="btn btn--outline" href="{{ section.settings.button_2_url | default: '#' }}">{{ section.settings.button_2_label | escape }}</a>
+      {%- endif -%}
+    </div>
+  </div>
+
+  <ul class="gallery" data-gallery aria-label="{{ section.settings.gallery_label | escape }}">
+    {%- for block in section.blocks -%}
+      {%- liquid
+        assign fb = block.settings.placeholder
+        case fb
+          when 'gallery-3.webp'
+            assign fw = 1200
+            assign fh = 1800
+          when 'gallery-4.webp', 'gallery-5.webp', 'gallery-7.webp'
+            assign fw = 733
+            assign fh = 1100
+          else
+            assign fw = 615
+            assign fh = 1100
+        endcase
+      -%}
+      <li class="gallery__item gallery__item--{{ block.settings.size }}" style="--i: {{ block.settings.stagger }}" data-depth="{{ block.settings.depth }}" {{ block.shopify_attributes }}>
+        {%- render 'ms-image', image: block.settings.image, fallback: fb, alt: block.settings.alt, width: fw, height: fh, sizes: '(max-width: 767px) 50vw, 25vw', loading: 'lazy' -%}
+      </li>
+    {%- endfor -%}
+  </ul>
+</section>
+
+{% schema %}
+{
+  "name": "Home: intro + gallery",
+  "class": "section-home-whiff",
+  "max_blocks": 9,
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Incense sticks and holders" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "COME GET A WHIFF.", "info": "Revealed word by word" },
+    { "type": "textarea", "id": "lede", "label": "Intro text", "default": "Incense for whatever kind of night you have in mind. Meet Bonfire and Yoga Studio, or bring home both." },
+    { "type": "header", "content": "Buttons" },
+    { "type": "text", "id": "button_1_label", "label": "Button 1 label", "default": "Shop incense" },
+    { "type": "url", "id": "button_1_url", "label": "Button 1 link" },
+    { "type": "text", "id": "button_2_label", "label": "Button 2 label", "default": "Find your scent" },
+    { "type": "url", "id": "button_2_url", "label": "Button 2 link" },
+    { "type": "header", "content": "Gallery" },
+    { "type": "text", "id": "gallery_label", "label": "Gallery accessible name", "default": "Mr. Sniff's in the wild" }
+  ],
+  "blocks": [
+    {
+      "type": "gallery-image",
+      "name": "Gallery image",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Image", "info": "Portrait, about 2:3" },
+        { "type": "select", "id": "placeholder", "label": "Placeholder (shown until an image is picked)", "default": "gallery-1.webp", "options": [
+          { "value": "gallery-1.webp", "label": "Yellow jacket" },
+          { "value": "gallery-2.webp", "label": "Embroidered jacket" },
+          { "value": "gallery-3.webp", "label": "Tattooed hand" },
+          { "value": "gallery-4.webp", "label": "Mint suit" },
+          { "value": "gallery-5.webp", "label": "Yoga Studio box" },
+          { "value": "gallery-6.webp", "label": "Sunglasses" },
+          { "value": "gallery-7.webp", "label": "Box pattern" }
+        ] },
+        { "type": "text", "id": "alt", "label": "Alt text", "default": "Man in white sunglasses and a yellow leather jacket holding an incense stick" },
+        { "type": "select", "id": "size", "label": "Card height", "default": "mid", "options": [
+          { "value": "lg", "label": "Tallest (centre)" },
+          { "value": "mid", "label": "Medium" },
+          { "value": "low", "label": "Lowest" }
+        ] },
+        { "type": "range", "id": "stagger", "label": "Distance from centre", "min": 0, "max": 3, "step": 1, "default": 0, "info": "Used for the fan-out animation timing" },
+        { "type": "range", "id": "depth", "label": "Mouse-follow depth", "min": 0, "max": 1, "step": 0.1, "default": 0.6 }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Home: intro + gallery",
+      "blocks": [
+        { "type": "gallery-image", "settings": { "placeholder": "gallery-2.webp", "size": "mid", "stagger": 1, "depth": 0.7, "alt": "Woman in an embroidered jacket with a lit incense stick" } },
+        { "type": "gallery-image", "settings": { "placeholder": "gallery-1.webp", "size": "lg", "stagger": 0, "depth": 0.3 } },
+        { "type": "gallery-image", "settings": { "placeholder": "gallery-6.webp", "size": "mid", "stagger": 1, "depth": 0.7, "alt": "Man with sunglasses and a burning incense stick" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

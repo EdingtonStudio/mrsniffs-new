@@ -1,0 +1,47 @@
+{{ 'pdp.css' | asset_url | stylesheet_tag }}
+<section class="faq pdp-faq" id="faq" aria-labelledby="faq-title-{{ section.id }}">
+  {% render 'pdp-img', image: section.settings.mascot, asset: 'mascot.svg', alt: '', class: 'faq__mascot', sizes: '494px', attrs: 'aria-hidden="true"' %}
+  <div class="faq__inner">
+    <h2 class="display-l" id="faq-title-{{ section.id }}" data-reveal>{{ section.settings.title }}</h2>
+    <div class="accordion" data-reveal style="--d: 1">
+      {%- for block in section.blocks -%}
+        <details class="accordion__item" data-accordion {{ block.shopify_attributes }}>
+          <summary><span>{{ block.settings.question }}</span>{% render 'icon', name: 'plus.svg', size: 18 %}</summary>
+          <div class="accordion__panel">{{ block.settings.answer }}</div>
+        </details>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "FAQ",
+  "settings": [
+    { "type": "text", "id": "title", "label": "Heading", "default": "BEFORE YOU LIGHT ONE" },
+    { "type": "image_picker", "id": "mascot", "label": "Mascot image", "info": "Decorative" }
+  ],
+  "blocks": [
+    {
+      "type": "question",
+      "name": "Question",
+      "settings": [
+        { "type": "text", "id": "question", "label": "Question", "default": "Do I need a holder?" },
+        { "type": "richtext", "id": "answer", "label": "Answer", "default": "<p>Yes. Burn incense in a stable, heat-resistant holder that catches falling ash.</p>" }
+      ]
+    }
+  ],
+  "max_blocks": 12,
+  "presets": [
+    {
+      "name": "FAQ",
+      "blocks": [
+        { "type": "question" },
+        { "type": "question", "settings": { "question": "How many sticks come in a pack?", "answer": "<p>About 50 sticks per box (25 g).</p>" } },
+        { "type": "question", "settings": { "question": "How should I store them?", "answer": "<p>[Pending — approved storage guidance goes here.]</p>" } },
+        { "type": "question", "settings": { "question": "What is the Duo Bundle?", "answer": "<p>Bonfire and Yoga Studio, together. Get to know both sides of the lineup.</p>" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

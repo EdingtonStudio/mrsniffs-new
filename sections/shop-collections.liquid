@@ -1,0 +1,109 @@
+{{ 'shop.css' | asset_url | stylesheet_tag }}
+{%- comment -%} Collections list (/collections): one holder-card per collection. {%- endcomment -%}
+<section class="shop-grid" aria-label="{{ section.settings.aria_label | escape }}">
+  {%- paginate collections by 24 -%}
+    <div class="holders__grid shop-grid__list">
+      {%- for item in collections -%}
+        {%- liquid
+          assign d = forloop.index0 | modulo: 3
+          assign button = section.settings.button_label | replace: '[name]', item.title
+          assign count = section.settings.count_label | replace: '[count]', item.products_count
+          assign img = item.featured_image
+          if img == blank and item.products.first.featured_image
+            assign img = item.products.first.featured_image
+          endif
+          assign img_alt = img.alt | default: item.title
+        -%}
+        <article class="holder-card gleam gleam--light" id="{{ item.handle | escape }}" data-reveal{% if d > 0 %} style="--d: {{ d }}"{% endif %}>
+          <a class="holder-card__media" href="{{ item.url }}" aria-label="{{ button | escape }}">
+            {% render 'ms-image',
+              image: img,
+              fallback: 'shop-duo.webp',
+              alt: img_alt,
+              width: 879,
+              height: 1100,
+              sizes: '(max-width: 900px) 82vw, 33vw',
+              loading: 'lazy'
+            %}
+          </a>
+          <div class="holder-card__body">
+            <div class="holder-card__info">
+              <div>
+                <h2 class="product-name">{{ item.title | escape }}</h2>
+                {%- if section.settings.show_count -%}
+                  <p class="product-desc product-desc--md">{{ count | escape }}</p>
+                {%- endif -%}
+              </div>
+            </div>
+            <div class="shop-card__actions">
+              <a class="btn btn--solid btn--sm" href="{{ item.url }}">{{ button | escape }}</a>
+            </div>
+          </div>
+        </article>
+      {%- endfor -%}
+    </div>
+    {%- if paginate.pages > 1 -%}
+      <nav class="ms-pagination shop-grid__pagination" aria-label="{{ section.settings.pagination_label | escape }}">
+        {%- if paginate.previous -%}<a href="{{ paginate.previous.url }}">{{ section.settings.prev_label | escape }}</a>{%- endif -%}
+        <span>{{ paginate.current_page }} / {{ paginate.pages }}</span>
+        {%- if paginate.next -%}<a href="{{ paginate.next.url }}">{{ section.settings.next_label | escape }}</a>{%- endif -%}
+      </nav>
+    {%- endif -%}
+  {%- endpaginate -%}
+</section>
+
+{% schema %}
+{
+  "name": "Collections grid",
+  "settings": [
+    {
+      "type": "text",
+      "id": "aria_label",
+      "label": "Accessible section label",
+      "default": "Collections"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button label",
+      "info": "[name] is replaced by the collection title.",
+      "default": "Shop [name]"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_count",
+      "label": "Show product count",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "count_label",
+      "label": "Product count label",
+      "info": "[count] is replaced by the number of products.",
+      "default": "[count] products"
+    },
+    {
+      "type": "header",
+      "content": "Pagination"
+    },
+    {
+      "type": "text",
+      "id": "pagination_label",
+      "label": "Pagination accessible label",
+      "default": "Pagination"
+    },
+    {
+      "type": "text",
+      "id": "prev_label",
+      "label": "Previous page label",
+      "default": "Previous"
+    },
+    {
+      "type": "text",
+      "id": "next_label",
+      "label": "Next page label",
+      "default": "Next"
+    }
+  ]
+}
+{% endschema %}

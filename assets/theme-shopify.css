@@ -1,0 +1,70 @@
+/* ==========================================================================
+   Mr. Sniff's — Shopify-only additions
+   Things the static build never needed: theme-editor states, Shopify's
+   own policy/search/cart markup, and generic page content.
+   ========================================================================== */
+
+/* ---- Theme editor: show everything that normally reveals on scroll ------- */
+.shopify-design-mode .js [data-reveal],
+.shopify-design-mode [data-reveal] { opacity: 1 !important; transform: none !important; }
+.shopify-design-mode [data-split] .split-word > span { transform: none !important; }
+
+/* ---- Cart drawer busy state ---------------------------------------------- */
+.cart.is-busy .cart__panel { cursor: progress; }
+.cart.is-busy .cart__body { opacity: 0.6; transition: opacity var(--dur-fast, 150ms); }
+
+/* ---- Product-less card (no product picked yet) ---------------------------- */
+.ms-placeholder-note { font-family: var(--f-mono); font-size: 12px; letter-spacing: var(--tr-mono); text-transform: uppercase; color: var(--c-ember); }
+
+/* ---- Shopify policy pages (/policies/...) --------------------------------- */
+.shopify-policy__container {
+  max-width: 760px !important;
+  margin: 0 auto;
+  padding: var(--s-72) var(--pad-x) var(--s-72) !important;
+}
+.shopify-policy__title h1 {
+  font-family: var(--f-display);
+  font-weight: 700;
+  font-size: var(--fs-display-l);
+  letter-spacing: var(--tr-display);
+  text-transform: uppercase;
+  line-height: var(--lh-tight);
+  margin: 0 0 var(--s-36);
+}
+.shopify-policy__body,
+.rte { font-size: 16px; line-height: 1.6; letter-spacing: var(--tr-body); color: #2a2d30; }
+.shopify-policy__body h2,
+.shopify-policy__body h3,
+.rte h2,
+.rte h3 {
+  font-family: var(--f-display);
+  font-weight: 700;
+  font-size: var(--fs-display-s);
+  letter-spacing: var(--tr-display);
+  text-transform: uppercase;
+  line-height: var(--lh-tight);
+  color: var(--c-ink);
+  margin: var(--s-36) 0 var(--s-12);
+}
+.shopify-policy__body p,
+.rte p { margin: 0 0 var(--s-12); }
+.shopify-policy__body ul,
+.rte ul { margin: 0 0 var(--s-12); padding-left: 20px; list-style: disc; }
+.shopify-policy__body li::marker,
+.rte li::marker { color: var(--c-ember); }
+.shopify-policy__body a,
+.rte a { color: var(--c-ink); text-decoration: underline; text-underline-offset: 3px; }
+.shopify-policy__body a:hover,
+.rte a:hover { color: var(--c-ember); }
+
+/* ---- Generic page / search / cart page shells ----------------------------- */
+.ms-page { padding: var(--s-72) var(--pad-x); }
+.ms-page__inner { max-width: 760px; margin: 0 auto; display: flex; flex-direction: column; gap: var(--s-24); }
+.ms-page__wide { max-width: 1213px; margin: 0 auto; display: flex; flex-direction: column; gap: var(--s-36); }
+.ms-pagination { display: flex; gap: var(--s-12); justify-content: center; font-family: var(--f-mono); text-transform: uppercase; letter-spacing: var(--tr-mono); }
+.ms-pagination a { color: var(--c-ink); text-decoration: underline; text-underline-offset: 3px; }
+
+/* ---- Header: Shopify wraps it in a section div, so the sticky solid header
+   must stick on the wrapper (static build had it as a direct body child) ---- */
+.section-header:has(.site-header--solid) { position: sticky; top: 0; z-index: var(--z-header); }
+.section-header .site-header--solid { position: relative; }

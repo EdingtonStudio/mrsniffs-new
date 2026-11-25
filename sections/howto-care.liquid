@@ -1,0 +1,76 @@
+{{ 'howto.css' | asset_url | stylesheet_tag }}
+
+<section class="ht-care"{% if section.settings.anchor != blank %} id="{{ section.settings.anchor | remove: '#' | strip | escape }}"{% endif %} aria-labelledby="care-title-{{ section.id }}">
+  <div class="ht-care__intro">
+    <div data-reveal>
+      <h2 class="display-l" id="care-title-{{ section.id }}">{{ section.settings.heading }}</h2>
+      {%- if section.settings.lede != blank -%}<p class="lede">{{ section.settings.lede }}</p>{%- endif -%}
+    </div>
+    <div class="ht-care__media" data-reveal="fade">
+      {% render 'ms-image', image: section.settings.image, fallback: 'howto-care.webp', alt: section.settings.image_alt, width: 1400, height: 843, sizes: '(max-width: 900px) 100vw, 45vw' %}
+    </div>
+  </div>
+
+  <div class="ht-care__grid">
+    {%- for block in section.blocks -%}
+      {%- assign icon_size = 24 -%}
+      {%- if block.settings.icon == 'howto-eye.svg' -%}{%- assign icon_size = 20 -%}{%- endif -%}
+      <article class="ht-tile{% if block.settings.tint %} ht-tile--tint{% endif %}" data-reveal style="--d: {{ forloop.index }}" {{ block.shopify_attributes }}>
+        <span class="ht-icon">{% render 'icon', name: block.settings.icon, size: icon_size %}</span>
+        <div><h3>{{ block.settings.heading }}</h3>{% if block.settings.text != blank %}<p>{{ block.settings.text }}</p>{% endif %}</div>
+      </article>
+    {%- endfor -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "How-to burn with care",
+  "class": "section-howto-care",
+  "max_blocks": 4,
+  "settings": [
+    { "type": "text", "id": "anchor", "label": "Section ID", "info": "Used by the guide tabs in the hero", "default": "safety" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "BURN WITH CARE" },
+    { "type": "textarea", "id": "lede", "label": "Intro", "default": "A few essential safety precautions to keep in mind while your incense burns, ensuring a safe and enjoyable experience." },
+    { "type": "image_picker", "id": "image", "label": "Image", "info": "Defaults to the hand lighting a stick on a walnut table" },
+    { "type": "text", "id": "image_alt", "label": "Image alt text", "default": "Hand in a wool sleeve lighting a stick in a black holder, a Yoga Studio box lying on the walnut table" }
+  ],
+  "blocks": [
+    {
+      "type": "tile",
+      "name": "Safety tip",
+      "settings": [
+        { "type": "text", "id": "heading", "label": "Heading", "default": "Supervision" },
+        { "type": "textarea", "id": "text", "label": "Text", "default": "Never leave burning incense unattended. Always keep it within sight." },
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Icon",
+          "default": "howto-eye.svg",
+          "options": [
+            { "value": "howto-eye.svg", "label": "Eye" },
+            { "value": "howto-fan.svg", "label": "Fan" },
+            { "value": "howto-paw.svg", "label": "Paw" },
+            { "value": "howto-pin.svg", "label": "Pin" },
+            { "value": "howto-shield.svg", "label": "Shield" },
+            { "value": "howto-stack.svg", "label": "Stack" },
+            { "value": "howto-wind.svg", "label": "Wind" }
+          ]
+        },
+        { "type": "checkbox", "id": "tint", "label": "Tinted background", "default": false }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "How-to burn with care",
+      "blocks": [
+        { "type": "tile" },
+        { "type": "tile", "settings": { "heading": "Ventilation", "text": "Always burn incense in a well-ventilated area to allow proper airflow.", "icon": "howto-fan.svg" } },
+        { "type": "tile", "settings": { "heading": "Pets and children", "text": "Keep burning incense away from children and pets.", "icon": "howto-paw.svg" } },
+        { "type": "tile", "settings": { "heading": "Placement", "text": "Keep burning incense away from curtains and other flammable materials.", "icon": "howto-pin.svg", "tint": true } }
+      ]
+    }
+  ]
+}
+{% endschema %}

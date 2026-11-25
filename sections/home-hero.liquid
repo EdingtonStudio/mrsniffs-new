@@ -1,0 +1,24 @@
+<section class="hero" id="top" aria-label="{{ section.settings.aria_label | escape }}">
+  <div class="hero__frame">
+    {% render 'ms-image', image: section.settings.bg_image, fallback: 'hero-bg.webp', alt: '', width: 2200, height: 1228, class: 'hero__bg', loading: 'eager', attrs: 'data-parallax="0.12"' %}
+    <div class="hero__product" data-parallax="0.05">
+      {% render 'ms-image', image: section.settings.product_image, fallback: 'hero.webp', alt: section.settings.product_alt, width: 2400, height: 1728, loading: 'eager', attrs: 'fetchpriority="high"' %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Home: hero",
+  "class": "section-home-hero",
+  "settings": [
+    { "type": "text", "id": "aria_label", "label": "Accessible section name", "default": "Mr. Sniff's incense" },
+    { "type": "header", "content": "Background" },
+    { "type": "image_picker", "id": "bg_image", "label": "Background image", "info": "Moves slowly on scroll. 2200 × 1228 px recommended." },
+    { "type": "header", "content": "Product layer" },
+    { "type": "image_picker", "id": "product_image", "label": "Product image", "info": "Transparent cut-out laid over the background. 2400 × 1728 px recommended." },
+    { "type": "text", "id": "product_alt", "label": "Product image alt text", "default": "Mr. Sniff's Bonfire and Yoga Studio incense boxes on driftwood beside a burning stick in a black holder" }
+  ],
+  "presets": [{ "name": "Home: hero" }]
+}
+{% endschema %}

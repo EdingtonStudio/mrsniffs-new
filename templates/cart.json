@@ -1,0 +1,30 @@
+{
+  "sections": {
+    "main": {
+      "type": "shop-cart",
+      "settings": {
+        "heading": "YOUR CART",
+        "qty_label": "Quantity for [name]",
+        "remove_label": "Remove",
+        "update_label": "Update cart",
+        "summary_label": "Order summary",
+        "ship_away": "You're [amount] away from free shipping.",
+        "ship_unlocked": "Free shipping unlocked.",
+        "subtotal_label": "Subtotal",
+        "fine_print": "Shipping and taxes calculated at checkout.",
+        "show_note": false,
+        "note_label": "Order note",
+        "checkout_label": "Checkout",
+        "continue_label": "Keep shopping",
+        "continue_link": "/collections/shop",
+        "empty_title": "Nothing to sniff here yet.",
+        "empty_text": "Your cart is empty. Start with a scent, or let the Smell Test pick one.",
+        "empty_shop_label": "Shop incense",
+        "empty_shop_link": "/collections/shop",
+        "empty_quiz_label": "Find your scent",
+        "empty_quiz_link": "/pages/smell-test"
+      }
+    }
+  },
+  "order": ["main"]
+}

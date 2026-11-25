@@ -1,0 +1,208 @@
+/* ==========================================================================
+   Mr. Sniff's — inner pages: FAQ, contact, policies, 404, password, generic pages
+   Builds on tokens.css + main.css. Page-scoped under .page-info.
+   ========================================================================== */
+
+/* ---- Page hero ----------------------------------------------------------- */
+.info-hero {
+  padding: var(--s-72) var(--pad-x) var(--s-48);
+  background: var(--c-paper);
+  border-bottom: 1px solid var(--c-line);
+}
+.info-hero__inner { display: flex; flex-direction: column; gap: var(--s-12); max-width: 760px; }
+.info-hero__eyebrow,
+.info-side__label {
+  font-family: var(--f-mono);
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: var(--tr-mono-wide);
+  text-transform: uppercase;
+  color: var(--c-ink-60);
+}
+.info-hero .lede { max-width: 560px; font-size: 18px; }
+.info-hero .lede a { color: var(--c-ink); text-decoration: underline; text-underline-offset: 3px; }
+.info-hero__meta { font-family: var(--f-mono); font-size: 12px; letter-spacing: var(--tr-mono); text-transform: uppercase; color: var(--c-grey); }
+
+/* ---- Two-column layout: sticky side nav + content ------------------------ */
+.info-layout {
+  display: grid;
+  grid-template-columns: 260px minmax(0, 1fr);
+  gap: var(--s-72);
+  padding: var(--s-60) var(--pad-x) var(--s-72);
+}
+.info-side { position: sticky; top: 96px; align-self: start; display: flex; flex-direction: column; gap: var(--s-36); }
+.info-side ul { display: flex; flex-direction: column; gap: 10px; margin: 12px 0 0; padding: 0; list-style: none; }
+.info-side a { color: var(--c-ink-60); transition: color var(--dur-fast); }
+.info-side a:hover,
+.info-side a[aria-current="page"] { color: var(--c-ink); }
+.info-nav a[aria-current="page"] { font-weight: 500; text-decoration: underline; text-underline-offset: 4px; }
+
+/* ---- Prose (policies) ------------------------------------------------------ */
+.prose { max-width: 720px; display: flex; flex-direction: column; gap: var(--s-36); }
+.prose__section { display: flex; flex-direction: column; gap: var(--s-12); scroll-margin-top: 110px; }
+.prose h2 {
+  font-family: var(--f-display);
+  font-weight: 700;
+  font-size: var(--fs-display-s);
+  letter-spacing: var(--tr-display);
+  text-transform: uppercase;
+  line-height: var(--lh-tight);
+}
+.prose p,
+.prose li { font-size: 16px; line-height: 1.6; letter-spacing: var(--tr-body); color: #2a2d30; }
+.prose ul { display: flex; flex-direction: column; gap: 8px; margin: 0; padding-left: 20px; list-style: disc; }
+.prose li::marker { color: var(--c-ember); }
+.prose a { color: var(--c-ink); text-decoration: underline; text-underline-offset: 3px; }
+.prose a:hover { color: var(--c-ember); }
+.prose__contact { padding-top: var(--s-24); border-top: 1px solid var(--c-line); }
+.draft-note {
+  padding: 14px 16px;
+  background: var(--c-tint-bonfire);
+  border-left: 3px solid var(--c-ember);
+  font-size: 14px !important;
+}
+
+/* ---- FAQ ----------------------------------------------------------------- */
+.faq-groups { display: flex; flex-direction: column; gap: var(--s-60); max-width: 820px; }
+.faq-group { display: flex; flex-direction: column; gap: var(--s-12); scroll-margin-top: 110px; }
+.faq-group .accordion__panel a { text-decoration: underline; text-underline-offset: 3px; }
+
+/* ---- Contact --------------------------------------------------------------- */
+.contact {
+  display: grid;
+  grid-template-columns: 320px minmax(0, 1fr);
+  gap: var(--s-72);
+  padding: var(--s-60) var(--pad-x) var(--s-72);
+}
+.contact__aside { display: flex; flex-direction: column; gap: var(--s-36); }
+.contact__block { display: flex; flex-direction: column; gap: 10px; }
+.contact__email { font-family: var(--f-display); font-weight: 700; font-size: 28px; letter-spacing: var(--tr-display); text-transform: uppercase; }
+.contact__email:hover { color: var(--c-ember); }
+.contact__fine { font-size: 14px; color: var(--c-ink-60); }
+.contact__links { display: flex; flex-direction: column; gap: 8px; margin: 0; padding: 0; list-style: none; }
+.contact__links a { text-decoration: underline; text-underline-offset: 3px; }
+
+.contact-form { display: grid; grid-template-columns: 1fr 1fr; gap: var(--s-24); max-width: 760px; }
+.field { display: flex; flex-direction: column; gap: 8px; }
+.field--full { grid-column: 1 / -1; }
+.field label { font-family: var(--f-mono); font-size: 12px; letter-spacing: var(--tr-mono-wide); text-transform: uppercase; }
+.field label span { color: var(--c-grey); text-transform: none; letter-spacing: 0; font-family: var(--f-body); }
+.field input,
+.field select,
+.field textarea {
+  width: 100%;
+  padding: 12px 14px;
+  font: inherit;
+  font-size: 16px;
+  color: var(--c-ink);
+  background: var(--c-white);
+  border: 1px solid var(--c-ink-25);
+  border-radius: 0;
+  transition: border-color var(--dur-fast);
+}
+.field textarea { resize: vertical; min-height: 140px; }
+.field input:focus,
+.field select:focus,
+.field textarea:focus { outline: none; border-color: var(--c-ink); }
+.field.is-invalid input,
+.field.is-invalid textarea { border-color: var(--c-ember); }
+.contact-form__foot { display: flex; align-items: center; gap: var(--s-24); }
+.contact-form .form-msg { font-size: 14px; }
+.contact-form .form-msg.is-error { color: var(--c-ember); }
+
+/* ---- 404 ------------------------------------------------------------------ */
+.nf {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--s-16);
+  padding: 120px var(--pad-x) 140px;
+  text-align: center;
+  overflow: hidden;
+}
+.nf__code {
+  font-family: var(--f-display);
+  font-weight: 700;
+  font-size: clamp(160px, 22vw, 320px);
+  line-height: 0.85;
+  color: var(--c-paper);
+  -webkit-text-stroke: 1px var(--c-line);
+}
+.nf .lede { max-width: 460px; }
+.nf .btn-row { margin-top: var(--s-12); }
+
+/* ---- Responsive (mobile pass comes later; keep it usable) -------------------- */
+@media (max-width: 900px) {
+  .info-layout,
+  .contact { grid-template-columns: 1fr; gap: var(--s-36); padding-top: var(--s-36); }
+  .info-side { position: static; }
+  .contact-form { grid-template-columns: 1fr; }
+}
+
+/* ---- Coming soon / Shopify password page ------------------------------------ */
+.page-soon { background: var(--c-ink); }
+.soon { position: relative; min-height: 100vh; min-height: 100svh; overflow: hidden; color: var(--c-white); display: flex; align-items: center; }
+.soon__bg, .soon__product { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.soon__product { object-position: 70% 50%; }
+.soon::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(15, 17, 20, 0.92) 0%, rgba(15, 17, 20, 0.75) 38%, rgba(15, 17, 20, 0) 65%); }
+.soon__copy { position: relative; z-index: 1; display: flex; flex-direction: column; align-items: flex-start; gap: var(--s-16); max-width: 640px; padding: var(--s-60) var(--pad-x); }
+.soon__logo { margin-bottom: var(--s-24); }
+.soon__eyebrow { font-family: var(--f-mono); font-weight: 300; font-size: 14px; letter-spacing: var(--tr-mono-wide); text-transform: uppercase; color: var(--c-white-60); }
+.soon__title { font-family: var(--f-display); font-weight: 700; font-size: var(--fs-display-xl); line-height: 0.95; letter-spacing: var(--tr-display); text-transform: uppercase; }
+.soon__lede { font-size: 18px; line-height: var(--lh-body); color: var(--c-white-60); max-width: 420px; }
+.soon__form { width: 100%; margin-top: var(--s-12); }
+.soon__pass { margin-top: var(--s-24); font-size: 13px; color: var(--c-white-60); }
+.soon__pass summary { cursor: pointer; font-family: var(--f-mono); letter-spacing: var(--tr-mono); text-transform: uppercase; text-decoration: underline; text-underline-offset: 3px; }
+.soon__pass-form { display: flex; gap: 10px; margin-top: 12px; }
+.soon__pass-form input { padding: 9px 12px; background: transparent; border: 1px solid var(--c-white-40); color: var(--c-white); font: inherit; }
+@media (max-width: 900px) {
+  .soon { align-items: flex-end; }
+  .soon::after { background: linear-gradient(0deg, rgba(15, 17, 20, 0.95) 0%, rgba(15, 17, 20, 0.7) 50%, rgba(15, 17, 20, 0.1) 80%); }
+}
+
+/* ==========================================================================
+   Shopify port
+   ========================================================================== */
+
+/* ---- FAQ: the hero, topic list and each topic are separate sections, so the
+   two-column .info-layout grid is rebuilt on <main> around Shopify's section
+   wrappers (.ms-faq-side / .ms-faq-topic come from the section schemas). ---- */
+main:has(> .ms-faq-topic) {
+  display: grid;
+  grid-template-columns: var(--pad-x) 260px var(--s-72) minmax(0, 1fr) var(--pad-x);
+  padding-bottom: var(--s-72);
+}
+main:has(> .ms-faq-topic) > .shopify-section { grid-column: 1 / -1; min-width: 0; }
+main:has(> .ms-faq-topic) > .ms-faq-side { grid-column: 2; grid-row: 2 / span 99; padding-top: var(--s-60); }
+main:has(> .ms-faq-topic) > .ms-faq-topic { grid-column: 4; max-width: 820px; margin-top: var(--s-60); }
+@media (max-width: 900px) {
+  main:has(> .ms-faq-topic) { grid-template-columns: var(--pad-x) minmax(0, 1fr) var(--pad-x); }
+  main:has(> .ms-faq-topic) > .ms-faq-side { grid-column: 2; grid-row: auto; padding-top: var(--s-36); }
+  main:has(> .ms-faq-topic) > .ms-faq-topic { grid-column: 2; }
+  main:has(> .ms-faq-topic) > .ms-faq-side + .ms-faq-topic { margin-top: var(--s-36); }
+}
+
+/* ---- Generic page / article: single column when there's no side nav ------ */
+.info-layout--single { grid-template-columns: minmax(0, 1fr); }
+.info-layout--single .prose { margin: 0 auto; width: 100%; }
+
+/* ---- Rich text from the Shopify editor inside .prose (no section wrappers) - */
+.prose.rte { display: block; }
+.prose.rte > :first-child { margin-top: 0; }
+.prose.rte h2 { scroll-margin-top: 110px; }
+.prose.rte img { max-width: 100%; height: auto; }
+.prose .info-article__img { width: 100%; height: auto; margin-bottom: var(--s-36); }
+
+/* ---- Blog list ------------------------------------------------------------ */
+.info-blog { padding: var(--s-60) var(--pad-x) var(--s-72); display: flex; flex-direction: column; gap: var(--s-48); }
+.info-blog__list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--s-48) var(--s-36); margin: 0; padding: 0; list-style: none; }
+.info-blog__link { display: flex; flex-direction: column; gap: var(--s-12); }
+.info-blog__link:hover h2 { color: var(--c-ember); }
+.info-blog__img { width: 100%; height: auto; aspect-ratio: 3 / 2; object-fit: cover; }
+.info-blog__excerpt { color: var(--c-ink-60); line-height: 1.6; }
+@media (max-width: 900px) { .info-blog__list { grid-template-columns: 1fr; } }
+
+/* ---- Password page: Shopify storefront_password form ----------------------- */
+.soon__pass-form { flex-wrap: wrap; align-items: center; }
+.soon__pass-form .form-msg { flex-basis: 100%; margin: 0; }

@@ -1,0 +1,430 @@
+{
+  "sections": {
+    "hero": {
+      "type": "home-hero",
+      "settings": {
+        "aria_label": "Mr. Sniff's incense",
+        "product_alt": "Mr. Sniff's Bonfire and Yoga Studio incense boxes on driftwood beside a burning stick in a black holder"
+      }
+    },
+    "whiff": {
+      "type": "home-whiff",
+      "settings": {
+        "eyebrow": "Incense sticks and holders",
+        "heading": "COME GET A WHIFF.",
+        "lede": "Incense for whatever kind of night you have in mind. Meet Bonfire and Yoga Studio, or bring home both.",
+        "button_1_label": "Shop incense",
+        "button_1_url": "/collections/shop",
+        "button_2_label": "Find your scent",
+        "button_2_url": "/pages/smell-test",
+        "gallery_label": "Mr. Sniff's in the wild"
+      },
+      "blocks": {
+        "gallery_1": {
+          "type": "gallery-image",
+          "settings": {
+            "placeholder": "gallery-4.webp",
+            "size": "mid",
+            "stagger": 3,
+            "depth": 0.6,
+            "alt": "Hands in a mint suit holding a Mr. Sniff's box"
+          }
+        },
+        "gallery_2": {
+          "type": "gallery-image",
+          "settings": {
+            "placeholder": "gallery-3.webp",
+            "size": "low",
+            "stagger": 2,
+            "depth": 1,
+            "alt": "Tattooed hand holding a Bonfire box in blue smoke"
+          }
+        },
+        "gallery_3": {
+          "type": "gallery-image",
+          "settings": {
+            "placeholder": "gallery-2.webp",
+            "size": "mid",
+            "stagger": 1,
+            "depth": 0.7,
+            "alt": "Woman in an embroidered jacket with a lit incense stick"
+          }
+        },
+        "gallery_4": {
+          "type": "gallery-image",
+          "settings": {
+            "placeholder": "gallery-1.webp",
+            "size": "lg",
+            "stagger": 0,
+            "depth": 0.3,
+            "alt": "Man in white sunglasses and a yellow leather jacket holding an incense stick"
+          }
+        },
+        "gallery_5": {
+          "type": "gallery-image",
+          "settings": {
+            "placeholder": "gallery-6.webp",
+            "size": "mid",
+            "stagger": 1,
+            "depth": 0.7,
+            "alt": "Man with sunglasses and a burning incense stick"
+          }
+        },
+        "gallery_6": {
+          "type": "gallery-image",
+          "settings": {
+            "placeholder": "gallery-7.webp",
+            "size": "low",
+            "stagger": 2,
+            "depth": 1,
+            "alt": "Pattern of Bonfire and Yoga Studio boxes on black"
+          }
+        },
+        "gallery_7": {
+          "type": "gallery-image",
+          "settings": {
+            "placeholder": "gallery-5.webp",
+            "size": "mid",
+            "stagger": 3,
+            "depth": 0.6,
+            "alt": "Yoga Studio box standing in low light"
+          }
+        }
+      },
+      "block_order": [
+        "gallery_1",
+        "gallery_2",
+        "gallery_3",
+        "gallery_4",
+        "gallery_5",
+        "gallery_6",
+        "gallery_7"
+      ]
+    },
+    "why": {
+      "type": "home-why",
+      "settings": {
+        "eyebrow": "Why Mr. Sniff's",
+        "heading": "NOTHING BUT WOOD.",
+        "lede": "Most incense is a bamboo stick dipped in perfume. Ours is wood all the way through.",
+        "caption": "Mr. Sniff's incense compared with typical stick incense",
+        "ours_label": "Mr. Sniff's",
+        "theirs_label": "Typical stick incense",
+        "button_1_label": "Shop incense",
+        "button_1_url": "/collections/shop",
+        "button_2_label": "How to use incense",
+        "button_2_url": "/pages/how-to-use"
+      },
+      "blocks": {
+        "point_1": {
+          "type": "point",
+          "settings": {
+            "icon": "pdp-i-materials.svg",
+            "title": "All wood",
+            "text": "Aromatic wood powder, a little odorless bark to hold it together, and water. That's the whole ingredient list."
+          }
+        },
+        "point_2": {
+          "type": "point",
+          "settings": {
+            "icon": "pdp-i-burn.svg",
+            "title": "Nothing fake",
+            "text": "No synthetic fragrance, no perfume dip, no dyes. The smell is the oil that was already in the wood."
+          }
+        },
+        "point_3": {
+          "type": "point",
+          "settings": {
+            "icon": "pdp-i-madein.svg",
+            "title": "Nothing to hide",
+            "text": "Pressed and sun-dried in Taiwan, the Japanese way. Our palo santo comes from trees that fell on their own."
+          }
+        },
+        "row_1": {
+          "type": "row",
+          "settings": {
+            "icon": "pdp-i-sticks.svg",
+            "label": "Core",
+            "ours": "Solid wood, end to end",
+            "theirs": "Bamboo stick"
+          }
+        },
+        "row_2": {
+          "type": "row",
+          "settings": {
+            "icon": "cmp-scent.svg",
+            "label": "Where the scent comes from",
+            "ours": "Oils already in the wood",
+            "theirs": "Fragrance oil dip"
+          }
+        },
+        "row_3": {
+          "type": "row",
+          "settings": {
+            "icon": "pdp-i-burn.svg",
+            "label": "Dyes",
+            "ours": "None",
+            "theirs": "Often, for color"
+          }
+        },
+        "row_4": {
+          "type": "row",
+          "settings": {
+            "icon": "pdp-i-materials.svg",
+            "label": "Binder",
+            "ours": "Odorless bark powder",
+            "theirs": "Rarely listed"
+          }
+        },
+        "row_5": {
+          "type": "row",
+          "settings": {
+            "icon": "pdp-i-madein.svg",
+            "label": "How it's made",
+            "ours": "Extruded and sun-dried in Taiwan",
+            "theirs": "Hand-dipped, origin rarely listed"
+          }
+        },
+        "row_6": {
+          "type": "row",
+          "settings": {
+            "icon": "cmp-pack.svg",
+            "label": "Ingredient list",
+            "ours": "On the box",
+            "theirs": "Usually missing"
+          }
+        }
+      },
+      "block_order": [
+        "point_1",
+        "point_2",
+        "point_3",
+        "row_1",
+        "row_2",
+        "row_3",
+        "row_4",
+        "row_5",
+        "row_6"
+      ]
+    },
+    "scents": {
+      "type": "home-scents",
+      "settings": {
+        "heading": "TWO SCENTS. FIND YOUR FAVORITE.",
+        "lede": "Compare them here or take the Smell Test.",
+        "compare_text": "Compare the two scents side by side"
+      },
+      "blocks": {
+        "bonfire": {
+          "type": "scent-card",
+          "settings": {
+            "style": "bonfire",
+            "image_alt": "Bonfire Agarwood incense box",
+            "name": "Bonfire · Agarwood Incense",
+            "short_name": "Bonfire",
+            "note": "Dark resin + smoke",
+            "link_label": "Meet Bonfire",
+            "cart_label": "Add [name] to cart",
+            "price": "$24",
+            "url": "/products/bonfire"
+          }
+        },
+        "yoga_studio": {
+          "type": "scent-card",
+          "settings": {
+            "style": "yoga",
+            "image_alt": "Yoga Studio Palo Santo incense box",
+            "name": "Yoga Studio · Palo Santo Incense",
+            "short_name": "Yoga Studio",
+            "note": "Warm resin + citrus peel",
+            "link_label": "Meet Yoga Studio",
+            "cart_label": "Add [name] to cart",
+            "price": "$24",
+            "url": "/products/yoga-studio"
+          }
+        }
+      },
+      "block_order": [
+        "bonfire",
+        "yoga_studio"
+      ]
+    },
+    "duo": {
+      "type": "home-duo",
+      "settings": {
+        "image_alt": "Bonfire and Yoga Studio boxes hanging by twine from a driftwood branch",
+        "heading": "WHY PICK JUST ONE?",
+        "copy": "Bonfire and Yoga Studio, together. Get to know both sides of the lineup.",
+        "price_copy": "One box of each: Bonfire and Yoga Studio, about 50 sticks apiece.",
+        "button_label": "Meet the duo",
+        "price": "$42",
+        "url": "/products/duo"
+      }
+    },
+    "holders": {
+      "type": "home-holders",
+      "settings": {
+        "heading": "SOMEWHERE TO STICK IT",
+        "lede": "Holders. Sold separately.",
+        "chip_label": "Sold-out",
+        "add_label": "Add to cart",
+        "notify_label": "Notify me",
+        "placeholder": "your@email.com",
+        "send_label": "Send"
+      },
+      "blocks": {
+        "ash_catchum": {
+          "type": "holder-card",
+          "settings": {
+            "placeholder": "holder-ash-catchum.webp",
+            "image_alt": "Ash Catchum round stoneware ash catcher with a burning stick",
+            "name": "Ash Catchum",
+            "description": "Matte-black stoneware ash catcher for incense sticks.",
+            "email_label": "Email for [name] restock",
+            "price": "$22",
+            "url": "/products/ash-catchum",
+            "sold_out": true
+          }
+        },
+        "stachin_ash": {
+          "type": "holder-card",
+          "settings": {
+            "placeholder": "holder-stachin-ash.webp",
+            "image_alt": "Stachin' Ash moustache-shaped stoneware holder with a burning stick",
+            "name": "Stachin’ Ash",
+            "description": "Moustache-shaped black stoneware ash catcher.",
+            "email_label": "Email for [name] restock",
+            "price": "$38",
+            "url": "/products/stachin-ash",
+            "sold_out": true
+          }
+        },
+        "brass_monkey": {
+          "type": "holder-card",
+          "settings": {
+            "placeholder": "holder-brass-monkey.webp",
+            "image_alt": "Brass Monkey blackened brass holder with a burning stick",
+            "name": "Brass Monkey",
+            "description": "Blackened brass incense holder.",
+            "email_label": "Email for [name] restock",
+            "price": "$85",
+            "url": "/products/brass-monkey",
+            "sold_out": true
+          }
+        }
+      },
+      "block_order": [
+        "ash_catchum",
+        "stachin_ash",
+        "brass_monkey"
+      ]
+    },
+    "howto": {
+      "type": "home-howto",
+      "settings": {
+        "heading": "NEW TO INCENSE? START HERE.",
+        "lede": "Set up your space, choose a suitable holder, and follow the directions supplied with your incense.",
+        "button_label": "How to use incense",
+        "button_url": "/pages/how-to-use",
+        "image_alt": "Bonfire box and driftwood on sand in front of an orange sun, with a burning stick in a black holder"
+      },
+      "blocks": {
+        "step_1": {
+          "type": "step",
+          "settings": {
+            "icon": "step-flame.svg",
+            "text": "Choose a stable, heat-resistant incense holder."
+          }
+        },
+        "step_2": {
+          "type": "step",
+          "settings": {
+            "icon": "step-shield.svg",
+            "text": "Place it away from curtains, drafts and anything flammable."
+          }
+        },
+        "step_3": {
+          "type": "step",
+          "settings": {
+            "icon": "step-eye.svg",
+            "text": "Never leave a burning incense stick unattended."
+          }
+        }
+      },
+      "block_order": [
+        "step_1",
+        "step_2",
+        "step_3"
+      ]
+    },
+    "story": {
+      "type": "home-story",
+      "settings": {
+        "show_smoke": true,
+        "heading": "GOOD SCENTS. A LITTLE PERSONALITY.",
+        "text_1": "A few friends, one bad stick of incense and a better idea.",
+        "text_2": "We're here to make incense that actually makes an impression. Real wood, sun-dried, with nothing poured on top. No shortcuts, no unnecessary extras. Just good scents with a point of view.",
+        "button_label": "Read our story",
+        "button_url": "/pages/our-story"
+      }
+    },
+    "faq": {
+      "type": "home-faq",
+      "settings": {
+        "heading": "BEFORE YOU LIGHT ONE",
+        "show_mascot": true,
+        "button_1_label": "Shop incense",
+        "button_1_url": "/collections/shop",
+        "button_2_label": "Find your scent",
+        "button_2_url": "/pages/smell-test"
+      },
+      "blocks": {
+        "question_1": {
+          "type": "question",
+          "settings": {
+            "question": "Do I need a holder?",
+            "answer": "<p>Yes. Burn incense in a stable, heat-resistant holder that catches falling ash.</p>"
+          }
+        },
+        "question_2": {
+          "type": "question",
+          "settings": {
+            "question": "How many sticks come in a pack?",
+            "answer": "<p>About 50 sticks per box (25 g).</p>"
+          }
+        },
+        "question_3": {
+          "type": "question",
+          "settings": {
+            "question": "When are the holders back in stock?",
+            "answer": "<p>No date yet. Tap Notify me on any sold-out holder and we'll email you the moment it's back.</p>"
+          }
+        },
+        "question_4": {
+          "type": "question",
+          "settings": {
+            "question": "How long does shipping take?",
+            "answer": "<p>Orders leave us within 1–3 business days. Standard US shipping takes 3–7 business days and is free on orders over $50.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "question_1",
+        "question_2",
+        "question_3",
+        "question_4"
+      ]
+    }
+  },
+  "order": [
+    "hero",
+    "whiff",
+    "why",
+    "scents",
+    "duo",
+    "holders",
+    "howto",
+    "story",
+    "faq"
+  ]
+}

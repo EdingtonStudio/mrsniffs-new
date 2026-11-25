@@ -1,0 +1,243 @@
+/* ==========================================================================
+   Mr. Sniff's — Shop / Collection (Figma 1:455)
+   Builds on tokens.css + main.css; only shop-specific pieces live here.
+   ========================================================================== */
+
+
+/* ---- Hero (1:458) -------------------------------------------------------- */
+.shop-hero { padding: 0 var(--gutter); }
+.shop-hero__frame {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 1408 / 710;
+  background: var(--c-ink);
+  isolation: isolate;
+}
+.shop-hero__img {
+  position: absolute;
+  left: 0;
+  top: -10%;                 /* overscan so parallax never shows an edge */
+  width: 100%;
+  height: 120%;
+  object-fit: cover;
+  object-position: 50% 46.3%;
+  z-index: -2;
+  animation: hero-settle 2200ms var(--ease-out) both;
+}
+.shop-hero__frame::after {             /* 35% ink scrim from Figma */
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: rgba(15, 17, 20, 0.35);
+}
+.shop-hero__title {
+  position: absolute;
+  left: 27.88%;
+  top: 52.4%;
+  translate: -50% 0;
+  color: var(--c-white);
+  text-align: center;
+  white-space: nowrap;
+}
+.shop-hero__sub {
+  position: absolute;
+  left: 64.77%;
+  top: 56.2%;
+  width: 150px;
+  color: var(--c-white);
+}
+
+/* ---- Product grid (1:478) ------------------------------------------------ */
+.shop-grid { display: flex; justify-content: center; padding: var(--s-16) var(--gutter) var(--section-y); }
+.shop-grid .holder-card__media { display: block; background: var(--c-stone); }
+.shop-card__actions { display: flex; align-items: center; gap: var(--s-16); padding: 0 var(--s-16); }
+
+/* ---- Compare (1:533) ----------------------------------------------------- */
+.compare {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--s-36);
+  padding: var(--section-y) var(--pad-x);
+  background: var(--c-paper);
+}
+/* compare table styles live in main.css (shared with the homepage "why" block) */
+
+/* ---- Still deciding (1:663) --------------------------------------------- */
+.decide {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--s-36);
+  padding: var(--section-y) var(--gutter);
+}
+.decide__grid { display: flex; gap: var(--s-16); width: 100%; max-width: 1408px; }
+.decide-card { flex: 1 0 0; min-width: 0; display: flex; flex-direction: column; gap: var(--s-12); }
+.decide-card__media { position: relative; aspect-ratio: 458.67 / 484; overflow: hidden; background: var(--c-stone); }
+.decide-card__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 1100ms var(--ease-out);
+}
+/* Figma crop for the burn shot: 109.91% × 158.06% at -4.96%, -55.26% */
+.decide-card__media--burn img {
+  position: absolute;
+  left: -4.96%;
+  top: -55.26%;
+  width: 109.91%;
+  height: 158.06%;
+  max-width: none;
+  object-fit: fill;
+}
+.decide-card:hover .decide-card__media img { transform: scale(1.05); }
+
+.decide-card__body { display: flex; flex-direction: column; align-items: flex-start; gap: var(--s-24); padding-right: var(--s-16); }
+.decide-card__pill {
+  position: relative;
+  padding: 6px 0;
+  font-size: 14px;
+  letter-spacing: -0.28px;
+  color: var(--c-ink-60);
+  line-height: normal;
+}
+/* 32px rule that runs the full label on hover */
+.decide-card__pill::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 32px;
+  height: 1px;
+  background: #ff5b24;
+  transition: width 600ms var(--ease-out);
+}
+.decide-card:hover .decide-card__pill::after { width: 100%; }
+
+.decide-card__text { display: flex; flex-direction: column; gap: var(--s-16); }
+.decide-card__text h3 {
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 24px;
+  letter-spacing: -0.4px;
+  color: var(--c-ink);
+}
+.decide-card__text p { font-size: 14px; line-height: 20px; letter-spacing: -0.28px; color: rgba(20, 20, 20, 0.6); }
+
+/* ---- FAQ, full-width variant (1:708) ------------------------------------ */
+.faq--wide { padding: var(--section-y) var(--pad-x); background: var(--c-paper); }
+.faq--wide .faq__inner { max-width: 1320px; }
+
+/* ---- Responsive ---------------------------------------------------------- */
+@media (max-width: 900px) {
+
+  .shop-hero__frame { aspect-ratio: auto; height: min(70svh, 560px); }
+  .shop-hero__img { top: -16%; height: 132%; }
+  .shop-hero__title { left: 50%; top: auto; bottom: 96px; }
+  .shop-hero__sub { left: 50%; top: auto; bottom: 48px; width: auto; translate: -50% 0; text-align: center; white-space: nowrap; }
+
+  .shop-grid .holder-card { flex: 0 0 82%; }
+
+
+  .decide__grid { flex-direction: column; gap: var(--s-48); }
+}
+
+
+/* ==========================================================================
+   Shopify additions (collection pagination, collections list, search, cart)
+   ========================================================================== */
+
+/* Grid: stack pagination under the list; wrap to rows of three when a
+   collection holds more than three products (desktop only — mobile keeps
+   the horizontal snap scroller from main.css). */
+.shop-grid { flex-direction: column; align-items: center; }
+.shop-grid__pagination { margin-top: var(--s-36); }
+@media (min-width: 901px) {
+  .shop-grid__list { flex-wrap: wrap; justify-content: center; row-gap: var(--s-36); }
+  .shop-grid__list > .holder-card {
+    flex: 0 0 calc((100% - 2 * var(--s-8)) / 3);
+    max-width: calc((100% - 2 * var(--s-8)) / 3);
+  }
+}
+
+/* ---- Search page --------------------------------------------------------- */
+.shop-search__form {
+  display: flex;
+  gap: var(--s-8);
+  width: 100%;
+  max-width: 640px;
+  margin: 0 auto;
+}
+.shop-search__input {
+  flex: 1;
+  min-width: 0;
+  height: 48px;
+  padding: 0 var(--s-16);
+  border: 1px solid var(--c-ink-15);
+  border-radius: 0;
+  background: var(--c-white);
+  color: var(--c-ink);
+  -webkit-appearance: none;
+  appearance: none;
+}
+.shop-search__input:focus { outline: none; border-color: var(--c-ink); }
+.shop-search__grid { max-width: none; }
+.shop-search__list { margin: 0; padding: 0; list-style: none; border-top: 1px solid var(--c-line); }
+.shop-search__item { display: flex; flex-direction: column; gap: 6px; padding: var(--s-24) 0; border-bottom: 1px solid var(--c-line); }
+.shop-search__type { font-family: var(--f-mono); font-size: 12px; letter-spacing: var(--tr-mono); text-transform: uppercase; color: var(--c-ink-60); }
+.shop-search__link { font-weight: 500; font-size: 20px; line-height: 24px; letter-spacing: -0.4px; color: var(--c-ink); }
+.shop-search__link:hover { text-decoration: underline; text-underline-offset: 3px; }
+.shop-search__excerpt { font-size: 14px; line-height: 20px; color: var(--c-ink-60); }
+
+/* ---- Cart page (reuses the drawer's .cart-line / .cart__row language) ---- */
+.shop-cart__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 380px;
+  gap: var(--s-48);
+  align-items: start;
+}
+.shop-cart__lines { display: flex; flex-direction: column; align-items: flex-start; gap: var(--s-24); }
+.shop-cart__lines .cart__lines { width: 100%; border-top: 1px solid var(--c-line); }
+.shop-cart__lines .cart-line { grid-template-columns: 112px 1fr; }
+.shop-cart__qty input {
+  width: 64px;
+  height: 32px;
+  border: 0;
+  background: none;
+  text-align: center;
+  font-variant-numeric: tabular-nums;
+  color: var(--c-ink);
+}
+.shop-cart__qty input:focus { outline: none; box-shadow: inset 0 0 0 1px var(--c-ink); }
+.shop-cart__was { margin-right: 6px; color: var(--c-ink-60); font-weight: 400; }
+.shop-cart__discount { color: var(--c-ember); }
+.shop-cart__discount-row { font-size: 14px; font-weight: 400; color: var(--c-ink-60); }
+.shop-cart__summary {
+  position: sticky;
+  top: var(--s-24);
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-12);
+  padding: var(--s-24);
+  background: var(--c-paper);
+}
+.shop-cart__note { display: flex; flex-direction: column; gap: 8px; }
+.shop-cart__note textarea {
+  width: 100%;
+  padding: var(--s-12);
+  border: 1px solid var(--c-ink-15);
+  border-radius: 0;
+  background: var(--c-white);
+  font: inherit;
+  resize: vertical;
+}
+.shop-cart__note textarea:focus { outline: none; border-color: var(--c-ink); }
+.shop-cart .cart__continue { text-decoration: none; }
+
+@media (max-width: 900px) {
+  .shop-cart__grid { grid-template-columns: 1fr; gap: var(--s-36); }
+  .shop-cart__lines .cart-line { grid-template-columns: 84px 1fr; }
+  .shop-cart__summary { position: static; }
+  .shop-search__grid { margin: 0 calc(-1 * var(--pad-x)); padding: 0 var(--pad-x); width: calc(100% + 2 * var(--pad-x)); }
+}

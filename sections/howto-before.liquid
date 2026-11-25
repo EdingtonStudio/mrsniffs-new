@@ -1,0 +1,99 @@
+{{ 'howto.css' | asset_url | stylesheet_tag }}
+
+<section class="ht-before"{% if section.settings.anchor != blank %} id="{{ section.settings.anchor | remove: '#' | strip | escape }}"{% endif %} aria-labelledby="before-title-{{ section.id }}">
+  <div class="ht-before__intro">
+    <h2 class="display-l" id="before-title-{{ section.id }}" data-reveal>{{ section.settings.heading }}</h2>
+    {%- if section.settings.lede != blank -%}<p class="lede" data-reveal style="--d: 1">{{ section.settings.lede }}</p>{%- endif -%}
+  </div>
+
+  {%- for block in section.blocks -%}
+    {%- liquid
+      case block.settings.crop
+        when 'surface'
+          assign fallback = 'howto-card-surface.webp'
+          assign fw = 720
+          assign fh = 900
+        when 'vent'
+          assign fallback = 'howto-card-vent.webp'
+          assign fw = 1400
+          assign fh = 788
+        else
+          assign fallback = 'howto-card-holder.webp'
+          assign fw = 900
+          assign fh = 900
+      endcase
+    -%}
+    <article class="ht-card{% if block.settings.drop %} ht-card--drop{% endif %}" data-reveal style="--d: {{ forloop.index }}" {{ block.shopify_attributes }}>
+      <div class="ht-card__media ht-card__media--{{ block.settings.crop }}">
+        {% render 'ms-image', image: block.settings.image, fallback: fallback, alt: block.settings.image_alt, width: fw, height: fh, sizes: '(max-width: 900px) 100vw, 25vw' %}
+      </div>
+      <div class="ht-card__body">
+        <h3><span class="ht-icon">{% render 'icon', name: block.settings.icon, size: 24 %}</span>{{ block.settings.heading }}</h3>
+        {%- if block.settings.text != blank -%}<p>{{ block.settings.text }}</p>{%- endif -%}
+      </div>
+    </article>
+  {%- endfor -%}
+</section>
+
+{% schema %}
+{
+  "name": "How-to before you light",
+  "class": "section-howto-before",
+  "max_blocks": 3,
+  "settings": [
+    { "type": "text", "id": "anchor", "label": "Section ID", "info": "Used by the guide tabs in the hero", "default": "setup" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "BEFORE YOU LIGHT" },
+    { "type": "textarea", "id": "lede", "label": "Intro", "default": "A few essentials for a safe and simple incense experience." }
+  ],
+  "blocks": [
+    {
+      "type": "card",
+      "name": "Card",
+      "settings": [
+        { "type": "text", "id": "heading", "label": "Heading", "default": "A suitable holder" },
+        { "type": "textarea", "id": "text", "label": "Text", "default": "Use a heatproof incense holder." },
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Icon",
+          "default": "howto-shield.svg",
+          "options": [
+            { "value": "howto-shield.svg", "label": "Shield" },
+            { "value": "howto-stack.svg", "label": "Stack" },
+            { "value": "howto-wind.svg", "label": "Wind" },
+            { "value": "howto-eye.svg", "label": "Eye" },
+            { "value": "howto-fan.svg", "label": "Fan" },
+            { "value": "howto-paw.svg", "label": "Paw" },
+            { "value": "howto-pin.svg", "label": "Pin" }
+          ]
+        },
+        { "type": "image_picker", "id": "image", "label": "Image" },
+        { "type": "text", "id": "image_alt", "label": "Image alt text", "default": "Stachin' Ash moustache holder with a stick standing upright" },
+        {
+          "type": "select",
+          "id": "crop",
+          "label": "Photo crop",
+          "info": "Also picks the bundled photo used when no image is set",
+          "default": "holder",
+          "options": [
+            { "value": "holder", "label": "Holder" },
+            { "value": "surface", "label": "Surface" },
+            { "value": "vent", "label": "Ventilation" }
+          ]
+        },
+        { "type": "checkbox", "id": "drop", "label": "Drop card lower (staggered)", "default": false }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "How-to before you light",
+      "blocks": [
+        { "type": "card" },
+        { "type": "card", "settings": { "heading": "A heat-resistant surface", "text": "Use a stable, heat-resistant surface.", "icon": "howto-stack.svg", "image_alt": "Incense stick resting on a dark stone surface", "crop": "surface", "drop": true } },
+        { "type": "card", "settings": { "heading": "Ventilation", "text": "Burn incense in a well-ventilated space.", "icon": "howto-wind.svg", "image_alt": "Sheer curtains moving beside an open window", "crop": "vent" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

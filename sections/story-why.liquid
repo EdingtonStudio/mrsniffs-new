@@ -1,0 +1,76 @@
+{{ 'story.css' | asset_url | stylesheet_tag }}
+
+<section class="why" aria-labelledby="why-title-{{ section.id }}" data-why>
+  <div class="why__stage">
+    <div class="why__cards" aria-hidden="true">
+      {%- for block in section.blocks -%}
+        <figure class="why__card{% if block.settings.back %} why__card--back{% endif %}" style="--x:{{ block.settings.x }};--y:{{ block.settings.y }};--w:{{ block.settings.w }};--h:{{ block.settings.h }};--speed:{{ block.settings.speed }}" data-why-card {{ block.shopify_attributes }}>
+          {% render 'ms-image', image: block.settings.image, fallback: block.settings.fallback, alt: '', width: 640, height: 960, sizes: '320px' %}
+        </figure>
+      {%- endfor -%}
+    </div>
+    <div class="why__copy">
+      <img class="why__mark" src="{{ 'story-quote.svg' | asset_url }}" width="83" height="62" alt="">
+      <p class="why__eyebrow" id="why-title-{{ section.id }}">{{ section.settings.eyebrow }}</p>
+      {%- assign words = section.settings.quote | strip_newlines | split: ' ' -%}
+      <blockquote class="why__quote" data-why-quote><p>{% for word in words %}{% if word != blank %}<span class="why__word">{{ word }}</span>{% unless forloop.last %} {% endunless %}{% endif %}{% endfor %}</p></blockquote>
+      <p class="why__by"><span class="why__name">{{ section.settings.name }}</span><span class="why__role">{{ section.settings.role }}</span></p>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Story why we started",
+  "class": "section-story-why",
+  "max_blocks": 16,
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Why we started" },
+    { "type": "textarea", "id": "quote", "label": "Quote", "info": "Lights up word by word as visitors scroll", "default": "Incense shouldn’t smell like a perfume counter, and it shouldn’t take itself so seriously. Real wood, nothing poured on top and a little personality in every burn." },
+    { "type": "text", "id": "name", "label": "Attribution", "default": "The Mr. Sniff’s crew" },
+    { "type": "text", "id": "role", "label": "Role", "default": "Founders" }
+  ],
+  "blocks": [
+    {
+      "type": "card",
+      "name": "Drifting photo",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Photo" },
+        {
+          "type": "select",
+          "id": "fallback",
+          "label": "Bundled photo",
+          "info": "Shown when no photo is picked",
+          "default": "story-why-1.webp",
+          "options": [
+            { "value": "story-why-1.webp", "label": "Photo 1" },
+            { "value": "story-why-2.webp", "label": "Photo 2" },
+            { "value": "story-why-3.webp", "label": "Photo 3" },
+            { "value": "story-why-4.webp", "label": "Photo 4" },
+            { "value": "story-why-5.webp", "label": "Photo 5" },
+            { "value": "story-why-6.webp", "label": "Photo 6" }
+          ]
+        },
+        { "type": "checkbox", "id": "back", "label": "Push to background (faded)", "default": false },
+        { "type": "header", "content": "Position (on a 1440 × 778 stage)" },
+        { "type": "number", "id": "x", "label": "Left (x)", "default": 105 },
+        { "type": "number", "id": "y", "label": "Start height (y)", "default": 113 },
+        { "type": "number", "id": "w", "label": "Width", "default": 209 },
+        { "type": "number", "id": "h", "label": "Height", "default": 135 },
+        { "type": "number", "id": "speed", "label": "Drift speed", "info": "1 = normal, higher = faster", "default": 1 }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Story why we started",
+      "blocks": [
+        { "type": "card", "settings": { "fallback": "story-why-1.webp", "x": 105, "y": 113, "w": 209, "h": 135, "speed": 0.9 } },
+        { "type": "card", "settings": { "fallback": "story-why-2.webp", "back": true, "x": 16, "y": 299, "w": 146, "h": 94, "speed": 1.4 } },
+        { "type": "card", "settings": { "fallback": "story-why-3.webp", "x": 916, "y": 65, "w": 207, "h": 134, "speed": 1.1 } },
+        { "type": "card", "settings": { "fallback": "story-why-4.webp", "back": true, "x": 1157, "y": 173, "w": 151, "h": 98, "speed": 1.6 } }
+      ]
+    }
+  ]
+}
+{% endschema %}

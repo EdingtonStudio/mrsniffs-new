@@ -1,0 +1,172 @@
+{
+  "sections": {
+    "hero": {
+      "type": "smell-hero",
+      "settings": {
+        "image_alt": "Bonfire and Yoga Studio boxes on a stack of books beside a moustache holder with a burning stick",
+        "title": "FIND YOUR WHIFF.",
+        "lede": "A few quick picks. A scent to meet.",
+        "meta": "4 QUESTIONS · ABOUT 30 SECONDS · NO EMAIL NEEDED",
+        "start_label": "Start the Smell Test",
+        "compare_label": "Compare scents instead",
+        "compare_link": "/collections/shop#compare"
+      }
+    },
+    "quiz": {
+      "type": "smell-quiz",
+      "blocks": {
+        "question-1": {
+          "type": "question",
+          "settings": {
+            "title": "When do you usually light one?",
+            "a_label": "After dark",
+            "a_sub": "Lights low, the day's done",
+            "a_lean": "bonfire",
+            "b_label": "Morning or midday",
+            "b_sub": "A reset between things",
+            "b_lean": "yoga",
+            "c_label": "Whenever, honestly",
+            "c_sub": "No schedule, just vibes",
+            "c_lean": "both",
+            "d_label": "",
+            "d_sub": "",
+            "d_lean": "both"
+          }
+        },
+        "question-2": {
+          "type": "question",
+          "settings": {
+            "title": "Where does it burn?",
+            "a_label": "Couch, friends over",
+            "a_sub": "Records on, someone's telling a story",
+            "a_lean": "bonfire",
+            "b_label": "Mat, desk or bath",
+            "b_sub": "Somewhere you go to breathe",
+            "b_lean": "yoga",
+            "c_label": "All over the house",
+            "c_sub": "Wherever it needs it",
+            "c_lean": "both",
+            "d_label": "",
+            "d_sub": "",
+            "d_lean": "both"
+          }
+        },
+        "question-3": {
+          "type": "question",
+          "settings": {
+            "title": "Which smell pulls you in?",
+            "a_label": "Campfire and leather",
+            "a_sub": "Smoky, deep, a little mysterious",
+            "a_lean": "bonfire",
+            "b_label": "Citrus and clean wood",
+            "b_sub": "Bright, fresh, easy",
+            "b_lean": "yoga",
+            "c_label": "A bit of both",
+            "c_sub": "Depends on the day",
+            "c_lean": "both",
+            "d_label": "",
+            "d_sub": "",
+            "d_lean": "both"
+          }
+        },
+        "question-4": {
+          "type": "question",
+          "settings": {
+            "title": "Pick your ideal night.",
+            "a_label": "Fire pit, late talks",
+            "a_sub": "Nobody's in a rush to leave",
+            "a_lean": "bonfire",
+            "b_label": "Early night, long stretch",
+            "b_sub": "Phone down, deep exhale",
+            "b_lean": "yoga",
+            "c_label": "Whatever comes up",
+            "c_sub": "Plans are overrated",
+            "c_lean": "both",
+            "d_label": "",
+            "d_sub": "",
+            "d_lean": "both"
+          }
+        }
+      },
+      "block_order": [
+        "question-1",
+        "question-2",
+        "question-3",
+        "question-4"
+      ],
+      "settings": {
+        "aria_label": "The Smell Test",
+        "count_text": "Question [n] of [total]",
+        "back_label": "← Back",
+        "result_eyebrow": "Your whiff is",
+        "add_label": "Add to cart",
+        "retake_label": "Retake the Smell Test",
+        "bonfire_image_alt": "Bonfire Agarwood incense box standing on grey",
+        "bonfire_title": "Bonfire",
+        "bonfire_line": "Agarwood · dark resin and smoke",
+        "bonfire_text": "You like your evenings long and your rooms a little smoky. Bonfire smells like having nowhere to be.",
+        "bonfire_price": "$24",
+        "bonfire_link_label": "Meet Bonfire",
+        "bonfire_link": "/products/bonfire",
+        "yoga_image_alt": "Yoga Studio Palo Santo incense box standing on grey",
+        "yoga_title": "Yoga Studio",
+        "yoga_line": "Palo santo · warm resin and a citrus edge",
+        "yoga_text": "You light up to reset, not to wind down. Yoga Studio feels like a deep stretch and a long exhale.",
+        "yoga_price": "$24",
+        "yoga_link_label": "Meet Yoga Studio",
+        "yoga_link": "/products/yoga-studio",
+        "duo_image_alt": "Bonfire and Yoga Studio boxes side by side",
+        "duo_title": "The Duo",
+        "duo_line": "Bonfire + Yoga Studio · one of each",
+        "duo_text": "You're a little of both, so don't pick. Bonfire for after dark, Yoga Studio for the reset, and $6 back in your pocket.",
+        "duo_price": "$42",
+        "duo_link_label": "Meet the Duo",
+        "duo_link": "/products/duo"
+      }
+    },
+    "fallback": {
+      "type": "smell-fallback",
+      "blocks": {
+        "scent-1": {
+          "type": "scent",
+          "settings": {
+            "name": "Bonfire · Agarwood Incense",
+            "note": "Dark resin + smoke",
+            "price": "$24",
+            "url": "/products/bonfire",
+            "button_label": "View",
+            "media_label": "View Bonfire",
+            "image_alt": "Bonfire Agarwood incense box",
+            "style": "bonfire"
+          }
+        },
+        "scent-2": {
+          "type": "scent",
+          "settings": {
+            "name": "Yoga Studio · Palo Santo Incense",
+            "note": "Warm resin + citrus peel",
+            "price": "$24",
+            "url": "/products/yoga-studio",
+            "button_label": "View",
+            "media_label": "View Yoga Studio",
+            "image_alt": "Yoga Studio Palo Santo incense box",
+            "style": "yoga"
+          }
+        }
+      },
+      "block_order": [
+        "scent-1",
+        "scent-2"
+      ],
+      "settings": {
+        "heading": "TWO SCENTS. FIND YOUR FAVORITE.",
+        "lede": "Compare them here or take the Smell Test."
+      }
+    }
+  },
+  "order": [
+    "hero",
+    "quiz",
+    "fallback"
+  ]
+}

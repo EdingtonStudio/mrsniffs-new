@@ -1,0 +1,75 @@
+{{ 'howto.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'howto.js' | asset_url }}" defer></script>
+
+<section class="ht-hero" aria-labelledby="ht-title-{{ section.id }}" data-ht-hero>
+  {% render 'ms-image', image: section.settings.image, fallback: 'howto-hero.webp', alt: section.settings.image_alt, width: 2200, height: 1228, class: 'ht-hero__img', loading: 'eager', attrs: 'fetchpriority="high" data-parallax="0.1"' %}
+  <div class="ht-hero__copy">
+    <h1 class="ht-hero__title" id="ht-title-{{ section.id }}" data-split>{{ section.settings.title | escape }}</h1>
+    {%- if section.settings.text != blank -%}<p data-reveal style="--d: 4">{{ section.settings.text }}</p>{%- endif -%}
+  </div>
+  {%- if section.blocks.size > 0 -%}
+    <nav class="ht-tabs" aria-label="{{ section.settings.tabs_label | escape }}" data-ht-tabs>
+      {%- for block in section.blocks -%}
+        {%- liquid
+          assign anchor = block.settings.anchor | remove: '#' | strip
+          assign key = anchor
+          if block.settings.burn_step != 'none'
+            assign key = anchor | append: '-step-' | append: block.settings.burn_step
+          endif
+        -%}
+        <a class="ht-tab{% if forloop.first %} is-active{% endif %}" href="#{{ anchor }}" data-tab="{{ key }}"{% if block.settings.burn_step != 'none' %} data-burn-step="{{ block.settings.burn_step }}"{% endif %} {{ block.shopify_attributes }}>{{ block.settings.label }}</a>
+      {%- endfor -%}
+    </nav>
+  {%- endif -%}
+</section>
+
+{% schema %}
+{
+  "name": "How-to hero",
+  "class": "section-howto-hero",
+  "max_blocks": 7,
+  "settings": [
+    { "type": "image_picker", "id": "image", "label": "Background image", "info": "Defaults to the boxes with pine branches photo" },
+    { "type": "text", "id": "image_alt", "label": "Image alt text", "default": "Yoga Studio and Bonfire boxes beside a burning stick in a round black holder, pine branches behind" },
+    { "type": "text", "id": "title", "label": "Headline", "default": "NEW TO INCENSE? START HERE." },
+    { "type": "textarea", "id": "text", "label": "Text", "default": "Set up your space, choose a suitable holder, and follow the directions supplied with your incense." },
+    { "type": "text", "id": "tabs_label", "label": "Guide tabs label (screen readers)", "default": "Guide sections" }
+  ],
+  "blocks": [
+    {
+      "type": "tab",
+      "name": "Guide tab",
+      "settings": [
+        { "type": "text", "id": "label", "label": "Label", "default": "Setup" },
+        { "type": "text", "id": "anchor", "label": "Jumps to section ID", "info": "The \"Section ID\" set on a section of this page, e.g. setup, use, safety, clean-up", "default": "setup" },
+        {
+          "type": "select",
+          "id": "burn_step",
+          "label": "Jump to a burn step",
+          "info": "Only for tabs pointing at the \"How to burn\" section.",
+          "default": "none",
+          "options": [
+            { "value": "none", "label": "No" },
+            { "value": "0", "label": "Step 1" },
+            { "value": "1", "label": "Step 2" },
+            { "value": "2", "label": "Step 3" },
+            { "value": "3", "label": "Step 4" },
+            { "value": "4", "label": "Step 5" },
+            { "value": "5", "label": "Step 6" }
+          ]
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "How-to hero",
+      "blocks": [
+        { "type": "tab", "settings": { "label": "Setup", "anchor": "setup" } },
+        { "type": "tab", "settings": { "label": "Use", "anchor": "use" } },
+        { "type": "tab", "settings": { "label": "Safety", "anchor": "safety" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

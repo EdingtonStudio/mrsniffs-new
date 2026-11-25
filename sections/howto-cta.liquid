@@ -1,0 +1,43 @@
+{{ 'howto.css' | asset_url | stylesheet_tag }}
+
+<section class="ht-cta section--ink" aria-labelledby="cta-title-{{ section.id }}" data-ht-cta>
+  {% render 'ms-image', image: section.settings.image, fallback: 'howto-cta.webp', alt: section.settings.image_alt, width: 1906, height: 825, class: 'ht-cta__img', attrs: 'data-parallax="0.06"' %}
+  <div class="ht-cta__copy">
+    <h2 class="display-l" id="cta-title-{{ section.id }}" data-split>{{ section.settings.heading | escape }}</h2>
+    {%- if section.settings.text != blank -%}<p data-reveal style="--d: 2">{{ section.settings.text }}</p>{%- endif -%}
+    <div class="ht-cta__actions" data-reveal style="--d: 3">
+      {%- if section.settings.button_1_label != blank -%}
+        <a class="btn btn--light btn--sm" href="{{ section.settings.button_1_link | default: routes.all_products_collection_url }}">{{ section.settings.button_1_label }}</a>
+      {%- endif -%}
+      {%- if section.settings.button_2_label != blank -%}
+        <a class="btn btn--ghost-light btn--sm" href="{{ section.settings.button_2_link | default: routes.root_url }}">{{ section.settings.button_2_label }}</a>
+      {%- endif -%}
+      {%- if section.settings.contact_link != blank -%}
+        <a class="ht-iconbtn" href="{{ section.settings.contact_link }}" aria-label="{{ section.settings.contact_label | escape }}">
+          {% render 'icon', name: 'howto-phone.svg', size: 16 %}
+        </a>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "How-to closing CTA",
+  "class": "section-howto-cta",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Headline", "default": "READY TO LIGHT ONE?" },
+    { "type": "textarea", "id": "text", "label": "Text", "default": "We're here to make incense that actually makes an impression. Real wood, sun-dried, with nothing poured on top." },
+    { "type": "image_picker", "id": "image", "label": "Background image", "info": "Defaults to the boxes on driftwood under a blue sky" },
+    { "type": "text", "id": "image_alt", "label": "Image alt text", "default": "Bonfire and Yoga Studio boxes leaning on driftwood under a blue sky" },
+    { "type": "header", "content": "Buttons" },
+    { "type": "text", "id": "button_1_label", "label": "First button label", "default": "Shop incense" },
+    { "type": "url", "id": "button_1_link", "label": "First button link" },
+    { "type": "text", "id": "button_2_label", "label": "Second button label", "default": "Shop holders" },
+    { "type": "url", "id": "button_2_link", "label": "Second button link" },
+    { "type": "url", "id": "contact_link", "label": "Contact icon link", "info": "Leave empty to hide the phone icon" },
+    { "type": "text", "id": "contact_label", "label": "Contact icon label (screen readers)", "default": "Contact us by phone" }
+  ],
+  "presets": [{ "name": "How-to closing CTA" }]
+}
+{% endschema %}

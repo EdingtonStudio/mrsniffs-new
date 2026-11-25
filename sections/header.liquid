@@ -1,0 +1,69 @@
+{%- liquid
+  assign solid = true
+  if template.name == 'index' and section.settings.transparent_home
+    assign solid = false
+  endif
+  if solid
+    assign logo_file = 'logo-ink.svg'
+    assign ink = '-ink'
+  else
+    assign logo_file = 'logo.svg'
+    assign ink = ''
+  endif
+-%}
+<header class="site-header{% if solid %} site-header--solid{% endif %}" data-header>
+  <nav class="nav" aria-label="{{ 'general.primary_nav' | t }}">
+    <ul class="nav__links" id="nav-menu" data-menu>
+      {%- for link in section.settings.menu.links -%}
+        <li>
+          <a class="nav__link{% if link.active %} is-current{% endif %}" href="{{ link.url }}"{% if link.current %} aria-current="page"{% endif %}>
+            {{- link.title -}}
+            {%- if forloop.first and section.settings.arrow_first -%}
+              {%- assign arrow = 'arrow-up-right-sm' | append: ink | append: '.svg' -%}
+              {% render 'icon', name: arrow, size: 14, class: 'nav__arrow' %}
+            {%- endif -%}
+          </a>
+        </li>
+      {%- endfor -%}
+    </ul>
+
+    <a class="nav__logo" href="{{ routes.root_url }}" aria-label="{{ shop.name | escape }} — {{ 'general.home' | t }}">
+      {%- if solid and section.settings.logo_dark != blank -%}
+        {{ section.settings.logo_dark | image_url: width: 240 | image_tag: width: 119, height: 50, alt: shop.name }}
+      {%- elsif solid == false and section.settings.logo_light != blank -%}
+        {{ section.settings.logo_light | image_url: width: 240 | image_tag: width: 119, height: 50, alt: shop.name }}
+      {%- else -%}
+        <img src="{{ logo_file | asset_url }}" width="119" height="50" alt="{{ shop.name | escape }}">
+      {%- endif -%}
+    </a>
+
+    <div class="nav__actions">
+      <button class="icon-btn" type="button" aria-label="{{ 'general.search' | t }}" data-search-open>
+        {%- assign s_icon = 'search' | append: ink | append: '.svg' -%}
+        {% render 'icon', name: s_icon %}
+      </button>
+      <a class="icon-btn nav__cart" href="{{ routes.cart_url }}" aria-label="{{ 'cart.label' | t: count: cart.item_count }}" data-cart-link>
+        {%- assign b_icon = 'bag' | append: ink | append: '.svg' -%}
+        {% render 'icon', name: b_icon %}
+        <span class="cart-count" data-cart-count{% if cart.item_count == 0 %} hidden{% endif %}>{{ cart.item_count }}</span>
+      </a>
+      <button class="nav__burger" type="button" aria-label="{{ 'general.open_menu' | t }}" aria-expanded="false" aria-controls="nav-menu" data-burger>
+        <span></span><span></span>
+      </button>
+    </div>
+  </nav>
+</header>
+
+{% schema %}
+{
+  "name": "Header",
+  "class": "section-header",
+  "settings": [
+    { "type": "link_list", "id": "menu", "label": "Menu", "default": "main-menu" },
+    { "type": "checkbox", "id": "arrow_first", "label": "Show arrow on first menu link", "default": true },
+    { "type": "checkbox", "id": "transparent_home", "label": "Transparent header over the homepage hero", "default": true },
+    { "type": "image_picker", "id": "logo_light", "label": "Logo on dark backgrounds", "info": "Defaults to the white Mr. Sniff's wordmark" },
+    { "type": "image_picker", "id": "logo_dark", "label": "Logo on light backgrounds", "info": "Defaults to the black Mr. Sniff's wordmark" }
+  ]
+}
+{% endschema %}

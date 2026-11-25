@@ -1,0 +1,117 @@
+[
+  {
+    "name": "theme_info",
+    "theme_name": "Mr. Sniff's",
+    "theme_version": "1.0.0",
+    "theme_author": "Edington Studio",
+    "theme_documentation_url": "https://github.com/EdingtonStudio/mrsniffs-new",
+    "theme_support_url": "https://github.com/EdingtonStudio/mrsniffs-new"
+  },
+  {
+    "name": "Brand",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "favicon",
+        "label": "Favicon",
+        "info": "Square, at least 64 × 64 px"
+      },
+      {
+        "type": "checkbox",
+        "id": "smoke_cursor",
+        "label": "Incense smoke cursor (desktop)",
+        "default": true
+      }
+    ]
+  },
+  {
+    "name": "Cart",
+    "settings": [
+      {
+        "type": "number",
+        "id": "free_shipping_threshold",
+        "label": "Free-shipping threshold ($)",
+        "default": 50,
+        "info": "Drives the progress bar in the cart. Set to 0 to hide it. The actual rate is set in Settings › Shipping."
+      },
+      {
+        "type": "product",
+        "id": "duo_product",
+        "label": "Duo bundle product",
+        "info": "Offered as a swap when the cart has a single scent"
+      },
+      {
+        "type": "product_list",
+        "id": "scent_products",
+        "label": "Single scents that can swap to the Duo",
+        "limit": 4
+      }
+    ]
+  },
+  {
+    "name": "Links",
+    "settings": [
+      {
+        "type": "url",
+        "id": "shop_link",
+        "label": "Shop link (empty cart button)",
+        "info": "Defaults to all products"
+      },
+      {
+        "type": "url",
+        "id": "quiz_link",
+        "label": "Smell Test link (empty cart button)"
+      }
+    ]
+  },
+  {
+    "name": "Search",
+    "settings": [
+      {
+        "type": "text",
+        "id": "search_suggestions",
+        "label": "Popular searches",
+        "default": "Bonfire, Palo santo, Holders, Burn time, Shipping",
+        "info": "Comma-separated. Shown before someone types."
+      }
+    ]
+  },
+  {
+    "name": "Email sign-up",
+    "settings": [
+      {
+        "type": "paragraph",
+        "content": "With both values set, sign-up forms subscribe straight to Klaviyo. Leave them empty to collect emails as Shopify customers, which Klaviyo syncs."
+      },
+      {
+        "type": "text",
+        "id": "klaviyo_company_id",
+        "label": "Klaviyo public API key (site ID)",
+        "info": "Klaviyo › Settings › API keys › Public API key"
+      },
+      {
+        "type": "text",
+        "id": "klaviyo_list_id",
+        "label": "Klaviyo list ID",
+        "info": "Klaviyo › Lists & segments › your list › Settings"
+      }
+    ]
+  },
+  {
+    "name": "Social sharing",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "share_image",
+        "label": "Share image",
+        "info": "1200 × 630 px. Defaults to the driftwood hero."
+      },
+      {
+        "type": "textarea",
+        "id": "share_description",
+        "label": "Fallback description",
+        "default": "Incense for whatever kind of night you have in mind. Meet Bonfire and Yoga Studio, or bring home both."
+      }
+    ]
+  }
+]

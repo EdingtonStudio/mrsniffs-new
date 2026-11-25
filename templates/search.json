@@ -1,0 +1,30 @@
+{
+  "sections": {
+    "main": {
+      "type": "shop-search",
+      "settings": {
+        "heading": "SEARCH",
+        "intro": "Search scents, holders, help.",
+        "results_text": "[count] results for “[terms]”",
+        "empty_text": "Nothing matches “[terms]”. Try a scent name, “holder” or “shipping”.",
+        "input_label": "Search",
+        "placeholder": "Search scents, holders, help",
+        "submit_label": "Search",
+        "meet_label": "Meet [name]",
+        "add_label": "Add [name] to cart",
+        "sold_out_label": "Sold out",
+        "price_from": "From",
+        "page_label": "Page",
+        "article_label": "Journal",
+        "empty_button_label": "Shop incense",
+        "empty_button_link": "/collections/shop",
+        "empty_button_2_label": "Find your scent",
+        "empty_button_2_link": "/pages/smell-test",
+        "pagination_label": "Pagination",
+        "prev_label": "Previous",
+        "next_label": "Next"
+      }
+    }
+  },
+  "order": ["main"]
+}
