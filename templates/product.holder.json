@@ -83,12 +83,6 @@
           "settings": {
             "text": "Fits Mr. Sniff's 210 mm sticks"
           }
-        },
-        "bullet_3": {
-          "type": "bullet",
-          "settings": {
-            "text": "[Pending — dimensions]"
-          }
         }
       },
       "block_order": [
@@ -99,8 +93,7 @@
         "tag_2",
         "tag_3",
         "bullet_1",
-        "bullet_2",
-        "bullet_3"
+        "bullet_2"
       ]
     },
     "scents": {
@@ -203,7 +196,7 @@
           "type": "question",
           "settings": {
             "question": "How do I clean it?",
-            "answer": "<p>[Pending — approved care guidance goes here.]</p>"
+            "answer": "<p>Let it cool completely, tip out the ash and wipe it with a soft, damp cloth. Brass Monkey is unlacquered brass, so its patina keeps developing; that's the point.</p>"
           }
         },
         "question_4": {
