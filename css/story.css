@@ -217,13 +217,14 @@
 .story-shop { flex-direction: column; align-items: center; gap: var(--s-48); padding-top: var(--section-y); }
 
 /* ---- Closing CTA (132:285) -------------------------------------------------- */
-.story-cta { position: relative; height: 450px; overflow: hidden; isolation: isolate; }
+.story-cta { position: relative; min-height: 480px; overflow: hidden; isolation: isolate; }
 .story-cta__img { position: absolute; left: 0; top: -24%; width: 72.42%; height: 130.42%; object-fit: cover; z-index: -2; }
 .story-cta::after { content: ""; position: absolute; inset: 0; z-index: -1; background: linear-gradient(90deg, transparent 40%, var(--c-ink) 72%); }
 .story-cta__copy { position: absolute; left: 57.36%; top: calc(50% + 14px); translate: 0 -50%; width: 524px; display: flex; flex-direction: column; align-items: flex-start; gap: 16px; }
 .story-cta__copy p { line-height: var(--lh-body); }
 .story-cta__logo { width: 144px; height: auto; rotate: -7.91deg; margin: 8px 0; }
 .story-cta__actions { display: flex; gap: 12px; }
+.story-cta__form { width: 454px; max-width: 100%; }
 
 /* ---- Reduced motion: no drifting, everything visible ---------------------- */
 @media (prefers-reduced-motion: reduce) {
@@ -256,3 +257,6 @@
   .story-cta::after { background: linear-gradient(180deg, transparent 20%, var(--c-ink) 62%); }
   .story-cta__copy { position: relative; left: auto; top: auto; translate: none; width: auto; }
 }
+
+/* Our Story has its own sign-up in the closing block; skip the duplicate footer form here */
+.page-story .footer .signup { display: none; }

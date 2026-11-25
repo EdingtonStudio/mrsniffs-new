@@ -296,8 +296,7 @@
   });
 
   /* ---- Newsletter: validation + consent + success/error states ---------- */
-  const signup = $('[data-signup]');
-  if (signup) {
+  document.querySelectorAll('[data-signup]').forEach((signup) => {
     const email = signup.elements.email;
     const consent = signup.elements.consent;
     const msg = $('[data-signup-msg]', signup);
@@ -328,5 +327,5 @@
       submit.disabled = true;
       email.disabled = true;
     });
-  }
+  });
 })();

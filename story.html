@@ -260,12 +260,22 @@
       <img class="story-cta__img" src="assets/img/story/cta.webp" width="1600" height="900" alt="Black holder with a burning stick on a wooden table in warm light" loading="lazy" data-parallax="0.05" />
       <div class="story-cta__copy">
         <h2 class="display-l" id="story-cta-title" data-split>GOOD SCENTS. SEE YOU AROUND.</h2>
-        <p data-reveal style="--d: 2">We're here to make incense that actually makes an impression.<br />Real wood, honest ingredients and a little personality in every burn.</p>
+        <p data-reveal style="--d: 2">Get first whiff of new scents, restocks and the occasional good story.<br />No spam. Unsubscribe anytime.</p>
         <img class="story-cta__logo" src="assets/icons/logo.svg" width="144" height="60" alt="" data-reveal style="--d: 3" />
-        <div class="story-cta__actions" data-reveal style="--d: 4">
-          <a class="btn btn--light btn--sm" href="shop.html">Meet the lineup</a>
-          <a class="btn btn--ghost-light btn--sm" href="contact.html">Get in touch</a>
-        </div>
+        <!-- Klaviyo sign-up. Shopify: point at the Klaviyo list (Klaviyo embed or the Klaviyo app block). -->
+        <form class="signup__form story-cta__form" data-signup data-klaviyo-list="" novalidate data-reveal style="--d: 4">
+          <div class="signup__row">
+            <label class="sr-only" for="story-signup-email">Email address</label>
+            <input class="signup__input" id="story-signup-email" name="email" type="email" placeholder="your@email.com" autocomplete="email" required />
+            <button class="btn btn--light" type="submit">Sign up</button>
+          </div>
+          <label class="consent">
+            <input type="checkbox" name="consent" required />
+            <span class="consent__box" aria-hidden="true"></span>
+            <span>Yes, email me about new scents and restocks. Unsubscribe anytime.</span>
+          </label>
+          <p class="form-msg" data-signup-msg role="status"></p>
+        </form>
       </div>
     </section>
   </main>
