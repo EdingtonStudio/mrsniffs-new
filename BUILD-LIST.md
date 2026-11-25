@@ -31,7 +31,7 @@ Style source: Figma file "Mr. Sniff's Style Guide + Emails" (tokens, type styles
 | 1 | **Our Story** | Built (`story.html`). Team row replaced with the origin story (Nov 23); team returns after the January headshot shoot in Greenville. Origin copy and the reworked pull quote need Don and Kyle's sign-off. POV panels 2–3 copy still open |
 | 2 | **Shopify port** | Convert pages to theme sections/templates; swap the Cart API block in `js/cart.js` and `search()` in `js/search.js` for Shopify's AJAX endpoints; contact form → `{% form 'contact' %}`. Target: done by Dec 8 to leave a week for QA |
 | 3 | **Checkout styling** | Shopify admin → Checkout: logo, Ink/White/Ember colors, Big Shoulders + Inter, square buttons. About an hour |
-| 4 | **Policy details + review** | Fill bracketed items (company name, address, shipping rates, return window), then counsel review |
+| 4 | **Policy review** | Details filled in Nov 25 (Edington Studios LLC, PA; $5.95 / $12.95 shipping, free over $50; 30-day returns). Counsel review pending |
 | 5 | **Mobile pass** | After desktop sign-off |
 
 ## P2 — States and conversion

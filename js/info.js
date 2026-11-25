@@ -30,7 +30,7 @@
         return;
       }
       msg.classList.remove('is-error');
-      msg.textContent = 'Message sent. We’ll get back to you within 1–2 business days.';
+      msg.textContent = 'Message sent. We’ll get back to you within 1–3 business days.';
       form.reset();
     });
   }
