@@ -119,7 +119,8 @@
             "note": "Dark resin + smoke",
             "price": "$24",
             "cta_label": "Meet Bonfire",
-            "url": "/products/bonfire"
+            "url": "/products/bonfire-agarwood",
+            "product": "bonfire-agarwood"
           }
         },
         "card_2": {
@@ -131,7 +132,8 @@
             "note": "Warm resin + citrus peel",
             "price": "$24",
             "cta_label": "Meet Yoga Studio",
-            "url": "/products/yoga-studio"
+            "url": "/products/yoga-studio-palo-santo",
+            "product": "yoga-studio-palo-santo"
           }
         }
       },

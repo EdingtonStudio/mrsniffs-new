@@ -6,12 +6,13 @@
     (no tag = plain ember gleam).
   - Card note line: product metafield custom.card_note (single line text), else the product type.
   - Short name used in "Meet …" / "Add … to cart": product metafield custom.short_name, else the product title.
-  - When the collection has no products (or there is no collection, e.g. in the editor),
-    the "Placeholder card" blocks render instead, so the page never looks broken.
+  - "Cards to show" = Curated (default): the card blocks render, with live price/add-to-cart from
+    each block's product. "Every product": the collection's products render; the blocks are the
+    fallback when the collection is empty.
 {%- endcomment -%}
 {%- liquid
   assign has_products = false
-  if collection and collection.products_count > 0
+  if section.settings.grid_source == 'collection' and collection and collection.products_count > 0
     assign has_products = true
   endif
 -%}
@@ -108,9 +109,6 @@
             assign fb_w = 821
           endif
           assign img = block.settings.image
-          if img == blank and p != blank
-            assign img = p.featured_image
-          endif
           assign gleam = ''
           if block.settings.gleam != 'plain'
             assign gleam = ' gleam--' | append: block.settings.gleam
@@ -171,6 +169,17 @@
   "class": "shop-products-section",
   "max_blocks": 6,
   "settings": [
+    {
+      "type": "select",
+      "id": "grid_source",
+      "label": "Cards to show",
+      "options": [
+        { "value": "curated", "label": "Curated cards (blocks below)" },
+        { "value": "collection", "label": "Every product in the collection" }
+      ],
+      "default": "curated",
+      "info": "Curated cards use the designed art and copy, with live price and add to cart from the product picked on each card."
+    },
     {
       "type": "paragraph",
       "content": "Shows the products in the current collection. Tag a product gleam-bonfire, gleam-yoga or gleam-duo to set its border glow color. The note line comes from the product metafield custom.card_note (falls back to product type); the short name in buttons comes from custom.short_name (falls back to the product title)."
@@ -233,7 +242,7 @@
   "blocks": [
     {
       "type": "placeholder-card",
-      "name": "Placeholder card",
+      "name": "Product card",
       "settings": [
         {
           "type": "paragraph",

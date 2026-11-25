@@ -297,11 +297,12 @@
             "name": "Bonfire · Agarwood",
             "desc": "Dark resin + smoke",
             "price": "$24",
-            "url": "/products/bonfire",
+            "url": "/products/bonfire-agarwood",
             "button_label": "Meet Bonfire",
             "cart_label": "Add Bonfire to cart",
             "image_alt": "Bonfire Agarwood incense box on grey",
-            "gleam": "bonfire"
+            "gleam": "bonfire",
+            "product": "bonfire-agarwood"
           }
         },
         "card-2": {
@@ -310,11 +311,12 @@
             "name": "Yoga Studio · Palo Santo Incense",
             "desc": "Warm resin + citrus peel",
             "price": "$24",
-            "url": "/products/yoga-studio",
+            "url": "/products/yoga-studio-palo-santo",
             "button_label": "Meet Yoga Studio",
             "cart_label": "Add Yoga Studio to cart",
             "image_alt": "Yoga Studio Palo Santo incense box on grey",
-            "gleam": "yoga"
+            "gleam": "yoga",
+            "product": "yoga-studio-palo-santo"
           }
         },
         "card-3": {
@@ -323,11 +325,12 @@
             "name": "The Duo Bundle",
             "desc": "Both scents · In stock",
             "price": "$42",
-            "url": "/products/duo",
+            "url": "/products/duo-bundle",
             "button_label": "Meet the Duo",
             "cart_label": "Add the Duo to cart",
             "image_alt": "Yoga Studio and Bonfire boxes standing side by side",
-            "gleam": "duo"
+            "gleam": "duo",
+            "product": "duo-bundle"
           }
         }
       },

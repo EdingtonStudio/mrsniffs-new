@@ -226,7 +226,8 @@
             "link_label": "Meet Bonfire",
             "cart_label": "Add [name] to cart",
             "price": "$24",
-            "url": "/products/bonfire"
+            "url": "/products/bonfire-agarwood",
+            "product": "bonfire-agarwood"
           }
         },
         "yoga_studio": {
@@ -240,7 +241,8 @@
             "link_label": "Meet Yoga Studio",
             "cart_label": "Add [name] to cart",
             "price": "$24",
-            "url": "/products/yoga-studio"
+            "url": "/products/yoga-studio-palo-santo",
+            "product": "yoga-studio-palo-santo"
           }
         }
       },
@@ -258,7 +260,8 @@
         "price_copy": "One box of each: Bonfire and Yoga Studio, about 50 sticks apiece.",
         "button_label": "Meet the duo",
         "price": "$42",
-        "url": "/products/duo"
+        "url": "/products/duo-bundle",
+        "product": "duo-bundle"
       }
     },
     "holders": {
@@ -283,7 +286,8 @@
             "email_label": "Email for [name] restock",
             "price": "$22",
             "url": "/products/ash-catchum",
-            "sold_out": true
+            "sold_out": true,
+            "product": "ash-catchum"
           }
         },
         "stachin_ash": {
@@ -295,8 +299,9 @@
             "description": "Moustache-shaped black stoneware ash catcher.",
             "email_label": "Email for [name] restock",
             "price": "$38",
-            "url": "/products/stachin-ash",
-            "sold_out": true
+            "url": "/products/smoke-show",
+            "sold_out": true,
+            "product": "smoke-show"
           }
         },
         "brass_monkey": {
@@ -309,7 +314,8 @@
             "email_label": "Email for [name] restock",
             "price": "$85",
             "url": "/products/brass-monkey",
-            "sold_out": true
+            "sold_out": true,
+            "product": "brass-monkey"
           }
         }
       },

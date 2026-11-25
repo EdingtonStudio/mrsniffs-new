@@ -107,21 +107,24 @@
         "bonfire_text": "You like your evenings long and your rooms a little smoky. Bonfire smells like having nowhere to be.",
         "bonfire_price": "$24",
         "bonfire_link_label": "Meet Bonfire",
-        "bonfire_link": "/products/bonfire",
+        "bonfire_link": "/products/bonfire-agarwood",
         "yoga_image_alt": "Yoga Studio Palo Santo incense box standing on grey",
         "yoga_title": "Yoga Studio",
         "yoga_line": "Palo santo · warm resin and a citrus edge",
         "yoga_text": "You light up to reset, not to wind down. Yoga Studio feels like a deep stretch and a long exhale.",
         "yoga_price": "$24",
         "yoga_link_label": "Meet Yoga Studio",
-        "yoga_link": "/products/yoga-studio",
+        "yoga_link": "/products/yoga-studio-palo-santo",
         "duo_image_alt": "Bonfire and Yoga Studio boxes side by side",
         "duo_title": "The Duo",
         "duo_line": "Bonfire + Yoga Studio · one of each",
         "duo_text": "You're a little of both, so don't pick. Bonfire for after dark, Yoga Studio for the reset, and $6 back in your pocket.",
         "duo_price": "$42",
         "duo_link_label": "Meet the Duo",
-        "duo_link": "/products/duo"
+        "duo_link": "/products/duo-bundle",
+        "bonfire_product": "bonfire-agarwood",
+        "yoga_product": "yoga-studio-palo-santo",
+        "duo_product": "duo-bundle"
       }
     },
     "fallback": {
@@ -133,11 +136,12 @@
             "name": "Bonfire · Agarwood Incense",
             "note": "Dark resin + smoke",
             "price": "$24",
-            "url": "/products/bonfire",
+            "url": "/products/bonfire-agarwood",
             "button_label": "View",
             "media_label": "View Bonfire",
             "image_alt": "Bonfire Agarwood incense box",
-            "style": "bonfire"
+            "style": "bonfire",
+            "product": "bonfire-agarwood"
           }
         },
         "scent-2": {
@@ -146,11 +150,12 @@
             "name": "Yoga Studio · Palo Santo Incense",
             "note": "Warm resin + citrus peel",
             "price": "$24",
-            "url": "/products/yoga-studio",
+            "url": "/products/yoga-studio-palo-santo",
             "button_label": "View",
             "media_label": "View Yoga Studio",
             "image_alt": "Yoga Studio Palo Santo incense box",
-            "style": "yoga"
+            "style": "yoga",
+            "product": "yoga-studio-palo-santo"
           }
         }
       },
