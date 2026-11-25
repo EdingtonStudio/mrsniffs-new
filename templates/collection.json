@@ -70,7 +70,8 @@
         "price_from": "From",
         "pagination_label": "Pagination",
         "prev_label": "Previous",
-        "next_label": "Next"
+        "next_label": "Next",
+        "grid_source": "curated"
       }
     },
     "compare": {
