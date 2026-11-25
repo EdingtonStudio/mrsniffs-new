@@ -307,7 +307,7 @@
   const KL = (window.MrSniffs && window.MrSniffs.klaviyo) || {};
   const klaviyoSubscribe = (address, listId) => fetch(`https://a.klaviyo.com/client/subscriptions/?company_id=${encodeURIComponent(KL.companyId)}`, {
     method: 'POST',
-    headers: { 'Content-Type': 'application/json', revision: '2024-10-15' },
+    headers: { 'Content-Type': 'application/vnd.api+json', revision: '2024-10-15' },
     body: JSON.stringify({ data: { type: 'subscription', attributes: { profile: { data: { type: 'profile', attributes: { email: address } } } }, relationships: { list: { data: { type: 'list', id: listId } } } } }),
   }).then((r) => { if (!r.ok) throw new Error(String(r.status)); });
 
@@ -350,9 +350,9 @@
         e.preventDefault();
         submit.disabled = true;
         klaviyoSubscribe(email.value.trim(), listId).then(success).catch(() => {
-          submit.disabled = false;
-          msg.className = 'form-msg is-error';
-          msg.textContent = 'Something went wrong. Try again in a moment.';
+          // Klaviyo unreachable: fall back to the Shopify customer form,
+          // which Klaviyo's Shopify integration syncs in.
+          HTMLFormElement.prototype.submit.call(signup);
         });
       }
       // no Klaviyo keys: let the Shopify customer form submit normally
