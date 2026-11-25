@@ -12,7 +12,7 @@
     "header": {
       "type": "header",
       "settings": {
-        "menu": "main-menu",
+        "menu": "mrsniffs-main",
         "arrow_first": true,
         "transparent_home": true
       }
