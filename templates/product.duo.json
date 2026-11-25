@@ -20,7 +20,7 @@
         "use_description": false,
         "get_text": "One pack of Bonfire · Agarwood and one pack of Yoga Studio · Palo Santo. Both made with aromatic wood, botanical binder and water. No synthetic fragrance, no added perfume, no dyes.",
         "delivery_heading": "Delivery",
-        "delivery_text": "<p>[Pending — approved delivery copy goes here.]</p>",
+        "delivery_text": "<p>Ships within 1–3 business days. Standard US shipping is $5.95 (3–7 business days) and free on orders over $50. Expedited is $12.95 (2–3 business days).</p>",
         "find_title": "Two moods, covered.",
         "find_text": "Bonfire for the night, Yoga Studio for the reset. Not sure which you'll reach for? Now you don't have to choose.",
         "find_link_label": "Compare the two scents side by side",
@@ -99,12 +99,6 @@
           "settings": {
             "text": "One Yoga Studio · Palo Santo pack (about 50 sticks)"
           }
-        },
-        "bullet_3": {
-          "type": "bullet",
-          "settings": {
-            "text": "[Pending — confirm final Duo contents]"
-          }
         }
       },
       "block_order": [
@@ -117,8 +111,7 @@
         "tag_2",
         "tag_3",
         "bullet_1",
-        "bullet_2",
-        "bullet_3"
+        "bullet_2"
       ]
     },
     "smells": {
@@ -379,7 +372,7 @@
           "settings": {
             "icon": "returns",
             "title": "Returns & Exchanges",
-            "text": "<p>[Pending — approved returns &amp; exchanges copy goes here.]</p>",
+            "text": "<p>Unopened boxes can be returned within 30 days of delivery. Once a box is opened we can't take it back, but if anything arrives damaged or wrong, it's on us.</p>",
             "link_label": "Read the policy",
             "link_url": "/pages/refund-policy"
           }
@@ -414,7 +407,7 @@
           "type": "question",
           "settings": {
             "question": "How should I store them?",
-            "answer": "<p>[Pending — approved storage guidance goes here.]</p>"
+            "answer": "<p>Keep sticks in the box, somewhere cool and dry, away from direct sun.</p>"
           }
         },
         "question_4": {

@@ -20,7 +20,7 @@
         "use_description": true,
         "get_text": "One Ash Catchum. Matte-black stoneware ash catcher for incense sticks. Made to fit our 210 mm sticks. Incense sold separately.",
         "delivery_heading": "Delivery",
-        "delivery_text": "<p>[Pending — approved delivery copy goes here.]</p>",
+        "delivery_text": "<p>Ships within 1–3 business days. Standard US shipping is $5.95 (3–7 business days) and free on orders over $50. Expedited is $12.95 (2–3 business days).</p>",
         "find_title": "Pair it with a scent.",
         "find_text": "Bonfire for after dark, Yoga Studio for the reset, or bring home both.",
         "find_link_label": "Compare the two scents side by side",
@@ -168,7 +168,7 @@
           "settings": {
             "icon": "returns",
             "title": "Returns & Exchanges",
-            "text": "<p>[Pending — approved returns &amp; exchanges copy goes here.]</p>",
+            "text": "<p>Unused holders in their original packaging can be returned within 30 days of delivery. If one arrives chipped or broken, send us a photo and we'll replace it free.</p>",
             "link_label": "Read the policy",
             "link_url": "/pages/refund-policy"
           }
