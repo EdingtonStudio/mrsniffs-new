@@ -1,0 +1,73 @@
+{{ 'info.css' | asset_url | stylesheet_tag }}
+{%- comment -%}
+  Policy body. Content comes from the page itself (Online Store → Pages):
+  write it as H2 headings with paragraphs/lists under each. Every H2 becomes
+  a section and an entry in "On this page" automatically.
+{%- endcomment -%}
+{%- liquid
+  assign parts = page.content | split: '<h2'
+  assign intro = parts | first | strip
+-%}
+<div class="info-layout">
+  <aside class="info-side">
+    {%- assign menu = linklists[section.settings.menu] -%}
+    {%- if menu.links.size > 0 -%}
+      <nav class="info-nav" aria-label="{{ section.settings.nav_label | escape }}">
+        <p class="info-side__label">{{ section.settings.nav_label }}</p>
+        <ul>
+          {%- for link in menu.links -%}
+            <li><a href="{{ link.url }}"{% if link.url == request.path or link.active %} aria-current="page"{% endif %}>{{ link.title }}</a></li>
+          {%- endfor -%}
+        </ul>
+      </nav>
+    {%- endif -%}
+    {%- if parts.size > 1 -%}
+      <nav class="info-toc" aria-label="{{ section.settings.toc_label | escape }}">
+        <p class="info-side__label">{{ section.settings.toc_label }}</p>
+        <ul>
+          {%- for part in parts offset: 1 -%}
+            {%- assign heading = part | split: '</h2>' | first | split: '>' | last | strip_html | strip -%}
+            <li><a href="#{{ heading | handleize }}">{{ heading }}</a></li>
+          {%- endfor -%}
+        </ul>
+      </nav>
+    {%- endif -%}
+  </aside>
+  <article class="prose">
+    {%- if section.settings.show_note and section.settings.note != blank -%}
+      <p class="draft-note">{{ section.settings.note }}</p>
+    {%- endif -%}
+    {%- if intro != blank and parts.size > 1 -%}{{ intro }}{%- endif -%}
+    {%- if parts.size > 1 -%}
+      {%- for part in parts offset: 1 -%}
+        {%- assign heading = part | split: '</h2>' | first | split: '>' | last | strip_html | strip -%}
+        {%- assign rest = part | split: '</h2>' -%}
+        <section class="prose__section" id="{{ heading | handleize }}">
+          <h2>{{ heading }}</h2>
+          {%- for chunk in rest offset: 1 -%}{{ chunk }}{%- endfor -%}
+        </section>
+      {%- endfor -%}
+    {%- else -%}
+      {{ page.content }}
+    {%- endif -%}
+    {%- if section.settings.contact != blank -%}
+      <p class="prose__contact">{{ section.settings.contact }}</p>
+    {%- endif -%}
+  </article>
+</div>
+
+{% schema %}
+{
+  "name": "Policy body",
+  "class": "ms-policy",
+  "settings": [
+    { "type": "paragraph", "content": "The text comes from the page in Online Store → Pages. Each H2 heading becomes a section and a link under \"On this page\"." },
+    { "type": "link_list", "id": "menu", "label": "Policy links menu" },
+    { "type": "text", "id": "nav_label", "label": "Policy links label", "default": "Policies" },
+    { "type": "text", "id": "toc_label", "label": "Contents label", "default": "On this page" },
+    { "type": "checkbox", "id": "show_note", "label": "Show review note", "default": true },
+    { "type": "inline_richtext", "id": "note", "label": "Review note", "default": "<strong>Pending legal review.</strong> Details are final; wording is with counsel before launch." },
+    { "type": "inline_richtext", "id": "contact", "label": "Closing line", "default": "Questions about this policy? Email <a href=\"mailto:hello@mrsniffs.co\">hello@mrsniffs.co</a> or use the <a href=\"/pages/contact\">contact form</a>." }
+  ]
+}
+{% endschema %}

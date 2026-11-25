@@ -1,0 +1,23 @@
+{
+  "sections": {
+    "hero": {
+      "type": "info-hero",
+      "settings": {
+        "eyebrow": "Policies",
+        "heading": "Returns & refunds",
+        "lede": "Not feeling it? Here's how returns work.",
+        "meta": "Last updated November 25, 2026"
+      }
+    },
+    "body": {
+      "type": "info-policy",
+      "settings": {
+        "menu": "footer-policies"
+      }
+    }
+  },
+  "order": [
+    "hero",
+    "body"
+  ]
+}

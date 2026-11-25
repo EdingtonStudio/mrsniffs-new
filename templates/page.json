@@ -7,28 +7,28 @@
           "type": "link",
           "settings": {
             "label": "Shipping",
-            "link": "/policies/shipping-policy"
+            "link": "/pages/shipping-policy"
           }
         },
         "refund": {
           "type": "link",
           "settings": {
             "label": "Returns & refunds",
-            "link": "/policies/refund-policy"
+            "link": "/pages/refund-policy"
           }
         },
         "privacy": {
           "type": "link",
           "settings": {
             "label": "Privacy",
-            "link": "/policies/privacy-policy"
+            "link": "/pages/privacy-policy"
           }
         },
         "terms": {
           "type": "link",
           "settings": {
             "label": "Terms of service",
-            "link": "/policies/terms-of-service"
+            "link": "/pages/terms-of-service"
           }
         }
       },

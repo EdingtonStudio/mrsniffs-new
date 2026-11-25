@@ -371,7 +371,7 @@
             "title": "Shipping & Delivery",
             "text": "<p>Wondering when your incense will arrive? Find your available shipping options and estimated delivery window at checkout.</p>",
             "link_label": "Read the policy",
-            "link_url": "/policies/shipping-policy"
+            "link_url": "/pages/shipping-policy"
           }
         },
         "item_2": {
@@ -381,7 +381,7 @@
             "title": "Returns & Exchanges",
             "text": "<p>[Pending — approved returns &amp; exchanges copy goes here.]</p>",
             "link_label": "Read the policy",
-            "link_url": "/policies/refund-policy"
+            "link_url": "/pages/refund-policy"
           }
         }
       },

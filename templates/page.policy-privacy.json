@@ -1,0 +1,23 @@
+{
+  "sections": {
+    "hero": {
+      "type": "info-hero",
+      "settings": {
+        "eyebrow": "Policies",
+        "heading": "Privacy",
+        "lede": "What we collect, why we collect it and the choices you have.",
+        "meta": "Last updated November 25, 2026"
+      }
+    },
+    "body": {
+      "type": "info-policy",
+      "settings": {
+        "menu": "footer-policies"
+      }
+    }
+  },
+  "order": [
+    "hero",
+    "body"
+  ]
+}

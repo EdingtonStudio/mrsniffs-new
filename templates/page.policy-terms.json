@@ -1,0 +1,23 @@
+{
+  "sections": {
+    "hero": {
+      "type": "info-hero",
+      "settings": {
+        "eyebrow": "Policies",
+        "heading": "Terms of service",
+        "lede": "The rules for using this site and buying from us.",
+        "meta": "Last updated November 25, 2026"
+      }
+    },
+    "body": {
+      "type": "info-policy",
+      "settings": {
+        "menu": "footer-policies"
+      }
+    }
+  },
+  "order": [
+    "hero",
+    "body"
+  ]
+}

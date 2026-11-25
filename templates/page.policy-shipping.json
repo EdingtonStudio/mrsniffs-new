@@ -1,0 +1,23 @@
+{
+  "sections": {
+    "hero": {
+      "type": "info-hero",
+      "settings": {
+        "eyebrow": "Policies",
+        "heading": "Shipping",
+        "lede": "Where we ship, how long it takes and what it costs.",
+        "meta": "Last updated November 25, 2026"
+      }
+    },
+    "body": {
+      "type": "info-policy",
+      "settings": {
+        "menu": "footer-policies"
+      }
+    }
+  },
+  "order": [
+    "hero",
+    "body"
+  ]
+}

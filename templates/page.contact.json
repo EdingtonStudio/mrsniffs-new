@@ -23,14 +23,14 @@
           "type": "link",
           "settings": {
             "label": "Shipping",
-            "link": "/policies/shipping-policy"
+            "link": "/pages/shipping-policy"
           }
         },
         "returns": {
           "type": "link",
           "settings": {
             "label": "Returns & refunds",
-            "link": "/policies/refund-policy"
+            "link": "/pages/refund-policy"
           }
         }
       },

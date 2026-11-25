@@ -108,7 +108,7 @@
           "type": "question",
           "settings": {
             "question": "Where do you ship?",
-            "answer": "<p>Within the United States for now. Details in our <a href=\"/policies/shipping-policy\">Shipping policy</a>.</p>"
+            "answer": "<p>Within the United States for now. Details in our <a href=\"/pages/shipping-policy\">Shipping policy</a>.</p>"
           }
         },
         "q2": {
@@ -151,7 +151,7 @@
           "type": "question",
           "settings": {
             "question": "Can I return my order?",
-            "answer": "<p>Unopened items can be returned within 30 days. Opened incense can't be returned. See the <a href=\"/policies/refund-policy\">Returns &amp; refunds policy</a>.</p>"
+            "answer": "<p>Unopened items can be returned within 30 days. Opened incense can't be returned. See the <a href=\"/pages/refund-policy\">Returns &amp; refunds policy</a>.</p>"
           }
         },
         "q2": {
