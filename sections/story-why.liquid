@@ -13,7 +13,7 @@
       <img class="why__mark" src="{{ 'story-quote.svg' | asset_url }}" width="83" height="62" alt="">
       <p class="why__eyebrow" id="why-title-{{ section.id }}">{{ section.settings.eyebrow }}</p>
       {%- assign words = section.settings.quote | strip_newlines | split: ' ' -%}
-      <blockquote class="why__quote" data-why-quote><p>{% for word in words %}{% if word != blank %}<span class="why__word">{{ word }}</span>{% unless forloop.last %} {% endunless %}{% endif %}{% endfor %}</p></blockquote>
+      <blockquote class="why__quote" data-why-quote><p>{% for word in words %}{% if word != blank %}<span class="why__word">{{ word }}</span>{% unless forloop.last %}&#32;{% endunless %}{% endif %}{% endfor %}</p></blockquote>
       <p class="why__by"><span class="why__name">{{ section.settings.name }}</span><span class="why__role">{{ section.settings.role }}</span></p>
     </div>
   </div>
